@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
   Check,
@@ -915,9 +915,30 @@ function AppPage({ pathname }) {
   }
 }
 
+function normalisePathname(pathname) {
+  return pathname.split(/[?#]/)[0].replace(/\/$/, "") || "/";
+}
+
+function getCurrentPathname() {
+  const hashPath = window.location.hash.startsWith("#/") ? window.location.hash.slice(1) : "";
+  return normalisePathname(hashPath || window.location.pathname);
+}
+
 export default function App() {
   const appRef = useRef(null);
-  const pathname = useMemo(() => window.location.pathname.replace(/\/$/, "") || "/", []);
+  const [pathname, setPathname] = useState(getCurrentPathname);
+
+  useEffect(() => {
+    const syncPathname = () => setPathname(getCurrentPathname());
+
+    window.addEventListener("hashchange", syncPathname);
+    window.addEventListener("popstate", syncPathname);
+
+    return () => {
+      window.removeEventListener("hashchange", syncPathname);
+      window.removeEventListener("popstate", syncPathname);
+    };
+  }, []);
 
   useEffect(() => {
     setMeta(pathname);
