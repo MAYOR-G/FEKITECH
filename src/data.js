@@ -62,49 +62,79 @@ export const processSteps = [
 export const testimonials = [
   {
     quote:
-      "This platform completely transformed how our team operates. Tasks that used to take hours now happen automatically, and the insights helped us identify inefficiencies we did not even know existed.",
+      "This platform completely transformed how our team operates. Tasks that used to take hours now happen automatically, and the AI insights helped us identify inefficiencies we didn’t even know existed.",
     name: "Ronald",
     role: "Medical Assistant"
   },
   {
     quote:
-      "We have tried multiple automation tools, but nothing comes close. The clean interface and speed of implementation became essential to our daily operations.",
+      "We’ve tried multiple automation tools, but nothing comes close. The accuracy of the AI, the clean interface, and the speed of implementation are unmatched. It became essential to our daily operations.",
     name: "Cody Fisher",
     role: "Digital Marketer"
   },
   {
     quote:
-      "What impressed us most is how quickly we saw results. Within the first week, our workflow time dropped dramatically and communication became smoother.",
+      "What impressed us the most is how quickly we saw results. Within the first week, our workflow time dropped dramatically and communication across teams became smoother than ever.",
     name: "Gladys",
     role: "President of Sales"
   },
   {
     quote:
-      "The predictive analytics alone paid for the entire subscription. We were able to make better decisions faster and avoid costly mistakes.",
+      "The predictive analytics alone paid for the entire subscription. We were able to make better decisions, faster — and avoid several costly mistakes in the process.",
     name: "Luna Mars",
     role: "Digital Marketer"
   },
   {
     quote:
-      "We cut down manual work by nearly 70%. The efficiency gains were immediate, and the impact on team morale was huge.",
+      "Onboarding was effortless. Our entire team was up and running in minutes, and the AI automatically created workflows that felt perfectly tailored to our processes.",
+    name: "Ronald",
+    role: "Medical Assistant"
+  },
+  {
+    quote:
+      "This tool gave our small team the power of a full operations department. Automation, insights, and reporting all in one place it’s exactly what we needed to scale.",
+    name: "Cody Fisher",
+    role: "Digital Marketer"
+  },
+  {
+    quote:
+      "We cut down manual work by nearly 70%. The efficiency gains were immediate, and the impact on team morale was huge. Everyone feels more productive and less overwhelmed.",
     name: "Shawn",
     role: "Digital Marketer"
   },
   {
     quote:
-      "Our leadership team now relies heavily on the insights dashboard. It gives us a real-time view of performance and helps us make confident decisions.",
+      "The simplicity of the interface is incredible. Even team members who aren’t tech-savvy were able to build advanced workflows with no friction.",
+    name: "Cody Fisher",
+    role: "Digital Marketer"
+  },
+  {
+    quote:
+      "Our leadership team now relies heavily on the insights dashboard. It gives us a real-time view of performance and helps us make confident decisions without guesswork.",
     name: "Leslie Alexander",
     role: "President of Sales"
   },
   {
     quote:
-      "The recommendations were spot-on. We optimized processes we had been struggling with for months, and the results were immediate.",
+      "We replaced three different tools with this one platform. Everything is integrated, seamless, and far more intelligent than anything we used before.",
+    name: "Luna Mars",
+    role: "President of Sales"
+  },
+  {
+    quote:
+      "The AI recommendations were spot-on. We optimized processes we’ve been struggling with for months, and the results were immediate.",
     name: "Joelle",
     role: "Medical Assistant"
   },
   {
     quote:
-      "Our productivity skyrocketed after switching. We complete projects faster, communicate better, and make data-driven decisions effortlessly.",
+      "From automating tasks to improving collaboration, it’s become a core part of our workflow. I can’t imagine running operations without it now.",
+    name: "Joelle",
+    role: "Medical Assistant"
+  },
+  {
+    quote:
+      "Our productivity skyrocketed after switching. We’re completing projects faster, communicating better, and making data-driven decisions effortlessly.",
     name: "Courtney",
     role: "Medical Assistant"
   }
