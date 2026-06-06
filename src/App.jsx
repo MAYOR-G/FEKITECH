@@ -26,6 +26,17 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 const businessImage = "https://images.pexels.com/photos/3931504/pexels-photo-3931504.jpeg?auto=compress&cs=tinysrgb&w=1400";
 const analyticsImage = "https://images.pexels.com/photos/7693686/pexels-photo-7693686.jpeg?auto=compress&cs=tinysrgb&w=1400";
 const systemsImage = "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1400";
+const aboutImage = "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=1400";
+const testimonialAvatars = {
+  Ronald: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=240",
+  "Cody Fisher": "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=240",
+  Shawn: "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?auto=compress&cs=tinysrgb&w=240",
+  Gladys: "https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=240",
+  "Luna Mars": "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=240",
+  "Leslie Alexander": "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=240",
+  Joelle: "https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=240",
+  Courtney: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=240"
+};
 
 const navItems = [
   ["Home", "/"],
@@ -192,8 +203,10 @@ function Hero() {
         <div className="trust-badge">Fekitech Operating System</div>
         <h1>Build a Profitable, Scalable Business with FOS</h1>
         <p>
-          FOS helps businesses replace operational chaos with structure, automation, business intelligence, and clear
-          systems for profitable growth.
+          FOS is an integrated operating system that brings together business structure, digital tools, automation,
+          reporting, and performance optimisation into a single unified framework.
+          It goes beyond software and consulting, providing a practical system that enables businesses to operate with
+          clarity, intelligence, and accountability.
         </p>
         <div className="hero-actions">
           <Button>Book a Free Business Audit</Button>
@@ -242,35 +255,6 @@ function Hero() {
   );
 }
 
-function AboutPreview() {
-  return (
-    <section className="section split about-preview">
-      <div className="section-intro left">
-        <span className="eyebrow">Structured Growth</span>
-        <h2>From Operational Chaos to Structured, Profitable Growth</h2>
-        <p>
-          Fekitech helps businesses move from scattered processes and unclear decisions into a structured operating
-          system built for clarity, performance, and scale.
-        </p>
-        <p>
-          We connect people, processes, data, and technology so business leaders can see what is working, fix what is
-          broken, and grow with confidence.
-        </p>
-        <Button href="/about" variant="secondary">Learn More About Fekitech</Button>
-      </div>
-      <div className="chaos-map">
-        <div className="chaos-core">
-          <span>FOS</span>
-          <strong>people, process, data, technology</strong>
-        </div>
-        {["People", "Process", "Data", "Technology", "Customers", "Performance"].map((item, index) => (
-          <b className={`map-node n${index + 1}`} key={item}>{item}</b>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function Challenges() {
   const items = [
     ["Loss of customers", "Weak customer retention, inconsistent follow-up, and poor customer experience reduce long-term growth.", Users],
@@ -285,7 +269,7 @@ function Challenges() {
       <div className="challenges-copy">
         <SectionIntro
           label="Business Challenges We Solve"
-          title="The Problems That Keep Good Businesses From Scaling"
+          title="Why Businesses Are Not Profitable"
           text="Most businesses do not fail because of effort. They struggle because structure, visibility, systems, and customer retention are weak."
           center={false}
         />
@@ -316,7 +300,7 @@ function Solution() {
   return (
     <section className="section solution-section" id="fos">
       <div className="solution-copy">
-        <span className="eyebrow">Core Offer</span>
+        <span className="eyebrow">Our Solution</span>
         <h2>Fekitech Operating System <span className="solid-accent">(FOS)</span></h2>
         <p>
           FOS is a structured implementation system that combines business structure, digital tools, automation,
@@ -326,7 +310,6 @@ function Solution() {
           It is not just software and it is not just consulting. It is a practical system for helping businesses operate
           with clarity, intelligence, and accountability.
         </p>
-        <strong>Result: a structured, data-driven, profitable, and scalable business.</strong>
       </div>
       <div className="fos-architecture">
         <div className="fos-engine">
@@ -351,6 +334,13 @@ function Solution() {
           <i style={{ "--w": "91%" }} />
         </div>
       </div>
+      <div className="fos-result-strip" aria-label="FOS result">
+        <div>
+          {Array.from({ length: 4 }).map((_, index) => (
+            <span key={index}>STRUCTURED • DATA-DRIVEN • PROFITABLE • SCALABLE</span>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }
@@ -361,15 +351,16 @@ function TransformProcess() {
     ["Identify gaps in structure and systems", "We uncover what is slowing growth, reducing profit, weakening retention, or creating operational confusion."],
     ["Design the FOS framework for your business", "We map the structure, tools, workflows, data points, and implementation plan your business needs."],
     ["Implement digital and intelligence systems", "We help set up the systems, automations, reporting, and processes required to improve execution."],
-    ["Optimise for performance and scale", "We track what is working, improve what is weak, and prepare the business for scalable growth."]
+    ["Optimise for performance and scale", "We track what is working, improve what is weak, and prepare the business for scalable growth."],
+    ["Follow-up and Mentorship", "We provide continued guidance, follow-up, and strategic support to help the business stay aligned, improve execution, and sustain profitability."]
   ];
 
   return (
     <section className="section transform-section" id="process">
       <SectionIntro
         label="How We Transform Your Business"
-        title="From Business Audit to Operating System"
-        text="A structured transformation path that turns business problems into clear systems, measurable performance, and scalable operations."
+        title={<>From Business Audit to <span className="gradient-performance">Profitability</span></>}
+        text="The result is not just better understanding of your business — but a clear, repeatable framework for sustainable growth, improved efficiency, and long-term profitability."
       />
       <div className="transform-roadmap">
         {steps.map(([title, text], index) => (
@@ -397,12 +388,12 @@ function Outcomes() {
     <section className="section outcomes-section" id="results">
       <SectionIntro
         label="What You Achieve"
-        title="A Business That Is Easier to Run, Improve, and Scale"
-        text="FOS helps you build a business that is easier to manage, measure, improve, and grow."
+        title="Growth You Can See and Control"
+        text="Improve profitability, retain more customers, and build clear systems that remove inefficiency so you can make smarter decisions and scale with confidence."
       />
-      <div className="outcome-stack">
+      <div className="outcome-showcase">
         {outcomes.map(([title, text, image], index) => (
-          <article className={`outcome-card ${index % 2 ? "reverse" : ""}`} style={{ "--i": index }} key={title}>
+          <article className={index === 0 ? "outcome-card featured" : "outcome-card"} key={title}>
             <div className="outcome-media">
               <img src={image} alt={`${title} visual`} />
             </div>
@@ -410,7 +401,7 @@ function Outcomes() {
               <span>{String(index + 1).padStart(2, "0")}</span>
               <h3>{title}</h3>
               <p>{text}</p>
-              <div><Check size={17} /> FOS outcome layer</div>
+              <div><Check size={17} /> Visible improvement layer</div>
             </div>
           </article>
         ))}
@@ -462,8 +453,8 @@ function Testimonials() {
     <section className="section testimonials" id="reviews">
       <SectionIntro
         label="Reviews"
-        title="Leaders Feel the Difference When the System Gets Clean"
-        text="When structure improves, teams move faster, leaders see clearer, and growth becomes easier to manage."
+        title="What Leaders Say About FekiTech Operating System"
+        text="When teamwork moves faster, leaders see clearer, profitability improves, and growth becomes easier to manage."
       />
       {[rowOne, rowTwo].map((row, rowIndex) => (
         <div className={`marquee-row ${rowIndex === 1 ? "reverse" : ""}`} key={rowIndex}>
@@ -471,7 +462,10 @@ function Testimonials() {
             {[...row, ...row].map((item, index) => (
               <article className="testimonial-card" key={`${item.name}-${index}`}>
                 <p>"{item.quote}"</p>
-                <div><strong>{item.name}</strong><span>{item.role}</span></div>
+                <div className="testimonial-person">
+                  <img src={testimonialAvatars[item.name] || testimonialAvatars.Ronald} alt={`${item.name} avatar`} loading="lazy" />
+                  <div><strong>{item.name}</strong><span>{item.role}</span></div>
+                </div>
               </article>
             ))}
           </div>
@@ -502,7 +496,6 @@ function HomePage() {
     <main>
       <Hero />
       <Challenges />
-      <AboutPreview />
       <Solution />
       <TransformProcess />
       <Outcomes />
@@ -514,89 +507,46 @@ function HomePage() {
 }
 
 function AboutPage() {
-  const areas = [
-    ["Business Structure", "Clear roles, responsibilities, decision rights, and leadership rhythm so work has ownership instead of confusion."],
-    ["Human Capital", "Team clarity, accountability, capacity planning, and operating habits that help people perform without constant supervision."],
-    ["Operations", "Cleaner workflows, handoffs, delivery standards, and process discipline across the parts of the business that create value."],
-    ["Digital Transformation", "Practical systems and tools that reduce manual work, improve speed, and make execution easier to manage."],
-    ["Business Intelligence", "Dashboards, performance signals, and reporting structures that help leaders see what is actually happening."],
-    ["Profitability", "Better visibility into revenue, margins, waste, and operational leakage so the business can grow without losing control."],
-    ["Customer Retention", "Customer experience, follow-up, delivery consistency, and feedback loops that protect loyalty and long-term revenue."]
-  ];
-
   return (
     <main className="page-main">
-      <PageHero
-        label="About Fekitech"
-        title="We help businesses become structured, measurable, and ready to scale."
-        text="Fekitech redesigns the operating core of growing businesses by connecting structure, people, process, data, technology, and performance through the Fekitech Operating System."
-      >
-        <Button>Book a Free Business Audit</Button>
-      </PageHero>
-      <section className="section split about-deep-section">
-        <div className="section-intro left about-copy-panel">
-          <span className="eyebrow">What We Do</span>
-          <h2>We strengthen the parts of the business that determine performance.</h2>
-          <p>
-            Many businesses have ambition, activity, and talent, but growth still feels heavy because the operating
-            system underneath the business is unclear. Work depends on memory, reporting arrives late, customers are
-            managed inconsistently, and leaders spend too much time reacting.
-          </p>
-          <p>
-            FOS gives the business a clearer structure: who owns what, how work moves, what data matters, where profit is
-            leaking, and which systems should support the team. The result is a business that is easier to run, improve,
-            and scale.
-          </p>
-          <div className="page-proof-row">
-            <span><Check size={16} /> Operating clarity</span>
-            <span><Check size={16} /> Performance visibility</span>
-            <span><Check size={16} /> Profitable scale</span>
+      <section className="section about-simple">
+        <div className="about-simple-copy">
+          <h1>About Us</h1>
+          <div className="about-text-stack">
+            <p>Fekitech is a business transformation company dedicated to helping organisations build profitable, structured, and scalable businesses.</p>
+            <p>We help companies move from operational chaos to clarity by strengthening seven critical areas: Business Structure, Human Capital, Operations, Digital Transformation, Business Intelligence, Profitability, and Customer Retention.</p>
+            <p>We work to eliminate inefficiencies, reduce guesswork, and replace complexity with clear operational frameworks that improve decision-making, performance, and accountability.</p>
+            <p>By combining strategy, systems, and data, we enable businesses to operate smarter, scale faster, and achieve long-term profitability with confidence and control.</p>
+            <p>Through the Fekitech Operating System (FOS), we integrate people, processes, data, and technology to improve performance, increase profitability, and support sustainable growth.</p>
           </div>
         </div>
-        <div className="page-image about-image-card">
-          <img src={systemsImage} alt="Team designing a business operating system" />
+        <div className="page-image about-image-card about-simple-visual">
+          <img src={aboutImage} alt="Business team aligning around a transformation plan" />
           <div>
-            <strong>FOS connects the business core</strong>
-            <span>People, process, data, technology, customers, and profitability working as one system.</span>
+            <strong>Seven areas. One operating system.</strong>
+            <span>Structure, people, operations, digital systems, intelligence, profitability, and retention connected through FOS.</span>
           </div>
         </div>
       </section>
-      <section className="section">
-        <SectionIntro label="Seven Critical Areas" title="The areas we strengthen" text="A business becomes easier to scale when these areas work together instead of competing for attention." />
-        <div className="simple-card-grid seven-grid">
-          {areas.map(([area, text], index) => (
-            <article key={area}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{area}</h3>
-              <p>{text}</p>
-            </article>
-          ))}
-        </div>
-      </section>
-      <section className="section mission-panel premium-mission">
+      <section className="section mission-panel premium-mission about-mission-only">
         <div>
-          <span className="eyebrow">Mission</span>
-          <h2>To help ambitious businesses grow with structure instead of chaos.</h2>
-          <p>
-            Growth without structure becomes expensive. Our mission is to make the business visible, measurable, and
-            controllable so leaders can improve performance with confidence.
-          </p>
+          <h2>Our Mission</h2>
+          <p>Our mission is simple: to help businesses become structured, data-driven, and high-performing organisations built on clarity, systems, and sustainable growth.</p>
         </div>
         <Button>Book a Free Business Audit</Button>
       </section>
-      <CTA />
     </main>
   );
 }
 
 function ServicesPage() {
   const services = [
-    ["Business Structure Design", "We define roles, responsibilities, workflows, ownership, and decision rhythms so the business can operate with clarity.", "Outcome: fewer bottlenecks, clearer accountability, and leadership control."],
-    ["Digital Transformation", "We implement practical digital systems that reduce manual work, improve execution speed, and support better management.", "Outcome: cleaner operations, faster handoffs, and less dependence on scattered tools."],
-    ["Business Intelligence Architecture", "We design reporting systems, dashboards, and performance signals around the numbers leaders actually need.", "Outcome: decisions become visible, measurable, and easier to prioritise."],
-    ["Process Optimisation and Automation", "We map, simplify, and automate repeated workflows so teams spend less time on friction and more time on value.", "Outcome: reduced waste, better delivery consistency, and improved productivity."],
-    ["Customer Retention Systems", "We improve follow-up, communication, customer experience, and feedback loops so customers stay longer.", "Outcome: stronger retention, better reviews, and more reliable lifetime value."],
-    ["Profitability Improvement", "We identify operational gaps, revenue leakage, cost waste, and margin pressure across the business.", "Outcome: clearer profit drivers and more disciplined growth decisions."]
+    ["Business Structure Design", "We define roles, responsibilities, workflows, ownership, and decision rhythms so the business can operate with clarity.", "Outcome: fewer bottlenecks, clearer accountability, and leadership control.", Users],
+    ["Digital Transformation", "We implement practical digital systems that reduce manual work, improve execution speed, and support better management.", "Outcome: cleaner operations, faster handoffs, and less dependence on scattered tools.", Workflow],
+    ["Business Intelligence Architecture", "We design reporting systems, dashboards, and performance signals around the numbers leaders actually need.", "Outcome: decisions become visible, measurable, and easier to prioritise.", Database],
+    ["Process Optimisation and Automation", "We map, simplify, and automate repeated workflows so teams spend less time on friction and more time on value.", "Outcome: reduced waste, better delivery consistency, and improved productivity.", ScanLine],
+    ["Customer Retention Systems", "We improve follow-up, communication, customer experience, and feedback loops so customers stay longer.", "Outcome: stronger retention, better reviews, and more reliable lifetime value.", Sparkles],
+    ["Profitability Improvement", "We identify operational gaps, revenue leakage, cost waste, and margin pressure across the business.", "Outcome: clearer profit drivers and more disciplined growth decisions.", Gauge]
   ];
 
   const gains = [
@@ -615,9 +565,12 @@ function ServicesPage() {
       />
       <section className="section">
         <div className="simple-card-grid service-grid">
-          {services.map(([title, text, value], index) => (
+          {services.map(([title, text, value, Icon], index) => (
             <article key={title}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
+              <div className="service-card-top">
+                <Icon size={19} />
+                <span>{String(index + 1).padStart(2, "0")}</span>
+              </div>
               <h3>{title}</h3>
               <p>{text}</p>
               <strong>{value}</strong>
@@ -813,25 +766,25 @@ function ContactPage() {
       </section>
       <section className="audit-layout">
         <form className="audit-form" onSubmit={handleSubmit}>
-          <label>Full name<input required name="fullName" /></label>
-          <label>Email address<input required type="email" name="email" /></label>
-          <label>Company name<input required name="company" /></label>
-          <label>Website or social link<input required name="website" /></label>
-          <label>
+          <label htmlFor="fullName">Full name<input id="fullName" required name="fullName" /></label>
+          <label htmlFor="email">Email address<input id="email" required type="email" name="email" /></label>
+          <label htmlFor="company">Company name<input id="company" required name="company" /></label>
+          <label htmlFor="website">Website or social link<input id="website" required name="website" /></label>
+          <label htmlFor="size">
             Business size
-            <select required name="size" defaultValue="">
+            <select id="size" required name="size" defaultValue="">
               <option value="" disabled>Select business size</option>
               {["1-10", "11-50", "51-200", "201-500", "500+"].map((item) => <option key={item}>{item}</option>)}
             </select>
           </label>
-          <label>
+          <label htmlFor="challenge">
             Main challenge
-            <select required name="challenge" defaultValue="">
+            <select id="challenge" required name="challenge" defaultValue="">
               <option value="" disabled>Select main challenge</option>
               {["Low profitability", "Customer retention", "Manual operations", "Poor visibility", "Weak online conversion", "Disconnected teams", "Other"].map((item) => <option key={item}>{item}</option>)}
             </select>
           </label>
-          <label className="full">Message<textarea required name="message" placeholder="Tell us what is currently slowing your business down." /></label>
+          <label className="full" htmlFor="message">Message<textarea id="message" required name="message" placeholder="Tell us what is currently slowing your business down." /></label>
           <button type="submit">Submit Audit Request</button>
           {submitted && <p className="success-message">Your audit request has been received. The Fekitech team will follow up with the next step.</p>}
         </form>
@@ -885,7 +838,7 @@ function Footer() {
       </div>
       <div className="footer-column">
         <h3>CTA</h3>
-        <a href="/contact">Book a Free Business Audit</a>
+        <a href="/contact">Book an Audit</a>
         <a href="https://www.facebook.com/profile.php?id=61590753470491">Facebook</a>
         <a href="https://www.instagram.com/fekitech/">Instagram</a>
         <a href="https://www.tiktok.com/@fekitech">TikTok</a>
