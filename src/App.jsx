@@ -560,8 +560,8 @@ function ServicesPage() {
     <main className="page-main">
       <PageHero
         label="Services"
-        title="Business transformation services for structure, intelligence, and profitable scale."
-        text="Choose focused support for a specific business constraint, or build the complete Fekitech Operating System around your operations."
+        title="Business transformation services for Operational Intelligence and Profitability"
+        text="Choose focused support for the areas your business needs to improve. From structure and operations to digital transformation and profitability, we help you build a stronger business operating system."
       />
       <section className="section">
         <div className="simple-card-grid service-grid">
