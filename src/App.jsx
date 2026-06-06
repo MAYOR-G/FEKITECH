@@ -421,7 +421,7 @@ function BusinessImpact() {
     <section className="section results" id="results">
       <SectionIntro
         label="Metrics"
-        title="Built to Improve the Numbers That Matter"
+        title="Built to Improve Business Performance"
         text="FOS focuses on the areas that directly affect business performance: profitability, retention, visibility, operations, and scale."
       />
       <div className="numbers-row">
