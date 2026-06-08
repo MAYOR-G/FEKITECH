@@ -7417,7 +7417,7 @@ p {
   display: grid;
   grid-template-columns: 1fr;
   gap: 14px;
-  width: min(100%, 1360px);
+  width: min(100%, 1440px);
   margin-top: clamp(34px, 5vw, 58px);
   margin-right: auto;
   margin-left: auto;
@@ -7425,15 +7425,15 @@ p {
 
 .outcome-lane-card {
   position: relative;
-  width: min(88%, 1180px);
+  width: min(97%, 1390px);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(240px, 28vw, 420px);
+  grid-template-columns: minmax(0, 1fr) clamp(200px, 25vw, 360px);
   align-items: center;
   gap: clamp(20px, 3vw, 42px);
-  min-height: clamp(172px, 14vw, 220px);
+  min-height: clamp(142px, 11vw, 186px);
   margin-right: auto !important;
   margin-left: 0 !important;
-  padding: clamp(18px, 2.4vw, 30px);
+  padding: clamp(16px, 2vw, 24px);
   border: 1px solid rgba(255, 255, 255, 0.105);
   border-radius: 8px 34px 8px 34px;
   background:
@@ -7445,7 +7445,7 @@ p {
 }
 
 .outcome-lane-card:nth-child(even) {
-  grid-template-columns: clamp(240px, 28vw, 420px) minmax(0, 1fr);
+  grid-template-columns: clamp(200px, 25vw, 360px) minmax(0, 1fr);
   margin-right: 0 !important;
   margin-left: auto !important;
   border-radius: 34px 8px 34px 8px;
