@@ -390,7 +390,7 @@ function Outcomes() {
   ];
 
   return (
-    <section className="section outcomes-section" id="results">
+    <section className="section outcomes-section" id="growth">
       <SectionIntro
         label="Everything you need to run your business efficiently."
         title={<>Growth You Can See and <span className="heading-accent accent-blue">Control</span></>}
@@ -422,7 +422,7 @@ function BusinessImpact() {
   ];
 
   return (
-    <section className="section results" id="results">
+    <section className="section results" id="metrics">
       <SectionIntro
         label="Metrics"
         title={<>Built to Improve Business <span className="heading-accent accent-purple">Performance</span></>}

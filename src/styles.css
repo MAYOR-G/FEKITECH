@@ -8985,15 +8985,55 @@ body {
   }
 }
 
-/* Metrics and reviews final pass: compact stat cards with readable marquee interaction. */
-.results {
-  width: min(calc(100% - 48px), 1440px);
+/* Growth and metrics final pass: keep these home bands full-width in production. */
+.outcomes-section {
+  width: 100%;
+  max-width: none;
+  margin-right: 0;
+  margin-left: 0;
+  padding: clamp(82px, 9vw, 132px) var(--page-gutter) clamp(76px, 8vw, 112px);
+  overflow: hidden;
+  background: var(--bg-main);
+}
+
+.outcomes-section .section-intro {
+  width: min(100%, 940px);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.outcome-lanes {
+  width: min(100%, 1440px);
   max-width: 1440px;
+}
+
+.outcome-lane-card,
+.outcome-lane-card:nth-child(even) {
+  width: min(100%, 1320px);
+  min-height: clamp(188px, 14vw, 238px);
+  grid-template-columns: minmax(0, 1fr) clamp(300px, 29vw, 460px);
+}
+
+.outcome-lane-card:nth-child(even) {
+  grid-template-columns: clamp(300px, 29vw, 460px) minmax(0, 1fr);
+}
+
+.results {
+  width: 100%;
+  max-width: none;
+  margin-right: 0;
+  margin-left: 0;
+  padding-right: var(--page-gutter);
+  padding-left: var(--page-gutter);
   padding-top: clamp(78px, 8vw, 112px);
   padding-bottom: clamp(72px, 8vw, 104px);
+  background: #05070a;
 }
 
 .results .section-intro {
+  width: min(100%, 940px);
+  margin-right: auto;
+  margin-left: auto;
   margin-bottom: clamp(24px, 3vw, 36px);
 }
 
@@ -9123,13 +9163,43 @@ body {
 }
 
 @media (max-width: 900px) {
-  .results {
-    width: calc(100% - 24px);
+  .outcomes-section {
+    width: 100%;
+    max-width: none;
+    padding: 64px 12px;
+  }
+
+  .outcomes-section .section-intro {
+    width: min(100%, 720px);
+  }
+
+  .outcome-lanes {
+    width: 100%;
     max-width: 760px;
+  }
+
+  .outcome-lane-card,
+  .outcome-lane-card:nth-child(even) {
+    width: 100%;
+    max-width: 100%;
+    min-height: 0;
+    grid-template-columns: 1fr;
+  }
+
+  .results {
+    width: 100%;
+    max-width: none;
     padding-top: 64px;
     padding-bottom: 64px;
-    padding-right: 0;
-    padding-left: 0;
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .results .section-intro,
+  .numbers-row,
+  .result-grid,
+  .metric-note {
+    width: min(100%, 760px);
   }
 
   .numbers-row {
@@ -9193,9 +9263,10 @@ body {
 }
 
 @media (max-width: 430px) {
+  .outcomes-section,
   .results {
-    width: calc(100% - 20px);
-    max-width: calc(100% - 20px);
+    padding-right: 10px;
+    padding-left: 10px;
   }
 
   .testimonial-card {
