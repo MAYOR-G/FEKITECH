@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
   Check,
@@ -17,11 +17,12 @@ import {
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import logoMark from "../Pasted image.png";
 import { resultCards, testimonials } from "./data";
+import { applySeo } from "./lib/seo.js";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
+const logoMark = "/fekitech-logo.png";
 const businessImage = "https://images.pexels.com/photos/7693688/pexels-photo-7693688.jpeg?auto=compress&cs=tinysrgb&w=1600";
 const analyticsImage = "/outcome-higher-profitability.jpeg";
 const systemsImage = "/outcome-reduce-stress.jpeg";
@@ -54,51 +55,8 @@ const navItems = [
   ["Contact", "/contact"]
 ];
 
-const seo = {
-  "/": [
-    "Fekitech | Business Transformation and Operating Systems for Scalable Growth",
-    "Fekitech helps businesses build structure, improve profitability, implement digital transformation, and scale with the Fekitech Operating System."
-  ],
-  "/about": [
-    "About Fekitech | Business Transformation Company",
-    "Learn how Fekitech helps organisations become structured, data-driven, profitable, and scalable through the Fekitech Operating System."
-  ],
-  "/services": [
-    "Fekitech Services | Business Structure, Digital Transformation and Business Intelligence",
-    "Explore Fekitech services including business structure design, digital transformation, business intelligence, process optimisation, and FOS implementation."
-  ],
-  "/pricing": [
-    "Fekitech Pricing | Structured Solutions for Scalable Business Growth",
-    "View Fekitech pricing packages for business audits, digital transformation, FOS implementation, and enterprise transformation support."
-  ],
-  "/blog": [
-    "Fekitech Blog | Business Systems, Profitability and Digital Transformation",
-    "Insights on business structure, profitability, customer retention, digital transformation, and business operating systems."
-  ],
-  "/blog/why-most-businesses-are-not-profitable": [
-    "Why Most Businesses Are Not Profitable And How to Fix It with Structured Systems",
-    "Most businesses struggle with low profitability and poor customer retention due to weak systems and structure. Learn how to fix it using digital transformation and business operating systems."
-  ],
-  "/contact": [
-    "Book a Free Business Audit | Fekitech",
-    "Book a free business audit with Fekitech and discover how to improve profitability, structure, and business performance."
-  ],
-  "/audit": [
-    "Book a Free Business Audit | Fekitech",
-    "Book a free business audit with Fekitech and discover how to improve profitability, structure, and business performance."
-  ]
-};
-
 function setMeta(pathname) {
-  const [title, description] = seo[pathname] || seo["/"];
-  document.title = title;
-  let meta = document.querySelector('meta[name="description"]');
-  if (!meta) {
-    meta = document.createElement("meta");
-    meta.name = "description";
-    document.head.appendChild(meta);
-  }
-  meta.content = description;
+  applySeo(pathname);
 }
 
 function Header() {
@@ -108,7 +66,7 @@ function Header() {
     <header className="site-header">
       <div className="header-inner">
         <a className="brand" href="/" aria-label="Fekitech home">
-          <img src={logoMark} alt="" />
+          <img src={logoMark} alt="" width="654" height="658" />
           <span>
             Fekitech
             <small>Turn business chaos into profitability.</small>
@@ -384,7 +342,7 @@ function Outcomes() {
         {outcomes.map(([title, text, image, alt], index) => (
           <article className="outcome-lane-card" key={title}>
             <div className="outcome-lane-media">
-              <img src={image} alt={alt} loading="lazy" decoding="async" />
+              <img src={image} alt={alt} width="1376" height="768" loading="lazy" decoding="async" />
             </div>
             <div className="outcome-lane-content">
               <span>{String(index + 1).padStart(2, "0")}</span>
@@ -449,7 +407,7 @@ function Testimonials() {
               <article className="testimonial-card" key={`${item.name}-${index}`}>
                 <p>"{item.quote}"</p>
                 <div className="testimonial-person">
-                  <img src={testimonialAvatars[item.name] || testimonialAvatars.Ronald} alt={`${item.name} avatar`} loading="lazy" decoding="async" />
+                  <img src={testimonialAvatars[item.name] || testimonialAvatars.Ronald} alt={`${item.name} avatar`} width="240" height="240" loading="lazy" decoding="async" />
                   <div><strong>{item.name}</strong><span>{item.role}</span></div>
                 </div>
               </article>
@@ -494,7 +452,7 @@ function AboutPage() {
     <main className="page-main">
       <section className="section about-simple">
         <figure className="about-single-image about-simple-visual">
-          <img src={aboutTransformationImage} alt="Business leaders collaborating on transformation strategy in a modern office" loading="lazy" decoding="async" />
+          <img src={aboutTransformationImage} alt="Business leaders collaborating on transformation strategy in a modern office" width="1719" height="915" loading="lazy" decoding="async" />
         </figure>
         <div className="about-simple-copy">
           <h1>About Us</h1>
@@ -872,7 +830,7 @@ function ContactPage() {
           {submitted && <p className="success-message">Your audit request has been received. The Fekitech team will follow up with the next step.</p>}
         </form>
         <aside className="audit-side-card">
-          <img src={logoMark} alt="" />
+          <img src={logoMark} alt="" width="654" height="658" />
           <h2>Contact Details</h2>
           <p>Phone: <a href="tel:+447352364942">+447352364942</a></p>
           <p>71-75, Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ</p>
@@ -893,7 +851,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer-brand">
         <a className="footer-logo" href="/" aria-label="Fekitech home">
-          <img src={logoMark} alt="" />
+          <img src={logoMark} alt="" width="654" height="658" />
           <span>Fekitech<small>Turn business chaos into profitability.</small></span>
         </a>
         <p>Fekitech helps businesses become structured, data-driven, profitable, and scalable through FOS.</p>
@@ -953,13 +911,16 @@ function normalisePathname(pathname) {
 }
 
 function getCurrentPathname() {
+  if (typeof window === "undefined") {
+    return "/";
+  }
   const hashPath = window.location.hash.startsWith("#/") ? window.location.hash.slice(1) : "";
   return normalisePathname(hashPath || window.location.pathname);
 }
 
-export default function App() {
+export default function App({ initialPathname } = {}) {
   const appRef = useRef(null);
-  const [pathname, setPathname] = useState(getCurrentPathname);
+  const [pathname, setPathname] = useState(() => normalisePathname(initialPathname || getCurrentPathname()));
 
   useEffect(() => {
     const syncPathname = () => setPathname(getCurrentPathname());

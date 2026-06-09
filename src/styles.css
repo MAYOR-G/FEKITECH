@@ -3591,7 +3591,7 @@ p {
 
 .audit-page {
   min-height: 100vh;
-  padding-top: 92px;
+  padding-top: 126px;
   background:
     radial-gradient(circle at 18% 8%, rgba(0, 183, 255, 0.08), transparent 30%),
     radial-gradient(circle at 86% 4%, rgba(138, 45, 255, 0.08), transparent 30%),
@@ -3601,7 +3601,7 @@ p {
 .audit-hero {
   width: min(calc(100% - 48px), 920px);
   margin: 0 auto;
-  padding: 88px 0 42px;
+  padding: 58px 0 42px;
   text-align: center;
 }
 
@@ -3616,7 +3616,8 @@ p {
   grid-template-columns: minmax(0, 1fr) minmax(320px, 0.42fr);
   gap: 22px;
   margin: 0 auto;
-  padding-bottom: 80px;
+  padding-top: 8px;
+  padding-bottom: 96px;
 }
 
 .audit-form,
@@ -3714,8 +3715,14 @@ p {
 }
 
 .audit-side-card img {
-  width: 64px;
-  border-radius: 18px;
+  justify-self: start;
+  width: 52px;
+  height: 52px;
+  padding: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  background: #020308;
+  object-fit: contain;
   box-shadow: 0 0 28px rgba(10, 62, 168, 0.22);
 }
 

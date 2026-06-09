@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Fekitech business transformation and operating systems">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#041019"/>
+      <stop offset="0.48" stop-color="#05070a"/>
+      <stop offset="1" stop-color="#12071f"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#00b7ff"/>
+      <stop offset="1" stop-color="#8a2dff"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="0.18" cy="0.15" r="0.55">
+      <stop offset="0" stop-color="#00b7ff" stop-opacity="0.38"/>
+      <stop offset="1" stop-color="#00b7ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="0.88" cy="0.1" r="0.58">
+      <stop offset="0" stop-color="#8a2dff" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#8a2dff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glowA)"/>
+  <rect width="1200" height="630" fill="url(#glowB)"/>
+  <g opacity="0.18">
+    <path d="M120 144h960M120 228h960M120 312h960M120 396h960M120 480h960" stroke="#cde4ff"/>
+    <path d="M204 80v470M336 80v470M468 80v470M600 80v470M732 80v470M864 80v470M996 80v470" stroke="#cde4ff"/>
+  </g>
+  <rect x="96" y="88" width="1008" height="454" rx="34" fill="#060a10" fill-opacity="0.72" stroke="#5f9fff" stroke-opacity="0.22"/>
+  <circle cx="992" cy="184" r="76" fill="url(#accent)" opacity="0.22"/>
+  <path d="M180 394c94-96 178-134 252-114 62 17 96 75 160 90 84 20 162-48 262-166" fill="none" stroke="url(#accent)" stroke-width="8" stroke-linecap="round" opacity="0.9"/>
+  <text x="162" y="232" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="74" font-weight="800" letter-spacing="0">Fekitech</text>
+  <text x="162" y="304" fill="#d9e8ff" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="600">Business Transformation and Operating Systems</text>
+  <text x="162" y="360" fill="#9fb7d5" font-family="Arial, Helvetica, sans-serif" font-size="26">Structure. Profitability. Digital transformation. Scalable growth.</text>
+</svg>
