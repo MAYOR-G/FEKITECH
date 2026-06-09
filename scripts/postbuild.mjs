@@ -15,7 +15,9 @@ function outputPathForRoute(route) {
 
 function getBuiltAssetTags(template) {
   const head = template.match(/<head>([\s\S]*?)<\/head>/)?.[1] || "";
-  return (head.match(/<(?:script|link)\b(?=[^>]*(?:\/assets\/|rel="(?:stylesheet|modulepreload)"))[\s\S]*?(?:<\/script>|\/?>)/g) || []).join("\n    ");
+  const scripts = head.match(/<script\b(?=[^>]*\/assets\/)[^>]*><\/script>/g) || [];
+  const links = head.match(/<link\b(?=[^>]*(?:\/assets\/|rel="(?:stylesheet|modulepreload)"))[^>]*>/g) || [];
+  return [...scripts, ...links].join("\n    ");
 }
 
 function injectHead(template, route, headTags) {
