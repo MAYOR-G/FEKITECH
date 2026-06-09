@@ -23,20 +23,17 @@ import { resultCards, testimonials } from "./data";
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const businessImage = "https://images.pexels.com/photos/7693688/pexels-photo-7693688.jpeg?auto=compress&cs=tinysrgb&w=1600";
-const analyticsImage = "https://images.pexels.com/photos/36733313/pexels-photo-36733313.jpeg?auto=compress&cs=tinysrgb&w=1600";
-const systemsImage = "https://images.pexels.com/photos/8154789/pexels-photo-8154789.jpeg?auto=compress&cs=tinysrgb&w=1600";
+const analyticsImage = "/outcome-higher-profitability.jpeg";
+const systemsImage = "/outcome-reduce-stress.jpeg";
 const aboutImage = "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1800";
 const aboutCircleImage = "https://images.pexels.com/photos/3184328/pexels-photo-3184328.jpeg?auto=compress&cs=tinysrgb&w=1000";
 const aboutBoxImage = "https://images.pexels.com/photos/3182811/pexels-photo-3182811.jpeg?auto=compress&cs=tinysrgb&w=1200";
-const retentionImage = "https://images.pexels.com/photos/4623519/pexels-photo-4623519.jpeg?auto=compress&cs=tinysrgb&w=1400";
+const aboutTransformationImage = "/fekitech-about-transformation.png";
+const retentionImage = "/outcome-customer-growth.jpeg";
 const structureImage = "https://images.pexels.com/photos/6340632/pexels-photo-6340632.jpeg?auto=compress&cs=tinysrgb&w=1400";
-const scaleImage = "https://images.pexels.com/photos/7988237/pexels-photo-7988237.jpeg?auto=compress&cs=tinysrgb&w=1400";
-const billingImage = "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1400&q=80";
-const timeImage = "https://images.pexels.com/photos/5716001/pexels-photo-5716001.jpeg?auto=compress&cs=tinysrgb&w=1400";
-const blogHeroImage = "https://images.pexels.com/photos/7688460/pexels-photo-7688460.jpeg?auto=compress&cs=tinysrgb&w=1600";
-const blogArticleImage = "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1600";
-const blogSystemsImage = "https://images.pexels.com/photos/7688336/pexels-photo-7688336.jpeg?auto=compress&cs=tinysrgb&w=1400";
-const blogDashboardImage = "https://images.pexels.com/photos/7567434/pexels-photo-7567434.jpeg?auto=compress&cs=tinysrgb&w=1400";
+const scaleImage = "/outcome-business-success.jpeg";
+const billingImage = "/outcome-get-paid-faster.jpeg";
+const timeImage = "/outcome-save-time.jpeg";
 const testimonialAvatars = {
   Ronald: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=240",
   "Cody Fisher": "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=240",
@@ -210,22 +207,15 @@ function Hero() {
       <div className="system-ring ring-a" />
       <div className="system-ring ring-b" />
       <div className="hero-inner">
-        <div className="trust-badge">Fekitech Operating System</div>
         <h1>Run your business, not paperwork.</h1>
         <p>
           FekiTech creates instant quotes, invoices, expenses, and reporting in seconds, so you can focus on growing
-          your business, not paperwork.
-          <br />
-          <br />
-          Get instant clarity on your profit, costs, and performance in real time.
+          your business, not paperwork. Get instant clarity on your profit, costs, and performance in real time.
         </p>
         <div className="hero-actions">
           <Button>Start Free Trial</Button>
           <Button href="#fos" variant="secondary">Install in 2 Minutes</Button>
         </div>
-        <small className="hero-note">
-          For founders, executives, and teams ready to improve structure, performance, and scale.
-        </small>
         <div className="hero-video-stage" aria-label="Fekitech Operating System preview">
           <div className="hero-video-shell">
             {videoError ? <div className="video-fallback" aria-hidden="true">
@@ -279,15 +269,14 @@ function Challenges() {
     <section className="section challenges-section" id="challenges">
       <div className="challenges-copy">
         <SectionIntro
-          label="Business Challenges We Solve"
-          title={<>WHY BUSINESS <span className="heading-accent accent-purple">FAIL</span></>}
+          title="BUSINESS PROBLEMS"
           center={false}
         />
       </div>
       <div className="challenge-grid">
         {items.map(([title, text, Icon], index) => (
           <article className={index === 0 ? "challenge-card featured" : "challenge-card"} key={title}>
-            <div><Icon size={19} /><span>{String(index + 1).padStart(2, "0")}</span></div>
+            <div><Icon size={19} /></div>
             <h3>{title}</h3>
             <p>{text}</p>
           </article>
@@ -310,11 +299,10 @@ function Solution() {
   return (
     <section className="section solution-section" id="fos">
       <div className="solution-copy">
-        <span className="eyebrow">Our Solution</span>
-        <h2>Fekitech Operating System <span className="solid-accent">(FOS)</span></h2>
+        <h2>Our Solution</h2>
         <p>
-          FOS is a structured implementation system that combines business structure, digital tools, automation,
-          reporting, and performance improvement into one operating framework.
+          Fekitech Operating System (FOS) is a structured implementation system that combines business structure,
+          digital tools, automation, reporting, and performance improvement into one operating framework.
         </p>
         <p>
           It is not just software and it is not just consulting. It is a practical system for helping businesses operate
@@ -362,9 +350,7 @@ function TransformProcess() {
   return (
     <section className="section transform-section" id="process">
       <SectionIntro
-        label="How We Transform Your Business"
-        title={<>From Business Audit to <span className="heading-accent accent-purple">Profitability</span></>}
-        text="The result is not just better understanding of your business — but a clear, repeatable framework for sustainable growth, improved efficiency, and long-term profitability."
+        title={<>How We Transform Your <span className="heading-accent accent-mix">Business</span></>}
       />
       <div className="transform-roadmap">
         {steps.map(([title, text], index) => (
@@ -392,9 +378,7 @@ function Outcomes() {
   return (
     <section className="section outcomes-section" id="growth">
       <SectionIntro
-        label="Everything you need to run your business efficiently."
-        title={<>Growth You Can See and <span className="heading-accent accent-blue">Control</span></>}
-        text="Improve profitability, retain more customers, and build clear systems that remove inefficiency so you can make smarter decisions and scale with confidence."
+        title={<>Everything you need to run your business <span className="heading-accent accent-blue">efficiently.</span></>}
       />
       <div className="outcome-lanes">
         {outcomes.map(([title, text, image, alt], index) => (
@@ -480,9 +464,10 @@ function Testimonials() {
 function CTA() {
   return (
     <section className="final-cta" id="contact">
+      <div className="cta-light-trails" aria-hidden="true">
+        {Array.from({ length: 12 }).map((_, index) => <span key={index} />)}
+      </div>
       <div className="cta-inner">
-        <h2>Book Free Demo</h2>
-        <p>Book a free demo to see how FekiTech can automate your business, save time, and improve profitability in real time.</p>
         <Button>Book Free Demo</Button>
       </div>
     </section>
@@ -508,17 +493,9 @@ function AboutPage() {
   return (
     <main className="page-main">
       <section className="section about-simple">
-        <div className="about-collage about-simple-visual">
-          <figure className="about-collage-circle">
-            <img src={aboutCircleImage} alt="Business consultant reviewing digital operations with a team" loading="lazy" decoding="async" />
-          </figure>
-          <figure className="about-collage-box">
-            <img src={aboutBoxImage} alt="Business team planning strategy and transformation in a modern office" loading="lazy" decoding="async" />
-          </figure>
-          <figure className="about-collage-main">
-            <img src={aboutImage} alt="Business leaders collaborating on transformation strategy in a modern office" loading="lazy" decoding="async" />
-          </figure>
-        </div>
+        <figure className="about-single-image about-simple-visual">
+          <img src={aboutTransformationImage} alt="Business leaders collaborating on transformation strategy in a modern office" loading="lazy" decoding="async" />
+        </figure>
         <div className="about-simple-copy">
           <h1>About Us</h1>
           <div className="about-text-stack">
@@ -541,6 +518,133 @@ function AboutPage() {
   );
 }
 
+function ServiceCardVisual({ index }) {
+  const visualNumber = String(index + 1).padStart(2, "0");
+
+  return (
+    <div className={`service-card-visual service-visual-${visualNumber}`} aria-hidden="true">
+      {index === 0 && (
+        <svg className="service-visual-svg" viewBox="0 0 320 150" role="presentation">
+          <path className="service-line" d="M84 73h58M178 73h58M160 47v52" />
+          <rect className="service-panel" x="42" y="49" width="62" height="48" rx="12" />
+          <rect className="service-panel service-panel-strong" x="129" y="30" width="62" height="48" rx="12" />
+          <rect className="service-panel" x="216" y="49" width="62" height="48" rx="12" />
+          <circle className="service-node" cx="160" cy="114" r="13" />
+        </svg>
+      )}
+      {index === 1 && (
+        <svg className="service-visual-svg" viewBox="0 0 320 150" role="presentation">
+          <rect className="service-panel" x="54" y="34" width="118" height="82" rx="16" />
+          <rect className="service-fill" x="72" y="54" width="78" height="10" rx="5" />
+          <rect className="service-fill service-fill-purple" x="72" y="76" width="48" height="10" rx="5" />
+          <path className="service-line" d="M188 75h58M229 50l25 25-25 25" />
+          <rect className="service-panel service-panel-strong" x="230" y="38" width="42" height="74" rx="14" />
+        </svg>
+      )}
+      {index === 2 && (
+        <svg className="service-visual-svg" viewBox="0 0 320 150" role="presentation">
+          <rect className="service-panel" x="52" y="30" width="216" height="92" rx="18" />
+          <path className="service-line" d="M76 96l38-30 34 18 46-44 50 30" />
+          <rect className="service-fill" x="76" y="82" width="18" height="22" rx="5" />
+          <rect className="service-fill service-fill-purple" x="112" y="70" width="18" height="34" rx="5" />
+          <rect className="service-fill" x="148" y="58" width="18" height="46" rx="5" />
+          <circle className="service-node" cx="215" cy="50" r="11" />
+        </svg>
+      )}
+      {index === 3 && (
+        <svg className="service-visual-svg" viewBox="0 0 320 150" role="presentation">
+          <path className="service-line" d="M76 76h54c18 0 18-28 36-28h42M244 48l22 22-22 22M244 20l22 22-22 22" />
+          <path className="service-line service-line-soft" d="M76 76h54c18 0 18 28 36 28h42M244 86l22 22-22 22" />
+          <circle className="service-node" cx="68" cy="76" r="16" />
+          <rect className="service-panel" x="132" y="56" width="58" height="40" rx="12" />
+          <circle className="service-node service-node-purple" cx="224" cy="48" r="13" />
+          <circle className="service-node" cx="224" cy="104" r="13" />
+        </svg>
+      )}
+      {index === 4 && (
+        <svg className="service-visual-svg" viewBox="0 0 320 150" role="presentation">
+          <circle className="service-node" cx="82" cy="76" r="20" />
+          <circle className="service-node service-node-purple" cx="160" cy="48" r="18" />
+          <circle className="service-node" cx="238" cy="76" r="20" />
+          <path className="service-line" d="M101 69c25-27 70-27 95 0M219 83c-25 27-70 27-95 0" />
+          <path className="service-line service-line-soft" d="M116 106h88" />
+          <rect className="service-panel" x="124" y="94" width="72" height="26" rx="13" />
+        </svg>
+      )}
+      {index === 5 && (
+        <svg className="service-visual-svg" viewBox="0 0 320 150" role="presentation">
+          <rect className="service-fill" x="70" y="84" width="24" height="30" rx="6" />
+          <rect className="service-fill service-fill-purple" x="112" y="68" width="24" height="46" rx="6" />
+          <rect className="service-fill" x="154" y="52" width="24" height="62" rx="6" />
+          <rect className="service-fill service-fill-purple" x="196" y="36" width="24" height="78" rx="6" />
+          <path className="service-line" d="M72 68c52-14 98-30 154-62" />
+          <path className="service-line" d="M220 10l8 28-28-8" />
+        </svg>
+      )}
+      {index === 6 && (
+        <svg className="service-visual-svg" viewBox="0 0 320 150" role="presentation">
+          <circle className="service-panel service-orb" cx="160" cy="75" r="34" />
+          <circle className="service-node" cx="96" cy="42" r="13" />
+          <circle className="service-node service-node-purple" cx="226" cy="46" r="13" />
+          <circle className="service-node" cx="96" cy="108" r="13" />
+          <circle className="service-node service-node-purple" cx="226" cy="108" r="13" />
+          <path className="service-line" d="M109 49l24 13M192 61l22-10M109 101l24-13M192 89l22 13M142 75h36" />
+        </svg>
+      )}
+      {index === 7 && (
+        <svg className="service-visual-svg" viewBox="0 0 320 150" role="presentation">
+          <path className="service-line" d="M54 75h62M150 75h62M246 75h34" />
+          <path className="service-line service-line-soft" d="M92 48h76M126 102h106" />
+          <rect className="service-panel" x="116" y="48" width="34" height="54" rx="11" />
+          <rect className="service-panel service-panel-strong" x="212" y="48" width="34" height="54" rx="11" />
+          <path className="service-line" d="M256 51l24 24-24 24" />
+        </svg>
+      )}
+      {index === 8 && (
+        <svg className="service-visual-svg" viewBox="0 0 320 150" role="presentation">
+          <path className="service-line" d="M78 114V44M78 44h154" />
+          <path className="service-line service-line-soft" d="M112 114V72M146 114V60M180 114V88M214 114V36" />
+          <circle className="service-node" cx="78" cy="44" r="12" />
+          <circle className="service-node service-node-purple" cx="146" cy="60" r="12" />
+          <circle className="service-node" cx="214" cy="36" r="12" />
+          <path className="service-line" d="M232 36l26 0M248 20l16 16-16 16" />
+        </svg>
+      )}
+      {index === 9 && (
+        <svg className="service-visual-svg" viewBox="0 0 320 150" role="presentation">
+          <rect className="service-panel" x="64" y="34" width="84" height="76" rx="14" />
+          <rect className="service-panel service-panel-strong" x="172" y="28" width="84" height="88" rx="16" />
+          <rect className="service-fill" x="82" y="54" width="42" height="8" rx="4" />
+          <rect className="service-fill service-fill-purple" x="82" y="76" width="30" height="8" rx="4" />
+          <path className="service-line" d="M190 56h48M190 78h30M190 100h42" />
+          <circle className="service-node" cx="246" cy="36" r="9" />
+        </svg>
+      )}
+      {index === 10 && (
+        <svg className="service-visual-svg" viewBox="0 0 320 150" role="presentation">
+          <path className="service-line" d="M74 108C114 42 178 28 244 42" />
+          <path className="service-line service-line-soft" d="M72 108h182" />
+          <circle className="service-node" cx="74" cy="108" r="12" />
+          <circle className="service-node service-node-purple" cx="130" cy="66" r="12" />
+          <circle className="service-node" cx="190" cy="42" r="12" />
+          <path className="service-line" d="M242 42l20 10-20 10" />
+        </svg>
+      )}
+      {index === 11 && (
+        <svg className="service-visual-svg" viewBox="0 0 320 150" role="presentation">
+          <rect className="service-panel" x="64" y="34" width="70" height="86" rx="14" />
+          <path className="service-line" d="M154 106h88M194 48v58M168 78h50" />
+          <rect className="service-fill" x="82" y="56" width="34" height="8" rx="4" />
+          <rect className="service-fill service-fill-purple" x="82" y="78" width="24" height="8" rx="4" />
+          <circle className="service-node" cx="194" cy="48" r="12" />
+          <circle className="service-node service-node-purple" cx="242" cy="106" r="12" />
+          <path className="service-line" d="M242 74l20 20-20 20" />
+        </svg>
+      )}
+    </div>
+  );
+}
+
 function ServicesPage() {
   const services = [
     ["Business Structure Design", "We define roles, responsibilities, workflows, ownership, and decision rhythms so the business can operate with clarity."],
@@ -559,16 +663,15 @@ function ServicesPage() {
 
   return (
     <main className="page-main">
-      <PageHero
-        label="Services"
-        title="Business transformation services for Operational Intelligence and Profitability"
-        text="Choose focused support for the areas your business needs to improve. From structure and operations to digital transformation and profitability, we help you build a stronger business operating system."
-      />
-      <section className="section service-list-section">
+      <section className="section services-page-heading">
+        <h1>Services</h1>
+      </section>
+      <section className="section service-list-section services-card-section">
         <div className="service-rows">
           {services.map(([title, text], index) => (
-            <article key={title}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
+            <article className="service-card" key={title}>
+              <ServiceCardVisual index={index} />
+              <span className="service-card-number">{String(index + 1).padStart(2, "0")}</span>
               <h3>{title}</h3>
               <p>{text}</p>
             </article>
@@ -586,13 +689,21 @@ function PricingPage() {
     ["Business Plan", "£99/month", "For agencies & high-volume businesses", ["Everything in Pro", "Unlimited quotes & invoices", "Advanced AI pricing rules (profit control + margins)", "Full expense tracking system", "Real-time profit dashboard", "Multi-user access (team accounts)", "Priority support", "Advanced widget customization"]],
     ["Agency / White Label", "£199/month", "For agencies reselling FekiTech", ["Everything in Business", "White-label branding (remove FekiTech branding)", "Manage multiple client accounts", "API access", "Custom integrations", "Dedicated onboarding support"]]
   ];
+  const transformationPackages = [
+    ["Starter Package", "From £500 – £1,500", "Business audit + structure review"],
+    ["Growth Package", "From £2,000 – £5,000", "Systems + digital transformation setup"],
+    ["FOS Implementation (Main Offer)", "From £5,000 – £25,000+", "Full business operating system build", true],
+    ["Enterprise (Custom)", "Custom pricing", "Full transformation + ongoing support"]
+  ];
 
   return (
     <main className="page-main">
       <section className="section pricing-page-section pricing-only-page">
         <div className="pricing-section-heading">
-          <span className="eyebrow">Pricing</span>
-          <h1>Small Business Operating System Pricing</h1>
+          <h1>Pricing</h1>
+        </div>
+        <div className="pricing-subsection-heading">
+          <h2>Small Business Operating System Packages</h2>
         </div>
         <div className="pricing-grid page-pricing small-business-pricing">
           {smallBusinessPlans.map(([name, price, summary, features, featured]) => (
@@ -608,31 +719,56 @@ function PricingPage() {
             </article>
           ))}
         </div>
-        <p className="pricing-note bespoke-pricing-note">OTHER SERVICES PRICING ARE ALL BESPOKE TAILORED MADE</p>
+        <p className="pricing-note bespoke-pricing-note">OTHER SERVICES PRICING ARE ALL BESPOKE AND TAILOR-MADE</p>
+      </section>
+      <section className="section transformation-packages-section">
+        <div className="transformation-packages-heading">
+          <h2>Business Transformation Packages</h2>
+          <p>Structured solutions for building profitable, scalable businesses.</p>
+        </div>
+        <div className="transformation-package-grid">
+          {transformationPackages.map(([name, price, summary, featured]) => (
+            <article className={`transformation-package-card ${featured ? "featured" : ""}`} key={name}>
+              {featured && <span className="package-badge">Main Offer</span>}
+              <h3>{name}</h3>
+              <strong>{price}</strong>
+              <p>{summary}</p>
+              <a href="/contact">Book an Audit</a>
+            </article>
+          ))}
+        </div>
       </section>
     </main>
   );
 }
 
 function BlogPage() {
+  const featuredArticle = {
+    category: "Business Systems",
+    title: "Why Most Businesses Are Not Profitable And How to Fix It with Structured Systems",
+    excerpt: "Most businesses struggle with profitability because they lack clear systems, visibility, follow-up, and operational control. Learn how structured systems can improve performance.",
+    readTime: "5 min read",
+    href: "/blog/why-most-businesses-are-not-profitable"
+  };
+
   return (
     <main className="page-main">
-      <section className="section blog-featured-section single-blog-section">
-        <span className="blog-page-title">Blog</span>
-        <div className="blog-featured-copy">
-          <span className="eyebrow">Blog</span>
-          <h1>Why Most Businesses Are Not Profitable (And How to Fix It with Structured Systems)</h1>
-          <p>
-            Most businesses struggle with low profitability and poor customer retention due to weak systems and structure.
-            Learn how to fix it using digital transformation and business operating systems.
-          </p>
-          <a className="blog-read-link" href="/blog/why-most-businesses-are-not-profitable">
-            Read blog <ArrowRight size={17} />
-          </a>
-        </div>
-        <figure className="blog-featured-image">
-          <img src={blogHeroImage} alt="Business team reviewing performance reports and operating systems" loading="lazy" decoding="async" />
-        </figure>
+      <section className="section blog-editorial-section">
+        <header className="blog-editorial-header">
+          <h1>Blog</h1>
+          <p>Insights on business structure, profitability, systems, automation, and digital transformation.</p>
+        </header>
+        <article className="blog-text-card blog-text-card-featured">
+          <span className="blog-category">{featuredArticle.category}</span>
+          <h2>{featuredArticle.title}</h2>
+          <p>{featuredArticle.excerpt}</p>
+          <div className="blog-card-footer">
+            <span>{featuredArticle.readTime}</span>
+            <a className="blog-read-link" href={featuredArticle.href}>
+              Read article <ArrowRight size={17} />
+            </a>
+          </div>
+        </article>
       </section>
     </main>
   );
@@ -650,7 +786,7 @@ function BlogArticlePage() {
 
   return (
     <main className="page-main">
-      <article className="article-page">
+      <article className="article-page article-text-only">
         <header className="article-header">
           <span className="eyebrow">Blog</span>
           <h1>Why Most Businesses Are Not Profitable (And How to Fix It with Structured Systems)</h1>
@@ -660,28 +796,15 @@ function BlogArticlePage() {
           </p>
           <div className="article-meta">
             <span>Fekitech Insight</span>
-            <span>Meta Description (SEO)</span>
+            <span>5 min read</span>
           </div>
         </header>
-        <figure className="article-hero-image">
-          <img src={blogArticleImage} alt="Business leaders reviewing strategy and performance data" loading="lazy" decoding="async" />
-        </figure>
         <h2>Introduction</h2>
         <p>Many business owners work hard every day, yet their businesses are still not profitable. Revenue may come in, but at the end of the month, there is little to no real profit.</p>
         <p>The problem is not effort — the problem is lack of structure, systems, and visibility.</p>
         <p>In today’s business environment, companies that do not operate with clear systems and digital intelligence struggle to survive, let alone grow.</p>
         {sections.map(([title, intro, bullets, closing], index) => (
           <section key={title}>
-            {index === 2 && (
-              <figure className="article-inline-image">
-                <img src={blogSystemsImage} alt="Team mapping business systems and structured workflows" loading="lazy" decoding="async" />
-              </figure>
-            )}
-            {index === 4 && (
-              <figure className="article-inline-image">
-                <img src={blogDashboardImage} alt="Business intelligence dashboard showing performance analytics" loading="lazy" decoding="async" />
-              </figure>
-            )}
             <h2>{index + 1}. {title}</h2>
             <p>{intro}</p>
             <ul>{bullets.map((item) => <li key={item}>{item}</li>)}</ul>
