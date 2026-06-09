@@ -13,15 +13,22 @@ function outputPathForRoute(route) {
   return path.join(distDir, route.replace(/^\//, ""), "index.html");
 }
 
+function getBuiltAssetTags(template) {
+  const head = template.match(/<head>([\s\S]*?)<\/head>/)?.[1] || "";
+  return (head.match(/<(?:script|link)\b(?=[^>]*(?:\/assets\/|rel="(?:stylesheet|modulepreload)"))[\s\S]*?(?:<\/script>|\/?>)/g) || []).join("\n    ");
+}
+
 function injectHead(template, route, headTags) {
+  const assetTags = getBuiltAssetTags(template);
   const baseHead = [
     '<meta charset="UTF-8" />',
     '<meta name="viewport" content="width=device-width, initial-scale=1.0" />',
     '<meta name="robots" content="index, follow" />',
     '<link rel="icon" type="image/png" href="/fekitech-logo.png" />',
     '<link rel="apple-touch-icon" href="/fekitech-logo.png" />',
-    headTags
-  ].join("\n    ");
+    headTags,
+    assetTags
+  ].filter(Boolean).join("\n    ");
 
   return template.replace(/<head>[\s\S]*?<\/head>/, `<head>\n    ${baseHead}\n  </head>`);
 }
