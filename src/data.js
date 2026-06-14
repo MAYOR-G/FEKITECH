@@ -64,7 +64,7 @@ export const testimonials = [
     quote:
       "This platform completely transformed how our team operates. Tasks that used to take hours now happen automatically, and the AI insights helped us identify inefficiencies we didn’t even know existed.",
     name: "Ronald",
-    role: "Medical Assistant"
+    role: "Operations Manager"
   },
   {
     quote:
@@ -88,7 +88,7 @@ export const testimonials = [
     quote:
       "Onboarding was effortless. Our entire team was up and running in minutes, and the AI automatically created workflows that felt perfectly tailored to our processes.",
     name: "Ronald",
-    role: "Medical Assistant"
+    role: "Operations Manager"
   },
   {
     quote:
@@ -124,19 +124,19 @@ export const testimonials = [
     quote:
       "The AI recommendations were spot-on. We optimized processes we’ve been struggling with for months, and the results were immediate.",
     name: "Joelle",
-    role: "Medical Assistant"
+    role: "Business Consultant"
   },
   {
     quote:
       "From automating tasks to improving collaboration, it’s become a core part of our workflow. I can’t imagine running operations without it now.",
     name: "Joelle",
-    role: "Medical Assistant"
+    role: "Business Consultant"
   },
   {
     quote:
       "Our productivity skyrocketed after switching. We’re completing projects faster, communicating better, and making data-driven decisions effortlessly.",
     name: "Courtney",
-    role: "Medical Assistant"
+    role: "Founder & CEO"
   }
 ];
 
