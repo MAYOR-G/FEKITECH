@@ -7,6 +7,7 @@ import {
   Facebook,
   Gauge,
   Instagram,
+  Megaphone,
   Menu,
   ScanLine,
   Sparkles,
@@ -23,12 +24,8 @@ import { applySeo } from "./lib/seo.js";
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const logoMark = "/fekitech-logo.png";
-const businessImage = "https://images.pexels.com/photos/7693688/pexels-photo-7693688.jpeg?auto=compress&cs=tinysrgb&w=1600";
 const analyticsImage = "/outcome-higher-profitability.jpeg";
 const systemsImage = "/outcome-reduce-stress.jpeg";
-const aboutImage = "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1800";
-const aboutCircleImage = "https://images.pexels.com/photos/3184328/pexels-photo-3184328.jpeg?auto=compress&cs=tinysrgb&w=1000";
-const aboutBoxImage = "https://images.pexels.com/photos/3182811/pexels-photo-3182811.jpeg?auto=compress&cs=tinysrgb&w=1200";
 const aboutTransformationImage = "/fekitech-about-transformation.png";
 const retentionImage = "/outcome-customer-growth.jpeg";
 const structureImage = "https://images.pexels.com/photos/6340632/pexels-photo-6340632.jpeg?auto=compress&cs=tinysrgb&w=1400";
@@ -154,6 +151,11 @@ function Hero() {
     video.muted = true;
     video.defaultMuted = true;
 
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      video.pause();
+      return undefined;
+    }
+
     const playVideo = () => {
       video.play().catch(() => {
         // Autoplay can still be delayed by a browser until it has enough data.
@@ -172,54 +174,35 @@ function Hero() {
 
   return (
     <section className="hero" id="top">
-      <div className="hero-orb blue" />
-      <div className="hero-orb purple" />
-      <div className="system-ring ring-a" />
-      <div className="system-ring ring-b" />
+      <div className="hero-background" aria-hidden="true">
+        {videoError ? (
+          <img src="/outcome-business-success.jpeg" alt="" width="1376" height="768" />
+        ) : (
+          <video
+            ref={videoRef}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/outcome-business-success.jpeg"
+            tabIndex="-1"
+            onError={() => setVideoError(true)}
+          >
+            <source src="https://pub-9f4f9c9b1b3e477aba4991ccfd92f1ae.r2.dev/Untitled.mp4" type="video/mp4" />
+          </video>
+        )}
+      </div>
+      <div className="hero-overlay" aria-hidden="true" />
       <div className="hero-inner">
-        <h1>Run your <span className="hero-emphasis">BUSINESS</span>, not <span className="hero-emphasis">PAPERWORK</span>.</h1>
+        <h1><span>Run Your Business,</span><span>Not Paperwork.</span></h1>
         <p>
           FekiTech creates instant quotes, invoices, expenses, and reporting in seconds, so you can focus on growing
-          your business, not paperwork. Get instant clarity on your profit, costs, and performance in real time.
+          your business, not paperwork. Gain instant clarity on your profit, cash, and performance in real time.
         </p>
         <div className="hero-actions">
           <Button>Start Free Trial</Button>
-          <Button href="#fos" variant="secondary">Install in 2 Minutes</Button>
-        </div>
-        <div className="hero-video-stage" aria-label="Fekitech Operating System preview">
-          <div className="hero-video-shell">
-            {videoError ? <div className="video-fallback" aria-hidden="true">
-              <div>
-                <span>FOS preview unavailable</span>
-                <strong>Business operating system</strong>
-              </div>
-              <i />
-              <i />
-              <i />
-            </div> : (
-              <video
-                ref={videoRef}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                poster={businessImage}
-                onError={() => setVideoError(true)}
-              >
-                <source src="https://pub-9f4f9c9b1b3e477aba4991ccfd92f1ae.r2.dev/Untitled.mp4" type="video/mp4" />
-              </video>
-            )}
-            <div className="video-status"><span />FOS preview</div>
-            {["Profitability visibility", "Retention tracking", "Process clarity", "Performance dashboard"].map((item, index) => (
-              <b className={`hero-float f${index + 1}`} key={item}>{item}</b>
-            ))}
-          </div>
-        </div>
-        <div className="proof-strip">
-          {["Business Structure", "Digital Transformation", "Business Intelligence", "Process Automation", "Profitability Systems"].map((item) => (
-            <span key={item}>{item}</span>
-          ))}
+          <Button href="/pricing#pricing" variant="secondary">Install in 2 Minutes</Button>
         </div>
       </div>
     </section>
@@ -232,14 +215,15 @@ function Challenges() {
     ["Unpredictable profitability", "Revenue may come in, but without visibility into costs, margins, and performance, profit remains unclear.", Gauge],
     ["Weak online conversion", "A weak digital presence and unclear customer journey make it harder to convert attention into revenue.", ScanLine],
     ["Manual operations", "Unstructured workflows, repeated manual tasks, and unclear responsibilities slow the business down.", Workflow],
-    ["Limited visibility", "Leaders cannot improve what they cannot see. Without data, decisions become reactive instead of strategic.", Database]
+    ["Limited visibility", "Leaders cannot improve what they cannot see. Without data, decisions become reactive instead of strategic.", Database],
+    ["Owners Struggle to Stand Out", "It is no longer just about competing with rivals; it is about competing against a relentless flood of information. Here is why business owners find it increasingly difficult to be seen.", Megaphone]
   ];
 
   return (
     <section className="section challenges-section" id="challenges">
       <div className="challenges-copy">
         <SectionIntro
-          title="BUSINESS PROBLEMS"
+          title={<>Business <span className="heading-accent accent-blue">Problems</span></>}
           center={false}
         />
       </div>
@@ -269,7 +253,7 @@ function Solution() {
   return (
     <section className="section solution-section" id="fos">
       <div className="solution-copy">
-        <h2>Our Solution</h2>
+        <h2>Our <span className="heading-accent accent-purple">Solution</span></h2>
         <p>
           Fekitech Operating System (FOS) is a structured implementation system that combines business structure,
           digital tools, automation, reporting, and performance improvement into one operating framework.
@@ -320,7 +304,7 @@ function TransformProcess() {
   return (
     <section className="section transform-section" id="process">
       <SectionIntro
-        title={<>How We Transform Your <span className="heading-accent accent-mix">Business</span></>}
+        title={<>How We Transform Your <span className="heading-accent accent-blue">Business</span></>}
       />
       <div className="transform-roadmap">
         {steps.map(([title, text], index) => (
@@ -410,7 +394,7 @@ function Testimonials() {
     <section className="section testimonials" id="reviews">
       <SectionIntro
         label="Reviews"
-        title={<>WHAT FOUNDERS SAY ABOUT <span className="heading-accent accent-blue">US</span></>}
+        title={<>What Founders Say About <span className="heading-accent accent-blue">Us</span></>}
       />
       {[rowOne, rowTwo].map((row, rowIndex) => (
         <div className={`marquee-row ${rowIndex === 1 ? "reverse" : ""}`} key={rowIndex}>
@@ -438,7 +422,10 @@ function CTA() {
         {Array.from({ length: 12 }).map((_, index) => <span key={index} />)}
       </div>
       <div className="cta-inner">
-        <Button>Book Free Demo</Button>
+        <figure className="cta-visual">
+          <img src={retentionImage} alt="Business team reviewing a modern software demonstration" width="1376" height="768" loading="lazy" decoding="async" />
+          <Button>Book Free Demo</Button>
+        </figure>
       </div>
     </section>
   );
@@ -461,7 +448,7 @@ function HomePage() {
 
 function AboutPage() {
   return (
-    <main className="page-main">
+    <main className="page-main about-page">
       <section className="section about-simple">
         <figure className="about-single-image about-simple-visual">
           <img src={aboutTransformationImage} alt="Business leaders collaborating on transformation strategy in a modern office" width="1719" height="915" loading="lazy" decoding="async" />
@@ -679,7 +666,7 @@ function PricingPage() {
 
   return (
     <main className="page-main">
-      <section className="section pricing-page-section pricing-only-page">
+      <section className="section pricing-page-section pricing-only-page" id="pricing">
         <div className="pricing-section-heading">
           <h1>Pricing</h1>
         </div>
