@@ -211,12 +211,11 @@ function Hero() {
       <div className="hero-inner">
         <h1><span>Run Your Business,</span><span>Not Paperwork.</span></h1>
         <p>
-          FekiTech creates instant quotes, invoices, expenses, and reporting in seconds, so you can focus on growing
-          your business, not paperwork. Gain instant clarity on your profit, cash, and performance in real time.
+          We help businesses improve performance across operations, people, systems, and profitability.
         </p>
         <div className="hero-actions">
-          <Button>Start Free Trial</Button>
-          <Button href="/pricing#pricing" variant="secondary">Install in 2 Minutes</Button>
+          <Button>Book a Strategy Call</Button>
+          <Button href="/pricing#pricing" variant="secondary">Explore Our Approach</Button>
         </div>
       </div>
     </section>
@@ -259,40 +258,59 @@ function Challenges() {
 
 function Solution() {
   const pillars = [
-    ["Organisational Structure", "Roles, responsibilities, workflows, and accountability across the business.", Users],
-    ["Digital Transformation", "Tools and systems that reduce manual work and improve execution.", Workflow],
-    ["Business Intelligence", "Reporting and visibility for stronger leadership decisions.", Database],
-    ["Process Optimisation", "Cleaner workflows that remove waste and repeated friction.", ScanLine],
-    ["Automation", "Repeatable systems that reduce delays and operational dependency.", Sparkles],
-    ["Performance Improvement", "A rhythm for tracking, improving, and scaling what works.", Gauge]
+    ["Organisational Structure", "Define clarity, roles, and organizational design.", Users],
+    ["Digital Transformation", "Modernize systems and processes.", Workflow],
+    ["Business Intelligence", "Enable data-driven decision making.", Database],
+    ["Profitability", "Improve margins and financial control.", ScanLine],
+    ["Automation", "Repeatable systems that improve efficiency by reducing delays and operational bottlenecks.", Sparkles],
+    ["Performance Improvement", "Align teams’ performance and accountability.", Gauge, "Human Capital"]
   ];
 
   return (
     <section className="section solution-section" id="fos">
       <div className="solution-copy">
         <h2>Our <span className="heading-accent accent-purple">Solution</span></h2>
-        <p>
-          Fekitech Operating System (FOS) is a structured implementation system that combines business structure,
-          digital tools, automation, reporting, and performance improvement into one operating framework.
+        <p className="solution-summary">
+          The Fekitech Operating System (FOS) is a unified business operating framework that connects people,
+          processes, data, and technology into one structured system for predictable performance, scalability, and
+          profitability.
         </p>
-        <p>
-          It is not just software and it is not just consulting. It is a practical system for helping businesses operate
-          with clarity, intelligence, and accountability.
-        </p>
+        <div className="solution-deliverables">
+          <h3>What it delivers:</h3>
+          <div>
+            <strong>Consistent execution across teams</strong>
+            <p>Ensures aligned priorities, accountability, and operational discipline.</p>
+          </div>
+          <div>
+            <strong>Real-time performance visibility</strong>
+            <p>Enables data-driven decisions through clear operational insights.</p>
+          </div>
+          <div>
+            <strong>Reduced operational inefficiency</strong>
+            <p>Eliminates duplication, friction, and manual guesswork.</p>
+          </div>
+          <div>
+            <strong>Scalable business architecture</strong>
+            <p>Builds a foundation for sustainable growth without operational breakdown.</p>
+          </div>
+        </div>
       </div>
       <div className="fos-architecture">
         <div className="fos-engine">
           <span>FOS</span>
-          <strong>Operating System Engine</strong>
-          <small>People, process, data, technology, and performance connected into one implementation system.</small>
+          <strong>Operations</strong>
+          <small>Streamline workflow and remove inefficiencies.</small>
         </div>
         <div className="fos-orbit orbit-one" />
         <div className="fos-orbit orbit-two" />
-        {pillars.map(([title, text, Icon], index) => (
+        {pillars.map(([title, text, Icon, emphasis], index) => (
           <article className={`fos-node node-${index + 1}`} key={title}>
             <Icon size={18} />
             <h3>{title}</h3>
-            <p>{text}</p>
+            <p>
+              {emphasis && <strong className="fos-node-emphasis">→ {emphasis}</strong>}
+              {text}
+            </p>
           </article>
         ))}
       </div>
@@ -708,7 +726,6 @@ function PricingPage() {
       <section className="section transformation-packages-section">
         <div className="transformation-packages-heading">
           <h2>Business Transformation Packages</h2>
-          <p>Structured solutions for building profitable, scalable businesses.</p>
         </div>
         <div className="transformation-package-grid">
           {transformationPackages.map(([name, price, summary, featured]) => (
@@ -738,10 +755,6 @@ function BlogPage() {
   return (
     <main className="page-main">
       <section className="section blog-editorial-section">
-        <header className="blog-editorial-header">
-          <h1>Blog</h1>
-          <p>Insights on business structure, profitability, systems, automation, and digital transformation.</p>
-        </header>
         <article className="blog-text-card blog-text-card-featured">
           <span className="blog-category">{featuredArticle.category}</span>
           <h2>{featuredArticle.title}</h2>
