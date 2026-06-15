@@ -3,14 +3,20 @@ import {
   ArrowRight,
   Check,
   ChevronRight,
+  ClipboardCheck,
   Database,
   Facebook,
   Gauge,
+  Handshake,
   Instagram,
   Megaphone,
   Menu,
+  Network,
   ScanLine,
+  Search,
+  Settings2,
   Sparkles,
+  TrendingUp,
   Users,
   Workflow,
   X
@@ -32,6 +38,14 @@ const structureImage = "https://images.pexels.com/photos/6340632/pexels-photo-63
 const scaleImage = "/outcome-business-success.jpeg";
 const billingImage = "/outcome-get-paid-faster.jpeg";
 const timeImage = "/outcome-save-time.jpeg";
+const problemImages = {
+  customers: "/problem-loss-customers.webp",
+  profitability: "/problem-unpredictable-profitability.webp",
+  conversion: "/problem-weak-online-conversion.webp",
+  operations: "/problem-manual-operations.webp",
+  visibility: "/problem-limited-visibility.webp",
+  standout: "/problem-stand-out.webp"
+};
 const testimonialAvatars = {
   Ronald: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=240",
   "Cody Fisher": "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=240",
@@ -211,26 +225,29 @@ function Hero() {
 
 function Challenges() {
   const items = [
-    ["Loss of customers", "Weak customer retention, inconsistent follow-up, and poor customer experience reduce long-term growth.", Users],
-    ["Unpredictable profitability", "Revenue may come in, but without visibility into costs, margins, and performance, profit remains unclear.", Gauge],
-    ["Weak online conversion", "A weak digital presence and unclear customer journey make it harder to convert attention into revenue.", ScanLine],
-    ["Manual operations", "Unstructured workflows, repeated manual tasks, and unclear responsibilities slow the business down.", Workflow],
-    ["Limited visibility", "Leaders cannot improve what they cannot see. Without data, decisions become reactive instead of strategic.", Database],
-    ["Owners Struggle to Stand Out", "It is no longer just about competing with rivals; it is about competing against a relentless flood of information. Here is why business owners find it increasingly difficult to be seen.", Megaphone]
+    ["Loss of customers", "Weak customer retention, inconsistent follow-up, and poor customer experience reduce long-term growth.", Users, problemImages.customers],
+    ["Unpredictable profitability", "Revenue may come in, but without visibility into costs, margins, and performance, profit remains unclear.", Gauge, problemImages.profitability],
+    ["Weak online conversion", "A weak digital presence and unclear customer journey make it harder to convert attention into revenue.", ScanLine, problemImages.conversion],
+    ["Manual operations", "Unstructured workflows, repeated manual tasks, and unclear responsibilities slow the business down.", Workflow, problemImages.operations],
+    ["Limited visibility", "Leaders cannot improve what they cannot see. Without data, decisions become reactive instead of strategic.", Database, problemImages.visibility],
+    ["Owners Struggle to Stand Out", "It is no longer just about competing with rivals; it is about competing against a relentless flood of information. Here is why business owners find it increasingly difficult to be seen.", Megaphone, problemImages.standout]
   ];
 
   return (
     <section className="section challenges-section" id="challenges">
       <div className="challenges-copy">
         <SectionIntro
-          title={<>Business <span className="heading-accent accent-blue">Problems</span></>}
+          title="Business Problems"
           center={false}
         />
       </div>
       <div className="challenge-grid">
-        {items.map(([title, text, Icon], index) => (
+        {items.map(([title, text, Icon, image], index) => (
           <article className={index === 0 ? "challenge-card featured" : "challenge-card"} key={title}>
-            <div><Icon size={19} /></div>
+            <figure className="problem-image" aria-hidden="true">
+              <img src={image} alt="" width="1200" height="675" loading="lazy" decoding="async" />
+              <div className="challenge-card-icon"><Icon size={20} /></div>
+            </figure>
             <h3>{title}</h3>
             <p>{text}</p>
           </article>
@@ -274,7 +291,6 @@ function Solution() {
         {pillars.map(([title, text, Icon], index) => (
           <article className={`fos-node node-${index + 1}`} key={title}>
             <Icon size={18} />
-            <span>{String(index + 1).padStart(2, "0")}</span>
             <h3>{title}</h3>
             <p>{text}</p>
           </article>
@@ -293,23 +309,23 @@ function Solution() {
 
 function TransformProcess() {
   const steps = [
-    ["Assess your business operations", "We review your current structure, workflows, customer journey, digital systems, and performance gaps."],
-    ["Identify gaps in structure and systems", "We uncover what is slowing growth, reducing profit, weakening retention, or creating operational confusion."],
-    ["Design the FOS framework for your business", "We map the structure, tools, workflows, data points, and implementation plan your business needs."],
-    ["Implement digital and intelligence systems", "We help set up the systems, automations, reporting, and processes required to improve execution."],
-    ["Optimise for performance and scale", "We track what is working, improve what is weak, and prepare the business for scalable growth."],
-    ["Follow-up and Mentorship", "We provide continued guidance, follow-up, and strategic support to help the business stay aligned, improve execution, and sustain profitability."]
+    ["Assess your business operations", "We review your current structure, workflows, customer journey, digital systems, and performance gaps.", ClipboardCheck],
+    ["Identify gaps in structure and systems", "We uncover what is slowing growth, reducing profit, weakening retention, or creating operational confusion.", Search],
+    ["Design the FOS framework for your business", "We map the structure, tools, workflows, data points, and implementation plan your business needs.", Network],
+    ["Implement digital and intelligence systems", "We help set up the systems, automations, reporting, and processes required to improve execution.", Settings2],
+    ["Optimise for performance and scale", "We track what is working, improve what is weak, and prepare the business for scalable growth.", TrendingUp],
+    ["Follow-up and Mentorship", "We provide continued guidance, follow-up, and strategic support to help the business stay aligned, improve execution, and sustain profitability.", Handshake]
   ];
 
   return (
     <section className="section transform-section" id="process">
       <SectionIntro
-        title={<>How We Transform Your <span className="heading-accent accent-blue">Business</span></>}
+        title="How We Transform Your Business"
       />
       <div className="transform-roadmap">
-        {steps.map(([title, text], index) => (
+        {steps.map(([title, text, Icon]) => (
           <article key={title}>
-            <span>{String(index + 1).padStart(2, "0")}</span>
+            <span className="transform-step-icon" aria-hidden="true"><Icon size={26} /></span>
             <h3>{title}</h3>
             <p>{text}</p>
           </article>
@@ -332,7 +348,7 @@ function Outcomes() {
   return (
     <section className="section outcomes-section" id="growth">
       <SectionIntro
-        title={<>Everything you need to run your business <span className="heading-accent accent-blue">efficiently.</span></>}
+        title={<>Run Your Business More <span className="heading-accent accent-blue">Efficiently</span></>}
       />
       <div className="outcome-lanes">
         {outcomes.map(([title, text, image, alt], index) => (
@@ -393,7 +409,7 @@ function Testimonials() {
   return (
     <section className="section testimonials" id="reviews">
       <SectionIntro
-        label="Reviews"
+        label="Review"
         title={<>What Founders Say About <span className="heading-accent accent-blue">Us</span></>}
       />
       {[rowOne, rowTwo].map((row, rowIndex) => (
