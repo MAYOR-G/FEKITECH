@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /api/
 
-Sitemap: https://fekitech.vercel.app/sitemap.xml
+Sitemap: https://fekitech.co.uk/sitemap.xml

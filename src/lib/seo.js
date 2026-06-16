@@ -167,8 +167,10 @@ export function applySeo(pathname = "/") {
   const seo = getSeo(pathname);
   const canonical = getCanonicalUrl(pathname);
   const image = absoluteUrl(siteConfig.ogImage);
+  const robots = pathname === "/admin" ? "noindex, nofollow" : "index, follow";
 
   document.title = seo.title;
+  setMetaContent('meta[name="robots"]', { name: "robots", content: robots });
   setMetaContent('meta[name="description"]', { name: "description", content: seo.description });
   setLink('link[rel="canonical"]', { rel: "canonical", href: canonical });
   setMetaContent('meta[property="og:type"]', { property: "og:type", content: pathname.startsWith("/blog/why-") ? "article" : "website" });
@@ -216,6 +218,8 @@ ${entries}
 export function getRobotsTxt() {
   return `User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /api/
 
 Sitemap: ${absoluteUrl("/sitemap.xml")}
 `;

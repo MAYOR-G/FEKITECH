@@ -1,0 +1,11 @@
+import { clearSessionCookie } from "../_lib/auth.js";
+import { methodNotAllowed, sendJson } from "../_lib/http.js";
+
+export default async function handler(req, res) {
+  if (req.method !== "POST") {
+    return methodNotAllowed(res, ["POST"]);
+  }
+
+  res.setHeader("Set-Cookie", clearSessionCookie(req));
+  return sendJson(res, 200, { ok: true });
+}

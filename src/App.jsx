@@ -209,9 +209,10 @@ function Hero() {
       </div>
       <div className="hero-overlay" aria-hidden="true" />
       <div className="hero-inner">
+        <span className="hero-label">Built For Local Businesses</span>
         <h1><span>Run Your Business,</span><span>Not Paperwork.</span></h1>
         <p>
-          We help businesses improve performance across operations, people, systems, and profitability.
+          Fekitech transforms organisations by improving performance across operations, people, systems, and profitability.
         </p>
         <div className="hero-actions">
           <Button>Book a Strategy Call</Button>
@@ -366,7 +367,7 @@ function Outcomes() {
   return (
     <section className="section outcomes-section" id="growth">
       <SectionIntro
-        title={<>Run Your Business More <span className="heading-accent accent-blue">Efficiently</span></>}
+        title={<>How We Help You Run Your Business <span className="heading-accent accent-blue">Efficiently.</span></>}
       />
       <div className="outcome-lanes">
         {outcomes.map(([title, text, image, alt], index) => (
@@ -826,17 +827,51 @@ function BlogArticlePage() {
 }
 
 function ContactPage() {
-  const [submitted, setSubmitted] = useState(false);
+  const [formStatus, setFormStatus] = useState({ type: "", message: "" });
+  const [submitting, setSubmitting] = useState(false);
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
     const form = event.currentTarget;
     if (!form.checkValidity()) {
       form.reportValidity();
       return;
     }
-    setSubmitted(true);
-    form.reset();
+
+    const formData = new FormData(form);
+    const payload = {
+      name: formData.get("fullName"),
+      email: formData.get("email"),
+      subject: formData.get("challenge"),
+      message: formData.get("message"),
+      company: formData.get("company"),
+      website: formData.get("website"),
+      businessSize: formData.get("size"),
+      challenge: formData.get("challenge")
+    };
+
+    setSubmitting(true);
+    setFormStatus({ type: "", message: "" });
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Unable to submit your message right now.");
+      }
+
+      setFormStatus({ type: "success", message: result.message || "Your message has been received. The FekiTech team will follow up shortly." });
+      form.reset();
+    } catch (error) {
+      setFormStatus({ type: "error", message: error.message || "Unable to submit your message right now." });
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -865,21 +900,237 @@ function ContactPage() {
             </select>
           </label>
           <label className="full" htmlFor="message">Message<textarea id="message" required name="message" placeholder="Tell us what is currently slowing your business down." /></label>
-          <button type="submit">Submit Audit Request</button>
-          {submitted && <p className="success-message">Your audit request has been received. The Fekitech team will follow up with the next step.</p>}
+          <button type="submit" disabled={submitting}>{submitting ? "Submitting..." : "Submit Audit Request"}</button>
+          {formStatus.message && <p className={formStatus.type === "error" ? "error-message" : "success-message"}>{formStatus.message}</p>}
         </form>
         <aside className="audit-side-card">
           <img src={logoMark} alt="" width="654" height="658" />
           <h2>Contact Details</h2>
           <p>Phone: <a href="tel:+447352364942">+447352364942</a></p>
           <p>71-75, Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ</p>
-          <p>Email: <a href="mailto:info@fekitech.com">info@fekitech.com</a></p>
+          <p>Email: <a href="mailto:info@fekitech.co.uk">info@fekitech.co.uk</a></p>
           <div className="socials">
             <a href="https://www.facebook.com/profile.php?id=61590753470491" aria-label="Facebook"><Facebook size={18} /></a>
             <a href="https://www.instagram.com/fekitech/" aria-label="Instagram"><Instagram size={18} /></a>
             <a href="https://www.tiktok.com/@fekitech" aria-label="TikTok"><TikTokIcon size={18} /></a>
           </div>
         </aside>
+      </section>
+    </main>
+  );
+}
+
+function formatAdminDate(value) {
+  if (!value) return "";
+  return new Intl.DateTimeFormat("en-GB", {
+    dateStyle: "medium",
+    timeStyle: "short"
+  }).format(new Date(value));
+}
+
+function AdminPage() {
+  const [authStatus, setAuthStatus] = useState("checking");
+  const [conversations, setConversations] = useState([]);
+  const [selectedEmail, setSelectedEmail] = useState("");
+  const [messages, setMessages] = useState([]);
+  const [notice, setNotice] = useState("");
+  const [loadingThread, setLoadingThread] = useState(false);
+  const [replying, setReplying] = useState(false);
+
+  async function loadConversations() {
+    const response = await fetch("/api/admin/messages", { credentials: "include" });
+    if (response.status === 401) {
+      setAuthStatus("logged-out");
+      return;
+    }
+    const result = await response.json();
+    if (!response.ok) {
+      throw new Error(result.error || "Unable to load messages.");
+    }
+    setConversations(result.conversations || []);
+    setAuthStatus("logged-in");
+    if (!selectedEmail && result.conversations?.[0]?.email) {
+      await loadThread(result.conversations[0].email);
+    }
+  }
+
+  async function loadThread(email) {
+    setSelectedEmail(email);
+    setLoadingThread(true);
+    setNotice("");
+    try {
+      const response = await fetch(`/api/admin/messages?email=${encodeURIComponent(email)}`, { credentials: "include" });
+      if (response.status === 401) {
+        setAuthStatus("logged-out");
+        return;
+      }
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.error || "Unable to load this conversation.");
+      }
+      setMessages(result.messages || []);
+    } catch (error) {
+      setNotice(error.message);
+    } finally {
+      setLoadingThread(false);
+    }
+  }
+
+  useEffect(() => {
+    loadConversations().catch((error) => {
+      setNotice(error.message);
+      setAuthStatus("logged-out");
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  async function handleLogin(event) {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    setNotice("");
+    try {
+      const response = await fetch("/api/admin/login", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: formData.get("email"),
+          password: formData.get("password")
+        })
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.error || "Unable to log in.");
+      }
+      await loadConversations();
+    } catch (error) {
+      setNotice(error.message);
+    }
+  }
+
+  async function handleLogout() {
+    await fetch("/api/admin/logout", { method: "POST", credentials: "include" });
+    setAuthStatus("logged-out");
+    setConversations([]);
+    setMessages([]);
+    setSelectedEmail("");
+  }
+
+  async function handleReply(event) {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const message = String(formData.get("reply") || "").trim();
+    if (!selectedEmail || !message) return;
+
+    setReplying(true);
+    setNotice("");
+    try {
+      const response = await fetch("/api/admin/reply", {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: selectedEmail, message })
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.error || "Unable to send reply.");
+      }
+      setMessages(result.messages || []);
+      form.reset();
+      await loadConversations();
+    } catch (error) {
+      setNotice(error.message);
+    } finally {
+      setReplying(false);
+    }
+  }
+
+  if (authStatus === "checking") {
+    return (
+      <main className="admin-page">
+        <section className="admin-panel"><p>Loading admin...</p></section>
+      </main>
+    );
+  }
+
+  if (authStatus === "logged-out") {
+    return (
+      <main className="admin-page admin-login-page">
+        <section className="admin-panel admin-login-panel">
+          <h1>Admin Login</h1>
+          <form className="admin-login-form" onSubmit={handleLogin}>
+            <label>Email<input required type="email" name="email" autoComplete="username" /></label>
+            <label>Password<input required type="password" name="password" autoComplete="current-password" /></label>
+            <button type="submit">Log In</button>
+            {notice && <p className="error-message">{notice}</p>}
+          </form>
+        </section>
+      </main>
+    );
+  }
+
+  const selectedConversation = conversations.find((conversation) => conversation.email === selectedEmail);
+
+  return (
+    <main className="admin-page">
+      <section className="admin-panel admin-dashboard">
+        <div className="admin-toolbar">
+          <div>
+            <span className="eyebrow">Admin</span>
+            <h1>Messages</h1>
+          </div>
+          <button type="button" onClick={handleLogout}>Log Out</button>
+        </div>
+        {notice && <p className="error-message">{notice}</p>}
+        <div className="admin-dashboard-grid">
+          <aside className="conversation-list" aria-label="Conversations">
+            {conversations.length === 0 ? (
+              <p>No messages yet.</p>
+            ) : conversations.map((conversation) => (
+              <button
+                className={conversation.email === selectedEmail ? "active" : ""}
+                type="button"
+                key={conversation.email}
+                onClick={() => loadThread(conversation.email)}
+              >
+                <strong>{conversation.name || conversation.email}</strong>
+                <span>{conversation.email}</span>
+                <small>{conversation.messageCount} message{conversation.messageCount === 1 ? "" : "s"} · {formatAdminDate(conversation.lastMessageAt)}</small>
+                <p>{conversation.preview}</p>
+              </button>
+            ))}
+          </aside>
+          <section className="message-thread">
+            {selectedConversation ? (
+              <>
+                <header>
+                  <h2>{selectedConversation.name || selectedConversation.email}</h2>
+                  <a href={`mailto:${selectedConversation.email}`}>{selectedConversation.email}</a>
+                </header>
+                <div className="message-history">
+                  {loadingThread ? <p>Loading conversation...</p> : messages.map((message) => (
+                    <article className={`thread-message ${message.direction === "admin" ? "admin-reply" : ""}`} key={message.id}>
+                      <div>
+                        <strong>{message.direction === "admin" ? "FekiTech" : message.name}</strong>
+                        <span>{formatAdminDate(message.createdAt)}</span>
+                      </div>
+                      <h3>{message.subject}</h3>
+                      <p>{message.message}</p>
+                    </article>
+                  ))}
+                </div>
+                <form className="admin-reply-form" onSubmit={handleReply}>
+                  <label htmlFor="adminReply">Reply from info@fekitech.co.uk</label>
+                  <textarea id="adminReply" name="reply" required placeholder="Write your reply..." />
+                  <button type="submit" disabled={replying}>{replying ? "Sending..." : "Send Reply"}</button>
+                </form>
+              </>
+            ) : (
+              <p>Select a conversation to view the message history.</p>
+            )}
+          </section>
+        </div>
       </section>
     </main>
   );
@@ -910,7 +1161,7 @@ function Footer() {
       <div className="footer-column">
         <h3>Contact</h3>
         <a href="tel:+447352364942">+447352364942</a>
-        <a href="mailto:info@fekitech.com">info@fekitech.com</a>
+        <a href="mailto:info@fekitech.co.uk">info@fekitech.co.uk</a>
         <span>71-75, Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ</span>
       </div>
       <div className="footer-column">
@@ -940,6 +1191,8 @@ function AppPage({ pathname }) {
     case "/contact":
     case "/audit":
       return <ContactPage />;
+    case "/admin":
+      return <AdminPage />;
     default:
       return <HomePage />;
   }

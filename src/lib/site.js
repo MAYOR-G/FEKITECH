@@ -1,4 +1,4 @@
-const fallbackSiteUrl = "https://fekitech.vercel.app";
+const fallbackSiteUrl = "https://fekitech.co.uk";
 
 function getEnvValue(name) {
   const viteEnv = typeof import.meta !== "undefined" ? import.meta.env : undefined;
@@ -20,19 +20,19 @@ export function absoluteUrl(path = "/") {
 }
 
 export const siteConfig = {
-  siteName: "Fekitech",
+  siteName: "FekiTech",
   siteUrl: normaliseSiteUrl(getEnvValue("NEXT_PUBLIC_SITE_URL") || getEnvValue("VITE_SITE_URL")),
   alternateDomains: (getEnvValue("NEXT_PUBLIC_ALTERNATE_DOMAINS") || "")
     .split(",")
     .map((domain) => domain.trim())
     .filter(Boolean)
     .map((domain) => normaliseSiteUrl(domain)),
-  defaultTitle: "Fekitech | Business Transformation and Operating Systems for Scalable Growth",
+  defaultTitle: "FekiTech | Business Transformation and Operating Systems for Scalable Growth",
   defaultDescription:
-    "Fekitech helps businesses build structure, improve profitability, implement digital transformation, and scale with the Fekitech Operating System.",
+    "Fekitech transforms organisations by improving performance across operations, people, systems, and profitability.",
   ogImage: "/og-image.svg",
   logo: "/fekitech-logo.png",
-  email: "info@fekitech.com",
+  email: "info@fekitech.co.uk",
   phone: "+447352364942",
   address: "71-75, Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ",
   sameAs: [
@@ -50,28 +50,28 @@ export const pageSeo = {
     priority: 1
   },
   "/about": {
-    title: "About Fekitech | Business Transformation and Operating Systems",
+    title: "About FekiTech | Business Transformation and Operating Systems",
     description:
       "Learn how Fekitech helps organisations become structured, data-driven, profitable, and scalable through business operating systems.",
     canonicalPath: "/about",
     priority: 0.8
   },
   "/services": {
-    title: "Business Transformation Services | Fekitech",
+    title: "Business Transformation Services | FekiTech",
     description:
       "Explore Fekitech services for business structure, digital transformation, business intelligence, automation, retention, profitability, AI agents, software, training, mentorship, and career support.",
     canonicalPath: "/services",
     priority: 0.9
   },
   "/pricing": {
-    title: "Fekitech Pricing | Business Operating System and Transformation Packages",
+    title: "FekiTech Pricing | Business Operating System and Transformation Packages",
     description:
       "View Fekitech pricing for small business operating system plans and business transformation packages.",
     canonicalPath: "/pricing",
     priority: 0.8
   },
   "/blog": {
-    title: "Fekitech Blog | Business Systems, Profitability and Automation",
+    title: "FekiTech Blog | Business Systems, Profitability and Automation",
     description:
       "Read Fekitech insights on business structure, profitability, systems, automation, and digital transformation.",
     canonicalPath: "/blog",
@@ -85,17 +85,23 @@ export const pageSeo = {
     priority: 0.7
   },
   "/contact": {
-    title: "Contact Fekitech | Book a Free Business Audit",
+    title: "Contact FekiTech | Book a Free Business Audit",
     description:
       "Contact Fekitech to book a free business audit and discover how to improve profitability, structure, and business performance.",
     canonicalPath: "/contact",
     priority: 0.8
   },
   "/audit": {
-    title: "Contact Fekitech | Book a Free Business Audit",
+    title: "Contact FekiTech | Book a Free Business Audit",
     description:
       "Contact Fekitech to book a free business audit and discover how to improve profitability, structure, and business performance.",
     canonicalPath: "/contact",
+    priority: 0
+  },
+  "/admin": {
+    title: "FekiTech Admin",
+    description: "Secure FekiTech admin dashboard.",
+    canonicalPath: "/admin",
     priority: 0
   }
 };
