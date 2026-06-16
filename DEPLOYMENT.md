@@ -147,6 +147,10 @@ Add these in **Vercel -> Project -> Settings -> Environment Variables**:
 RESEND_API_KEY=
 RESEND_FROM_EMAIL=info@contact.fekitech.co.uk
 CONTACT_NOTIFICATION_EMAILS=info@contact.fekitech.co.uk,couragechidoka@gmail.com,fekitech01@gmail.com
+SUPPORT_EMAIL=info@contact.fekitech.co.uk
+COMPANY_NAME=FekiTech
+WEBSITE_URL=https://fekitech.co.uk
+EMAIL_LOGO_URL=https://fekitech.co.uk/fekitech-logo.png
 
 ADMIN_EMAIL=fekitech01@gmail.com
 ADMIN_PASSWORD=
@@ -165,6 +169,8 @@ Important:
 - `ADMIN_PASSWORD` should be added only in Vercel Environment Variables.
 - The admin password must not be committed to GitHub.
 - `RESEND_API_KEY` must not be committed to GitHub.
+- `RESEND_FROM_EMAIL` must use a verified Resend sender/domain.
+- `SUPPORT_EMAIL`, `COMPANY_NAME`, `WEBSITE_URL`, and `EMAIL_LOGO_URL` control the branded admin reply email template.
 - `SESSION_SECRET` should be a long random secret value.
 - `CRON_SECRET` should be a long random secret value.
 - `CLOUDFLARE_TURNSTILE_SECRET_KEY` must not be committed to GitHub.

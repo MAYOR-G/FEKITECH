@@ -1,7 +1,23 @@
 import { requireAdmin } from "../_lib/auth.js";
 import { getThread, storeMessage } from "../_lib/db.js";
-import { sendEmail } from "../_lib/email.js";
-import { cleanString, escapeHtml, isEmail, methodNotAllowed, readJson, sendJson } from "../_lib/http.js";
+import { adminReplyEmail, sendEmail } from "../_lib/email.js";
+import { cleanString, isEmail, methodNotAllowed, readJson, sendJson } from "../_lib/http.js";
+
+function cleanReplyMessage(value, maxLength = 5000) {
+  return String(value || "")
+    .replace(/\r\n/g, "\n")
+    .replace(/\r/g, "\n")
+    .trim()
+    .slice(0, maxLength);
+}
+
+function getRecipientName(messages) {
+  const inboundMessage = [...messages].reverse().find((message) => message.direction !== "admin" && message.name);
+  if (!inboundMessage || inboundMessage.name === inboundMessage.email) {
+    return "";
+  }
+  return inboundMessage.name;
+}
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -12,28 +28,26 @@ export default async function handler(req, res) {
     requireAdmin(req);
     const body = await readJson(req);
     const email = cleanString(body.email, 160).toLowerCase();
-    const message = cleanString(body.message, 5000);
-    const subject = cleanString(body.subject || "Re: Your FekiTech enquiry", 160);
+    const message = cleanReplyMessage(body.message, 5000);
+    const subject = cleanString(body.subject, 160);
 
     if (!isEmail(email) || message.length < 2) {
       return sendJson(res, 400, { error: "Please provide a valid recipient and reply message." });
     }
 
+    const existingThread = await getThread(email);
+    const recipientName = getRecipientName(existingThread);
+    const replyEmail = adminReplyEmail({ message, recipientName, subject });
+
     await sendEmail({
       to: email,
-      subject,
-      html: `
-        <div style="font-family:Arial,sans-serif;line-height:1.6;color:#0f172a;">
-          <p style="white-space:pre-wrap;margin:0;">${escapeHtml(message)}</p>
-        </div>
-      `,
-      text: message
+      ...replyEmail
     });
 
     await storeMessage({
       senderEmail: email,
       senderName: "FekiTech",
-      subject,
+      subject: replyEmail.subject,
       message,
       direction: "admin",
       meta: { repliedBy: process.env.ADMIN_EMAIL }
