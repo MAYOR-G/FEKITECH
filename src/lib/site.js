@@ -32,7 +32,7 @@ export const siteConfig = {
     "Fekitech transforms organisations by improving performance across operations, people, systems, and profitability.",
   ogImage: "/og-image.svg",
   logo: "/fekitech-logo.png",
-  email: "info@fekitech.co.uk",
+  email: "info@contact.fekitech.co.uk",
   phone: "+447352364942",
   address: "71-75, Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ",
   sameAs: [

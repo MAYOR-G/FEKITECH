@@ -3720,6 +3720,26 @@ p {
   transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
 }
 
+.audit-form select {
+  color-scheme: dark;
+  background-color: rgba(13, 18, 27, 0.92);
+}
+
+.audit-form select option {
+  background: #080d15;
+  color: #edf4ff;
+}
+
+.audit-form select option:disabled {
+  color: #8c9aaf;
+}
+
+.audit-form select option:checked,
+.audit-form select option:hover {
+  background: #103f91;
+  color: #fff;
+}
+
 .audit-form input:focus,
 .audit-form select:focus,
 .audit-form textarea:focus {
@@ -3732,6 +3752,36 @@ p {
   min-height: 140px;
   padding-top: 14px;
   resize: vertical;
+}
+
+.turnstile-field {
+  display: grid;
+  gap: 10px;
+}
+
+.turnstile-field > span {
+  color: #d5e0ee;
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.turnstile-widget {
+  min-height: 70px;
+  display: flex;
+  align-items: center;
+}
+
+.turnstile-widget small {
+  display: inline-flex;
+  width: 100%;
+  min-height: 54px;
+  align-items: center;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.105);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.045);
+  color: #aebbd0;
+  line-height: 1.5;
 }
 
 .audit-form button {

@@ -2,11 +2,11 @@
 
 Main domain: `fekitech.co.uk`
 
-Business sender email: `info@fekitech.co.uk`
+Business sender email: `info@contact.fekitech.co.uk`
 
 Notification recipients:
 
-- `info@fekitech.co.uk`
+- `info@contact.fekitech.co.uk`
 - `couragechidoka@gmail.com`
 - `fekitech01@gmail.com`
 
@@ -14,7 +14,7 @@ Notification recipients:
 
 1. Open the FekiTech project in Vercel.
 2. Go to **Settings -> Domains**.
-3. Add `fekitech.co.uk`.
+3. Add `contact.fekitech.co.uk`.
 4. Add `www.fekitech.co.uk` if you want the `www` version to resolve too.
 5. Vercel will show the required DNS records for the apex domain and `www`.
 6. Copy the exact DNS records shown by Vercel. Vercel may show project-specific verification records, so do not rely only on generic examples.
@@ -109,18 +109,44 @@ To confirm it works:
 5. Copy all DNS records provided by Resend.
 6. Add those records in **Namecheap -> Advanced DNS**.
 7. Wait for Resend to verify the domain.
-8. After verification, use `info@fekitech.co.uk` as the sender email.
+8. After verification, use `info@contact.fekitech.co.uk` as the sender email.
 
 Do not send production email from an unverified domain.
 
-## E. Environment Variables
+## E. Cloudflare Turnstile Setup
+
+Cloudflare Turnstile protects the contact form from spam before messages are stored or email notifications are sent.
+
+1. Open the Cloudflare dashboard.
+2. Go to **Turnstile**.
+3. Create a new widget for `fekitech.co.uk`.
+4. Add `fekitech.co.uk` and `www.fekitech.co.uk` as allowed hostnames if both domains will be used.
+5. Copy the generated **Site Key** and **Secret Key**.
+6. In Vercel, open **Project -> Settings -> Environment Variables**.
+7. Add:
+   - `CLOUDFLARE_TURNSTILE_SITE_KEY`
+   - `CLOUDFLARE_TURNSTILE_SECRET_KEY`
+8. Redeploy the Vercel project after adding the keys.
+
+To test Turnstile:
+
+1. Open the contact form in production.
+2. Confirm the security check appears before the submit button.
+3. Submit the form only after the Turnstile check passes.
+4. Confirm the message is stored in `/admin`.
+5. Confirm notification emails are sent to all configured recipients.
+6. If Turnstile fails or is missing, the API should return a verification error and should not store or send the message.
+
+The current contact form rate limit is a basic in-memory IP limit and does not require an extra secret or storage provider. For heavier production traffic across multiple serverless instances, replace it with a shared store such as Vercel KV or Upstash Redis.
+
+## F. Environment Variables
 
 Add these in **Vercel -> Project -> Settings -> Environment Variables**:
 
 ```env
 RESEND_API_KEY=
-RESEND_FROM_EMAIL=info@fekitech.co.uk
-CONTACT_NOTIFICATION_EMAILS=info@fekitech.co.uk,couragechidoka@gmail.com,fekitech01@gmail.com
+RESEND_FROM_EMAIL=info@contact.fekitech.co.uk
+CONTACT_NOTIFICATION_EMAILS=info@contact.fekitech.co.uk,couragechidoka@gmail.com,fekitech01@gmail.com
 
 ADMIN_EMAIL=fekitech01@gmail.com
 ADMIN_PASSWORD=
@@ -128,6 +154,8 @@ ADMIN_PASSWORD=
 SESSION_SECRET=
 DATABASE_URL=
 CRON_SECRET=
+CLOUDFLARE_TURNSTILE_SITE_KEY=
+CLOUDFLARE_TURNSTILE_SECRET_KEY=
 
 VITE_SITE_URL=https://fekitech.co.uk
 ```
@@ -139,6 +167,7 @@ Important:
 - `RESEND_API_KEY` must not be committed to GitHub.
 - `SESSION_SECRET` should be a long random secret value.
 - `CRON_SECRET` should be a long random secret value.
+- `CLOUDFLARE_TURNSTILE_SECRET_KEY` must not be committed to GitHub.
 - After adding or changing environment variables, redeploy the Vercel project.
 
 Generate long random secrets locally:
@@ -147,7 +176,7 @@ Generate long random secrets locally:
 openssl rand -base64 48
 ```
 
-## F. Admin Dashboard
+## G. Admin Dashboard
 
 Admin URL:
 
@@ -170,25 +199,27 @@ Admin features:
 - Newest conversations appear first.
 - Open a full message thread from each sender.
 - Reply directly to the sender.
-- Replies are sent from `info@fekitech.co.uk` through Resend.
+- Replies are sent from `info@contact.fekitech.co.uk` through Resend.
 - Admin replies are stored in the same thread.
 - Logout clears the session cookie.
 
-## G. Final Production Checklist
+## H. Final Production Checklist
 
 - Domain is connected to Vercel.
 - `www.fekitech.co.uk` is connected or redirected if needed.
 - Namecheap DNS records match the exact records shown in Vercel.
 - Database is connected and `DATABASE_URL` is present.
+- Cloudflare Turnstile keys are present in Vercel.
+- Contact form only submits after Turnstile verification passes.
 - Contact form submissions are stored.
 - Messages auto-delete after 90 days.
 - Vercel Cron Job runs once per day.
 - Resend domain is verified.
-- `info@fekitech.co.uk` can send emails.
+- `info@contact.fekitech.co.uk` can send emails.
 - Contact form sends notifications to all three recipients.
 - Contact messages appear in `/admin`.
 - Admin can log in using environment variable credentials.
-- Admin can reply from `info@fekitech.co.uk`.
+- Admin can reply from `info@contact.fekitech.co.uk`.
 - Messages from the same sender email appear as one thread.
 - No secrets are hard-coded.
 - No console errors.

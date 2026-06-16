@@ -57,6 +57,40 @@ const testimonialAvatars = {
   Courtney: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=240"
 };
 
+const turnstileScriptSrc = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+let turnstileScriptPromise;
+
+function loadTurnstileScript() {
+  if (typeof window === "undefined") {
+    return Promise.reject(new Error("Turnstile is only available in the browser."));
+  }
+
+  if (window.turnstile) {
+    return Promise.resolve(window.turnstile);
+  }
+
+  if (!turnstileScriptPromise) {
+    turnstileScriptPromise = new Promise((resolve, reject) => {
+      const existingScript = document.querySelector(`script[src="${turnstileScriptSrc}"]`);
+      if (existingScript) {
+        existingScript.addEventListener("load", () => resolve(window.turnstile), { once: true });
+        existingScript.addEventListener("error", reject, { once: true });
+        return;
+      }
+
+      const script = document.createElement("script");
+      script.src = turnstileScriptSrc;
+      script.async = true;
+      script.defer = true;
+      script.onload = () => resolve(window.turnstile);
+      script.onerror = reject;
+      document.head.appendChild(script);
+    });
+  }
+
+  return turnstileScriptPromise;
+}
+
 function TikTokIcon({ size = 18 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 352.28 398.67" aria-hidden="true" focusable="false">
@@ -829,12 +863,90 @@ function BlogArticlePage() {
 function ContactPage() {
   const [formStatus, setFormStatus] = useState({ type: "", message: "" });
   const [submitting, setSubmitting] = useState(false);
+  const [turnstileSiteKey, setTurnstileSiteKey] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [turnstileLoading, setTurnstileLoading] = useState(true);
+  const turnstileContainerRef = useRef(null);
+  const turnstileWidgetId = useRef(null);
+
+  useEffect(() => {
+    let active = true;
+
+    fetch("/api/turnstile-config")
+      .then((response) => response.json())
+      .then((config) => {
+        if (active) {
+          setTurnstileSiteKey(config.siteKey || "");
+        }
+      })
+      .catch(() => {
+        if (active) {
+          setTurnstileSiteKey("");
+        }
+      })
+      .finally(() => {
+        if (active) {
+          setTurnstileLoading(false);
+        }
+      });
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!turnstileSiteKey || !turnstileContainerRef.current || turnstileWidgetId.current !== null) {
+      return undefined;
+    }
+
+    let cancelled = false;
+
+    loadTurnstileScript()
+      .then((turnstile) => {
+        if (cancelled || !turnstileContainerRef.current || !turnstile) {
+          return;
+        }
+
+        turnstileWidgetId.current = turnstile.render(turnstileContainerRef.current, {
+          sitekey: turnstileSiteKey,
+          theme: "dark",
+          callback: (token) => {
+            setTurnstileToken(token);
+            setFormStatus((status) => (status.type === "error" && status.message.includes("security check") ? { type: "", message: "" } : status));
+          },
+          "expired-callback": () => setTurnstileToken(""),
+          "error-callback": () => {
+            setTurnstileToken("");
+            setFormStatus({ type: "error", message: "Security check could not load. Please refresh and try again." });
+          }
+        });
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setFormStatus({ type: "error", message: "Security check could not load. Please refresh and try again." });
+        }
+      });
+
+    return () => {
+      cancelled = true;
+      if (turnstileWidgetId.current !== null && window.turnstile?.remove) {
+        window.turnstile.remove(turnstileWidgetId.current);
+        turnstileWidgetId.current = null;
+      }
+    };
+  }, [turnstileSiteKey]);
 
   async function handleSubmit(event) {
     event.preventDefault();
     const form = event.currentTarget;
     if (!form.checkValidity()) {
       form.reportValidity();
+      return;
+    }
+
+    if (!turnstileToken) {
+      setFormStatus({ type: "error", message: "Please complete the security check before submitting." });
       return;
     }
 
@@ -847,7 +959,8 @@ function ContactPage() {
       company: formData.get("company"),
       website: formData.get("website"),
       businessSize: formData.get("size"),
-      challenge: formData.get("challenge")
+      challenge: formData.get("challenge"),
+      turnstileToken
     };
 
     setSubmitting(true);
@@ -867,8 +980,16 @@ function ContactPage() {
 
       setFormStatus({ type: "success", message: result.message || "Your message has been received. The FekiTech team will follow up shortly." });
       form.reset();
+      setTurnstileToken("");
+      if (turnstileWidgetId.current !== null && window.turnstile?.reset) {
+        window.turnstile.reset(turnstileWidgetId.current);
+      }
     } catch (error) {
       setFormStatus({ type: "error", message: error.message || "Unable to submit your message right now." });
+      setTurnstileToken("");
+      if (turnstileWidgetId.current !== null && window.turnstile?.reset) {
+        window.turnstile.reset(turnstileWidgetId.current);
+      }
     } finally {
       setSubmitting(false);
     }
@@ -900,6 +1021,13 @@ function ContactPage() {
             </select>
           </label>
           <label className="full" htmlFor="message">Message<textarea id="message" required name="message" placeholder="Tell us what is currently slowing your business down." /></label>
+          <div className="turnstile-field full">
+            <span>Security check</span>
+            <div className="turnstile-widget" ref={turnstileContainerRef}>
+              {turnstileLoading && <small>Loading verification...</small>}
+              {!turnstileLoading && !turnstileSiteKey && <small>Security check is unavailable. Please refresh or email info@contact.fekitech.co.uk.</small>}
+            </div>
+          </div>
           <button type="submit" disabled={submitting}>{submitting ? "Submitting..." : "Submit Audit Request"}</button>
           {formStatus.message && <p className={formStatus.type === "error" ? "error-message" : "success-message"}>{formStatus.message}</p>}
         </form>
@@ -908,7 +1036,7 @@ function ContactPage() {
           <h2>Contact Details</h2>
           <p>Phone: <a href="tel:+447352364942">+447352364942</a></p>
           <p>71-75, Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ</p>
-          <p>Email: <a href="mailto:info@fekitech.co.uk">info@fekitech.co.uk</a></p>
+          <p>Email: <a href="mailto:info@contact.fekitech.co.uk">info@contact.fekitech.co.uk</a></p>
           <div className="socials">
             <a href="https://www.facebook.com/profile.php?id=61590753470491" aria-label="Facebook"><Facebook size={18} /></a>
             <a href="https://www.instagram.com/fekitech/" aria-label="Instagram"><Instagram size={18} /></a>
@@ -1121,7 +1249,7 @@ function AdminPage() {
                   ))}
                 </div>
                 <form className="admin-reply-form" onSubmit={handleReply}>
-                  <label htmlFor="adminReply">Reply from info@fekitech.co.uk</label>
+                  <label htmlFor="adminReply">Reply from info@contact.fekitech.co.uk</label>
                   <textarea id="adminReply" name="reply" required placeholder="Write your reply..." />
                   <button type="submit" disabled={replying}>{replying ? "Sending..." : "Send Reply"}</button>
                 </form>
@@ -1161,7 +1289,7 @@ function Footer() {
       <div className="footer-column">
         <h3>Contact</h3>
         <a href="tel:+447352364942">+447352364942</a>
-        <a href="mailto:info@fekitech.co.uk">info@fekitech.co.uk</a>
+        <a href="mailto:info@contact.fekitech.co.uk">info@contact.fekitech.co.uk</a>
         <span>71-75, Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ</span>
       </div>
       <div className="footer-column">

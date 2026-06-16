@@ -3,7 +3,7 @@ import { escapeHtml } from "./http.js";
 const resendEndpoint = "https://api.resend.com/emails";
 
 function getSenderEmail() {
-  return process.env.RESEND_FROM_EMAIL || "info@fekitech.co.uk";
+  return process.env.RESEND_FROM_EMAIL || "info@contact.fekitech.co.uk";
 }
 
 export async function sendEmail({ to, subject, html, text, replyTo }) {
