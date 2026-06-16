@@ -22,10 +22,11 @@ function getBuiltAssetTags(template) {
 
 function injectHead(template, route, headTags) {
   const assetTags = getBuiltAssetTags(template);
+  const robots = route === "/admin" ? "noindex, nofollow" : "index, follow";
   const baseHead = [
     '<meta charset="UTF-8" />',
     '<meta name="viewport" content="width=device-width, initial-scale=1.0" />',
-    '<meta name="robots" content="index, follow" />',
+    `<meta name="robots" content="${robots}" />`,
     '<link rel="icon" type="image/png" href="/fekitech-logo.png" />',
     '<link rel="apple-touch-icon" href="/fekitech-logo.png" />',
     headTags,
@@ -52,7 +53,8 @@ async function main() {
   const template = await fs.readFile(templatePath, "utf8");
   const serverEntry = await import(pathToFileURL(path.join(root, "dist-ssr", "entry-server.js")));
 
-  await Promise.all(serverEntry.sitemapRoutes.map((route) => writeRoute(route, template, serverEntry.render, serverEntry.getHeadTags)));
+  const routes = serverEntry.prerenderRoutes || serverEntry.sitemapRoutes;
+  await Promise.all(routes.map((route) => writeRoute(route, template, serverEntry.render, serverEntry.getHeadTags)));
   await fs.writeFile(path.join(distDir, "robots.txt"), serverEntry.getRobotsTxt());
   await fs.writeFile(path.join(distDir, "sitemap.xml"), serverEntry.getSitemapXml());
   await fs.rm(path.join(root, "dist-ssr"), { recursive: true, force: true });

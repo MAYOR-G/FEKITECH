@@ -1,6 +1,7 @@
-import { absoluteUrl, getCanonicalUrl, getSeo, pageSeo, siteConfig, sitemapRoutes } from "./site.js";
+import { absoluteUrl, getCanonicalUrl, getSeo, pageSeo, prerenderRoutes, siteConfig, sitemapRoutes } from "./site.js";
 
 export { sitemapRoutes } from "./site.js";
+export { prerenderRoutes } from "./site.js";
 
 const serviceItems = [
   ["Business Structure Design", "We define roles, responsibilities, workflows, ownership, and decision rhythms so the business can operate with clarity."],

@@ -107,6 +107,7 @@ export const pageSeo = {
 };
 
 export const sitemapRoutes = ["/", "/about", "/services", "/pricing", "/blog", "/contact", "/blog/why-most-businesses-are-not-profitable"];
+export const prerenderRoutes = [...sitemapRoutes, "/admin"];
 
 export function getSeo(pathname = "/") {
   return pageSeo[pathname] || pageSeo["/"];
