@@ -22,7 +22,7 @@ function getBuiltAssetTags(template) {
 
 function injectHead(template, route, headTags) {
   const assetTags = getBuiltAssetTags(template);
-  const robots = route === "/admin" ? "noindex, nofollow" : "index, follow";
+  const robots = route === "/admin" ? "noindex, nofollow, noarchive" : "index, follow";
   const baseHead = [
     '<meta charset="UTF-8" />',
     '<meta name="viewport" content="width=device-width, initial-scale=1.0" />',

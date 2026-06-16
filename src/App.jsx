@@ -259,12 +259,12 @@ function Hero() {
 
 function Challenges() {
   const items = [
-    ["Loss of customers", "Weak customer retention, inconsistent follow-up, and poor customer experience reduce long-term growth.", Users, problemImages.customers],
-    ["Unpredictable profitability", "Revenue may come in, but without visibility into costs, margins, and performance, profit remains unclear.", Gauge, problemImages.profitability],
-    ["Weak online conversion", "A weak digital presence and unclear customer journey make it harder to convert attention into revenue.", ScanLine, problemImages.conversion],
-    ["Manual operations", "Unstructured workflows, repeated manual tasks, and unclear responsibilities slow the business down.", Workflow, problemImages.operations],
-    ["Limited visibility", "Leaders cannot improve what they cannot see. Without data, decisions become reactive instead of strategic.", Database, problemImages.visibility],
-    ["Owners Struggle to Stand Out", "It is no longer just about competing with rivals; it is about competing against a relentless flood of information. Here is why business owners find it increasingly difficult to be seen.", Megaphone, problemImages.standout]
+    ["Loss of customers", "Weak customer retention, inconsistent follow-up, and poor customer experience reduce long-term growth.", Users, problemImages.customers, "Business team discussing customer retention and growth in a meeting"],
+    ["Unpredictable profitability", "Revenue may come in, but without visibility into costs, margins, and performance, profit remains unclear.", Gauge, problemImages.profitability, "Business leaders reviewing profitability charts and financial performance"],
+    ["Weak online conversion", "A weak digital presence and unclear customer journey make it harder to convert attention into revenue.", ScanLine, problemImages.conversion, "Local business owner reviewing digital conversion data with a consultant"],
+    ["Manual operations", "Unstructured workflows, repeated manual tasks, and unclear responsibilities slow the business down.", Workflow, problemImages.operations, "Business professional managing manual workflows on a laptop"],
+    ["Limited visibility", "Leaders cannot improve what they cannot see. Without data, decisions become reactive instead of strategic.", Database, problemImages.visibility, "Business team reviewing operational visibility and reporting dashboards"],
+    ["Owners Struggle to Stand Out", "It is no longer just about competing with rivals; it is about competing against a relentless flood of information. Here is why business owners find it increasingly difficult to be seen.", Megaphone, problemImages.standout, "Business team planning how to stand out in a competitive market"]
   ];
 
   return (
@@ -276,10 +276,10 @@ function Challenges() {
         />
       </div>
       <div className="challenge-grid">
-        {items.map(([title, text, Icon, image], index) => (
+        {items.map(([title, text, Icon, image, alt], index) => (
           <article className={index === 0 ? "challenge-card featured" : "challenge-card"} key={title}>
-            <figure className="problem-image" aria-hidden="true">
-              <img src={image} alt="" width="1200" height="675" loading="lazy" decoding="async" />
+            <figure className="problem-image">
+              <img src={image} alt={alt} width="1200" height="675" loading="lazy" decoding="async" />
               <div className="challenge-card-icon"><Icon size={20} /></div>
             </figure>
             <h3>{title}</h3>
@@ -693,6 +693,7 @@ function ServicesPage() {
         <h1>Services</h1>
       </section>
       <section className="section service-list-section services-card-section">
+        <h2 className="sr-only">Primary Services</h2>
         <div className="service-rows primary-service-rows">
           {services.slice(0, 6).map(([title, text], index) => (
             <article className="service-card" key={title}>
@@ -792,7 +793,7 @@ function BlogPage() {
       <section className="section blog-editorial-section">
         <article className="blog-text-card blog-text-card-featured">
           <span className="blog-category">{featuredArticle.category}</span>
-          <h2>{featuredArticle.title}</h2>
+          <h1>{featuredArticle.title}</h1>
           <p>{featuredArticle.excerpt}</p>
           <div className="blog-card-footer">
             <span>{featuredArticle.readTime}</span>
@@ -852,7 +853,7 @@ function BlogArticlePage() {
         <div className="article-cta">
           <h2>Book a Free Business Audit with Fekitech</h2>
           <p>If you want to understand what is broken in your business and how to fix it:</p>
-          <p>We help businesses build structure, improve profitability, and implement intelligent systems for growth.</p>
+          <p>We help businesses build structure, improve profitability, and implement intelligent systems for growth. Explore our <a href="/services">business operations services</a>.</p>
           <Button>Book a Free Business Audit</Button>
         </div>
       </article>

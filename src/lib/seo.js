@@ -60,17 +60,44 @@ function setLink(selector, attributes) {
   Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
 }
 
+function getBreadcrumbItems(pathname) {
+  if (pathname === "/") {
+    return [];
+  }
+
+  const labels = {
+    "/about": "About",
+    "/services": "Services",
+    "/pricing": "Pricing",
+    "/blog": "Blog",
+    "/contact": "Contact",
+    "/blog/why-most-businesses-are-not-profitable": "Why Most Businesses Are Not Profitable"
+  };
+
+  if (!labels[pathname]) {
+    return [];
+  }
+
+  const parentPath = pathname.startsWith("/blog/") ? "/blog" : null;
+  return [
+    { name: "Home", item: absoluteUrl("/") },
+    ...(parentPath ? [{ name: labels[parentPath], item: absoluteUrl(parentPath) }] : []),
+    { name: labels[pathname], item: getCanonicalUrl(pathname) }
+  ];
+}
+
 export function getStructuredData(pathname = "/") {
   const canonical = getCanonicalUrl(pathname);
   const organizationId = `${siteConfig.siteUrl}/#organization`;
   const websiteId = `${siteConfig.siteUrl}/#website`;
   const graph = [
     {
-      "@type": "Organization",
+      "@type": ["LocalBusiness", "Organization"],
       "@id": organizationId,
       name: siteConfig.siteName,
       url: siteConfig.siteUrl,
       logo: absoluteUrl(siteConfig.logo),
+      image: absoluteUrl(siteConfig.ogImage),
       email: siteConfig.email,
       telephone: siteConfig.phone,
       address: {
@@ -79,6 +106,13 @@ export function getStructuredData(pathname = "/") {
         addressLocality: "London",
         postalCode: "WC2H 9JQ",
         addressCountry: "GB"
+      },
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        email: siteConfig.email,
+        telephone: siteConfig.phone,
+        availableLanguage: "English"
       },
       sameAs: siteConfig.sameAs
     },
@@ -90,6 +124,19 @@ export function getStructuredData(pathname = "/") {
       publisher: { "@id": organizationId }
     }
   ];
+
+  const breadcrumbs = getBreadcrumbItems(pathname);
+  if (breadcrumbs.length > 0) {
+    graph.push({
+      "@type": "BreadcrumbList",
+      itemListElement: breadcrumbs.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        name: item.name,
+        item: item.item
+      }))
+    });
+  }
 
   if (pathname === "/services") {
     graph.push(
@@ -128,6 +175,8 @@ export function getStructuredData(pathname = "/") {
       url: canonical,
       mainEntityOfPage: canonical,
       inLanguage: "en-GB",
+      image: absoluteUrl(siteConfig.ogImage),
+      author: { "@id": organizationId },
       publisher: { "@id": organizationId }
     });
   }
@@ -168,7 +217,7 @@ export function applySeo(pathname = "/") {
   const seo = getSeo(pathname);
   const canonical = getCanonicalUrl(pathname);
   const image = absoluteUrl(siteConfig.ogImage);
-  const robots = pathname === "/admin" ? "noindex, nofollow" : "index, follow";
+  const robots = pathname === "/admin" ? "noindex, nofollow, noarchive" : "index, follow";
 
   document.title = seo.title;
   setMetaContent('meta[name="robots"]', { name: "robots", content: robots });
@@ -219,8 +268,6 @@ ${entries}
 export function getRobotsTxt() {
   return `User-agent: *
 Allow: /
-Disallow: /admin
-Disallow: /api/
 
 Sitemap: ${absoluteUrl("/sitemap.xml")}
 `;

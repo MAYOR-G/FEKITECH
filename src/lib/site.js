@@ -44,57 +44,58 @@ export const siteConfig = {
 
 export const pageSeo = {
   "/": {
-    title: siteConfig.defaultTitle,
-    description: siteConfig.defaultDescription,
+    title: "FekiTech | Business Operations & Performance Systems for Local Businesses",
+    description:
+      "FekiTech transforms local businesses by improving performance across operations, people, systems, and profitability.",
     canonicalPath: "/",
     priority: 1
   },
   "/about": {
-    title: "About FekiTech | Business Transformation and Operating Systems",
+    title: "About FekiTech | Business Operations & Performance Systems",
     description:
-      "Learn how Fekitech helps organisations become structured, data-driven, profitable, and scalable through business operating systems.",
+      "Learn how FekiTech helps local businesses improve operations, people, systems, performance visibility, and profitability.",
     canonicalPath: "/about",
     priority: 0.8
   },
   "/services": {
-    title: "Business Transformation Services | FekiTech",
+    title: "FekiTech Services | Business Operations, Systems & Performance Improvement",
     description:
-      "Explore Fekitech services for business structure, digital transformation, business intelligence, automation, retention, profitability, AI agents, software, training, mentorship, and career support.",
+      "Explore FekiTech services for improving business structure, operations, automation, performance visibility, and profitability.",
     canonicalPath: "/services",
     priority: 0.9
   },
   "/pricing": {
-    title: "FekiTech Pricing | Business Operating System and Transformation Packages",
+    title: "FekiTech Pricing | Business Transformation Package",
     description:
-      "View Fekitech pricing for small business operating system plans and business transformation packages.",
+      "View FekiTech’s business transformation package for local businesses that want stronger operations, better systems, and improved profitability.",
     canonicalPath: "/pricing",
     priority: 0.8
   },
   "/blog": {
-    title: "FekiTech Blog | Business Systems, Profitability and Automation",
+    title: "FekiTech Blog | Business Growth, Operations & Profitability Insights",
     description:
-      "Read Fekitech insights on business structure, profitability, systems, automation, and digital transformation.",
+      "Read practical insights from FekiTech on business operations, profitability, performance systems, and scalable growth for local businesses.",
     canonicalPath: "/blog",
     priority: 0.7
   },
   "/blog/why-most-businesses-are-not-profitable": {
-    title: "Why Most Businesses Are Not Profitable And How to Fix It with Structured Systems",
+    title: "Why Most Businesses Are Not Profitable | FekiTech",
     description:
-      "Most businesses struggle with low profitability and poor customer retention due to weak systems and structure. Learn how to fix it using digital transformation and business operating systems.",
+      "Learn why businesses struggle with profitability and how structured operations, systems, visibility, and retention improve performance.",
     canonicalPath: "/blog/why-most-businesses-are-not-profitable",
     priority: 0.7
   },
   "/contact": {
-    title: "Contact FekiTech | Book a Free Business Audit",
+    title: "Contact FekiTech | Book a Business Strategy Call",
     description:
-      "Contact Fekitech to book a free business audit and discover how to improve profitability, structure, and business performance.",
+      "Contact FekiTech to book a strategy call and improve your business operations, systems, performance, and profitability.",
     canonicalPath: "/contact",
     priority: 0.8
   },
   "/audit": {
-    title: "Contact FekiTech | Book a Free Business Audit",
+    title: "Contact FekiTech | Book a Business Strategy Call",
     description:
-      "Contact Fekitech to book a free business audit and discover how to improve profitability, structure, and business performance.",
+      "Contact FekiTech to book a strategy call and improve your business operations, systems, performance, and profitability.",
     canonicalPath: "/contact",
     priority: 0
   },
