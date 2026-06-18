@@ -25,8 +25,8 @@ function injectHead(template, route, headTags) {
   const baseHead = [
     '<meta charset="UTF-8" />',
     '<meta name="viewport" content="width=device-width, initial-scale=1.0" />',
-    '<link rel="icon" type="image/png" href="/fekitech-logo.png" />',
-    '<link rel="apple-touch-icon" href="/fekitech-logo.png" />',
+    '<link rel="icon" type="image/png" href="/fekitech-logo-transparent-cropped.png" />',
+    '<link rel="apple-touch-icon" href="/fekitech-logo-transparent-cropped.png" />',
     headTags,
     assetTags
   ].filter(Boolean).join("\n    ");

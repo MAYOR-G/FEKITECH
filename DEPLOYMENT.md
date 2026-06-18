@@ -150,7 +150,7 @@ CONTACT_NOTIFICATION_EMAILS=info@contact.fekitech.co.uk,couragechidoka@gmail.com
 SUPPORT_EMAIL=info@contact.fekitech.co.uk
 COMPANY_NAME=FekiTech
 WEBSITE_URL=https://fekitech.co.uk
-EMAIL_LOGO_URL=https://fekitech.co.uk/fekitech-logo.png
+EMAIL_LOGO_URL=https://fekitech.co.uk/fekitech-logo-transparent-cropped.png
 
 ADMIN_EMAIL=fekitech01@gmail.com
 ADMIN_PASSWORD=

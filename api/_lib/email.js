@@ -25,7 +25,11 @@ function getSupportEmail() {
 }
 
 function getLogoUrl() {
-  return process.env.EMAIL_LOGO_URL || `${getWebsiteUrl()}/fekitech-logo.png`;
+  const configuredLogoUrl = process.env.EMAIL_LOGO_URL;
+  if (configuredLogoUrl && !configuredLogoUrl.endsWith("/fekitech-logo.png")) {
+    return configuredLogoUrl;
+  }
+  return `${getWebsiteUrl()}/fekitech-logo-transparent-cropped.png`;
 }
 
 function formatGreeting(name) {

@@ -29,7 +29,7 @@ import { applySeo } from "./lib/seo.js";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
-const logoMark = "/fekitech-logo.png";
+const logoMark = "/fekitech-logo-transparent-cropped.png";
 const analyticsImage = "/outcome-higher-profitability.webp";
 const systemsImage = "/outcome-reduce-stress.webp";
 const aboutTransformationImage = "/fekitech-about-transformation.webp";
@@ -123,7 +123,7 @@ function Header() {
     <header className="site-header">
       <div className="header-inner">
         <a className="brand" href="/" aria-label="Fekitech home">
-          <img src={logoMark} alt="" width="654" height="658" />
+          <img src={logoMark} alt="" width="616" height="646" />
           <span>
             Fekitech
             <small>Turn business chaos into profitability.</small>
@@ -1033,7 +1033,7 @@ function ContactPage() {
           {formStatus.message && <p className={formStatus.type === "error" ? "error-message" : "success-message"}>{formStatus.message}</p>}
         </form>
         <aside className="audit-side-card">
-          <img src={logoMark} alt="" width="654" height="658" />
+          <img src={logoMark} alt="" width="616" height="646" />
           <h2>Contact Details</h2>
           <p>Phone: <a href="tel:+447352364942">+447352364942</a></p>
           <p>71-75, Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ</p>
@@ -1270,7 +1270,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer-brand">
         <a className="footer-logo" href="/" aria-label="Fekitech home">
-          <img src={logoMark} alt="" width="654" height="658" />
+          <img src={logoMark} alt="" width="616" height="646" />
           <span>Fekitech<small>Turn business chaos into profitability.</small></span>
         </a>
         <p>Fekitech helps businesses become structured, data-driven, profitable, and scalable through FOS.</p>

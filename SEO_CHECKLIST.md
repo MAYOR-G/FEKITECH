@@ -83,7 +83,7 @@ Business details used:
 - Email: `info@fekitech.co.uk`
 - Phone: `+447352364942`
 - Address: `71-75, Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ`
-- Logo: `https://fekitech.co.uk/fekitech-logo.png`
+- Logo: `https://fekitech.co.uk/fekitech-logo-transparent-cropped.png`
 - Existing social profiles: Facebook, Instagram, TikTok
 
 ## Performance Fixes

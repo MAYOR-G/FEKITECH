@@ -13,7 +13,7 @@ export const siteConfig = {
     "FekiTech transforms organisations by improving performance across operations, people, systems, and profitability.",
   ogImage: "/og-image.png",
   ogImageAlt: "FekiTech business operations and performance systems",
-  logo: "/fekitech-logo.png",
+  logo: "/fekitech-logo-transparent-cropped.png",
   email: "info@fekitech.co.uk",
   phone: "+447352364942",
   address: "71-75, Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ",

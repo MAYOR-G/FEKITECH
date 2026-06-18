@@ -156,6 +156,15 @@ for (const lastmod of sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)) {
 
 const ogImage = await fs.readFile(path.join(distDir, "og-image.png"));
 assert.deepEqual(getPngDimensions(ogImage), { width: 1200, height: 630 }, "OG image must be 1200x630");
+const logoImage = await fs.readFile(path.join(distDir, "fekitech-logo-transparent-cropped.png"));
+assert.deepEqual(getPngDimensions(logoImage), { width: 616, height: 646 }, "FekiTech logo dimensions mismatch");
+for (const [route, html] of routeHtml) {
+  assert(
+    html.includes("/fekitech-logo-transparent-cropped.png"),
+    `${route} does not reference the new FekiTech logo`
+  );
+  assert(!html.includes("/fekitech-logo.png"), `${route} still references the old FekiTech logo`);
+}
 
 const vercelConfig = JSON.parse(await fs.readFile(path.join(root, "vercel.json"), "utf8"));
 const wwwRedirect = vercelConfig.redirects?.find((redirect) =>
