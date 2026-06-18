@@ -30,14 +30,14 @@ import { applySeo } from "./lib/seo.js";
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const logoMark = "/fekitech-logo.png";
-const analyticsImage = "/outcome-higher-profitability.jpeg";
-const systemsImage = "/outcome-reduce-stress.jpeg";
-const aboutTransformationImage = "/fekitech-about-transformation.png";
-const retentionImage = "/outcome-customer-growth.jpeg";
+const analyticsImage = "/outcome-higher-profitability.webp";
+const systemsImage = "/outcome-reduce-stress.webp";
+const aboutTransformationImage = "/fekitech-about-transformation.webp";
+const retentionImage = "/outcome-customer-growth.webp";
 const structureImage = "https://images.pexels.com/photos/6340632/pexels-photo-6340632.jpeg?auto=compress&cs=tinysrgb&w=1400";
-const scaleImage = "/outcome-business-success.jpeg";
-const billingImage = "/outcome-get-paid-faster.jpeg";
-const timeImage = "/outcome-save-time.jpeg";
+const scaleImage = "/outcome-business-success.webp";
+const billingImage = "/outcome-get-paid-faster.webp";
+const timeImage = "/outcome-save-time.webp";
 const problemImages = {
   customers: "/problem-loss-customers.webp",
   profitability: "/problem-unpredictable-profitability.webp",
@@ -224,7 +224,7 @@ function Hero() {
     <section className="hero" id="top">
       <div className="hero-background" aria-hidden="true">
         {videoError ? (
-          <img src="/outcome-business-success.jpeg" alt="" width="1376" height="768" />
+          <img src="/outcome-business-success.webp" alt="" width="1376" height="768" loading="eager" fetchPriority="high" decoding="async" />
         ) : (
           <video
             ref={videoRef}
@@ -233,7 +233,7 @@ function Hero() {
             loop
             playsInline
             preload="metadata"
-            poster="/outcome-business-success.jpeg"
+            poster="/outcome-business-success.webp"
             tabIndex="-1"
             onError={() => setVideoError(true)}
           >

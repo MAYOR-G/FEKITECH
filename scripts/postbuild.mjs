@@ -22,11 +22,9 @@ function getBuiltAssetTags(template) {
 
 function injectHead(template, route, headTags) {
   const assetTags = getBuiltAssetTags(template);
-  const robots = route === "/admin" ? "noindex, nofollow, noarchive" : "index, follow";
   const baseHead = [
     '<meta charset="UTF-8" />',
     '<meta name="viewport" content="width=device-width, initial-scale=1.0" />',
-    `<meta name="robots" content="${robots}" />`,
     '<link rel="icon" type="image/png" href="/fekitech-logo.png" />',
     '<link rel="apple-touch-icon" href="/fekitech-logo.png" />',
     headTags,

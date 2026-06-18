@@ -19,14 +19,14 @@ const serviceItems = [
 ];
 
 const pricingOffers = [
-  ["Starter Plan", "19", "GBP", "For small businesses starting out"],
-  ["Pro Plan", "49", "GBP", "For growing service businesses"],
-  ["Business Plan", "99", "GBP", "For agencies & high-volume businesses"],
-  ["Agency / White Label", "199", "GBP", "For agencies reselling FekiTech"],
-  ["Starter Package", "500", "GBP", "Business audit + structure review"],
-  ["Growth Package", "2000", "GBP", "Systems + digital transformation setup"],
-  ["FOS Implementation (Main Offer)", "5000", "GBP", "Full business operating system build"],
-  ["Enterprise (Custom)", undefined, "GBP", "Full transformation + ongoing support"]
+  { name: "Starter Plan", description: "For small businesses starting out", price: "19", unitText: "MONTH" },
+  { name: "Pro Plan", description: "For growing service businesses", price: "49", unitText: "MONTH" },
+  { name: "Business Plan", description: "For agencies & high-volume businesses", price: "99", unitText: "MONTH" },
+  { name: "Agency / White Label", description: "For agencies reselling FekiTech", price: "199", unitText: "MONTH" },
+  { name: "Starter Package", description: "Business audit + structure review", minPrice: "500", maxPrice: "1500" },
+  { name: "Growth Package", description: "Systems + digital transformation setup", minPrice: "2000", maxPrice: "5000" },
+  { name: "FOS Implementation (Main Offer)", description: "Full business operating system build", minPrice: "5000" },
+  { name: "Enterprise (Custom)", description: "Full transformation + ongoing support" }
 ];
 
 function escapeHtml(value) {
@@ -89,15 +89,28 @@ function getBreadcrumbItems(pathname) {
 export function getStructuredData(pathname = "/") {
   const canonical = getCanonicalUrl(pathname);
   const organizationId = `${siteConfig.siteUrl}/#organization`;
+  const localBusinessId = `${siteConfig.siteUrl}/#localbusiness`;
+  const contactPointId = `${siteConfig.siteUrl}/#contact-point`;
   const websiteId = `${siteConfig.siteUrl}/#website`;
   const graph = [
     {
-      "@type": ["LocalBusiness", "Organization"],
+      "@type": "Organization",
       "@id": organizationId,
       name: siteConfig.siteName,
       url: siteConfig.siteUrl,
       logo: absoluteUrl(siteConfig.logo),
       image: absoluteUrl(siteConfig.ogImage),
+      email: siteConfig.email,
+      contactPoint: { "@id": contactPointId },
+      sameAs: siteConfig.sameAs
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": localBusinessId,
+      name: siteConfig.siteName,
+      url: siteConfig.siteUrl,
+      image: absoluteUrl(siteConfig.ogImage),
+      logo: absoluteUrl(siteConfig.logo),
       email: siteConfig.email,
       telephone: siteConfig.phone,
       address: {
@@ -107,14 +120,16 @@ export function getStructuredData(pathname = "/") {
         postalCode: "WC2H 9JQ",
         addressCountry: "GB"
       },
-      contactPoint: {
-        "@type": "ContactPoint",
-        contactType: "customer support",
-        email: siteConfig.email,
-        telephone: siteConfig.phone,
-        availableLanguage: "English"
-      },
-      sameAs: siteConfig.sameAs
+      parentOrganization: { "@id": organizationId },
+      contactPoint: { "@id": contactPointId }
+    },
+    {
+      "@type": "ContactPoint",
+      "@id": contactPointId,
+      contactType: "customer support",
+      email: siteConfig.email,
+      telephone: siteConfig.phone,
+      availableLanguage: "English"
     },
     {
       "@type": "WebSite",
@@ -129,6 +144,7 @@ export function getStructuredData(pathname = "/") {
   if (breadcrumbs.length > 0) {
     graph.push({
       "@type": "BreadcrumbList",
+      "@id": `${canonical}#breadcrumb`,
       itemListElement: breadcrumbs.map((item, index) => ({
         "@type": "ListItem",
         position: index + 1,
@@ -142,9 +158,10 @@ export function getStructuredData(pathname = "/") {
     graph.push(
       ...serviceItems.map(([name, description]) => ({
         "@type": "Service",
+        "@id": `${canonical}#${name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`,
         name,
         description,
-        provider: { "@id": organizationId },
+        provider: { "@id": localBusinessId },
         url: canonical
       }))
     );
@@ -153,14 +170,26 @@ export function getStructuredData(pathname = "/") {
   if (pathname === "/pricing") {
     graph.push({
       "@type": "OfferCatalog",
+      "@id": `${canonical}#offer-catalog`,
       name: "Fekitech pricing",
       url: canonical,
-      itemListElement: pricingOffers.map(([name, price, priceCurrency, description]) => ({
+      itemListElement: pricingOffers.map(({ name, description, price, unitText, minPrice, maxPrice }) => ({
         "@type": "Offer",
         name,
         description,
         url: canonical,
-        ...(price ? { price, priceCurrency } : {}),
+        ...(price || minPrice
+          ? {
+              priceSpecification: {
+                "@type": "UnitPriceSpecification",
+                priceCurrency: "GBP",
+                ...(price ? { price } : {}),
+                ...(unitText ? { unitText } : {}),
+                ...(minPrice ? { minPrice } : {}),
+                ...(maxPrice ? { maxPrice } : {})
+              }
+            }
+          : {}),
         seller: { "@id": organizationId }
       }))
     });
@@ -170,10 +199,15 @@ export function getStructuredData(pathname = "/") {
     const seo = getSeo(pathname);
     graph.push({
       "@type": "BlogPosting",
+      "@id": `${canonical}#article`,
       headline: seo.title,
       description: seo.description,
       url: canonical,
-      mainEntityOfPage: canonical,
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": canonical
+      },
+      isPartOf: { "@id": websiteId },
       inLanguage: "en-GB",
       image: absoluteUrl(siteConfig.ogImage),
       author: { "@id": organizationId },
@@ -192,25 +226,38 @@ export function getHeadTags(pathname = "/") {
   const canonical = getCanonicalUrl(pathname);
   const image = absoluteUrl(siteConfig.ogImage);
   const structuredData = getStructuredData(pathname);
+  const robots = pathname === "/admin" ? "noindex, nofollow, noarchive" : "index, follow";
 
   return [
     `<title>${escapeHtml(seo.title)}</title>`,
+    `<meta name="robots" content="${robots}" />`,
     `<meta name="description" content="${escapeHtml(seo.description)}" />`,
     `<link rel="canonical" href="${escapeHtml(canonical)}" />`,
     `<meta property="og:type" content="${pathname.startsWith("/blog/why-") ? "article" : "website"}" />`,
+    `<meta property="og:locale" content="en_GB" />`,
     `<meta property="og:site_name" content="${escapeHtml(siteConfig.siteName)}" />`,
     `<meta property="og:title" content="${escapeHtml(seo.title)}" />`,
     `<meta property="og:description" content="${escapeHtml(seo.description)}" />`,
     `<meta property="og:url" content="${escapeHtml(canonical)}" />`,
     `<meta property="og:image" content="${escapeHtml(image)}" />`,
+    `<meta property="og:image:type" content="image/png" />`,
     `<meta property="og:image:width" content="1200" />`,
     `<meta property="og:image:height" content="630" />`,
+    `<meta property="og:image:alt" content="${escapeHtml(siteConfig.ogImageAlt)}" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
     `<meta name="twitter:title" content="${escapeHtml(seo.title)}" />`,
     `<meta name="twitter:description" content="${escapeHtml(seo.description)}" />`,
     `<meta name="twitter:image" content="${escapeHtml(image)}" />`,
+    `<meta name="twitter:image:alt" content="${escapeHtml(siteConfig.ogImageAlt)}" />`,
+    ...(pathname === "/"
+      ? [
+          '<link rel="preload" as="image" href="/outcome-business-success.webp" fetchpriority="high" />',
+          '<link rel="preconnect" href="https://pub-9f4f9c9b1b3e477aba4991ccfd92f1ae.r2.dev" crossorigin />',
+          '<link rel="preconnect" href="https://images.pexels.com" crossorigin />'
+        ]
+      : []),
     `<script type="application/ld+json" data-seo-jsonld>${escapeScript(structuredData)}</script>`
-  ].join("\n    ");
+  ].flat().join("\n    ");
 }
 
 export function applySeo(pathname = "/") {
@@ -224,17 +271,21 @@ export function applySeo(pathname = "/") {
   setMetaContent('meta[name="description"]', { name: "description", content: seo.description });
   setLink('link[rel="canonical"]', { rel: "canonical", href: canonical });
   setMetaContent('meta[property="og:type"]', { property: "og:type", content: pathname.startsWith("/blog/why-") ? "article" : "website" });
+  setMetaContent('meta[property="og:locale"]', { property: "og:locale", content: "en_GB" });
   setMetaContent('meta[property="og:site_name"]', { property: "og:site_name", content: siteConfig.siteName });
   setMetaContent('meta[property="og:title"]', { property: "og:title", content: seo.title });
   setMetaContent('meta[property="og:description"]', { property: "og:description", content: seo.description });
   setMetaContent('meta[property="og:url"]', { property: "og:url", content: canonical });
   setMetaContent('meta[property="og:image"]', { property: "og:image", content: image });
+  setMetaContent('meta[property="og:image:type"]', { property: "og:image:type", content: "image/png" });
   setMetaContent('meta[property="og:image:width"]', { property: "og:image:width", content: "1200" });
   setMetaContent('meta[property="og:image:height"]', { property: "og:image:height", content: "630" });
+  setMetaContent('meta[property="og:image:alt"]', { property: "og:image:alt", content: siteConfig.ogImageAlt });
   setMetaContent('meta[name="twitter:card"]', { name: "twitter:card", content: "summary_large_image" });
   setMetaContent('meta[name="twitter:title"]', { name: "twitter:title", content: seo.title });
   setMetaContent('meta[name="twitter:description"]', { name: "twitter:description", content: seo.description });
   setMetaContent('meta[name="twitter:image"]', { name: "twitter:image", content: image });
+  setMetaContent('meta[name="twitter:image:alt"]', { name: "twitter:image:alt", content: siteConfig.ogImageAlt });
 
   let jsonLd = document.head.querySelector('script[type="application/ld+json"][data-seo-jsonld]');
   if (!jsonLd) {
@@ -246,13 +297,13 @@ export function applySeo(pathname = "/") {
   jsonLd.textContent = JSON.stringify(getStructuredData(pathname));
 }
 
-export function getSitemapXml(lastmod = new Date().toISOString()) {
+export function getSitemapXml() {
   const entries = sitemapRoutes
     .map((route) => {
       const seo = pageSeo[route];
       return `  <url>
     <loc>${escapeHtml(absoluteUrl(route))}</loc>
-    <lastmod>${lastmod}</lastmod>
+    <lastmod>${seo.lastModified}</lastmod>
     <priority>${seo?.priority ?? 0.7}</priority>
   </url>`;
     })

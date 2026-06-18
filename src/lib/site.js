@@ -1,19 +1,5 @@
 const fallbackSiteUrl = "https://fekitech.co.uk";
 
-function getEnvValue(name) {
-  const viteEnv = typeof import.meta !== "undefined" ? import.meta.env : undefined;
-  return viteEnv?.[name] || globalThis.process?.env?.[name] || "";
-}
-
-export function trimTrailingSlash(value) {
-  return value.replace(/\/+$/, "");
-}
-
-export function normaliseSiteUrl(value) {
-  const url = trimTrailingSlash(String(value || fallbackSiteUrl).trim());
-  return url || fallbackSiteUrl;
-}
-
 export function absoluteUrl(path = "/") {
   const normalisedPath = path.startsWith("/") ? path : `/${path}`;
   return `${siteConfig.siteUrl}${normalisedPath}`;
@@ -21,18 +7,14 @@ export function absoluteUrl(path = "/") {
 
 export const siteConfig = {
   siteName: "FekiTech",
-  siteUrl: normaliseSiteUrl(getEnvValue("NEXT_PUBLIC_SITE_URL") || getEnvValue("VITE_SITE_URL")),
-  alternateDomains: (getEnvValue("NEXT_PUBLIC_ALTERNATE_DOMAINS") || "")
-    .split(",")
-    .map((domain) => domain.trim())
-    .filter(Boolean)
-    .map((domain) => normaliseSiteUrl(domain)),
-  defaultTitle: "FekiTech | Business Transformation and Operating Systems for Scalable Growth",
+  siteUrl: fallbackSiteUrl,
+  defaultTitle: "FekiTech | Business Operations Systems for Local Businesses",
   defaultDescription:
-    "Fekitech transforms organisations by improving performance across operations, people, systems, and profitability.",
-  ogImage: "/og-image.svg",
+    "FekiTech transforms organisations by improving performance across operations, people, systems, and profitability.",
+  ogImage: "/og-image.png",
+  ogImageAlt: "FekiTech business operations and performance systems",
   logo: "/fekitech-logo.png",
-  email: "info@contact.fekitech.co.uk",
+  email: "info@fekitech.co.uk",
   phone: "+447352364942",
   address: "71-75, Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ",
   sameAs: [
@@ -44,53 +26,60 @@ export const siteConfig = {
 
 export const pageSeo = {
   "/": {
-    title: "FekiTech | Business Operations & Performance Systems for Local Businesses",
+    title: "FekiTech | Business Operations Systems for Local Businesses",
     description:
-      "FekiTech transforms local businesses by improving performance across operations, people, systems, and profitability.",
+      "FekiTech transforms organisations by improving performance across operations, people, systems, and profitability.",
     canonicalPath: "/",
-    priority: 1
+    priority: 1,
+    lastModified: "2026-06-18"
   },
   "/about": {
-    title: "About FekiTech | Business Operations & Performance Systems",
+    title: "About FekiTech | Better Operations, Systems & Profitability",
     description:
-      "Learn how FekiTech helps local businesses improve operations, people, systems, performance visibility, and profitability.",
+      "Learn how FekiTech transforms organisations through stronger operations, people, systems, performance visibility, and profitability.",
     canonicalPath: "/about",
-    priority: 0.8
+    priority: 0.8,
+    lastModified: "2026-06-18"
   },
   "/services": {
-    title: "FekiTech Services | Business Operations, Systems & Performance Improvement",
+    title: "Business Operations & Performance Services | FekiTech",
     description:
-      "Explore FekiTech services for improving business structure, operations, automation, performance visibility, and profitability.",
+      "Explore FekiTech services for business structure, operations, automation, performance visibility, and profitability improvement.",
     canonicalPath: "/services",
-    priority: 0.9
+    priority: 0.9,
+    lastModified: "2026-06-18"
   },
   "/pricing": {
     title: "FekiTech Pricing | Business Transformation Package",
     description:
-      "View FekiTech’s business transformation package for local businesses that want stronger operations, better systems, and improved profitability.",
+      "View FekiTech’s business transformation package for local businesses that want better systems, stronger operations, and improved profitability.",
     canonicalPath: "/pricing",
-    priority: 0.8
+    priority: 0.8,
+    lastModified: "2026-06-18"
   },
   "/blog": {
-    title: "FekiTech Blog | Business Growth, Operations & Profitability Insights",
+    title: "FekiTech Blog | Operations, Growth & Profitability Insights",
     description:
-      "Read practical insights from FekiTech on business operations, profitability, performance systems, and scalable growth for local businesses.",
+      "Read practical insights on business operations, profitability, performance systems, and scalable growth for local businesses.",
     canonicalPath: "/blog",
-    priority: 0.7
+    priority: 0.7,
+    lastModified: "2026-06-18"
   },
   "/blog/why-most-businesses-are-not-profitable": {
     title: "Why Most Businesses Are Not Profitable | FekiTech",
     description:
       "Learn why businesses struggle with profitability and how structured operations, systems, visibility, and retention improve performance.",
     canonicalPath: "/blog/why-most-businesses-are-not-profitable",
-    priority: 0.7
+    priority: 0.7,
+    lastModified: "2026-06-18"
   },
   "/contact": {
     title: "Contact FekiTech | Book a Business Strategy Call",
     description:
-      "Contact FekiTech to book a strategy call and improve your business operations, systems, performance, and profitability.",
+      "Book a strategy call with FekiTech to improve your business operations, systems, performance, and profitability.",
     canonicalPath: "/contact",
-    priority: 0.8
+    priority: 0.8,
+    lastModified: "2026-06-18"
   },
   "/audit": {
     title: "Contact FekiTech | Book a Business Strategy Call",

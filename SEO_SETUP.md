@@ -2,23 +2,15 @@
 
 ## Primary Domain
 
-Set one primary canonical domain:
+The canonical production domain is fixed in the SEO configuration:
 
-```bash
-VITE_SITE_URL=https://fekitech.co.uk
+```txt
+https://fekitech.co.uk
 ```
 
-All canonical URLs, sitemap URLs, Open Graph URLs, Twitter URLs, and JSON-LD URLs are generated from this value.
+Canonical URLs, sitemap URLs, Open Graph URLs, Twitter image URLs, and JSON-LD URLs cannot be changed by preview or deployment environment variables.
 
-## Alternate Domains
-
-Optional alternate domains can be listed here:
-
-```bash
-NEXT_PUBLIC_ALTERNATE_DOMAINS=https://www.fekitech.co.uk
-```
-
-Only the primary `VITE_SITE_URL` should be indexed. Configure redirects at the hosting/domain level so every alternate domain redirects to the primary domain. Do this in Vercel domain settings or redirect rules after the final primary domain is chosen.
+`vercel.json` redirects every `www.fekitech.co.uk` path to the matching non-www path with HTTP 301.
 
 ## Google Search Console
 
@@ -27,4 +19,4 @@ After deployment:
 1. Verify the primary domain in Google Search Console.
 2. Submit `/sitemap.xml`.
 3. Request indexing for the homepage.
-4. Keep alternate domains redirected to the primary domain.
+4. Inspect all seven public sitemap URLs.
