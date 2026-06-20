@@ -123,7 +123,7 @@ function Header() {
     <header className="site-header">
       <div className="header-inner">
         <a className="brand" href="/" aria-label="Fekitech home">
-          <img src={logoMark} alt="" width="616" height="646" />
+          <img src={logoMark} alt="Fekitech logo" width="616" height="646" />
           <span>
             Fekitech
             <small>Turn business chaos into profitability.</small>
@@ -1270,7 +1270,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer-brand">
         <a className="footer-logo" href="/" aria-label="Fekitech home">
-          <img src={logoMark} alt="" width="616" height="646" />
+          <img src={logoMark} alt="Fekitech logo" width="616" height="646" />
           <span>Fekitech<small>Turn business chaos into profitability.</small></span>
         </a>
         <p>Fekitech helps businesses become structured, data-driven, profitable, and scalable through FOS.</p>
