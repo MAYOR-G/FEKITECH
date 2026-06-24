@@ -4,21 +4,14 @@ import {
   Check,
   ChevronRight,
   ClipboardCheck,
-  Database,
   Facebook,
-  Gauge,
   Handshake,
   Instagram,
-  Megaphone,
   Menu,
   Network,
-  ScanLine,
   Search,
   Settings2,
-  Sparkles,
   TrendingUp,
-  Users,
-  Workflow,
   X
 } from "lucide-react";
 import gsap from "gsap";
@@ -33,19 +26,11 @@ const logoMark = "/fekitech-logo-transparent-cropped.png";
 const analyticsImage = "/outcome-higher-profitability.webp";
 const systemsImage = "/outcome-reduce-stress.webp";
 const aboutTransformationImage = "/fekitech-about-transformation.webp";
+const transformationStrategyImage = "/fekitech-transformation-systems-ai.png";
 const retentionImage = "/outcome-customer-growth.webp";
-const structureImage = "https://images.pexels.com/photos/6340632/pexels-photo-6340632.jpeg?auto=compress&cs=tinysrgb&w=1400";
 const scaleImage = "/outcome-business-success.webp";
 const billingImage = "/outcome-get-paid-faster.webp";
 const timeImage = "/outcome-save-time.webp";
-const problemImages = {
-  customers: "/problem-loss-customers.webp",
-  profitability: "/problem-unpredictable-profitability.webp",
-  conversion: "/problem-weak-online-conversion.webp",
-  operations: "/problem-manual-operations.webp",
-  visibility: "/problem-limited-visibility.webp",
-  standout: "/problem-stand-out.webp"
-};
 const testimonialAvatars = {
   Ronald: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=240",
   "Cody Fisher": "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=240",
@@ -118,15 +103,25 @@ function setMeta(pathname) {
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 24);
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="site-header">
+    <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
       <div className="header-inner">
         <a className="brand" href="/" aria-label="Fekitech home">
           <img src={logoMark} alt="Fekitech logo" width="616" height="646" />
           <span>
             Fekitech
-            <small>Turn business chaos into profitability.</small>
+            <small>Business systems for profitable growth</small>
           </span>
         </a>
         <nav className="desktop-nav" aria-label="Main navigation">
@@ -137,7 +132,7 @@ function Header() {
           ))}
         </nav>
         <a className="header-cta" href="/contact">
-          Book a Free Audit
+          Book a Free Call
         </a>
         <button className="menu-button" type="button" onClick={() => setOpen(!open)} aria-label="Toggle navigation">
           {open ? <X size={21} /> : <Menu size={21} />}
@@ -150,7 +145,7 @@ function Header() {
             </a>
           ))}
           <a className="mobile-cta" href="/contact" onClick={() => setOpen(false)}>
-            Book a Free Business Audit
+            Book a Free Call
           </a>
         </div>
       </div>
@@ -189,171 +184,22 @@ function PageHero({ label, title, text, children }) {
 }
 
 function Hero() {
-  const videoRef = useRef(null);
-  const [videoError, setVideoError] = useState(false);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return undefined;
-
-    video.muted = true;
-    video.defaultMuted = true;
-
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      video.pause();
-      return undefined;
-    }
-
-    const playVideo = () => {
-      video.play().catch(() => {
-        // Autoplay can still be delayed by a browser until it has enough data.
-      });
-    };
-
-    playVideo();
-    video.addEventListener("loadeddata", playVideo);
-    video.addEventListener("canplay", playVideo);
-
-    return () => {
-      video.removeEventListener("loadeddata", playVideo);
-      video.removeEventListener("canplay", playVideo);
-    };
-  }, []);
-
   return (
     <section className="hero" id="top">
       <div className="hero-background" aria-hidden="true">
-        {videoError ? (
-          <img src="/outcome-business-success.webp" alt="" width="1376" height="768" loading="eager" fetchPriority="high" decoding="async" />
-        ) : (
-          <video
-            ref={videoRef}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster="/outcome-business-success.webp"
-            tabIndex="-1"
-            onError={() => setVideoError(true)}
-          >
-            <source src="https://pub-9f4f9c9b1b3e477aba4991ccfd92f1ae.r2.dev/202606151442.mp4" type="video/mp4" />
-          </video>
-        )}
+        <img src={scaleImage} alt="" width="1376" height="768" loading="eager" fetchPriority="high" decoding="async" />
       </div>
       <div className="hero-overlay" aria-hidden="true" />
       <div className="hero-inner">
-        <span className="hero-label">Built For Local Businesses</span>
+        <span className="hero-label"><span>Built For</span> <strong>Local Businesses</strong></span>
         <h1><span>Run Your Business,</span><span>Not Paperwork.</span></h1>
         <p>
-          Fekitech transforms organisations by improving performance across operations, people, systems, and profitability.
+          Fekitech helps local businesses replace manual admin, scattered tools, and unclear decisions with cleaner
+          systems, sharper visibility, and a calmer way to grow.
         </p>
         <div className="hero-actions">
-          <Button>Book a Strategy Call</Button>
-          <Button href="/pricing#pricing" variant="secondary">Explore Our Approach</Button>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Challenges() {
-  const items = [
-    ["Loss of customers", "Weak customer retention, inconsistent follow-up, and poor customer experience reduce long-term growth.", Users, problemImages.customers, "Business team discussing customer retention and growth in a meeting"],
-    ["Unpredictable profitability", "Revenue may come in, but without visibility into costs, margins, and performance, profit remains unclear.", Gauge, problemImages.profitability, "Business leaders reviewing profitability charts and financial performance"],
-    ["Weak online conversion", "A weak digital presence and unclear customer journey make it harder to convert attention into revenue.", ScanLine, problemImages.conversion, "Local business owner reviewing digital conversion data with a consultant"],
-    ["Manual operations", "Unstructured workflows, repeated manual tasks, and unclear responsibilities slow the business down.", Workflow, problemImages.operations, "Business professional managing manual workflows on a laptop"],
-    ["Limited visibility", "Leaders cannot improve what they cannot see. Without data, decisions become reactive instead of strategic.", Database, problemImages.visibility, "Business team reviewing operational visibility and reporting dashboards"],
-    ["Owners Struggle to Stand Out", "It is no longer just about competing with rivals; it is about competing against a relentless flood of information. Here is why business owners find it increasingly difficult to be seen.", Megaphone, problemImages.standout, "Business team planning how to stand out in a competitive market"]
-  ];
-
-  return (
-    <section className="section challenges-section" id="challenges">
-      <div className="challenges-copy">
-        <SectionIntro
-          title="Business Problems"
-          center={false}
-        />
-      </div>
-      <div className="challenge-grid">
-        {items.map(([title, text, Icon, image, alt], index) => (
-          <article className={index === 0 ? "challenge-card featured" : "challenge-card"} key={title}>
-            <figure className="problem-image">
-              <img src={image} alt={alt} width="1200" height="675" loading="lazy" decoding="async" />
-              <div className="challenge-card-icon"><Icon size={20} /></div>
-            </figure>
-            <h3>{title}</h3>
-            <p>{text}</p>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function Solution() {
-  const pillars = [
-    ["Organisational Structure", "Define clarity, roles, and organizational design.", Users],
-    ["Digital Transformation", "Modernize systems and processes.", Workflow],
-    ["Business Intelligence", "Enable data-driven decision making.", Database],
-    ["Profitability", "Improve margins and financial control.", ScanLine],
-    ["Automation", "Repeatable systems that improve efficiency by reducing delays and operational bottlenecks.", Sparkles],
-    ["Performance Improvement", "Align teams’ performance and accountability.", Gauge, "Human Capital"]
-  ];
-
-  return (
-    <section className="section solution-section" id="fos">
-      <div className="solution-copy">
-        <h2>Our <span className="heading-accent accent-purple">Solution</span></h2>
-        <p className="solution-summary">
-          The Fekitech Operating System (FOS) is a unified business operating framework that connects people,
-          processes, data, and technology into one structured system for predictable performance, scalability, and
-          profitability.
-        </p>
-        <div className="solution-deliverables">
-          <h3>What it delivers:</h3>
-          <div>
-            <strong>Consistent execution across teams</strong>
-            <p>Ensures aligned priorities, accountability, and operational discipline.</p>
-          </div>
-          <div>
-            <strong>Real-time performance visibility</strong>
-            <p>Enables data-driven decisions through clear operational insights.</p>
-          </div>
-          <div>
-            <strong>Reduced operational inefficiency</strong>
-            <p>Eliminates duplication, friction, and manual guesswork.</p>
-          </div>
-          <div>
-            <strong>Scalable business architecture</strong>
-            <p>Builds a foundation for sustainable growth without operational breakdown.</p>
-          </div>
-        </div>
-      </div>
-      <div className="fos-architecture">
-        <div className="fos-engine">
-          <span>FOS</span>
-          <strong>Operations</strong>
-          <small>Streamline workflow and remove inefficiencies.</small>
-        </div>
-        <div className="fos-orbit orbit-one" />
-        <div className="fos-orbit orbit-two" />
-        {pillars.map(([title, text, Icon, emphasis], index) => (
-          <article className={`fos-node node-${index + 1}`} key={title}>
-            <Icon size={18} />
-            <h3>{title}</h3>
-            <p>
-              {emphasis && <strong className="fos-node-emphasis">→ {emphasis}</strong>}
-              {text}
-            </p>
-          </article>
-        ))}
-      </div>
-      <div className="fos-result-strip" aria-label="FOS result">
-        <div>
-          {Array.from({ length: 4 }).map((_, index) => (
-            <span key={index}>STRUCTURED • DATA-DRIVEN • PROFITABLE • SCALABLE</span>
-          ))}
+          <Button>Book a Free Call</Button>
+          <Button href="/services" variant="secondary">Explore Our Approach</Button>
         </div>
       </div>
     </section>
@@ -362,27 +208,38 @@ function Solution() {
 
 function TransformProcess() {
   const steps = [
-    ["Assess your business operations", "We review your current structure, workflows, customer journey, digital systems, and performance gaps.", ClipboardCheck],
-    ["Identify gaps in structure and systems", "We uncover what is slowing growth, reducing profit, weakening retention, or creating operational confusion.", Search],
-    ["Design the FOS framework for your business", "We map the structure, tools, workflows, data points, and implementation plan your business needs.", Network],
-    ["Implement digital and intelligence systems", "We help set up the systems, automations, reporting, and processes required to improve execution.", Settings2],
-    ["Optimise for performance and scale", "We track what is working, improve what is weak, and prepare the business for scalable growth.", TrendingUp],
-    ["Follow-up and Mentorship", "We provide continued guidance, follow-up, and strategic support to help the business stay aligned, improve execution, and sustain profitability.", Handshake]
+    ["Assess operations", "Map the workflows, handoffs, tools, and customer journeys shaping daily performance.", ClipboardCheck],
+    ["Find system gaps", "Identify the friction, profit leakage, data blind spots, and ownership gaps slowing growth.", Search],
+    ["Design your FOS", "Create a practical operating framework for structure, rhythm, tools, and accountability.", Network],
+    ["Implement digital systems", "Set up automations, dashboards, processes, and intelligence that reduce manual work.", Settings2],
+    ["Optimize performance", "Track what is working, sharpen weak points, and prepare the business to scale.", TrendingUp],
+    ["Mentor for growth", "Provide follow-up guidance so your team keeps improving with clarity and confidence.", Handshake]
   ];
 
   return (
     <section className="section transform-section" id="process">
-      <SectionIntro
-        title="How We Transform Your Business"
-      />
-      <div className="transform-roadmap">
-        {steps.map(([title, text, Icon]) => (
-          <article key={title}>
-            <span className="transform-step-icon" aria-hidden="true"><Icon size={26} /></span>
-            <h3>{title}</h3>
-            <p>{text}</p>
-          </article>
-        ))}
+      <div className="transform-header">
+          <h2>How We Transform Your <span className="transform-title-accent">Business</span></h2>
+        <p>
+          We turn scattered operations into a practical business operating system, connecting people, workflows,
+          technology, and performance so the company is easier to lead every day.
+        </p>
+      </div>
+      <div className="transform-layout">
+        <div className="transform-copy">
+          <div className="transform-grid">
+            {steps.map(([title, text, Icon]) => (
+              <article key={title}>
+                <span className="transform-step-icon" aria-hidden="true"><Icon size={22} /></span>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+        <figure className="transform-visual">
+          <img src={transformationStrategyImage} alt="Business team planning strategy, operations, and transformation systems around a meeting table" width="1536" height="1536" loading="eager" decoding="async" />
+        </figure>
       </div>
     </section>
   );
@@ -390,32 +247,62 @@ function TransformProcess() {
 
 function Outcomes() {
   const outcomes = [
-    ["Higher Profitability", "Gain better visibility into your costs and profit so you can make smarter decisions and grow your bottom line.", analyticsImage, "Business profitability dashboard and financial charts in a modern workspace"],
-    ["Customer Growth", "Build stronger customer relationships with faster responses, better service, and a more professional experience.", retentionImage, "Professional team building customer relationships in a business meeting"],
-    ["Business Success", "Drive long-term growth with the tools and insights you need to run a more successful business.", scaleImage, "Business team celebrating growth and successful operations around laptops"],
-    ["Get Paid Faster", "Send professional quotes and invoices in seconds, reduce late payments, and improve cash flow with a faster, more streamlined billing process.", billingImage, "Professional invoice and business finance documents on a modern desk"],
-    ["Save Time", "Replace hours of manual paperwork every week. Save time, get paid faster, and see your profit in real time.", timeImage, "Organised modern workspace with paperwork and productivity tools"],
-    ["Reduce Stress", "Manage everything in one system instead of juggling spreadsheets and multiple tools, so you can stay organised and in control with less effort.", systemsImage, "Business leader using digital systems and dashboards to stay organised"]
+    ["Higher profitability", "See where money is made, where it leaks, and which changes protect your margins.", analyticsImage, "Business profitability dashboard and financial charts in a modern workspace"],
+    ["Customer growth", "Build a more consistent customer journey with better follow-up, response, and retention.", retentionImage, "Professional team building customer relationships in a business meeting"],
+    ["Faster execution", "Give teams clear systems, ownership, and rhythm so work moves without constant chasing.", scaleImage, "Business team celebrating growth and successful operations around laptops"],
+    ["Save time", "Replace repeated manual admin with practical digital systems and cleaner workflows.", timeImage, "Organised modern workspace with paperwork and productivity tools"],
+    ["Reduce stress", "Run the business from visible systems instead of scattered tools, spreadsheets, and guesswork.", systemsImage, "Business leader using digital systems and dashboards to stay organised"],
+    ["Business success", "Create the operating foundation for better decisions, stronger performance, and sustainable scale.", billingImage, "Professional invoice and business finance documents on a modern desk"]
   ];
 
   return (
     <section className="section outcomes-section" id="growth">
       <SectionIntro
-        title={<>How We Help You Run Your Business <span className="heading-accent accent-blue">Efficiently.</span></>}
+        title="Business Results After Our Solution"
+        text="The outcome is a business that feels easier to control, easier to improve, and easier to scale."
       />
-      <div className="outcome-lanes">
-        {outcomes.map(([title, text, image, alt], index) => (
-          <article className="outcome-lane-card" key={title}>
-            <div className="outcome-lane-media">
-              <img src={image} alt={alt} width="1376" height="768" loading="lazy" decoding="async" />
+      <div className="outcomes-premium-grid">
+        {outcomes.map(([title, text, image, alt]) => (
+          <article className="result-card" key={title}>
+            <div className="result-card-media">
+              <img src={image} alt={alt} width="1376" height="768" loading="eager" decoding="async" />
             </div>
-            <div className="outcome-lane-content">
-              <span>{String(index + 1).padStart(2, "0")}</span>
+            <div className="result-card-content">
               <h3>{title}</h3>
               <p>{text}</p>
             </div>
           </article>
         ))}
+      </div>
+    </section>
+  );
+}
+
+function WhyChooseFekitech() {
+  const reasons = [
+    ["Clarity Where Others Create Complexity", "We simplify what is slowing your business down by fixing the structural, operational, and performance issues at the core."],
+    ["Execution, Not Just Advice", "We turn strategy into practical systems and measurable improvements that strengthen performance, accountability, and profitability."],
+    ["Built for Scalable Growth", "We create the structure, control, and operational discipline businesses need to grow sustainably without losing efficiency or profitability."]
+  ];
+
+  return (
+    <section className="section why-section" id="why">
+      <div className="why-layout">
+        <div className="why-editorial">
+          <h2>Why Choose Fekitech</h2>
+          <Button href="/contact">Book a Free Call</Button>
+        </div>
+        <div className="why-reasons">
+          {reasons.map(([title, text]) => (
+            <article key={title}>
+              <Check size={18} />
+              <div>
+                <h3>{title}</h3>
+                <p>{text}</p>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -462,7 +349,7 @@ function Testimonials() {
   return (
     <section className="section testimonials" id="reviews">
       <SectionIntro
-        label="Review"
+        label="Reviews"
         title={<>What Founders Say About <span className="heading-accent accent-blue">Us</span></>}
       />
       {[rowOne, rowTwo].map((row, rowIndex) => (
@@ -491,10 +378,14 @@ function CTA() {
         {Array.from({ length: 12 }).map((_, index) => <span key={index} />)}
       </div>
       <div className="cta-inner">
-        <figure className="cta-visual">
-          <img src={retentionImage} alt="Business team reviewing a modern software demonstration" width="1376" height="768" loading="lazy" decoding="async" />
-          <Button>Book Free Demo</Button>
-        </figure>
+        <div className="cta-copy-panel">
+          <span className="section-kicker">Start with clarity</span>
+          <h2>Ready to make your business easier to run?</h2>
+          <p>
+            Book a free call and we will help you identify the systems, workflows, and performance gaps worth fixing first.
+          </p>
+          <Button>Book a Free Call</Button>
+        </div>
       </div>
     </section>
   );
@@ -504,10 +395,9 @@ function HomePage() {
   return (
     <main className="home-page">
       <Hero />
-      <Challenges />
-      <Solution />
       <TransformProcess />
       <Outcomes />
+      <WhyChooseFekitech />
       <BusinessImpact />
       <Testimonials />
       <CTA />
@@ -1271,9 +1161,9 @@ function Footer() {
       <div className="footer-brand">
         <a className="footer-logo" href="/" aria-label="Fekitech home">
           <img src={logoMark} alt="Fekitech logo" width="616" height="646" />
-          <span>Fekitech<small>Turn business chaos into profitability.</small></span>
+          <span>Fekitech<small>Business systems for profitable growth</small></span>
         </a>
-        <p>Fekitech helps businesses become structured, data-driven, profitable, and scalable through FOS.</p>
+        <p>We help local businesses replace scattered admin with structured operations, practical systems, and clearer performance visibility.</p>
       </div>
       <div className="footer-column">
         <h3>Quick Links</h3>
@@ -1294,13 +1184,13 @@ function Footer() {
         <span>71-75, Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ</span>
       </div>
       <div className="footer-column">
-        <h3>CTA</h3>
-        <a href="/contact">Book an Audit</a>
+        <h3>Start</h3>
+        <a href="/contact">Book a Free Call</a>
         <a href="https://www.facebook.com/profile.php?id=61590753470491">Facebook</a>
         <a href="https://www.instagram.com/fekitech/">Instagram</a>
         <a href="https://www.tiktok.com/@fekitech">TikTok</a>
       </div>
-      <small>© 2025 Fekitech. All rights reserved.</small>
+      <small>© 2026 Fekitech. All rights reserved.</small>
     </footer>
   );
 }
@@ -1363,13 +1253,17 @@ export default function App({ initialPathname } = {}) {
     () => {
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const countCounters = gsap.utils.toArray(".count-up");
+      const revealSelector = ".hero-label, .hero h1, .hero p, .hero-actions, .section-intro, .transform-header, .challenge-card, .fos-node, .transform-grid article, .result-card, .why-reasons article, .number-card, .simple-card-grid article, .method-steps article, .blog-list-card, .blog-card, .pricing-card, .about-simple-visual, .about-simple-copy, .mission-panel, .service-rows article, .blog-featured-copy, .blog-featured-image, .article-page section, .article-hero-image, .article-inline-image, .audit-form, .audit-side-card, .footer-column, .footer-brand";
+      const revealTargets = gsap.utils.toArray(revealSelector);
 
       if (reduceMotion) {
-        gsap.set(".section-intro, .challenge-card, .fos-node, .transform-roadmap article, .outcome-lane-card, .number-card, .simple-card-grid article, .method-steps article, .blog-list-card, .blog-card, .pricing-card, .about-simple-visual, .about-simple-copy, .mission-panel, .service-rows article, .blog-featured-copy, .blog-featured-image, .article-page section, .article-hero-image, .article-inline-image, .audit-form, .audit-side-card, .footer-column, .footer-brand", {
-          opacity: 1,
-          y: 0,
-          scale: 1
-        });
+        if (revealTargets.length) {
+          gsap.set(revealTargets, {
+            opacity: 1,
+            y: 0,
+            scale: 1
+          });
+        }
         countCounters.forEach((counter) => {
           const endValue = Number(counter.dataset.value);
           const hasDecimal = String(endValue).includes(".");
@@ -1378,16 +1272,26 @@ export default function App({ initialPathname } = {}) {
         return;
       }
 
-      const singleItems = gsap.utils.toArray(".section-intro, .outcomes-image, .page-image, .mission-panel, .about-simple-visual, .about-simple-copy, .blog-featured-copy, .blog-featured-image, .article-hero-image, .article-inline-image, .audit-form, .audit-side-card, .footer-brand");
-      const batchItems = gsap.utils.toArray(".challenge-card, .fos-node, .transform-roadmap article, .outcome-lane-card, .number-card, .simple-card-grid article, .method-steps article, .blog-list-card, .blog-card, .pricing-card, .service-rows article, .article-page section, .footer-column");
+      const heroItems = gsap.utils.toArray(".hero-label, .hero h1, .hero p, .hero-actions");
+      const singleItems = gsap.utils.toArray(".section-intro, .transform-header, .transform-visual, .why-editorial, .outcomes-image, .page-image, .mission-panel, .about-simple-visual, .about-simple-copy, .blog-featured-copy, .blog-featured-image, .article-hero-image, .article-inline-image, .audit-form, .audit-side-card, .footer-brand");
+      const batchItems = gsap.utils.toArray(".challenge-card, .fos-node, .transform-grid article, .result-card, .why-reasons article, .number-card, .simple-card-grid article, .method-steps article, .blog-list-card, .blog-card, .pricing-card, .service-rows article, .article-page section, .footer-column");
 
-      gsap.set([...singleItems, ...batchItems], { autoAlpha: 0, y: 30 });
+      gsap.set([...heroItems, ...singleItems, ...batchItems], { autoAlpha: 0, y: 20 });
+
+      gsap.to(heroItems, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.9,
+        stagger: 0.08,
+        ease: "power3.out",
+        delay: 0.08
+      });
 
       singleItems.forEach((item) => {
         gsap.to(item, {
           autoAlpha: 1,
           y: 0,
-          duration: 1.0,
+          duration: 0.82,
           ease: "power3.out",
           scrollTrigger: { trigger: item, start: "top 85%", once: true }
         });
@@ -1397,7 +1301,7 @@ export default function App({ initialPathname } = {}) {
         start: "top 85%",
         once: true,
         onEnter: (batch) => {
-          gsap.to(batch, { autoAlpha: 1, y: 0, duration: 1.0, stagger: 0.1, ease: "power3.out" });
+          gsap.to(batch, { autoAlpha: 1, y: 0, duration: 0.78, stagger: 0.055, ease: "power3.out" });
         }
       });
 
