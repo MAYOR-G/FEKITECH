@@ -261,8 +261,8 @@ function Outcomes() {
   return (
     <section className="section outcomes-section" id="growth">
       <SectionIntro
-        title="Business Results After Our Solution"
-        text="The outcome is a business that feels easier to control, easier to improve, and easier to scale."
+        title={<>Business Results After Our <span className="logo-blend-text">Solution</span></>}
+        text="A clearer operating system makes the business easier to control, improve, and scale."
       />
       <div className="outcomes-premium-grid">
         {outcomes.map(([title, text, image, alt]) => (
