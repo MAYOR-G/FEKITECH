@@ -23,6 +23,7 @@ import { applySeo } from "./lib/seo.js";
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const logoMark = "/fekitech-logo-transparent-cropped.png";
+const heroVideo = "https://pub-9f4f9c9b1b3e477aba4991ccfd92f1ae.r2.dev/fekitech%20new%20vid.mp4";
 const analyticsImage = "/outcome-higher-profitability.webp";
 const systemsImage = "/outcome-reduce-stress.webp";
 const aboutTransformationImage = "/fekitech-about-transformation.webp";
@@ -187,11 +188,13 @@ function Hero() {
   return (
     <section className="hero" id="top">
       <div className="hero-background" aria-hidden="true">
-        <img src={scaleImage} alt="" width="1376" height="768" loading="eager" fetchPriority="high" decoding="async" />
+        <video autoPlay muted loop playsInline preload="auto" poster={scaleImage}>
+          <source src={heroVideo} type="video/mp4" />
+        </video>
       </div>
       <div className="hero-overlay" aria-hidden="true" />
       <div className="hero-inner">
-        <span className="hero-label"><span>Built For</span> <strong>Local Businesses</strong></span>
+        <span className="hero-label">Built For Local Businesses</span>
         <h1><span>Run Your Business,</span><span>Not Paperwork.</span></h1>
         <p>
           Fekitech helps local businesses replace manual admin, scattered tools, and unclear decisions with cleaner
@@ -385,6 +388,16 @@ function CTA() {
             Book a free call and we will help you identify the systems, workflows, and performance gaps worth fixing first.
           </p>
           <Button>Book a Free Call</Button>
+        </div>
+        <div className="cta-signal-panel" aria-hidden="true">
+          <span className="signal-node node-one" />
+          <span className="signal-node node-two" />
+          <span className="signal-node node-three" />
+          <span className="signal-line line-one" />
+          <span className="signal-line line-two" />
+          <span className="signal-card card-one" />
+          <span className="signal-card card-two" />
+          <span className="signal-card card-three" />
         </div>
       </div>
     </section>
@@ -1276,16 +1289,22 @@ export default function App({ initialPathname } = {}) {
       const singleItems = gsap.utils.toArray(".section-intro, .transform-header, .transform-visual, .why-editorial, .outcomes-image, .page-image, .mission-panel, .about-simple-visual, .about-simple-copy, .blog-featured-copy, .blog-featured-image, .article-hero-image, .article-inline-image, .audit-form, .audit-side-card, .footer-brand");
       const batchItems = gsap.utils.toArray(".challenge-card, .fos-node, .transform-grid article, .result-card, .why-reasons article, .number-card, .simple-card-grid article, .method-steps article, .blog-list-card, .blog-card, .pricing-card, .service-rows article, .article-page section, .footer-column");
 
-      gsap.set([...heroItems, ...singleItems, ...batchItems], { autoAlpha: 0, y: 20 });
+      const animatedItems = [...heroItems, ...singleItems, ...batchItems];
 
-      gsap.to(heroItems, {
-        autoAlpha: 1,
-        y: 0,
-        duration: 0.9,
-        stagger: 0.08,
-        ease: "power3.out",
-        delay: 0.08
-      });
+      if (animatedItems.length) {
+        gsap.set(animatedItems, { y: 20 });
+      }
+
+      if (heroItems.length) {
+        gsap.to(heroItems, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.9,
+          stagger: 0.08,
+          ease: "power3.out",
+          delay: 0.08
+        });
+      }
 
       singleItems.forEach((item) => {
         gsap.to(item, {
@@ -1297,13 +1316,15 @@ export default function App({ initialPathname } = {}) {
         });
       });
 
-      ScrollTrigger.batch(batchItems, {
-        start: "top 85%",
-        once: true,
-        onEnter: (batch) => {
-          gsap.to(batch, { autoAlpha: 1, y: 0, duration: 0.78, stagger: 0.055, ease: "power3.out" });
-        }
-      });
+      if (batchItems.length) {
+        ScrollTrigger.batch(batchItems, {
+          start: "top 85%",
+          once: true,
+          onEnter: (batch) => {
+            gsap.to(batch, { autoAlpha: 1, y: 0, duration: 0.78, stagger: 0.055, ease: "power3.out" });
+          }
+        });
+      }
 
       countCounters.forEach((counter) => {
         const endValue = Number(counter.dataset.value);
@@ -1336,7 +1357,7 @@ export default function App({ initialPathname } = {}) {
   );
 
   return (
-    <div ref={appRef}>
+    <div ref={appRef} className={pathname === "/" ? "app-shell home-shell" : "app-shell page-shell"}>
       <Header />
       <AppPage pathname={pathname} />
       <Footer />
