@@ -195,7 +195,10 @@ function Hero() {
       <div className="hero-overlay" aria-hidden="true" />
       <div className="hero-inner">
         <span className="hero-label">Built For Local Businesses</span>
-        <h1><span>Run Your Business,</span><span>Not Paperwork.</span></h1>
+        <h1>
+          <span className="hero-title-line">Run Your <span className="logo-blend-text">Business</span>,</span>
+          <span className="hero-title-line">Not Paperwork.</span>
+        </h1>
         <p>
           Fekitech helps local businesses replace manual admin, scattered tools, and unclear decisions with cleaner
           systems, sharper visibility, and a calmer way to grow.
@@ -389,16 +392,16 @@ function CTA() {
           </p>
           <Button>Book a Free Call</Button>
         </div>
-        <div className="cta-signal-panel" aria-hidden="true">
-          <span className="signal-node node-one" />
-          <span className="signal-node node-two" />
-          <span className="signal-node node-three" />
-          <span className="signal-line line-one" />
-          <span className="signal-line line-two" />
-          <span className="signal-card card-one" />
-          <span className="signal-card card-two" />
-          <span className="signal-card card-three" />
-        </div>
+        <figure className="cta-signal-panel" aria-hidden="true">
+          <span className="cta-visual-accent accent-one" />
+          <span className="cta-visual-accent accent-two" />
+          <img
+            src="/fekitech-cta-systems-clarity.png"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
+        </figure>
       </div>
     </section>
   );
