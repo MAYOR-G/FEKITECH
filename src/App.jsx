@@ -173,16 +173,6 @@ function SectionIntro({ label, title, text, center = true }) {
   );
 }
 
-function PageHero({ label, title, text, children }) {
-  return (
-    <section className="page-hero">
-      <span className="eyebrow">{label}</span>
-      <h1>{title}</h1>
-      <p>{text}</p>
-      {children}
-    </section>
-  );
-}
 
 function Hero() {
   return (
