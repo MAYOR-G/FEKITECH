@@ -4717,7 +4717,7 @@ body,
 }
 
 .hero-background {
-  background: #05070a url("/outcome-business-success.jpeg") center / cover no-repeat;
+  background: #05070a url("/outcome-business-success.webp") center / cover no-repeat;
 }
 
 .hero-background video,
@@ -9196,5 +9196,569 @@ body {
   }
   .cta-signal-panel::after {
     animation: none;
+  }
+}
+
+/* Requested content, typography, mobile, and performance cleanup. */
+h1,
+h2 {
+  letter-spacing: -0.035em;
+}
+
+p,
+li {
+  font-size: clamp(0.96rem, 0.18vw + 0.9rem, 1.04rem);
+  line-height: 1.66;
+}
+
+.home-page .hero-inner {
+  max-width: min(100%, 930px);
+}
+
+.hero-label,
+.home-page .hero-label {
+  margin-bottom: clamp(8px, 1vw, 12px);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: clamp(0.9rem, 0.35vw + 0.82rem, 1.04rem);
+  font-weight: 850;
+  letter-spacing: 0.015em;
+  line-height: 1.2;
+  text-transform: none;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.42);
+}
+
+.hero h1,
+.home-page .hero h1 {
+  margin-top: 0;
+  margin-bottom: clamp(12px, 1.6vw, 18px);
+  font-size: clamp(2.85rem, 6.2vw, 5.85rem);
+}
+
+.hero p,
+.home-page .hero p {
+  max-width: 760px;
+  margin-top: 0;
+  font-size: clamp(0.98rem, 0.32vw + 0.9rem, 1.12rem);
+  line-height: 1.58;
+}
+
+.hero-actions {
+  margin-top: clamp(20px, 2vw, 26px);
+}
+
+.transform-header,
+.transform-header:has(+ .transform-layout) {
+  margin-bottom: clamp(24px, 3vw, 40px);
+}
+
+.transform-header p,
+.outcomes-section .section-intro p {
+  display: none !important;
+}
+
+.transform-header h2 {
+  font-size: clamp(2.15rem, 4vw, 4.25rem);
+  line-height: 1;
+}
+
+.transform-grid {
+  gap: clamp(14px, 1.4vw, 18px);
+}
+
+.transform-grid article {
+  min-height: 0;
+  padding: clamp(18px, 1.8vw, 22px);
+}
+
+.transform-grid h3 {
+  margin-top: 14px;
+  font-size: clamp(1rem, 0.3vw + 0.94rem, 1.16rem);
+  line-height: 1.18;
+}
+
+.transform-grid p {
+  margin-top: 8px;
+  color: #435166 !important;
+  font-size: clamp(0.88rem, 0.14vw + 0.84rem, 0.96rem);
+  line-height: 1.52;
+}
+
+.outcomes-section {
+  padding-top: clamp(66px, 7vw, 104px);
+}
+
+.outcomes-section .section-intro {
+  margin-bottom: clamp(28px, 3.2vw, 46px) !important;
+}
+
+.outcomes-section .section-intro h2,
+.results .section-intro h2,
+.testimonials .section-intro h2 {
+  font-size: clamp(2.05rem, 4.2vw, 4.35rem);
+  line-height: 1.02;
+}
+
+.result-card,
+.result-card.featured {
+  min-height: 0;
+}
+
+.result-card-content {
+  padding: clamp(18px, 1.8vw, 24px);
+}
+
+.result-card h3 {
+  font-size: clamp(1.12rem, 0.45vw + 1rem, 1.34rem);
+  line-height: 1.18;
+}
+
+.result-card p {
+  margin-top: 10px;
+  font-size: clamp(0.9rem, 0.14vw + 0.86rem, 0.98rem);
+  line-height: 1.55;
+}
+
+.page-main .section,
+.audit-page .audit-layout,
+.audit-page .audit-hero {
+  padding-top: clamp(58px, 6.5vw, 96px);
+  padding-bottom: clamp(58px, 6.5vw, 96px);
+}
+
+.page-main h1 {
+  font-size: clamp(2.55rem, 5.2vw, 5.2rem);
+}
+
+.page-main h2 {
+  font-size: clamp(1.9rem, 3.6vw, 3.7rem);
+}
+
+.page-main p,
+.page-main li {
+  font-size: clamp(0.94rem, 0.16vw + 0.88rem, 1.02rem);
+  line-height: 1.64;
+}
+
+.services-page-heading,
+.page-main .services-page-heading {
+  padding-top: clamp(70px, 7vw, 104px) !important;
+  padding-bottom: clamp(4px, 1vw, 12px) !important;
+}
+
+.services-page-heading h1 {
+  font-size: clamp(2.7rem, 6vw, 5.4rem);
+  line-height: 0.98;
+}
+
+.services-card-section.service-list-section,
+.page-main .services-card-section.service-list-section {
+  padding-top: clamp(10px, 1.4vw, 18px) !important;
+}
+
+.services-card-section .service-rows {
+  gap: clamp(16px, 1.7vw, 24px);
+}
+
+.services-card-section .service-rows h3 {
+  font-size: clamp(1.16rem, 0.55vw + 1rem, 1.55rem);
+  line-height: 1.15;
+}
+
+.services-card-section .service-rows p {
+  margin-top: 8px;
+  font-size: clamp(0.9rem, 0.12vw + 0.86rem, 0.98rem);
+  line-height: 1.55;
+}
+
+.pricing-section-heading h1,
+.pricing-only-page .pricing-section-heading h1 {
+  font-size: clamp(2.7rem, 5.4vw, 5.25rem);
+  line-height: 0.98;
+}
+
+.pricing-subsection-heading {
+  margin-bottom: clamp(18px, 2vw, 28px);
+}
+
+.pricing-subsection-heading h2 {
+  max-width: none;
+  font-size: clamp(1.45rem, 2.1vw, 2.3rem);
+  line-height: 1.12;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.pricing-grid.page-pricing.small-business-pricing {
+  gap: clamp(22px, 2.4vw, 34px);
+}
+
+.page-main .pricing-card,
+.page-main .page-pricing .pricing-card,
+.page-main .pricing-grid .pricing-card {
+  min-height: 500px;
+}
+
+.page-main .pricing-card h3 {
+  font-size: clamp(1.22rem, 0.42vw + 1.05rem, 1.55rem);
+}
+
+.page-main .pricing-card .pricing-kicker,
+.page-main .pricing-card li {
+  font-size: clamp(0.82rem, 0.12vw + 0.78rem, 0.92rem);
+}
+
+.pricing-note.bespoke-pricing-note {
+  font-size: clamp(0.82rem, 0.12vw + 0.78rem, 0.92rem);
+}
+
+.transformation-packages-section {
+  padding-top: clamp(24px, 3vw, 44px);
+}
+
+.transformation-packages-heading {
+  margin-bottom: clamp(18px, 2.2vw, 28px);
+}
+
+.transformation-packages-heading h2 {
+  font-size: clamp(1.75rem, 3vw, 3.2rem);
+  line-height: 1.08;
+  white-space: nowrap;
+}
+
+.transformation-package-grid {
+  gap: clamp(20px, 2.2vw, 32px);
+}
+
+.blog-editorial-section {
+  padding-top: clamp(84px, 8vw, 126px);
+}
+
+.blog-text-card h1,
+.page-main .blog-text-card h1 {
+  font-size: clamp(2rem, 3.8vw, 4rem);
+  line-height: 1.04;
+}
+
+.blog-text-card p,
+.page-main .blog-text-card p {
+  max-width: 70ch;
+  font-size: clamp(0.96rem, 0.2vw + 0.9rem, 1.08rem);
+  line-height: 1.65;
+}
+
+.article-page.article-text-only {
+  width: min(calc(100% - 48px), 880px);
+  padding-top: clamp(96px, 8vw, 130px);
+  padding-bottom: clamp(72px, 8vw, 112px);
+}
+
+.article-text-only .article-header,
+.article-text-only section:not(.article-cta),
+.article-text-only .article-cta {
+  max-width: 760px;
+  border: 0;
+  border-radius: 0;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.article-text-only .article-header {
+  margin-bottom: clamp(30px, 4vw, 48px);
+  padding: 0 0 clamp(24px, 3vw, 34px);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.12);
+  text-align: left;
+}
+
+.article-text-only .article-header .eyebrow {
+  min-height: 32px;
+  padding-inline: 12px;
+}
+
+.article-text-only .article-header h1 {
+  margin: 16px 0 16px;
+  color: #0b1020 !important;
+  font-size: clamp(2.05rem, 4vw, 3.65rem);
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.article-text-only .article-lead {
+  max-width: 68ch;
+  color: #334155 !important;
+  font-size: clamp(1rem, 0.3vw + 0.94rem, 1.14rem) !important;
+  line-height: 1.68;
+}
+
+.article-text-only .article-meta {
+  justify-content: flex-start;
+}
+
+.article-text-only > h2,
+.article-text-only > p,
+.article-text-only section:not(.article-cta),
+.article-text-only .article-cta {
+  width: min(100%, 760px);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.article-text-only > h2,
+.article-text-only section h2,
+.article-text-only .article-cta h2 {
+  color: #0b1020 !important;
+  font-size: clamp(1.35rem, 1.3vw + 1rem, 2rem);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+}
+
+.article-text-only > p,
+.article-text-only p,
+.article-text-only li {
+  color: #334155 !important;
+  font-size: clamp(0.98rem, 0.14vw + 0.94rem, 1.06rem);
+  line-height: 1.76;
+}
+
+.article-text-only section:not(.article-cta) {
+  margin-top: clamp(34px, 4vw, 52px);
+  padding: 0;
+}
+
+.article-text-only ul {
+  gap: 8px;
+  margin: 14px 0 18px;
+  padding-left: 22px;
+}
+
+.article-text-only .article-cta {
+  margin-top: clamp(42px, 5vw, 64px);
+  padding: clamp(24px, 3vw, 34px);
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  border-radius: 22px;
+  background:
+    linear-gradient(135deg, rgba(20, 92, 255, 0.06), rgba(255, 79, 216, 0.05)),
+    #ffffff !important;
+  box-shadow: 0 20px 54px rgba(10, 18, 32, 0.08) !important;
+}
+
+.article-text-only .article-cta a:not(.button) {
+  color: #145cff;
+  font-weight: 800;
+}
+
+.transform-section,
+.outcomes-section,
+.results,
+.testimonials,
+.final-cta,
+.services-card-section,
+.pricing-grid,
+.transformation-packages-section,
+.blog-editorial-section,
+.article-page {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 900px;
+}
+
+@media (max-width: 900px) {
+  .pricing-grid.page-pricing.small-business-pricing {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pricing-subsection-heading h2,
+  .transformation-packages-heading h2 {
+    white-space: normal;
+  }
+
+  .transform-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .transform-visual {
+    justify-self: center;
+  }
+}
+
+@media (max-width: 760px) {
+  h1,
+  h2 {
+    letter-spacing: -0.025em;
+  }
+
+  .hero,
+  .home-page .hero {
+    min-height: 100svh !important;
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+
+  .hero-background {
+    background-image: linear-gradient(rgba(3, 5, 10, 0.44), rgba(3, 5, 10, 0.84)), url("/outcome-business-success.webp");
+    background-size: cover;
+    background-position: center;
+  }
+
+  .hero-background video {
+    display: none;
+  }
+
+  .hero-label,
+  .home-page .hero-label {
+    font-size: clamp(0.84rem, 3.2vw, 0.98rem);
+  }
+
+  .hero h1,
+  .home-page .hero h1 {
+    font-size: clamp(2.55rem, 12vw, 4.15rem) !important;
+    line-height: 0.96 !important;
+  }
+
+  .hero p,
+  .home-page .hero p {
+    max-width: 36rem;
+    font-size: clamp(0.93rem, 3.5vw, 1rem);
+    line-height: 1.55;
+  }
+
+  .button,
+  .hero-actions .button {
+    min-height: 48px;
+    padding-inline: 18px;
+    font-size: 0.9rem;
+  }
+
+  .transform-header h2,
+  .outcomes-section .section-intro h2,
+  .results .section-intro h2,
+  .testimonials .section-intro h2 {
+    font-size: clamp(1.9rem, 9vw, 2.8rem) !important;
+  }
+
+  .transform-grid article {
+    padding: 18px;
+  }
+
+  .result-card-media {
+    height: 164px;
+  }
+
+  .page-main h1,
+  .services-page-heading h1,
+  .pricing-section-heading h1,
+  .pricing-only-page .pricing-section-heading h1 {
+    font-size: clamp(2.35rem, 12vw, 3.7rem) !important;
+  }
+
+  .pricing-grid.page-pricing.small-business-pricing,
+  .transformation-package-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .page-main .pricing-card,
+  .page-main .page-pricing .pricing-card,
+  .page-main .pricing-grid .pricing-card,
+  .transformation-package-card,
+  .transformation-package-card.featured {
+    min-height: 0;
+  }
+
+  .pricing-subsection-heading h2 {
+    font-size: clamp(1.28rem, 6vw, 1.9rem);
+  }
+
+  .transformation-packages-heading h2 {
+    font-size: clamp(1.42rem, 7vw, 2.2rem);
+  }
+
+  .services-card-section .service-rows article.service-card,
+  .services-card-section .service-rows article.service-card:nth-child(even),
+  .services-card-section .service-rows article.service-card:last-child {
+    padding: 92px 18px 20px;
+  }
+
+  .services-card-section .service-rows h3 {
+    font-size: clamp(1.08rem, 5vw, 1.34rem);
+  }
+
+  .article-page.article-text-only {
+    width: min(calc(100% - 32px), 720px);
+    padding-top: 82px;
+  }
+
+  .article-text-only .article-header {
+    padding-bottom: 22px;
+  }
+
+  .article-text-only .article-header h1 {
+    font-size: clamp(1.85rem, 9vw, 2.75rem);
+  }
+
+  .article-text-only .article-cta {
+    padding: 22px 18px;
+  }
+
+  .marquee-track,
+  .cta-light-trails span,
+  .page-main::before,
+  .audit-page::before {
+    animation: none !important;
+  }
+
+  .marquee-track {
+    transform: none !important;
+  }
+
+  .marquee-row {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+    scrollbar-width: none;
+  }
+
+  .marquee-row::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (max-width: 430px) {
+  .section,
+  .transform-section,
+  .outcomes-section,
+  .results,
+  .testimonials,
+  .final-cta {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .hero h1,
+  .home-page .hero h1 {
+    font-size: clamp(2.32rem, 11.5vw, 3.55rem) !important;
+  }
+
+  .hero-actions,
+  .hero-actions .button {
+    width: 100%;
+  }
+
+  .hero-actions .button {
+    max-width: 330px;
+  }
+
+  .result-card-media {
+    height: 152px;
+  }
+
+  .blog-text-card,
+  .page-main .blog-text-card {
+    padding: 22px 18px;
+  }
+
+  .article-text-only > p,
+  .article-text-only p,
+  .article-text-only li {
+    font-size: 0.96rem;
   }
 }

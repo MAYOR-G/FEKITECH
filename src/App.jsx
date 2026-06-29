@@ -178,7 +178,7 @@ function Hero() {
   return (
     <section className="hero" id="top">
       <div className="hero-background" aria-hidden="true">
-        <video autoPlay muted loop playsInline preload="auto" poster={scaleImage}>
+        <video autoPlay muted loop playsInline preload="metadata" poster={scaleImage}>
           <source src={heroVideo} type="video/mp4" />
         </video>
       </div>
@@ -190,8 +190,8 @@ function Hero() {
           <span className="hero-title-line">Not Paperwork.</span>
         </h1>
         <p>
-          Fekitech helps local businesses replace manual admin, scattered tools, and unclear decisions with cleaner
-          systems, sharper visibility, and a calmer way to grow.
+          At Fekitech We help business owners build organised, profitable businesses that run with less stress, better
+          systems, and ongoing expert support
         </p>
         <div className="hero-actions">
           <Button>Book a Free Call</Button>
@@ -204,22 +204,18 @@ function Hero() {
 
 function TransformProcess() {
   const steps = [
-    ["Assess operations", "Map the workflows, handoffs, tools, and customer journeys shaping daily performance.", ClipboardCheck],
-    ["Find system gaps", "Identify the friction, profit leakage, data blind spots, and ownership gaps slowing growth.", Search],
-    ["Design your FOS", "Create a practical operating framework for structure, rhythm, tools, and accountability.", Network],
-    ["Implement digital systems", "Set up automations, dashboards, processes, and intelligence that reduce manual work.", Settings2],
-    ["Optimize performance", "Track what is working, sharpen weak points, and prepare the business to scale.", TrendingUp],
-    ["Mentor for growth", "Provide follow-up guidance so your team keeps improving with clarity and confidence.", Handshake]
+    ["Business Audit", "We assess your operations, people, processes, and technology to gain a clear understanding of how your organisation works today.", ClipboardCheck],
+    ["Diagnose the Gaps", "We identify inefficiencies, bottlenecks, accountability gaps, and missed opportunities limiting your performance, profitability, and growth.", Search],
+    ["Design Your Transformation Roadmap", "We build a tailored operating roadmap that enables your organisation to run more efficiently, profitably, and with greater clarity and control.", Network],
+    ["Implement Smart Business Systems", "We deploy integrated systems, tools, and operational processes that improve efficiency, visibility, and decision-making.", Settings2],
+    ["Drive Performance & Scale", "We optimise performance through measurable improvements, continuous refinement, and scalable operating models.", TrendingUp],
+    ["Partner for Long-Term Success", "We provide ongoing advisory and strategic support to help leadership teams sustain growth, improve execution, and continue to grow.", Handshake]
   ];
 
   return (
     <section className="section transform-section" id="process">
       <div className="transform-header">
           <h2>How We Transform Your <span className="transform-title-accent">Business</span></h2>
-        <p>
-          We turn scattered operations into a practical business operating system, connecting people, workflows,
-          technology, and performance so the company is easier to lead every day.
-        </p>
       </div>
       <div className="transform-layout">
         <div className="transform-copy">
@@ -234,7 +230,7 @@ function TransformProcess() {
           </div>
         </div>
         <figure className="transform-visual">
-          <img src={transformationStrategyImage} alt="Business team planning strategy, operations, and transformation systems around a meeting table" width="1536" height="1536" loading="eager" decoding="async" />
+          <img src={transformationStrategyImage} alt="Business team planning strategy, operations, and transformation systems around a meeting table" width="1536" height="1536" loading="lazy" decoding="async" />
         </figure>
       </div>
     </section>
@@ -243,25 +239,24 @@ function TransformProcess() {
 
 function Outcomes() {
   const outcomes = [
-    ["Higher profitability", "See where money is made, where it leaks, and which changes protect your margins.", analyticsImage, "Business profitability dashboard and financial charts in a modern workspace"],
-    ["Customer growth", "Build a more consistent customer journey with better follow-up, response, and retention.", retentionImage, "Professional team building customer relationships in a business meeting"],
-    ["Faster execution", "Give teams clear systems, ownership, and rhythm so work moves without constant chasing.", scaleImage, "Business team celebrating growth and successful operations around laptops"],
-    ["Save time", "Replace repeated manual admin with practical digital systems and cleaner workflows.", timeImage, "Organised modern workspace with paperwork and productivity tools"],
-    ["Reduce stress", "Run the business from visible systems instead of scattered tools, spreadsheets, and guesswork.", systemsImage, "Business leader using digital systems and dashboards to stay organised"],
-    ["Business success", "Create the operating foundation for better decisions, stronger performance, and sustainable scale.", billingImage, "Professional invoice and business finance documents on a modern desk"]
+    ["Higher Profit Margins", "We help you recover lost revenue, improve cost control, and strengthen the systems that protect and increase profitability.", analyticsImage, "Business profitability dashboard and financial charts in a modern workspace"],
+    ["Predictable Customer Growth", "We improve your customer journey with better follow-up, response systems, and retention processes that drive consistent growth.", retentionImage, "Professional team building customer relationships in a business meeting"],
+    ["Faster Execution", "We streamline operations with clear systems, ownership, and workflows so your team delivers results without delays or chasing.", scaleImage, "Business team celebrating growth and successful operations around laptops"],
+    ["Time Efficiency Gains", "We remove repetitive manual work through smarter systems and automation, freeing up time for higher-value activities.", timeImage, "Organised modern workspace with paperwork and productivity tools"],
+    ["Reduced Operational Stress", "We replace disconnected tools and guesswork with structured, visible systems that give you clarity and control.", systemsImage, "Business leader using digital systems and dashboards to stay organised"],
+    ["Scalable Business Performance", "We build the operational foundation needed for better decisions, consistent performance, and long-term scalable growth.", billingImage, "Professional invoice and business finance documents on a modern desk"]
   ];
 
   return (
     <section className="section outcomes-section" id="growth">
       <SectionIntro
         title={<>Business Results After Our <span className="logo-blend-text">Solution</span></>}
-        text="A clearer operating system makes the business easier to control, improve, and scale."
       />
       <div className="outcomes-premium-grid">
         {outcomes.map(([title, text, image, alt]) => (
           <article className="result-card" key={title}>
             <div className="result-card-media">
-              <img src={image} alt={alt} width="1376" height="768" loading="eager" decoding="async" />
+              <img src={image} alt={alt} width="1376" height="768" loading="lazy" decoding="async" />
             </div>
             <div className="result-card-content">
               <h3>{title}</h3>
@@ -637,7 +632,7 @@ function PricingPage() {
           <h1>Pricing</h1>
         </div>
         <div className="pricing-subsection-heading">
-          <h2>Small Business Operating System Packages</h2>
+          <h2>Small Business Operating System Package</h2>
         </div>
         <div className="pricing-grid page-pricing small-business-pricing">
           {smallBusinessPlans.map(([name, price, summary, features, featured]) => (
@@ -657,7 +652,7 @@ function PricingPage() {
       </section>
       <section className="section transformation-packages-section">
         <div className="transformation-packages-heading">
-          <h2>Business Transformation Packages</h2>
+          <h2>Business Transformation Package</h2>
         </div>
         <div className="transformation-package-grid">
           {transformationPackages.map(([name, price, summary, featured]) => (
@@ -1258,11 +1253,12 @@ export default function App({ initialPathname } = {}) {
   useGSAP(
     () => {
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const smallViewport = window.matchMedia("(max-width: 760px)").matches;
       const countCounters = gsap.utils.toArray(".count-up");
       const revealSelector = ".hero-label, .hero h1, .hero p, .hero-actions, .section-intro, .transform-header, .challenge-card, .fos-node, .transform-grid article, .result-card, .why-reasons article, .number-card, .simple-card-grid article, .method-steps article, .blog-list-card, .blog-card, .pricing-card, .about-simple-visual, .about-simple-copy, .mission-panel, .service-rows article, .blog-featured-copy, .blog-featured-image, .article-page section, .article-hero-image, .article-inline-image, .audit-form, .audit-side-card, .footer-column, .footer-brand";
       const revealTargets = gsap.utils.toArray(revealSelector);
 
-      if (reduceMotion) {
+      if (reduceMotion || smallViewport) {
         if (revealTargets.length) {
           gsap.set(revealTargets, {
             opacity: 1,
