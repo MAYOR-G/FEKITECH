@@ -60,6 +60,10 @@ function setLink(selector, attributes) {
   Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
 }
 
+function compact(values) {
+  return [...new Set(values.filter(Boolean))];
+}
+
 function getBreadcrumbItems(pathname) {
   if (pathname === "/") {
     return [];
@@ -89,9 +93,11 @@ function getBreadcrumbItems(pathname) {
 export function getStructuredData(pathname = "/") {
   const canonical = getCanonicalUrl(pathname);
   const organizationId = `${siteConfig.siteUrl}/#organization`;
-  const localBusinessId = `${siteConfig.siteUrl}/#localbusiness`;
+  const professionalServiceId = `${siteConfig.siteUrl}/#professional-service`;
   const contactPointId = `${siteConfig.siteUrl}/#contact-point`;
   const websiteId = `${siteConfig.siteUrl}/#website`;
+  const seo = getSeo(pathname);
+  const realSocialProfiles = siteConfig.sameAs.filter(Boolean);
   const graph = [
     {
       "@type": "Organization",
@@ -100,19 +106,22 @@ export function getStructuredData(pathname = "/") {
       url: siteConfig.siteUrl,
       logo: absoluteUrl(siteConfig.logo),
       image: absoluteUrl(siteConfig.ogImage),
-      email: siteConfig.email,
+      description: siteConfig.defaultDescription,
+      email: siteConfig.contactEmail,
       contactPoint: { "@id": contactPointId },
-      sameAs: siteConfig.sameAs
+      sameAs: realSocialProfiles
     },
     {
-      "@type": "LocalBusiness",
-      "@id": localBusinessId,
+      "@type": ["ProfessionalService", "LocalBusiness"],
+      "@id": professionalServiceId,
       name: siteConfig.siteName,
       url: siteConfig.siteUrl,
+      description: siteConfig.defaultDescription,
       image: absoluteUrl(siteConfig.ogImage),
       logo: absoluteUrl(siteConfig.logo),
-      email: siteConfig.email,
+      email: siteConfig.contactEmail,
       telephone: siteConfig.phone,
+      priceRange: "Custom",
       address: {
         "@type": "PostalAddress",
         streetAddress: "71-75, Shelton Street, Covent Garden",
@@ -120,23 +129,49 @@ export function getStructuredData(pathname = "/") {
         postalCode: "WC2H 9JQ",
         addressCountry: "GB"
       },
+      areaServed: [
+        { "@type": "Country", name: "United Kingdom" },
+        { "@type": "Place", name: "Local businesses" }
+      ],
+      serviceType: [
+        "Business transformation",
+        "Business consulting",
+        "Operational improvement",
+        "Business systems advisory",
+        "Profitability improvement",
+        "Process improvement"
+      ],
       parentOrganization: { "@id": organizationId },
-      contactPoint: { "@id": contactPointId }
+      contactPoint: { "@id": contactPointId },
+      sameAs: realSocialProfiles
     },
     {
       "@type": "ContactPoint",
       "@id": contactPointId,
-      contactType: "customer support",
-      email: siteConfig.email,
+      contactType: "business transformation support",
+      email: siteConfig.contactEmail,
       telephone: siteConfig.phone,
-      availableLanguage: "English"
+      availableLanguage: ["English"],
+      areaServed: "GB"
     },
     {
       "@type": "WebSite",
       "@id": websiteId,
       name: siteConfig.siteName,
       url: siteConfig.siteUrl,
+      description: siteConfig.defaultDescription,
+      inLanguage: "en-GB",
       publisher: { "@id": organizationId }
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${canonical}#webpage`,
+      url: canonical,
+      name: seo.title,
+      description: seo.description,
+      isPartOf: { "@id": websiteId },
+      inLanguage: "en-GB",
+      about: { "@id": professionalServiceId }
     }
   ];
 
@@ -161,7 +196,9 @@ export function getStructuredData(pathname = "/") {
         "@id": `${canonical}#${name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`,
         name,
         description,
-        provider: { "@id": localBusinessId },
+        provider: { "@id": professionalServiceId },
+        serviceType: name,
+        areaServed: { "@type": "Country", name: "United Kingdom" },
         url: canonical
       }))
     );
@@ -190,13 +227,12 @@ export function getStructuredData(pathname = "/") {
               }
             }
           : {}),
-        seller: { "@id": organizationId }
+        seller: { "@id": professionalServiceId }
       }))
     });
   }
 
   if (pathname === "/blog/why-most-businesses-are-not-profitable") {
-    const seo = getSeo(pathname);
     graph.push({
       "@type": "BlogPosting",
       "@id": `${canonical}#article`,
@@ -210,6 +246,9 @@ export function getStructuredData(pathname = "/") {
       isPartOf: { "@id": websiteId },
       inLanguage: "en-GB",
       image: absoluteUrl(siteConfig.ogImage),
+      articleSection: "Business transformation",
+      datePublished: seo.datePublished,
+      dateModified: seo.lastModified,
       author: { "@id": organizationId },
       publisher: { "@id": organizationId }
     });
@@ -227,12 +266,16 @@ export function getHeadTags(pathname = "/") {
   const image = absoluteUrl(siteConfig.ogImage);
   const structuredData = getStructuredData(pathname);
   const robots = pathname === "/admin" ? "noindex, nofollow, noarchive" : "index, follow";
+  const keywords = compact([...(siteConfig.keywords || []), ...(seo.keywords || [])]).join(", ");
 
   return [
     `<title>${escapeHtml(seo.title)}</title>`,
     `<meta name="robots" content="${robots}" />`,
     `<meta name="description" content="${escapeHtml(seo.description)}" />`,
+    `<meta name="keywords" content="${escapeHtml(keywords)}" />`,
     `<link rel="canonical" href="${escapeHtml(canonical)}" />`,
+    `<link rel="alternate" href="${escapeHtml(canonical)}" hreflang="en-GB" />`,
+    `<link rel="alternate" href="${escapeHtml(canonical)}" hreflang="x-default" />`,
     `<meta property="og:type" content="${pathname.startsWith("/blog/why-") ? "article" : "website"}" />`,
     `<meta property="og:locale" content="en_GB" />`,
     `<meta property="og:site_name" content="${escapeHtml(siteConfig.siteName)}" />`,
@@ -265,11 +308,15 @@ export function applySeo(pathname = "/") {
   const canonical = getCanonicalUrl(pathname);
   const image = absoluteUrl(siteConfig.ogImage);
   const robots = pathname === "/admin" ? "noindex, nofollow, noarchive" : "index, follow";
+  const keywords = compact([...(siteConfig.keywords || []), ...(seo.keywords || [])]).join(", ");
 
   document.title = seo.title;
   setMetaContent('meta[name="robots"]', { name: "robots", content: robots });
   setMetaContent('meta[name="description"]', { name: "description", content: seo.description });
+  setMetaContent('meta[name="keywords"]', { name: "keywords", content: keywords });
   setLink('link[rel="canonical"]', { rel: "canonical", href: canonical });
+  setLink('link[rel="alternate"][hreflang="en-GB"]', { rel: "alternate", href: canonical, hreflang: "en-GB" });
+  setLink('link[rel="alternate"][hreflang="x-default"]', { rel: "alternate", href: canonical, hreflang: "x-default" });
   setMetaContent('meta[property="og:type"]', { property: "og:type", content: pathname.startsWith("/blog/why-") ? "article" : "website" });
   setMetaContent('meta[property="og:locale"]', { property: "og:locale", content: "en_GB" });
   setMetaContent('meta[property="og:site_name"]', { property: "og:site_name", content: siteConfig.siteName });

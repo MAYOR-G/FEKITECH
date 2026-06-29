@@ -19,6 +19,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { resultCards, testimonials } from "./data";
 import { applySeo } from "./lib/seo.js";
+import { siteConfig } from "./lib/site.js";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -98,6 +99,27 @@ const navItems = [
   ["Contact", "/contact"]
 ];
 
+const socialLinks = [
+  {
+    label: "Facebook",
+    href: siteConfig.sameAs.find((url) => url.includes("facebook.com")),
+    Icon: Facebook,
+    ariaLabel: "Fekitech on Facebook"
+  },
+  {
+    label: "Instagram",
+    href: siteConfig.sameAs.find((url) => url.includes("instagram.com")),
+    Icon: Instagram,
+    ariaLabel: "Fekitech on Instagram"
+  },
+  {
+    label: "TikTok",
+    href: siteConfig.sameAs.find((url) => url.includes("tiktok.com")),
+    Icon: TikTokIcon,
+    ariaLabel: "Fekitech on TikTok"
+  }
+].filter((link) => Boolean(link.href));
+
 function setMeta(pathname) {
   applySeo(pathname);
 }
@@ -107,9 +129,18 @@ function Header() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 24);
+    let ticking = false;
+    const updateScrolled = () => {
+      ticking = false;
+      setScrolled(window.scrollY > 24);
+    };
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(updateScrolled);
+    };
 
-    handleScroll();
+    updateScrolled();
     window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => window.removeEventListener("scroll", handleScroll);
@@ -383,6 +414,8 @@ function CTA() {
           <img
             src="/fekitech-cta-systems-clarity.png"
             alt=""
+            width="1536"
+            height="1536"
             loading="lazy"
             decoding="async"
           />
@@ -745,6 +778,7 @@ function BlogArticlePage() {
           <h2>Book a Free Business Audit with Fekitech</h2>
           <p>If you want to understand what is broken in your business and how to fix it:</p>
           <p>We help businesses build structure, improve profitability, and implement intelligent systems for growth. Explore our <a href="/services">business operations services</a>.</p>
+          <p>You can also review our <a href="/pricing">business transformation packages</a> or <a href="/contact">contact Fekitech</a> for tailored support.</p>
           <Button>Book a Free Business Audit</Button>
         </div>
       </article>
@@ -890,7 +924,7 @@ function ContactPage() {
   return (
     <main className="audit-page">
       <section className="audit-hero">
-        <h1>Start Free Trial</h1>
+        <h1>Start Business Transformation Support</h1>
       </section>
       <section className="audit-layout">
         <form className="audit-form" onSubmit={handleSubmit}>
@@ -930,9 +964,11 @@ function ContactPage() {
           <p>71-75, Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ</p>
           <p>Email: <a href="mailto:info@contact.fekitech.co.uk">info@contact.fekitech.co.uk</a></p>
           <div className="socials">
-            <a href="https://www.facebook.com/profile.php?id=61590753470491" aria-label="Facebook"><Facebook size={18} /></a>
-            <a href="https://www.instagram.com/fekitech/" aria-label="Instagram"><Instagram size={18} /></a>
-            <a href="https://www.tiktok.com/@fekitech" aria-label="TikTok"><TikTokIcon size={18} /></a>
+            {socialLinks.map(({ label, href, Icon, ariaLabel }) => (
+              <a href={href} key={label} aria-label={ariaLabel} target="_blank" rel="noopener noreferrer">
+                <Icon size={18} />
+              </a>
+            ))}
           </div>
         </aside>
       </section>
@@ -1187,9 +1223,11 @@ function Footer() {
       <div className="footer-column">
         <h3>Start</h3>
         <a href="/contact">Book a Free Call</a>
-        <a href="https://www.facebook.com/profile.php?id=61590753470491">Facebook</a>
-        <a href="https://www.instagram.com/fekitech/">Instagram</a>
-        <a href="https://www.tiktok.com/@fekitech">TikTok</a>
+        {socialLinks.map(({ label, href, ariaLabel }) => (
+          <a href={href} key={label} aria-label={ariaLabel} target="_blank" rel="noopener noreferrer">
+            {label}
+          </a>
+        ))}
       </div>
       <small>© 2026 Fekitech. All rights reserved.</small>
     </footer>

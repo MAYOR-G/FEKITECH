@@ -16,32 +16,32 @@ const publicRoutes = [
 ];
 const expectedSeo = {
   "/": {
-    title: "FekiTech | Business Operations Systems for Local Businesses",
-    description: "FekiTech transforms organisations by improving performance across operations, people, systems, and profitability."
+    title: "Fekitech | Business Transformation Company",
+    description: "Fekitech helps business owners build organised, profitable businesses with better systems, clearer operations, improved performance, and ongoing expert support."
   },
   "/about": {
-    title: "About FekiTech | Better Operations, Systems & Profitability",
-    description: "Learn how FekiTech transforms organisations through stronger operations, people, systems, performance visibility, and profitability."
+    title: "About Fekitech | Business Transformation Company",
+    description: "Learn how Fekitech helps businesses become organised, data-driven, profitable, and scalable through clearer systems and expert advisory."
   },
   "/services": {
-    title: "Business Operations & Performance Services | FekiTech",
-    description: "Explore FekiTech services for business structure, operations, automation, performance visibility, and profitability improvement."
+    title: "Business Transformation Services | Fekitech",
+    description: "Explore Fekitech’s business transformation services for improving operations, systems, profitability, performance, and long-term business growth."
   },
   "/pricing": {
-    title: "FekiTech Pricing | Business Transformation Package",
-    description: "View FekiTech’s business transformation package for local businesses that want better systems, stronger operations, and improved profitability."
+    title: "Business Transformation Packages | Fekitech Pricing",
+    description: "View Fekitech’s business transformation packages designed to help businesses improve systems, operations, profitability, and scalable performance."
   },
   "/blog": {
-    title: "FekiTech Blog | Operations, Growth & Profitability Insights",
-    description: "Read practical insights on business operations, profitability, performance systems, and scalable growth for local businesses."
+    title: "Business Transformation Insights | Fekitech Blog",
+    description: "Read practical insights on business transformation, operations, profitability, systems, customer growth, and performance improvement."
   },
   "/contact": {
-    title: "Contact FekiTech | Book a Business Strategy Call",
-    description: "Book a strategy call with FekiTech to improve your business operations, systems, performance, and profitability."
+    title: "Contact Fekitech | Business Transformation Support",
+    description: "Contact Fekitech for business transformation support, operational improvement, better systems, and expert advisory for your business."
   },
   "/blog/why-most-businesses-are-not-profitable": {
-    title: "Why Most Businesses Are Not Profitable | FekiTech",
-    description: "Learn why businesses struggle with profitability and how structured operations, systems, visibility, and retention improve performance."
+    title: "Why Most Businesses Are Not Profitable | Fekitech",
+    description: "Learn why businesses struggle with profitability and how structured systems, clearer operations, retention, and business transformation improve performance."
   }
 };
 
@@ -91,6 +91,8 @@ for (const route of publicRoutes) {
   const title = getTagValue(html, /<title>([^<]+)<\/title>/, `${route} title`);
   const description = getTagValue(html, /<meta name="description" content="([^"]+)" \/>/, `${route} description`);
   const canonical = getTagValue(html, /<link rel="canonical" href="([^"]+)" \/>/, `${route} canonical`);
+  const hreflang = getTagValue(html, /<link rel="alternate" href="([^"]+)" hreflang="en-GB" \/>/, `${route} en-GB hreflang`);
+  const xDefault = getTagValue(html, /<link rel="alternate" href="([^"]+)" hreflang="x-default" \/>/, `${route} x-default hreflang`);
   const robots = getTagValue(html, /<meta name="robots" content="([^"]+)" \/>/, `${route} robots`);
   const ogUrl = getTagValue(html, /<meta property="og:url" content="([^"]+)" \/>/, `${route} og:url`);
   const ogImage = getTagValue(html, /<meta property="og:image" content="([^"]+)" \/>/, `${route} og:image`);
@@ -99,6 +101,8 @@ for (const route of publicRoutes) {
   assert.equal(title, expectedSeo[route].title, `${route} title mismatch`);
   assert.equal(description, expectedSeo[route].description, `${route} description mismatch`);
   assert.equal(canonical, `${siteUrl}${route}`, `${route} canonical mismatch`);
+  assert.equal(hreflang, canonical, `${route} en-GB hreflang mismatch`);
+  assert.equal(xDefault, canonical, `${route} x-default hreflang mismatch`);
   assert.equal(ogUrl, canonical, `${route} og:url mismatch`);
   assert.equal(ogImage, `${siteUrl}/og-image.png`, `${route} OG image mismatch`);
   assert.equal(twitterImage, ogImage, `${route} Twitter image mismatch`);
@@ -110,7 +114,7 @@ for (const route of publicRoutes) {
   assert(jsonLd.length > 0, `${route} has no valid JSON-LD`);
   const graph = jsonLd.flatMap((entry) => entry["@graph"] || []);
   const schemaTypes = new Set(graph.flatMap((entry) => Array.isArray(entry["@type"]) ? entry["@type"] : [entry["@type"]]));
-  for (const requiredType of ["Organization", "LocalBusiness", "ContactPoint", "WebSite"]) {
+  for (const requiredType of ["Organization", "ProfessionalService", "LocalBusiness", "ContactPoint", "WebSite", "WebPage"]) {
     assert(schemaTypes.has(requiredType), `${route} is missing ${requiredType} schema`);
   }
   if (route !== "/") assert(schemaTypes.has("BreadcrumbList"), `${route} is missing BreadcrumbList schema`);
@@ -118,12 +122,21 @@ for (const route of publicRoutes) {
   if (route === "/pricing") assert(schemaTypes.has("OfferCatalog"), "Pricing page is missing OfferCatalog schema");
   if (route === "/blog/why-most-businesses-are-not-profitable") {
     assert(schemaTypes.has("BlogPosting"), "Blog article is missing BlogPosting schema");
+    const article = graph.find((entry) => entry["@type"] === "BlogPosting");
+    assert.equal(article.datePublished, "2026-06-18", "BlogPosting datePublished mismatch");
+    assert.equal(article.dateModified, "2026-06-29", "BlogPosting dateModified mismatch");
   }
 
   for (const image of html.matchAll(/<img\b[^>]*>/g)) {
     assert(/\salt="[^"]*"/.test(image[0]), `${route} has an image without an alt attribute`);
     assert(/\swidth="[^"]+"/.test(image[0]), `${route} has an image without width`);
     assert(/\sheight="[^"]+"/.test(image[0]), `${route} has an image without height`);
+  }
+
+  for (const match of html.matchAll(/<a\b[^>]*href="https:\/\/(?:www\.)?(?:facebook|instagram|tiktok)\.com[^"]*"[^>]*>/g)) {
+    assert(/target="_blank"/.test(match[0]), `${route} social link missing target blank`);
+    assert(/rel="noopener noreferrer"/.test(match[0]), `${route} social link missing safe rel`);
+    assert(/aria-label="Fekitech on /.test(match[0]) || />[^<]+<\/a>/.test(match[0]), `${route} social link missing accessible label`);
   }
 
   titles.add(title);
