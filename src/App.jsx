@@ -221,8 +221,8 @@ function Hero() {
           <span className="hero-title-line">Not Paperwork.</span>
         </h1>
         <p>
-          At Fekitech We help business owners build organised, profitable businesses that run with less stress, better
-          systems, and ongoing expert support
+          At FekiTech, we combine custom software, intelligent automation, and expert technology consultancy to help you
+          run a more profitable business with less stress
         </p>
         <div className="hero-actions">
           <Button>Book a Free Call</Button>
@@ -449,11 +449,9 @@ function AboutPage() {
         <div className="about-simple-copy">
           <h1>About Us</h1>
           <div className="about-text-stack">
-            <p>Fekitech is a business transformation company dedicated to helping organisations build profitable, structured, and scalable businesses.</p>
-            <p>We help companies move from operational chaos to clarity by strengthening seven critical areas: Business Structure, Human Capital, Operations, Digital Transformation, Business Intelligence, Profitability, and Customer Retention.</p>
-            <p>We work to eliminate inefficiencies, reduce guesswork, and replace complexity with clear operational frameworks that improve decision-making, performance, and accountability.</p>
-            <p>By combining strategy, systems, and data, we enable businesses to operate smarter, scale faster, and achieve long-term profitability with confidence and control.</p>
-            <p>Through the Fekitech Operating System (FOS), we integrate people, processes, data, and technology to improve performance, increase profitability, and support sustainable growth.</p>
+            <p>FekiTech is a technology company specialising in software development, IT consultancy, and business systems design for small and growing businesses.</p>
+            <p>We help organisations move away from manual processes, disconnected tools, and inefficient workflows by building integrated digital systems that improve how they operate day to day.</p>
+            <p>Our focus is simple:<br />to design, build, and implement the technology that helps businesses run more efficiently, more profitably, and with greater control.</p>
           </div>
         </div>
       </section>
