@@ -163,6 +163,14 @@ export default function FekitechChatbot() {
 
   const canSend = useMemo(() => input.trim().length > 1 && !loading, [input, loading]);
 
+  function updateLastAssistantMessage(content) {
+    setMessages((current) => {
+      const updated = [...current];
+      updated[updated.length - 1] = { role: "assistant", content };
+      return updated;
+    });
+  }
+
   async function sendMessage(text = input) {
     const clean = text.trim();
     if (!clean || loading) return;
@@ -179,33 +187,37 @@ export default function FekitechChatbot() {
         body: JSON.stringify({ messages: nextMessages.filter((message) => message.role !== "system") })
       });
 
-      if (!response.ok || !response.body) {
+      if (!response.ok) {
         throw new Error("Chat request failed.");
       }
 
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
+      const responseCopy = response.clone();
       let assistantText = "";
 
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        assistantText += decoder.decode(value, { stream: true });
-        setMessages((current) => {
-          const updated = [...current];
-          updated[updated.length - 1] = { role: "assistant", content: assistantText };
-          return updated;
-        });
+      if (response.body && typeof response.body.getReader === "function") {
+        try {
+          const reader = response.body.getReader();
+          const decoder = new TextDecoder();
+
+          while (true) {
+            const { done, value } = await reader.read();
+            if (done) break;
+            assistantText += decoder.decode(value, { stream: true });
+            updateLastAssistantMessage(assistantText);
+          }
+
+          assistantText += decoder.decode();
+        } catch {
+          assistantText = await responseCopy.text();
+        }
+      } else {
+        assistantText = await response.text();
       }
+
+      if (!assistantText.trim()) throw new Error("Empty chat response.");
+      updateLastAssistantMessage(assistantText);
     } catch {
-      setMessages((current) => {
-        const updated = [...current];
-        updated[updated.length - 1] = {
-          role: "assistant",
-          content: "I’m having trouble connecting right now. You can contact Fekitech directly at info@contact.fekitech.co.uk or call +447352364942."
-        };
-        return updated;
-      });
+      updateLastAssistantMessage("I’m having trouble connecting right now. You can contact Fekitech directly at info@contact.fekitech.co.uk or call +447352364942.");
     } finally {
       setLoading(false);
     }
