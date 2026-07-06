@@ -204,8 +204,25 @@ async function streamOpenRouter({ res, messages, contextChunks }) {
 }
 
 export default async function handler(req, res) {
+  if (req.method === "GET") {
+    res.setHeader("Content-Type", "application/json; charset=utf-8");
+    res.setHeader("Cache-Control", "no-store");
+    return res.end(JSON.stringify({
+      status: "ok",
+      service: "Fekitech chat API",
+      message: "Use POST /api/chat with a messages array to chat with the Fekitech Assistant.",
+      aiConfigured: Boolean(process.env.OPENROUTER_API_KEY)
+    }));
+  }
+
+  if (req.method === "OPTIONS") {
+    res.setHeader("Allow", "GET, POST, OPTIONS");
+    res.statusCode = 204;
+    return res.end();
+  }
+
   if (req.method !== "POST") {
-    return methodNotAllowed(res, ["POST"]);
+    return methodNotAllowed(res, ["GET", "POST", "OPTIONS"]);
   }
 
   res.setHeader("Content-Type", "text/plain; charset=utf-8");
