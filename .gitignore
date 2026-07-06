@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Local environment files
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Local/generated chatbot retrieval cache
+data/chatbot-index.json
+
+# Build and tool output
+dist-ssr/
+.vite/
+.vercel/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.vercel
+.env*

@@ -18,6 +18,8 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { resultCards, testimonials } from "./data";
+import { blogPosts, getBlogPost } from "./blogPosts.js";
+import FekitechChatbot from "./components/FekitechChatbot.jsx";
 import { applySeo } from "./lib/seo.js";
 import { siteConfig } from "./lib/site.js";
 
@@ -702,13 +704,7 @@ function PricingPage() {
 }
 
 function BlogPage() {
-  const featuredArticle = {
-    category: "Business Systems",
-    title: "Why Most Businesses Are Not Profitable And How to Fix It with Structured Systems",
-    excerpt: "Most businesses struggle with profitability because they lack clear systems, visibility, follow-up, and operational control. Learn how structured systems can improve performance.",
-    readTime: "5 min read",
-    href: "/blog/why-most-businesses-are-not-profitable"
-  };
+  const [featuredArticle, ...otherArticles] = blogPosts;
 
   return (
     <main className="page-main">
@@ -719,64 +715,94 @@ function BlogPage() {
           <p>{featuredArticle.excerpt}</p>
           <div className="blog-card-footer">
             <span>{featuredArticle.readTime}</span>
-            <a className="blog-read-link" href={featuredArticle.href}>
+            <a className="blog-read-link" href={featuredArticle.slug}>
               Read article <ArrowRight size={17} />
             </a>
           </div>
         </article>
+        <div className="blog-list-grid" aria-label="More Fekitech articles">
+          {otherArticles.map((article) => (
+            <article className="blog-text-card blog-list-card" key={article.slug}>
+              <span className="blog-category">{article.category}</span>
+              <h2>{article.title}</h2>
+              <p>{article.excerpt}</p>
+              <div className="blog-card-footer">
+                <span>{article.readTime}</span>
+                <a className="blog-read-link" href={article.slug}>
+                  Read article <ArrowRight size={17} />
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
       </section>
     </main>
   );
 }
 
-function BlogArticlePage() {
-  const sections = [
-    ["The Real Reason Businesses Are Not Profitable", "Most businesses fail to make consistent profit because of:", ["No clear organisational structure", "Poor workflow and operations management", "Lack of financial and performance visibility", "Weak customer retention systems", "Decisions made without data"], "Without systems, a business becomes dependent on constant effort instead of predictable performance."],
-    ["Why Customers Keep Leaving", "Customer retention is one of the biggest challenges in modern business. Businesses lose customers because:", ["There is no structured customer experience system", "Communication is inconsistent", "Service delivery is not standardised", "There is no data tracking customer behaviour"], "When customers cannot rely on consistency, they leave."],
-    ["Why Structure Is More Important Than Effort", "Many business owners believe working harder will fix their problems. But in reality:", ["Structure creates profit", "Effort without systems creates burnout"], "A structured business knows: who does what, how work is done, how performance is measured, and how customers are managed. Without this, growth creates chaos instead of profit."],
-    ["The Role of Digital Transformation", "Modern businesses must operate digitally. Digital transformation allows businesses to:", ["Automate processes", "Improve communication", "Track performance in real time", "Improve customer engagement", "Reduce operational inefficiencies"], "Businesses that ignore digital systems fall behind quickly."],
-    ["What Is a Business Operating System?", "A Business Operating System is a structured framework that connects all parts of a business into one system. It includes:", ["Organisational structure", "Operations and workflows", "Digital systems", "Business intelligence and reporting"], "Instead of managing chaos, leaders manage a system."],
-    ["Introducing the Fekitech Operating System (FOS)", "The Fekitech Operating System (FOS) is designed to solve these exact problems. FOS helps businesses:", ["Build clear structure and accountability", "Improve operational efficiency", "Implement digital transformation systems", "Gain real-time business intelligence", "Increase profitability and scalability"], "It turns unstructured businesses into structured, data-driven organisations."]
-  ];
+function BlogArticlePage({ slug = "/blog/why-most-businesses-are-not-profitable" }) {
+  const article = getBlogPost(slug) || getBlogPost("/blog/why-most-businesses-are-not-profitable");
 
   return (
     <main className="page-main">
       <article className="article-page article-text-only">
         <header className="article-header">
-          <span className="eyebrow">Blog</span>
-          <h1>Why Most Businesses Are Not Profitable (And How to Fix It with Structured Systems)</h1>
-          <p className="article-lead">
-            Most businesses struggle with low profitability and poor customer retention due to weak systems and structure.
-            Learn how to fix it using digital transformation and business operating systems.
-          </p>
+          <span className="eyebrow">{article.category}</span>
+          <h1>{article.h1}</h1>
+          <p className="article-lead">{article.lead}</p>
           <div className="article-meta">
             <span>Fekitech Insight</span>
-            <span>5 min read</span>
+            <span>{article.readTime}</span>
           </div>
         </header>
-        <h2>Introduction</h2>
-        <p>Many business owners work hard every day, yet their businesses are still not profitable. Revenue may come in, but at the end of the month, there is little to no real profit.</p>
-        <p>The problem is not effort — the problem is lack of structure, systems, and visibility.</p>
-        <p>In today’s business environment, companies that do not operate with clear systems and digital intelligence struggle to survive, let alone grow.</p>
-        {sections.map(([title, intro, bullets, closing], index) => (
-          <section key={title}>
-            <h2>{index + 1}. {title}</h2>
-            <p>{intro}</p>
-            <ul>{bullets.map((item) => <li key={item}>{item}</li>)}</ul>
-            <p>{closing}</p>
+        <section>
+          <h2>Quick answer</h2>
+          {article.intro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+        </section>
+        {article.toc?.length > 0 && (
+          <nav className="article-toc" aria-label="Table of contents">
+            <h2>In this guide</h2>
+            <ol>
+              {article.toc.map((item) => <li key={item}>{item}</li>)}
+            </ol>
+          </nav>
+        )}
+        {article.sections.map((section) => (
+          <section key={section.heading}>
+            <h2>{section.heading}</h2>
+            {section.body?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            {section.bullets?.length > 0 && <ul>{section.bullets.map((item) => <li key={item}>{item}</li>)}</ul>}
+            {section.table && (
+              <div className="article-table-wrap">
+                <table>
+                  <thead>
+                    <tr>{section.table.headers.map((header) => <th key={header}>{header}</th>)}</tr>
+                  </thead>
+                  <tbody>
+                    {section.table.rows.map((row) => (
+                      <tr key={row.join("-")}>{row.map((cell) => <td key={cell}>{cell}</td>)}</tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </section>
         ))}
         <section>
-          <h2>7. Final Thought</h2>
-          <p>If your business is not profitable or is losing customers, the issue is rarely effort.</p>
-          <p>The real issue is lack of systems, structure, and visibility.</p>
-          <p>Once these are fixed, growth becomes predictable, scalable, and sustainable.</p>
+          <h2>Frequently asked questions</h2>
+          <div className="article-faq-list">
+            {article.faqs.map((faq) => (
+              <div key={faq.question}>
+                <h3>{faq.question}</h3>
+                <p>{faq.answer}</p>
+              </div>
+            ))}
+          </div>
         </section>
         <div className="article-cta">
-          <h2>Book a Free Business Audit with Fekitech</h2>
-          <p>If you want to understand what is broken in your business and how to fix it:</p>
-          <p>We help businesses build structure, improve profitability, and implement intelligent systems for growth. Explore our <a href="/services">business operations services</a>.</p>
-          <p>You can also review our <a href="/pricing">business transformation packages</a> or <a href="/contact">contact Fekitech</a> for tailored support.</p>
+          <h2>Talk to Fekitech about your business systems</h2>
+          <p>{article.cta}</p>
+          <p>Explore <a href="/services">Fekitech services</a>, review <a href="/pricing">business transformation packages</a>, or <a href="/contact">contact Fekitech</a> for tailored support.</p>
           <Button>Book a Free Business Audit</Button>
         </div>
       </article>
@@ -1243,7 +1269,9 @@ function AppPage({ pathname }) {
     case "/blog":
       return <BlogPage />;
     case "/blog/why-most-businesses-are-not-profitable":
-      return <BlogArticlePage />;
+    case "/blog/how-much-does-a-business-website-cost-uk":
+    case "/blog/website-automation-small-businesses":
+      return <BlogArticlePage slug={pathname} />;
     case "/contact":
     case "/audit":
       return <ContactPage />;
@@ -1386,6 +1414,7 @@ export default function App({ initialPathname } = {}) {
       <Header />
       <AppPage pathname={pathname} />
       <Footer />
+      <FekitechChatbot />
     </div>
   );
 }

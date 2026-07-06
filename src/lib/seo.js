@@ -1,4 +1,5 @@
 import { absoluteUrl, getCanonicalUrl, getSeo, pageSeo, prerenderRoutes, siteConfig, sitemapRoutes } from "./site.js";
+import { getBlogPost } from "../blogPosts.js";
 
 export { sitemapRoutes } from "./site.js";
 export { prerenderRoutes } from "./site.js";
@@ -75,7 +76,9 @@ function getBreadcrumbItems(pathname) {
     "/pricing": "Pricing",
     "/blog": "Blog",
     "/contact": "Contact",
-    "/blog/why-most-businesses-are-not-profitable": "Why Most Businesses Are Not Profitable"
+    "/blog/why-most-businesses-are-not-profitable": "Why Most Businesses Are Not Profitable",
+    "/blog/how-much-does-a-business-website-cost-uk": "Business Website Cost UK",
+    "/blog/website-automation-small-businesses": "Website Automation for Small Businesses"
   };
 
   if (!labels[pathname]) {
@@ -232,11 +235,12 @@ export function getStructuredData(pathname = "/") {
     });
   }
 
-  if (pathname === "/blog/why-most-businesses-are-not-profitable") {
+  const blogPost = getBlogPost(pathname);
+  if (blogPost) {
     graph.push({
       "@type": "BlogPosting",
       "@id": `${canonical}#article`,
-      headline: seo.title,
+      headline: blogPost.h1 || seo.title,
       description: seo.description,
       url: canonical,
       mainEntityOfPage: {
@@ -246,7 +250,7 @@ export function getStructuredData(pathname = "/") {
       isPartOf: { "@id": websiteId },
       inLanguage: "en-GB",
       image: absoluteUrl(siteConfig.ogImage),
-      articleSection: "Business transformation",
+      articleSection: blogPost.category || "Business transformation",
       datePublished: seo.datePublished,
       dateModified: seo.lastModified,
       author: { "@id": organizationId },
@@ -276,7 +280,7 @@ export function getHeadTags(pathname = "/") {
     `<link rel="canonical" href="${escapeHtml(canonical)}" />`,
     `<link rel="alternate" href="${escapeHtml(canonical)}" hreflang="en-GB" />`,
     `<link rel="alternate" href="${escapeHtml(canonical)}" hreflang="x-default" />`,
-    `<meta property="og:type" content="${pathname.startsWith("/blog/why-") ? "article" : "website"}" />`,
+    `<meta property="og:type" content="${pathname.startsWith("/blog/") ? "article" : "website"}" />`,
     `<meta property="og:locale" content="en_GB" />`,
     `<meta property="og:site_name" content="${escapeHtml(siteConfig.siteName)}" />`,
     `<meta property="og:title" content="${escapeHtml(seo.title)}" />`,
@@ -317,7 +321,7 @@ export function applySeo(pathname = "/") {
   setLink('link[rel="canonical"]', { rel: "canonical", href: canonical });
   setLink('link[rel="alternate"][hreflang="en-GB"]', { rel: "alternate", href: canonical, hreflang: "en-GB" });
   setLink('link[rel="alternate"][hreflang="x-default"]', { rel: "alternate", href: canonical, hreflang: "x-default" });
-  setMetaContent('meta[property="og:type"]', { property: "og:type", content: pathname.startsWith("/blog/why-") ? "article" : "website" });
+  setMetaContent('meta[property="og:type"]', { property: "og:type", content: pathname.startsWith("/blog/") ? "article" : "website" });
   setMetaContent('meta[property="og:locale"]', { property: "og:locale", content: "en_GB" });
   setMetaContent('meta[property="og:site_name"]', { property: "og:site_name", content: siteConfig.siteName });
   setMetaContent('meta[property="og:title"]', { property: "og:title", content: seo.title });

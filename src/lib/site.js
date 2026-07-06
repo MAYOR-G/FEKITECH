@@ -1,3 +1,5 @@
+import { blogPosts } from "../blogPosts.js";
+
 const fallbackSiteUrl = "https://fekitech.co.uk";
 
 export function absoluteUrl(path = "/") {
@@ -92,14 +94,31 @@ export const pageSeo = {
     keywords: ["business transformation blog", "business operations insights", "profitability insights", "process improvement"]
   },
   "/blog/why-most-businesses-are-not-profitable": {
-    title: "Why Most Businesses Are Not Profitable | Fekitech",
-    description:
-      "Learn why businesses struggle with profitability and how structured systems, clearer operations, retention, and business transformation improve performance.",
+    title: blogPosts.find((post) => post.slug === "/blog/why-most-businesses-are-not-profitable")?.seoTitle,
+    description: blogPosts.find((post) => post.slug === "/blog/why-most-businesses-are-not-profitable")?.metaDescription,
     canonicalPath: "/blog/why-most-businesses-are-not-profitable",
     priority: 0.7,
-    lastModified: "2026-06-29",
-    datePublished: "2026-06-18",
-    keywords: ["business profitability", "business systems", "customer retention", "business transformation"]
+    lastModified: blogPosts.find((post) => post.slug === "/blog/why-most-businesses-are-not-profitable")?.lastModified,
+    datePublished: blogPosts.find((post) => post.slug === "/blog/why-most-businesses-are-not-profitable")?.datePublished,
+    keywords: blogPosts.find((post) => post.slug === "/blog/why-most-businesses-are-not-profitable")?.keywords
+  },
+  "/blog/how-much-does-a-business-website-cost-uk": {
+    title: blogPosts.find((post) => post.slug === "/blog/how-much-does-a-business-website-cost-uk")?.seoTitle,
+    description: blogPosts.find((post) => post.slug === "/blog/how-much-does-a-business-website-cost-uk")?.metaDescription,
+    canonicalPath: "/blog/how-much-does-a-business-website-cost-uk",
+    priority: 0.7,
+    lastModified: blogPosts.find((post) => post.slug === "/blog/how-much-does-a-business-website-cost-uk")?.lastModified,
+    datePublished: blogPosts.find((post) => post.slug === "/blog/how-much-does-a-business-website-cost-uk")?.datePublished,
+    keywords: blogPosts.find((post) => post.slug === "/blog/how-much-does-a-business-website-cost-uk")?.keywords
+  },
+  "/blog/website-automation-small-businesses": {
+    title: blogPosts.find((post) => post.slug === "/blog/website-automation-small-businesses")?.seoTitle,
+    description: blogPosts.find((post) => post.slug === "/blog/website-automation-small-businesses")?.metaDescription,
+    canonicalPath: "/blog/website-automation-small-businesses",
+    priority: 0.7,
+    lastModified: blogPosts.find((post) => post.slug === "/blog/website-automation-small-businesses")?.lastModified,
+    datePublished: blogPosts.find((post) => post.slug === "/blog/website-automation-small-businesses")?.datePublished,
+    keywords: blogPosts.find((post) => post.slug === "/blog/website-automation-small-businesses")?.keywords
   },
   "/contact": {
     title: "Contact Fekitech | Business Transformation Support",
@@ -125,7 +144,7 @@ export const pageSeo = {
   }
 };
 
-export const sitemapRoutes = ["/", "/about", "/services", "/pricing", "/blog", "/contact", "/blog/why-most-businesses-are-not-profitable"];
+export const sitemapRoutes = ["/", "/about", "/services", "/pricing", "/blog", "/contact", ...blogPosts.map((post) => post.slug)];
 export const prerenderRoutes = [...sitemapRoutes, "/admin"];
 
 export function getSeo(pathname = "/") {
