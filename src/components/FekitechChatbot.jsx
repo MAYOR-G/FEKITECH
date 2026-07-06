@@ -191,28 +191,7 @@ export default function FekitechChatbot() {
         throw new Error("Chat request failed.");
       }
 
-      const responseCopy = response.clone();
-      let assistantText = "";
-
-      if (response.body && typeof response.body.getReader === "function") {
-        try {
-          const reader = response.body.getReader();
-          const decoder = new TextDecoder();
-
-          while (true) {
-            const { done, value } = await reader.read();
-            if (done) break;
-            assistantText += decoder.decode(value, { stream: true });
-            updateLastAssistantMessage(assistantText);
-          }
-
-          assistantText += decoder.decode();
-        } catch {
-          assistantText = await responseCopy.text();
-        }
-      } else {
-        assistantText = await response.text();
-      }
+      const assistantText = await response.text();
 
       if (!assistantText.trim()) throw new Error("Empty chat response.");
       updateLastAssistantMessage(assistantText);
