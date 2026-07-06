@@ -183,13 +183,9 @@ export default function FekitechChatbot() {
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", "Accept": "text/plain" },
         body: JSON.stringify({ messages: nextMessages.filter((message) => message.role !== "system") })
       });
-
-      if (!response.ok) {
-        throw new Error("Chat request failed.");
-      }
 
       const assistantText = await response.text();
 

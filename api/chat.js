@@ -3,7 +3,7 @@ import { retrieveContext } from "../lib/chatbot/retrieval.js";
 import { cleanString, getClientIp, methodNotAllowed, readJson } from "./_lib/http.js";
 
 const requestBuckets = new Map();
-const maxRequests = 10;
+const maxRequests = 20;
 const windowMs = 10 * 60 * 1000;
 
 function checkRateLimit(ip) {
