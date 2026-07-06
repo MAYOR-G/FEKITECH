@@ -5,6 +5,20 @@ import { cleanString, getClientIp, methodNotAllowed, readJson } from "./_lib/htt
 const requestBuckets = new Map();
 const maxRequests = 20;
 const windowMs = 10 * 60 * 1000;
+const allowedOrigins = new Set([
+  "https://fekitech.co.uk",
+  "https://www.fekitech.co.uk"
+]);
+
+function setCorsHeaders(req, res) {
+  const origin = req.headers.origin;
+  if (allowedOrigins.has(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+    res.setHeader("Vary", "Origin");
+  }
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
+}
 
 function checkRateLimit(ip) {
   const now = Date.now();
@@ -204,6 +218,8 @@ async function streamOpenRouter({ res, messages, contextChunks }) {
 }
 
 export default async function handler(req, res) {
+  setCorsHeaders(req, res);
+
   if (req.method === "GET") {
     res.setHeader("Content-Type", "application/json; charset=utf-8");
     res.setHeader("Cache-Control", "no-store");

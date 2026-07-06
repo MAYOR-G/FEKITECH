@@ -17,6 +17,12 @@ const welcomeMessage = {
   content: "Hi, I’m the Fekitech Assistant. Ask me about services, business systems, automation, websites, AI agents, or how to contact the team."
 };
 
+function getChatApiUrl() {
+  if (typeof window === "undefined") return "/api/chat";
+  if (window.location.hostname === "www.fekitech.co.uk") return "https://fekitech.co.uk/api/chat";
+  return "/api/chat";
+}
+
 function getSpeechRecognition() {
   if (typeof window === "undefined") return null;
   return window.SpeechRecognition || window.webkitSpeechRecognition || null;
@@ -181,7 +187,7 @@ export default function FekitechChatbot() {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/chat", {
+      const response = await fetch(getChatApiUrl(), {
         method: "POST",
         headers: { "Content-Type": "application/json", "Accept": "text/plain" },
         body: JSON.stringify({ messages: nextMessages.filter((message) => message.role !== "system") })
