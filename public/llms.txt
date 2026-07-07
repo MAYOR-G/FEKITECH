@@ -1,0 +1,18 @@
+# Fekitech
+> Business systems for profitable growth
+
+Fekitech is a business transformation company that helps business owners build organised, profitable businesses with better systems, clearer operations, improved performance, and ongoing expert support.
+
+## Main sections
+- [Home](https://fekitech.co.uk/): Overview of Fekitech's business transformation solutions.
+- [About](https://fekitech.co.uk/about): Learn how Fekitech helps businesses become organised, data-driven, profitable, and scalable.
+- [Services](https://fekitech.co.uk/services): Business transformation services for improving operations, systems, profitability, and performance.
+- [Pricing](https://fekitech.co.uk/pricing): Business transformation packages designed to help businesses improve systems and operations.
+- [Blog](https://fekitech.co.uk/blog): Practical insights on business transformation, operations, profitability, and customer growth.
+- [Contact](https://fekitech.co.uk/contact): Contact Fekitech for business transformation support and expert advisory.
+
+## Optional: Key facts
+- Fekitech combines custom software, intelligent automation, and expert technology consultancy.
+- Fekitech improves customer journeys with better follow-up, response systems, and retention processes.
+- Fekitech streamlines operations with clear systems, ownership, and workflows.
+- Fekitech identifies operational gaps, revenue leakage, cost waste, and margin pressure across the business.

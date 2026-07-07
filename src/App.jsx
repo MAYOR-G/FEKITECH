@@ -152,7 +152,7 @@ function Header() {
     <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
       <div className="header-inner">
         <a className="brand" href="/" aria-label="Fekitech home">
-          <img src={logoMark} alt="Fekitech logo" width="616" height="646" />
+          <img src={logoMark} alt="Fekitech logo" width="616" height="646" fetchpriority="high" decoding="async" />
           <span>
             Fekitech
             <small>Business systems for profitable growth</small>
@@ -982,7 +982,7 @@ function ContactPage() {
           {formStatus.message && <p className={formStatus.type === "error" ? "error-message" : "success-message"}>{formStatus.message}</p>}
         </form>
         <aside className="audit-side-card">
-          <img src={logoMark} alt="" width="616" height="646" />
+          <img src={logoMark} alt="" width="616" height="646" loading="lazy" decoding="async" />
           <h2>Contact Details</h2>
           <p>Phone: <a href="tel:+447352364942">+447352364942</a></p>
           <p>71-75, Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ</p>
@@ -1221,7 +1221,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer-brand">
         <a className="footer-logo" href="/" aria-label="Fekitech home">
-          <img src={logoMark} alt="Fekitech logo" width="616" height="646" />
+          <img src={logoMark} alt="Fekitech logo" width="616" height="646" loading="lazy" decoding="async" />
           <span>Fekitech<small>Business systems for profitable growth</small></span>
         </a>
         <p>We help local businesses replace scattered admin with structured operations, practical systems, and clearer performance visibility.</p>

@@ -1,4 +1,27 @@
 User-agent: *
 Allow: /
 
+# Allow AI Search Engines and Chatbots explicitly
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Block bulk training/dataset crawlers
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
 Sitemap: https://fekitech.co.uk/sitemap.xml

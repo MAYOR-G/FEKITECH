@@ -256,6 +256,33 @@ export function getStructuredData(pathname = "/") {
       author: { "@id": organizationId },
       publisher: { "@id": organizationId }
     });
+
+    if (blogPost.faqs && blogPost.faqs.length > 0) {
+      graph.push({
+        "@type": "FAQPage",
+        "@id": `${canonical}#faq`,
+        mainEntity: blogPost.faqs.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer
+          }
+        }))
+      });
+    }
+  }
+
+  if (pathname === "/") {
+    graph.push({
+      "@type": "VideoObject",
+      "@id": `${canonical}#hero-video`,
+      name: "Fekitech Business Transformation",
+      description: siteConfig.defaultDescription,
+      thumbnailUrl: absoluteUrl("/outcome-business-success.webp"),
+      uploadDate: "2024-01-01T08:00:00+08:00",
+      contentUrl: "https://pub-9f4f9c9b1b3e477aba4991ccfd92f1ae.r2.dev/fekitech%20new%20vid.mp4"
+    });
   }
 
   return {
@@ -370,6 +397,29 @@ ${entries}
 export function getRobotsTxt() {
   return `User-agent: *
 Allow: /
+
+# Allow AI Search Engines and Chatbots explicitly
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# Block bulk training/dataset crawlers
+User-agent: CCBot
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
 
 Sitemap: ${absoluteUrl("/sitemap.xml")}
 `;
