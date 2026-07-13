@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
   Check,
+  ChevronDown,
   ChevronRight,
   ClipboardCheck,
   Facebook,
@@ -18,8 +19,10 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { resultCards, testimonials } from "./data";
-import { blogPosts, getBlogPost } from "./blogPosts.js";
+import { blogPosts, getBlogPost, getRelatedBlogPosts } from "./blogPosts.js";
 import FekitechChatbot from "./components/FekitechChatbot.jsx";
+import ServicePage from "./components/ServicePage.jsx";
+import { getServicePage, servicePages } from "./serviceData.js";
 import { applySeo } from "./lib/seo.js";
 import { siteConfig } from "./lib/site.js";
 
@@ -128,7 +131,10 @@ function setMeta(pathname) {
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const headerRef = useRef(null);
+  const servicesTriggerRef = useRef(null);
 
   useEffect(() => {
     let ticking = false;
@@ -148,37 +154,120 @@ function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const closeMenus = (event) => {
+      if (!headerRef.current?.contains(event.target)) {
+        setOpen(false);
+        setServicesOpen(false);
+      }
+    };
+    const closeOnEscape = (event) => {
+      if (event.key !== "Escape") return;
+      const hadServicesOpen = servicesOpen;
+      setOpen(false);
+      setServicesOpen(false);
+      if (hadServicesOpen) servicesTriggerRef.current?.focus();
+    };
+
+    document.addEventListener("pointerdown", closeMenus);
+    document.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("pointerdown", closeMenus);
+      document.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [servicesOpen]);
+
+  const closeNavigation = () => {
+    setOpen(false);
+    setServicesOpen(false);
+  };
+
   return (
-    <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
+    <header ref={headerRef} className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
       <div className="header-inner">
         <a className="brand" href="/" aria-label="Fekitech home">
-          <img src={logoMark} alt="Fekitech logo" width="616" height="646" fetchpriority="high" decoding="async" />
+          <img src={logoMark} alt="Fekitech logo" width="616" height="646" fetchPriority="high" decoding="async" />
           <span>
             Fekitech
             <small>Business systems for profitable growth</small>
           </span>
         </a>
         <nav className="desktop-nav" aria-label="Main navigation">
-          {navItems.map(([label, href]) => (
-            <a key={label} href={href}>
-              {label}
-            </a>
-          ))}
+          {navItems.map(([label, href]) => {
+            if (label === "Services") {
+              return (
+                <div className={`nav-item-dropdown ${servicesOpen ? "is-open" : ""}`} key={label}>
+                  <button
+                    ref={servicesTriggerRef}
+                    type="button"
+                    className="nav-dropdown-trigger"
+                    aria-expanded={servicesOpen}
+                    aria-controls="desktop-services-menu"
+                    onClick={() => setServicesOpen((current) => !current)}
+                  >
+                    {label} <ChevronDown size={14} className="dropdown-icon" aria-hidden="true" />
+                  </button>
+                  <div id="desktop-services-menu" className="nav-dropdown-content" aria-hidden={!servicesOpen}>
+                    <div className="nav-dropdown-list">
+                      {servicePages.map((service) => (
+                        <a key={service.slug} href={`/services/${service.slug}`} className="nav-dropdown-link" onClick={closeNavigation}>
+                          <span>{service.title}</span><ChevronRight size={15} aria-hidden="true" />
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+            return (
+              <a key={label} href={href}>
+                {label}
+              </a>
+            );
+          })}
         </nav>
         <a className="header-cta" href="/contact">
           Book a Free Call
         </a>
-        <button className="menu-button" type="button" onClick={() => setOpen(!open)} aria-label="Toggle navigation">
+        <button
+          className="menu-button"
+          type="button"
+          onClick={() => { setOpen(!open); setServicesOpen(false); }}
+          aria-label="Toggle navigation"
+          aria-expanded={open}
+          aria-controls="mobile-navigation"
+        >
           {open ? <X size={21} /> : <Menu size={21} />}
         </button>
-        <div className={`mobile-panel ${open ? "open" : ""}`}>
-          {navItems.map(([label, href]) => (
-            <a key={label} href={href} onClick={() => setOpen(false)}>
-              {label}
-              <ChevronRight size={16} />
+        <div id="mobile-navigation" className={`mobile-panel ${open ? "open" : ""}`} aria-hidden={!open}>
+          {navItems.map(([label, href]) => label === "Services" ? (
+            <div className={`mobile-services ${servicesOpen ? "is-open" : ""}`} key={label}>
+              <button
+                type="button"
+                className="mobile-services-trigger"
+                aria-expanded={servicesOpen}
+                aria-controls="mobile-services-list"
+                onClick={() => setServicesOpen((current) => !current)}
+              >
+                <span>{label}</span><ChevronDown size={17} aria-hidden="true" />
+              </button>
+              <div id="mobile-services-list" className="mobile-services-list">
+                <div>
+                  <a href={href} onClick={closeNavigation}><span>View all services</span><ChevronRight size={15} aria-hidden="true" /></a>
+                  {servicePages.map((service) => (
+                    <a href={`/services/${service.slug}`} key={service.slug} onClick={closeNavigation}>
+                      <span>{service.title}</span><ChevronRight size={15} aria-hidden="true" />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <a key={label} href={href} onClick={closeNavigation}>
+              {label}<ChevronRight size={16} aria-hidden="true" />
             </a>
           ))}
-          <a className="mobile-cta" href="/contact" onClick={() => setOpen(false)}>
+          <a className="mobile-cta" href="/contact" onClick={closeNavigation}>
             Book a Free Call
           </a>
         </div>
@@ -595,22 +684,27 @@ function ServiceCardVisual({ index }) {
   );
 }
 
-function ServicesPage() {
-  const services = [
-    ["Business Structure Design", "We define roles, responsibilities, workflows, ownership, and decision rhythms so the business can operate with clarity."],
-    ["Digital Transformation", "We implement practical digital systems that reduce manual work, improve execution speed, and support better management."],
-    ["Business Intelligence Architecture", "We design reporting systems, dashboards, and performance signals around the numbers leaders actually need."],
-    ["Process Optimisation and Automation", "We map, simplify, and automate repeated workflows so teams spend less time on friction and more time on value."],
-    ["Customer Retention Systems", "We improve follow-up, communication, customer experience, and feedback loops so customers stay longer."],
-    ["Profitability Improvement", "We identify operational gaps, revenue leakage, cost waste, and margin pressure across the business."],
-    ["Company Customised AI Agents", "We build AI agents tailored to your business that automate tasks, handle enquiries, and improve decision-making across your operations."],
-    ["Workflow Automations (Operation Acceleration)", "We design and implement automation systems that remove manual work, speed up processes, and improve overall business efficiency."],
-    ["Training (Staff, Personal & Career Development)", "We provide training programs to improve staff performance, develop individual skills, and support long-term career growth."],
-    ["Software Development / Apps", "We create custom software and mobile/web applications designed to solve specific business problems and improve productivity."],
-    ["Startup Mentorship", "We guide startups with strategy, product development, and business growth support to help them launch and scale successfully."],
-    ["Career Development and Job Success", "We help you go from CV to job offer with a complete career system. We improve your CV, write strong personal statements, and create tailored cover letters to get more interviews. We build a focused job search strategy, provide interview coaching to improve your performance, and support you in negotiating better job offers."]
-  ];
+function ServiceArticlePage({ slug }) {
+  const service = getServicePage(slug);
 
+  if (!service) {
+    return (
+      <main className="page-main light-theme-page">
+        <section className="section page-hero">
+          <h1 style={{ color: "#111827" }}>Service Not Found</h1>
+          <p style={{ color: "#4b5563" }}>The service you are looking for does not exist or has been moved.</p>
+          <div className="hero-actions">
+            <Button href="/services">View All Services</Button>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
+  return <ServicePage service={service} />;
+}
+
+function ServicesPage() {
   return (
     <main className="page-main">
       <section className="section services-page-heading">
@@ -619,24 +713,24 @@ function ServicesPage() {
       <section className="section service-list-section services-card-section">
         <h2 className="sr-only">Primary Services</h2>
         <div className="service-rows primary-service-rows">
-          {services.slice(0, 6).map(([title, text], index) => (
-            <article className="service-card" key={title}>
+          {servicePages.slice(0, 6).map((service, index) => (
+            <a href={`/services/${service.slug}`} className="service-card" key={service.title} style={{ textDecoration: 'none', color: 'inherit' }}>
               <ServiceCardVisual index={index} />
               <span className="service-card-number">{String(index + 1).padStart(2, "0")}</span>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </article>
+              <h3 style={{ textDecoration: 'underline', textDecorationColor: 'transparent', transition: 'text-decoration-color 0.2s ease' }}>{service.title}</h3>
+              <p>{service.shortDescription}</p>
+            </a>
           ))}
         </div>
         <h2 className="services-group-heading">Other Services</h2>
         <div className="service-rows other-service-rows">
-          {services.slice(6).map(([title, text], index) => (
-            <article className="service-card" key={title}>
+          {servicePages.slice(6).map((service, index) => (
+            <a href={`/services/${service.slug}`} className="service-card" key={service.title} style={{ textDecoration: 'none', color: 'inherit' }}>
               <ServiceCardVisual index={index + 6} />
               <span className="service-card-number">{String(index + 7).padStart(2, "0")}</span>
-              <h3>{title}</h3>
-              <p>{text}</p>
-            </article>
+              <h3 style={{ textDecoration: 'underline', textDecorationColor: 'transparent', transition: 'text-decoration-color 0.2s ease' }}>{service.title}</h3>
+              <p>{service.shortDescription}</p>
+            </a>
           ))}
         </div>
       </section>
@@ -704,37 +798,69 @@ function PricingPage() {
 }
 
 function BlogPage() {
-  const [featuredArticle, ...otherArticles] = blogPosts;
+  const visibleArticles = blogPosts.slice(0, 6);
+  const [featuredArticle, ...otherArticles] = visibleArticles;
 
   return (
     <main className="page-main">
-      <section className="section blog-editorial-section">
-        <article className="blog-text-card blog-text-card-featured">
-          <span className="blog-category">{featuredArticle.category}</span>
-          <h1>{featuredArticle.title}</h1>
-          <p>{featuredArticle.excerpt}</p>
-          <div className="blog-card-footer">
-            <span>{featuredArticle.readTime}</span>
-            <a className="blog-read-link" href={featuredArticle.slug}>
-              Read article <ArrowRight size={17} />
-            </a>
-          </div>
-        </article>
+      <section className="section blog-editorial-section" aria-label="Fekitech business insights">
+        <BlogTextCard article={featuredArticle} featured />
         <div className="blog-list-grid" aria-label="More Fekitech articles">
-          {otherArticles.map((article) => (
-            <article className="blog-text-card blog-list-card" key={article.slug}>
-              <span className="blog-category">{article.category}</span>
-              <h2>{article.title}</h2>
-              <p>{article.excerpt}</p>
-              <div className="blog-card-footer">
-                <span>{article.readTime}</span>
-                <a className="blog-read-link" href={article.slug}>
-                  Read article <ArrowRight size={17} />
-                </a>
-              </div>
-            </article>
-          ))}
+          {otherArticles.map((article) => <BlogTextCard article={article} key={article.slug} />)}
         </div>
+        {blogPosts.length > 6 && (
+          <div className="blog-index-more"><Button href="/blog/all">View All Articles</Button></div>
+        )}
+      </section>
+    </main>
+  );
+}
+
+function BlogTextCard({ article, featured = false }) {
+  const Heading = featured ? "h1" : "h2";
+
+  return (
+    <article className={`blog-text-card${featured ? " blog-text-card-featured" : " blog-list-card"}`}>
+      <span className="blog-category">{article.category}</span>
+      <Heading>{article.title}</Heading>
+      <p>{article.excerpt}</p>
+      <div className="blog-card-footer">
+        <span><time dateTime={article.datePublished}>{formatArticleDate(article.datePublished)}</time> · {article.readTime}</span>
+        <a className="blog-read-link" href={article.slug}>Read Article <ArrowRight size={17} aria-hidden="true" /></a>
+      </div>
+    </article>
+  );
+}
+
+function formatArticleDate(value) {
+  return new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric" }).format(new Date(`${value}T12:00:00Z`));
+}
+
+function articleSectionId(section) {
+  return section.id || section.heading.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
+function AllBlogsPage() {
+  const [visibleCount, setVisibleCount] = useState(9);
+  const visibleArticles = blogPosts.slice(0, visibleCount);
+
+  return (
+    <main className="page-main blog-index-page">
+      <header className="blog-index-hero blog-index-hero--compact">
+        <div className="blog-shell">
+          <nav className="blog-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/blog">Blog</a><span aria-hidden="true">/</span><span>All articles</span></nav>
+          <span className="blog-kicker">Fekitech library</span>
+          <h1>All business insights</h1>
+          <p>Browse every published guide on business systems, digital operations, technology and sustainable growth.</p>
+        </div>
+      </header>
+      <section className="blog-shell blog-index-section">
+        <div className="blog-list-grid">
+          {visibleArticles.map((article) => <BlogTextCard article={article} key={article.slug} />)}
+        </div>
+        {visibleCount < blogPosts.length && (
+          <div className="blog-index-more"><button className="button primary" type="button" onClick={() => setVisibleCount((count) => count + 9)}>Load More Articles <ArrowRight size={17} /></button></div>
+        )}
       </section>
     </main>
   );
@@ -742,69 +868,91 @@ function BlogPage() {
 
 function BlogArticlePage({ slug = "/blog/why-most-businesses-are-not-profitable" }) {
   const article = getBlogPost(slug) || getBlogPost("/blog/why-most-businesses-are-not-profitable");
+  const [openFaq, setOpenFaq] = useState(0);
+  const relatedArticles = getRelatedBlogPosts(article, 2);
+  const articleIndex = blogPosts.findIndex((post) => post.slug === article.slug);
+  const newerArticle = articleIndex > 0 ? blogPosts[articleIndex - 1] : null;
+  const olderArticle = articleIndex < blogPosts.length - 1 ? blogPosts[articleIndex + 1] : null;
 
   return (
-    <main className="page-main">
-      <article className="article-page article-text-only">
-        <header className="article-header">
-          <span className="eyebrow">{article.category}</span>
+    <main className="page-main blog-article-page">
+      <article className="blog-article">
+        <header className="blog-article__header blog-shell">
+          <nav className="blog-breadcrumb" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/blog">Blog</a><span aria-hidden="true">/</span><span>{article.category}</span></nav>
+          <span className="blog-kicker">{article.category}</span>
           <h1>{article.h1}</h1>
-          <p className="article-lead">{article.lead}</p>
-          <div className="article-meta">
-            <span>Fekitech Insight</span>
+          <p className="blog-article__lead">{article.lead}</p>
+          <div className="blog-article__meta">
+            <span>By Fekitech</span>
+            <time dateTime={article.datePublished}>Published {formatArticleDate(article.datePublished)}</time>
+            {article.lastModified !== article.datePublished && <time dateTime={article.lastModified}>Updated {formatArticleDate(article.lastModified)}</time>}
             <span>{article.readTime}</span>
           </div>
         </header>
-        <section>
-          <h2>Quick answer</h2>
-          {article.intro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-        </section>
-        {article.toc?.length > 0 && (
-          <nav className="article-toc" aria-label="Table of contents">
-            <h2>In this guide</h2>
-            <ol>
-              {article.toc.map((item) => <li key={item}>{item}</li>)}
-            </ol>
-          </nav>
-        )}
-        {article.sections.map((section) => (
-          <section key={section.heading}>
-            <h2>{section.heading}</h2>
-            {section.body?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-            {section.bullets?.length > 0 && <ul>{section.bullets.map((item) => <li key={item}>{item}</li>)}</ul>}
-            {section.table && (
-              <div className="article-table-wrap">
-                <table>
-                  <thead>
-                    <tr>{section.table.headers.map((header) => <th key={header}>{header}</th>)}</tr>
-                  </thead>
-                  <tbody>
-                    {section.table.rows.map((row) => (
-                      <tr key={row.join("-")}>{row.map((cell) => <td key={cell}>{cell}</td>)}</tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </section>
-        ))}
-        <section>
-          <h2>Frequently asked questions</h2>
-          <div className="article-faq-list">
-            {article.faqs.map((faq) => (
-              <div key={faq.question}>
-                <h3>{faq.question}</h3>
-                <p>{faq.answer}</p>
-              </div>
+        <figure className="blog-article__feature blog-shell">
+          <img src={article.featuredImage} alt={article.imageAlt} width={article.imageWidth} height={article.imageHeight} loading="eager" fetchPriority="high" />
+        </figure>
+        <div className="blog-article__layout blog-shell">
+          <aside className="blog-article__aside">
+            <nav className="blog-article__toc" aria-label="Table of contents">
+              <span>In this guide</span>
+              <ol>{article.sections.map((section) => <li key={section.heading}><a href={`#${articleSectionId(section)}`}>{section.heading}</a></li>)}</ol>
+              <a className="blog-article__service-link" href={article.relatedService?.href || "/services"}>{article.relatedService?.title || "Fekitech services"} <ArrowRight size={15} /></a>
+            </nav>
+          </aside>
+          <div className="blog-article__body">
+            <section className="blog-article__intro" aria-labelledby="quick-answer-heading">
+              <span>Quick answer</span>
+              <h2 id="quick-answer-heading">The practical starting point</h2>
+              {article.intro.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+            </section>
+            {article.sections.map((section) => (
+              <section id={articleSectionId(section)} key={section.heading}>
+                <h2>{section.heading}</h2>
+                {section.body?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                {section.callout && <blockquote>{section.callout}</blockquote>}
+                {section.bullets?.length > 0 && <ul>{section.bullets.map((item) => <li key={item}>{item}</li>)}</ul>}
+                {section.table && (
+                  <div className="blog-article__table-wrap">
+                    <table>
+                      <thead><tr>{section.table.headers.map((header) => <th key={header}>{header}</th>)}</tr></thead>
+                      <tbody>{section.table.rows.map((row) => <tr key={row.join("-")}>{row.map((cell) => <td key={cell}>{cell}</td>)}</tr>)}</tbody>
+                    </table>
+                  </div>
+                )}
+                {section.links?.length > 0 && <div className="blog-article__links">{section.links.map((link) => <p key={link.href}>{link.context} <a href={link.href}>{link.label}</a>.</p>)}</div>}
+                {section.sources?.length > 0 && <div className="blog-article__sources"><strong>Useful guidance</strong>{section.sources.map((source) => <a href={source.href} key={source.href} target="_blank" rel="noopener noreferrer">{source.label} <ArrowRight size={14} /></a>)}</div>}
+              </section>
             ))}
+            <section id="frequently-asked-questions" className="blog-article__faq">
+              <span>Common questions</span>
+              <h2>Frequently asked questions</h2>
+              <div>
+                {article.faqs.map((faq, index) => {
+                  const isOpen = openFaq === index;
+                  return <article className={isOpen ? "is-open" : ""} key={faq.question}>
+                    <h3><button type="button" aria-expanded={isOpen} aria-controls={`blog-faq-${index}`} onClick={() => setOpenFaq(isOpen ? -1 : index)}>{faq.question}<ChevronDown size={19} aria-hidden="true" /></button></h3>
+                    <div id={`blog-faq-${index}`} hidden={!isOpen}><p>{faq.answer}</p></div>
+                  </article>;
+                })}
+              </div>
+            </section>
+            <section className="blog-article__cta">
+              <span>Related Fekitech service</span>
+              <h2>{article.ctaHeading || "Turn the insight into a practical business system"}</h2>
+              <p>{article.cta}</p>
+              <div><Button href="/contact">Book a Free Business Audit</Button><a href={article.relatedService?.href || "/services"}>Explore {article.relatedService?.title || "our services"} <ArrowRight size={16} /></a></div>
+            </section>
           </div>
-        </section>
-        <div className="article-cta">
-          <h2>Talk to Fekitech about your business systems</h2>
-          <p>{article.cta}</p>
-          <p>Explore <a href="/services">Fekitech services</a>, review <a href="/pricing">business transformation packages</a>, or <a href="/contact">contact Fekitech</a> for tailored support.</p>
-          <Button>Book a Free Business Audit</Button>
         </div>
+        <section className="blog-related blog-shell" aria-labelledby="related-reading-title">
+          <div className="blog-related__heading"><div><span>Continue reading</span><h2 id="related-reading-title">Related business guides</h2></div><a href="/blog">View all insights <ArrowRight size={16} /></a></div>
+          <div className="blog-list-grid blog-related__grid">{relatedArticles.map((post) => <BlogTextCard article={post} key={post.slug} />)}</div>
+        </section>
+        <nav className="blog-article__pagination blog-shell" aria-label="Article navigation">
+          {newerArticle ? <a href={newerArticle.slug}><span>Newer article</span><strong>{newerArticle.title}</strong></a> : <span />}
+          {olderArticle ? <a href={olderArticle.slug}><span>Older article</span><strong>{olderArticle.title}</strong></a> : <span />}
+        </nav>
       </article>
     </main>
   );
@@ -1259,6 +1407,15 @@ function Footer() {
 }
 
 function AppPage({ pathname }) {
+  if (pathname.startsWith("/services/") && pathname.length > 10) {
+    const slug = pathname.replace("/services/", "");
+    return <ServiceArticlePage slug={slug} />;
+  }
+
+  if (pathname.startsWith("/blog/") && getBlogPost(pathname)) {
+    return <BlogArticlePage slug={pathname} />;
+  }
+
   switch (pathname) {
     case "/about":
       return <AboutPage />;
@@ -1268,10 +1425,8 @@ function AppPage({ pathname }) {
       return <PricingPage />;
     case "/blog":
       return <BlogPage />;
-    case "/blog/why-most-businesses-are-not-profitable":
-    case "/blog/how-much-does-a-business-website-cost-uk":
-    case "/blog/website-automation-small-businesses":
-      return <BlogArticlePage slug={pathname} />;
+    case "/blog/all":
+      return <AllBlogsPage />;
     case "/contact":
     case "/audit":
       return <ContactPage />;

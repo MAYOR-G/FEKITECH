@@ -1,4 +1,5 @@
 import { blogPosts } from "../blogPosts.js";
+import { servicePages, serviceRoutes } from "../serviceData.js";
 
 const fallbackSiteUrl = "https://fekitech.co.uk";
 
@@ -90,36 +91,32 @@ export const pageSeo = {
       "Read practical insights on business transformation, operations, profitability, systems, customer growth, and performance improvement.",
     canonicalPath: "/blog",
     priority: 0.7,
-    lastModified: "2026-06-29",
+    lastModified: "2026-07-13",
     keywords: ["business transformation blog", "business operations insights", "profitability insights", "process improvement"]
   },
-  "/blog/why-most-businesses-are-not-profitable": {
-    title: blogPosts.find((post) => post.slug === "/blog/why-most-businesses-are-not-profitable")?.seoTitle,
-    description: blogPosts.find((post) => post.slug === "/blog/why-most-businesses-are-not-profitable")?.metaDescription,
-    canonicalPath: "/blog/why-most-businesses-are-not-profitable",
-    priority: 0.7,
-    lastModified: blogPosts.find((post) => post.slug === "/blog/why-most-businesses-are-not-profitable")?.lastModified,
-    datePublished: blogPosts.find((post) => post.slug === "/blog/why-most-businesses-are-not-profitable")?.datePublished,
-    keywords: blogPosts.find((post) => post.slug === "/blog/why-most-businesses-are-not-profitable")?.keywords
+  "/blog/all": {
+    title: "All Business Insights | Fekitech Blog",
+    description:
+      "Browse all Fekitech guides on business systems, artificial intelligence, automation, customer retention, data and sustainable business growth.",
+    canonicalPath: "/blog/all",
+    priority: 0.6,
+    lastModified: "2026-07-13",
+    keywords: ["business insights", "business systems guides", "digital transformation articles", "Fekitech blog"]
   },
-  "/blog/how-much-does-a-business-website-cost-uk": {
-    title: blogPosts.find((post) => post.slug === "/blog/how-much-does-a-business-website-cost-uk")?.seoTitle,
-    description: blogPosts.find((post) => post.slug === "/blog/how-much-does-a-business-website-cost-uk")?.metaDescription,
-    canonicalPath: "/blog/how-much-does-a-business-website-cost-uk",
+  ...Object.fromEntries(blogPosts.map((post) => [post.slug, {
+    title: post.seoTitle,
+    description: post.metaDescription,
+    canonicalPath: post.slug,
     priority: 0.7,
-    lastModified: blogPosts.find((post) => post.slug === "/blog/how-much-does-a-business-website-cost-uk")?.lastModified,
-    datePublished: blogPosts.find((post) => post.slug === "/blog/how-much-does-a-business-website-cost-uk")?.datePublished,
-    keywords: blogPosts.find((post) => post.slug === "/blog/how-much-does-a-business-website-cost-uk")?.keywords
-  },
-  "/blog/website-automation-small-businesses": {
-    title: blogPosts.find((post) => post.slug === "/blog/website-automation-small-businesses")?.seoTitle,
-    description: blogPosts.find((post) => post.slug === "/blog/website-automation-small-businesses")?.metaDescription,
-    canonicalPath: "/blog/website-automation-small-businesses",
-    priority: 0.7,
-    lastModified: blogPosts.find((post) => post.slug === "/blog/website-automation-small-businesses")?.lastModified,
-    datePublished: blogPosts.find((post) => post.slug === "/blog/website-automation-small-businesses")?.datePublished,
-    keywords: blogPosts.find((post) => post.slug === "/blog/website-automation-small-businesses")?.keywords
-  },
+    lastModified: post.lastModified,
+    datePublished: post.datePublished,
+    keywords: post.keywords,
+    image: post.featuredImage,
+    imageAlt: post.imageAlt,
+    imageWidth: post.imageWidth,
+    imageHeight: post.imageHeight,
+    imageType: "image/webp"
+  }])),
   "/contact": {
     title: "Contact Fekitech | Business Transformation Support",
     description:
@@ -141,10 +138,18 @@ export const pageSeo = {
     description: "Secure Fekitech admin dashboard.",
     canonicalPath: "/admin",
     priority: 0
-  }
+  },
+  ...Object.fromEntries(servicePages.map((service) => [servicePath(service.slug), {
+    title: service.metaTitle,
+    description: service.metaDescription,
+    canonicalPath: servicePath(service.slug),
+    priority: 0.8,
+    lastModified: "2026-07-13",
+    keywords: [service.title.toLowerCase(), service.category.toLowerCase(), "Fekitech services"]
+  }]))
 };
 
-export const sitemapRoutes = ["/", "/about", "/services", "/pricing", "/blog", "/contact", ...blogPosts.map((post) => post.slug)];
+export const sitemapRoutes = ["/", "/about", "/services", ...serviceRoutes, "/pricing", "/blog", "/blog/all", "/contact", ...blogPosts.map((post) => post.slug)];
 export const prerenderRoutes = [...sitemapRoutes, "/admin"];
 
 export function getSeo(pathname = "/") {
@@ -153,4 +158,8 @@ export function getSeo(pathname = "/") {
 
 export function getCanonicalUrl(pathname = "/") {
   return absoluteUrl(getSeo(pathname).canonicalPath);
+}
+
+function servicePath(slug) {
+  return `/services/${slug}`;
 }

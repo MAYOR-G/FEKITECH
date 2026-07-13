@@ -1,4 +1,6 @@
-export const blogPosts = [
+import { newBlogPosts } from "./newBlogPosts.js";
+
+const existingBlogPosts = [
   {
     slug: "/blog/why-most-businesses-are-not-profitable",
     category: "Business Systems",
@@ -12,6 +14,12 @@ export const blogPosts = [
     datePublished: "2026-06-18",
     lastModified: "2026-07-06",
     keywords: ["business profitability", "business systems", "customer retention", "business transformation"],
+    featuredImage: "/outcome-higher-profitability.webp",
+    imageAlt: "Business leadership team reviewing profitability and performance information",
+    imageWidth: 1376,
+    imageHeight: 768,
+    relatedService: { title: "Profitability Improvement", href: "/services/profitability-improvement" },
+    relatedSlugs: ["/blog/business-intelligence-small-business-kpi-dashboard", "/blog/customer-retention-strategy-small-business"],
     h1: "Why Most Businesses Are Not Profitable And How to Fix It with Structured Systems",
     lead:
       "Many local businesses do not have a profit problem because the owner lacks effort. They struggle because the work behind the business is not structured enough to produce consistent results.",
@@ -129,6 +137,12 @@ export const blogPosts = [
     datePublished: "2026-07-06",
     lastModified: "2026-07-06",
     keywords: ["business website cost UK", "website development", "local business website", "website automation"],
+    featuredImage: "/outcome-business-success.webp",
+    imageAlt: "Business team reviewing a modern website and growth plan in a meeting",
+    imageWidth: 1376,
+    imageHeight: 768,
+    relatedService: { title: "Software Development / Apps", href: "/services/software-development-apps" },
+    relatedSlugs: ["/blog/website-automation-small-businesses", "/blog/ai-agents-for-small-business"],
     h1: "How Much Does a Business Website Cost in the UK? A Practical Guide for Local Businesses",
     lead:
       "Business website cost in the UK depends on what the website needs to do. A simple brochure site is very different from a website built to capture leads, support SEO, connect forms, automate follow-up, and help the business grow.",
@@ -257,6 +271,12 @@ export const blogPosts = [
     datePublished: "2026-07-06",
     lastModified: "2026-07-06",
     keywords: ["website automation", "small business automation", "lead capture", "AI chatbots"],
+    featuredImage: "/outcome-reduce-stress.webp",
+    imageAlt: "Small business team planning website automation and connected workflows",
+    imageWidth: 1376,
+    imageHeight: 768,
+    relatedService: { title: "Workflow Automations", href: "/services/workflow-automations" },
+    relatedSlugs: ["/blog/ai-agents-for-small-business", "/blog/how-much-does-a-business-website-cost-uk"],
     h1: "Website Automation for Small Businesses: How to Turn Your Website Into a System That Saves Time and Captures Leads",
     lead:
       "Website automation means using your website to capture information, guide enquiries, trigger follow-up, and connect work to the right system without relying on manual admin every time.",
@@ -372,6 +392,16 @@ export const blogPosts = [
   }
 ];
 
+export const blogPosts = [...newBlogPosts, ...existingBlogPosts].sort(
+  (a, b) => new Date(b.datePublished).getTime() - new Date(a.datePublished).getTime()
+);
+
 export function getBlogPost(slug) {
   return blogPosts.find((post) => post.slug === slug);
+}
+
+export function getRelatedBlogPosts(article, limit = 3) {
+  const preferred = (article.relatedSlugs || []).map(getBlogPost).filter(Boolean);
+  const fallback = blogPosts.filter((post) => post.slug !== article.slug && !preferred.some((item) => item.slug === post.slug));
+  return [...preferred, ...fallback].slice(0, limit);
 }

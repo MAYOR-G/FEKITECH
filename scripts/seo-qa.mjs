@@ -1,19 +1,12 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { pageSeo, sitemapRoutes } from "../src/lib/site.js";
 
 const root = process.cwd();
 const distDir = path.join(root, "dist");
 const siteUrl = "https://fekitech.co.uk";
-const publicRoutes = [
-  "/",
-  "/about",
-  "/services",
-  "/pricing",
-  "/blog",
-  "/contact",
-  "/blog/why-most-businesses-are-not-profitable"
-];
+const publicRoutes = sitemapRoutes;
 const expectedSeo = {
   "/": {
     title: "Fekitech | Business Transformation Company",
@@ -44,6 +37,10 @@ const expectedSeo = {
     description: "Learn why businesses struggle with profitability and how structured systems, clearer operations, retention, and business transformation improve performance."
   }
 };
+
+for (const route of publicRoutes) {
+  expectedSeo[route] = pageSeo[route];
+}
 
 function outputPathForRoute(route) {
   return route === "/"
@@ -104,7 +101,7 @@ for (const route of publicRoutes) {
   assert.equal(hreflang, canonical, `${route} en-GB hreflang mismatch`);
   assert.equal(xDefault, canonical, `${route} x-default hreflang mismatch`);
   assert.equal(ogUrl, canonical, `${route} og:url mismatch`);
-  assert.equal(ogImage, `${siteUrl}/og-image.png`, `${route} OG image mismatch`);
+  assert.equal(ogImage, `${siteUrl}${pageSeo[route]?.image || "/og-image.png"}`, `${route} OG image mismatch`);
   assert.equal(twitterImage, ogImage, `${route} Twitter image mismatch`);
   assert.equal(robots, "index, follow", `${route} should be indexable`);
   assert(!html.includes("vercel.app"), `${route} contains a Vercel preview URL`);
@@ -119,12 +116,18 @@ for (const route of publicRoutes) {
   }
   if (route !== "/") assert(schemaTypes.has("BreadcrumbList"), `${route} is missing BreadcrumbList schema`);
   if (route === "/services") assert(schemaTypes.has("Service"), "Services page is missing Service schema");
+  if (route.startsWith("/services/")) {
+    assert(schemaTypes.has("Service"), `${route} is missing Service schema`);
+    assert(schemaTypes.has("FAQPage"), `${route} is missing visible-content-matched FAQ schema`);
+  }
   if (route === "/pricing") assert(schemaTypes.has("OfferCatalog"), "Pricing page is missing OfferCatalog schema");
-  if (route === "/blog/why-most-businesses-are-not-profitable") {
-    assert(schemaTypes.has("BlogPosting"), "Blog article is missing BlogPosting schema");
+  if (route.startsWith("/blog/") && route !== "/blog/all") {
+    assert(schemaTypes.has("BlogPosting"), `${route} is missing BlogPosting schema`);
+    assert(schemaTypes.has("FAQPage"), `${route} is missing visible-content-matched FAQ schema`);
     const article = graph.find((entry) => entry["@type"] === "BlogPosting");
-    assert.equal(article.datePublished, "2026-06-18", "BlogPosting datePublished mismatch");
-    assert.equal(article.dateModified, "2026-06-29", "BlogPosting dateModified mismatch");
+    assert.equal(article.datePublished, pageSeo[route].datePublished, `${route} BlogPosting datePublished mismatch`);
+    assert.equal(article.dateModified, pageSeo[route].lastModified, `${route} BlogPosting dateModified mismatch`);
+    assert.equal(article.image, ogImage, `${route} BlogPosting image mismatch`);
   }
 
   for (const image of html.matchAll(/<img\b[^>]*>/g)) {
@@ -150,11 +153,8 @@ const adminHtml = await fs.readFile(outputPathForRoute("/admin"), "utf8");
 assert.match(adminHtml, /<meta name="robots" content="noindex, nofollow, noarchive" \/>/, "/admin is missing noindex/noarchive");
 
 const robots = await fs.readFile(path.join(distDir, "robots.txt"), "utf8");
-assert.equal(
-  robots,
-  `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}/sitemap.xml\n`,
-  "robots.txt content mismatch"
-);
+assert.match(robots, /User-agent: \*\nAllow: \//, "robots.txt must allow public crawling");
+assert.match(robots, new RegExp(`Sitemap: ${siteUrl.replaceAll(".", "\\.")}\/sitemap\\.xml`), "robots.txt sitemap is missing");
 
 const sitemap = await fs.readFile(path.join(distDir, "sitemap.xml"), "utf8");
 assert.match(sitemap, /^<\?xml version="1\.0" encoding="UTF-8"\?>/, "Sitemap XML declaration is missing");

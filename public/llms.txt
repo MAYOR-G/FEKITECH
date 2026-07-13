@@ -11,6 +11,20 @@ Fekitech is a business transformation company that helps business owners build o
 - [Blog](https://fekitech.co.uk/blog): Practical insights on business transformation, operations, profitability, and customer growth.
 - [Contact](https://fekitech.co.uk/contact): Contact Fekitech for business transformation support and expert advisory.
 
+## Services
+- [Business Structure Design](https://fekitech.co.uk/services/business-structure-design): Define roles, responsibilities, workflows, ownership, and decision rhythms.
+- [Digital Transformation](https://fekitech.co.uk/services/digital-transformation): Implement practical digital systems that reduce manual work.
+- [Business Intelligence Architecture](https://fekitech.co.uk/services/business-intelligence-architecture): Design reporting systems, dashboards, and performance signals.
+- [Process Optimisation and Automation](https://fekitech.co.uk/services/process-optimisation): Map, simplify, and automate repeated workflows.
+- [Customer Retention Systems](https://fekitech.co.uk/services/customer-retention-systems): Improve follow-up, communication, and customer experience.
+- [Profitability Improvement](https://fekitech.co.uk/services/profitability-improvement): Identify operational gaps, revenue leakage, and cost waste.
+- [Company Customised AI Agents](https://fekitech.co.uk/services/ai-agents): Build AI agents tailored to your business.
+- [Workflow Automations](https://fekitech.co.uk/services/workflow-automations): Design and implement automation systems.
+- [Training & Development](https://fekitech.co.uk/services/training-development): Training programs to improve staff performance.
+- [Software Development](https://fekitech.co.uk/services/software-development): Custom software and mobile/web applications.
+- [Startup Mentorship](https://fekitech.co.uk/services/startup-mentorship): Guide startups with strategy and business growth support.
+- [Career Development](https://fekitech.co.uk/services/career-development): Go from CV to job offer with a complete career system.
+
 ## Optional: Key facts
 - Fekitech combines custom software, intelligent automation, and expert technology consultancy.
 - Fekitech improves customer journeys with better follow-up, response systems, and retention processes.

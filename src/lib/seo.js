@@ -1,5 +1,6 @@
 import { absoluteUrl, getCanonicalUrl, getSeo, pageSeo, prerenderRoutes, siteConfig, sitemapRoutes } from "./site.js";
 import { getBlogPost } from "../blogPosts.js";
+import { getServicePage } from "../serviceData.js";
 
 export { sitemapRoutes } from "./site.js";
 export { prerenderRoutes } from "./site.js";
@@ -75,11 +76,27 @@ function getBreadcrumbItems(pathname) {
     "/services": "Services",
     "/pricing": "Pricing",
     "/blog": "Blog",
-    "/contact": "Contact",
-    "/blog/why-most-businesses-are-not-profitable": "Why Most Businesses Are Not Profitable",
-    "/blog/how-much-does-a-business-website-cost-uk": "Business Website Cost UK",
-    "/blog/website-automation-small-businesses": "Website Automation for Small Businesses"
+    "/blog/all": "All articles",
+    "/contact": "Contact"
   };
+
+  const service = getServicePage(pathname);
+  if (service) {
+    return [
+      { name: "Home", item: absoluteUrl("/") },
+      { name: "Services", item: absoluteUrl("/services") },
+      { name: service.title, item: getCanonicalUrl(pathname) }
+    ];
+  }
+
+  const blogPost = getBlogPost(pathname);
+  if (blogPost) {
+    return [
+      { name: "Home", item: absoluteUrl("/") },
+      { name: "Blog", item: absoluteUrl("/blog") },
+      { name: blogPost.title, item: getCanonicalUrl(pathname) }
+    ];
+  }
 
   if (!labels[pathname]) {
     return [];
@@ -207,6 +224,30 @@ export function getStructuredData(pathname = "/") {
     );
   }
 
+  const service = getServicePage(pathname);
+  if (service) {
+    graph.push({
+      "@type": "Service",
+      "@id": `${canonical}#service`,
+      name: service.title,
+      description: service.heroSummary,
+      serviceType: service.title,
+      provider: { "@id": professionalServiceId },
+      areaServed: { "@type": "Country", name: "United Kingdom" },
+      url: canonical,
+      mainEntityOfPage: { "@id": `${canonical}#webpage` }
+    });
+    graph.push({
+      "@type": "FAQPage",
+      "@id": `${canonical}#faq`,
+      mainEntity: service.faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: { "@type": "Answer", text: faq.answer }
+      }))
+    });
+  }
+
   if (pathname === "/pricing") {
     graph.push({
       "@type": "OfferCatalog",
@@ -249,7 +290,7 @@ export function getStructuredData(pathname = "/") {
       },
       isPartOf: { "@id": websiteId },
       inLanguage: "en-GB",
-      image: absoluteUrl(siteConfig.ogImage),
+      image: absoluteUrl(blogPost.featuredImage || siteConfig.ogImage),
       articleSection: blogPost.category || "Business transformation",
       datePublished: seo.datePublished,
       dateModified: seo.lastModified,
@@ -294,7 +335,11 @@ export function getStructuredData(pathname = "/") {
 export function getHeadTags(pathname = "/") {
   const seo = getSeo(pathname);
   const canonical = getCanonicalUrl(pathname);
-  const image = absoluteUrl(siteConfig.ogImage);
+  const image = absoluteUrl(seo.image || siteConfig.ogImage);
+  const imageAlt = seo.imageAlt || siteConfig.ogImageAlt;
+  const imageType = seo.imageType || "image/png";
+  const imageWidth = String(seo.imageWidth || 1200);
+  const imageHeight = String(seo.imageHeight || 630);
   const structuredData = getStructuredData(pathname);
   const robots = pathname === "/admin" ? "noindex, nofollow, noarchive" : "index, follow";
   const keywords = compact([...(siteConfig.keywords || []), ...(seo.keywords || [])]).join(", ");
@@ -314,15 +359,15 @@ export function getHeadTags(pathname = "/") {
     `<meta property="og:description" content="${escapeHtml(seo.description)}" />`,
     `<meta property="og:url" content="${escapeHtml(canonical)}" />`,
     `<meta property="og:image" content="${escapeHtml(image)}" />`,
-    `<meta property="og:image:type" content="image/png" />`,
-    `<meta property="og:image:width" content="1200" />`,
-    `<meta property="og:image:height" content="630" />`,
-    `<meta property="og:image:alt" content="${escapeHtml(siteConfig.ogImageAlt)}" />`,
+    `<meta property="og:image:type" content="${escapeHtml(imageType)}" />`,
+    `<meta property="og:image:width" content="${escapeHtml(imageWidth)}" />`,
+    `<meta property="og:image:height" content="${escapeHtml(imageHeight)}" />`,
+    `<meta property="og:image:alt" content="${escapeHtml(imageAlt)}" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
     `<meta name="twitter:title" content="${escapeHtml(seo.title)}" />`,
     `<meta name="twitter:description" content="${escapeHtml(seo.description)}" />`,
     `<meta name="twitter:image" content="${escapeHtml(image)}" />`,
-    `<meta name="twitter:image:alt" content="${escapeHtml(siteConfig.ogImageAlt)}" />`,
+    `<meta name="twitter:image:alt" content="${escapeHtml(imageAlt)}" />`,
     ...(pathname === "/"
       ? [
           '<link rel="preload" as="image" href="/outcome-business-success.webp" fetchpriority="high" />',
@@ -337,7 +382,11 @@ export function getHeadTags(pathname = "/") {
 export function applySeo(pathname = "/") {
   const seo = getSeo(pathname);
   const canonical = getCanonicalUrl(pathname);
-  const image = absoluteUrl(siteConfig.ogImage);
+  const image = absoluteUrl(seo.image || siteConfig.ogImage);
+  const imageAlt = seo.imageAlt || siteConfig.ogImageAlt;
+  const imageType = seo.imageType || "image/png";
+  const imageWidth = String(seo.imageWidth || 1200);
+  const imageHeight = String(seo.imageHeight || 630);
   const robots = pathname === "/admin" ? "noindex, nofollow, noarchive" : "index, follow";
   const keywords = compact([...(siteConfig.keywords || []), ...(seo.keywords || [])]).join(", ");
 
@@ -355,15 +404,15 @@ export function applySeo(pathname = "/") {
   setMetaContent('meta[property="og:description"]', { property: "og:description", content: seo.description });
   setMetaContent('meta[property="og:url"]', { property: "og:url", content: canonical });
   setMetaContent('meta[property="og:image"]', { property: "og:image", content: image });
-  setMetaContent('meta[property="og:image:type"]', { property: "og:image:type", content: "image/png" });
-  setMetaContent('meta[property="og:image:width"]', { property: "og:image:width", content: "1200" });
-  setMetaContent('meta[property="og:image:height"]', { property: "og:image:height", content: "630" });
-  setMetaContent('meta[property="og:image:alt"]', { property: "og:image:alt", content: siteConfig.ogImageAlt });
+  setMetaContent('meta[property="og:image:type"]', { property: "og:image:type", content: imageType });
+  setMetaContent('meta[property="og:image:width"]', { property: "og:image:width", content: imageWidth });
+  setMetaContent('meta[property="og:image:height"]', { property: "og:image:height", content: imageHeight });
+  setMetaContent('meta[property="og:image:alt"]', { property: "og:image:alt", content: imageAlt });
   setMetaContent('meta[name="twitter:card"]', { name: "twitter:card", content: "summary_large_image" });
   setMetaContent('meta[name="twitter:title"]', { name: "twitter:title", content: seo.title });
   setMetaContent('meta[name="twitter:description"]', { name: "twitter:description", content: seo.description });
   setMetaContent('meta[name="twitter:image"]', { name: "twitter:image", content: image });
-  setMetaContent('meta[name="twitter:image:alt"]', { name: "twitter:image:alt", content: siteConfig.ogImageAlt });
+  setMetaContent('meta[name="twitter:image:alt"]', { name: "twitter:image:alt", content: imageAlt });
 
   let jsonLd = document.head.querySelector('script[type="application/ld+json"][data-seo-jsonld]');
   if (!jsonLd) {
@@ -378,10 +427,10 @@ export function applySeo(pathname = "/") {
 export function getSitemapXml() {
   const entries = sitemapRoutes
     .map((route) => {
-      const seo = pageSeo[route];
+    const seo = pageSeo[route] || getSeo(route);
       return `  <url>
     <loc>${escapeHtml(absoluteUrl(route))}</loc>
-    <lastmod>${seo.lastModified}</lastmod>
+    <lastmod>${seo.lastModified || "2026-07-13"}</lastmod>
     <priority>${seo?.priority ?? 0.7}</priority>
   </url>`;
     })

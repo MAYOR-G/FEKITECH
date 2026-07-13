@@ -77,6 +77,10 @@
       "destination": "/services/index.html"
     },
     {
+      "source": "/services/:slug",
+      "destination": "/services/:slug/index.html"
+    },
+    {
       "source": "/pricing",
       "destination": "/pricing/index.html"
     },
