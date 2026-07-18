@@ -3,6 +3,37 @@ import { getRelatedServices } from "../serviceData.js";
 import ServiceFaq from "./ServiceFaq.jsx";
 import ServiceVisual from "./ServiceVisual.jsx";
 
+const guideLinksByService = {
+  "business-intelligence-architecture": [
+    ["Business intelligence and KPI dashboards", "/blog/business-intelligence-small-business-kpi-dashboard"],
+    ["KPI dashboard software for small businesses", "/blog/kpi-dashboard-software-small-business"]
+  ],
+  "company-customised-ai-agents": [
+    ["AI agents for small businesses", "/blog/ai-agents-for-small-business"],
+    ["AI agents versus workflow automation", "/blog/ai-agent-vs-workflow-automation-small-business"]
+  ],
+  "workflow-automations": [
+    ["Website automation services explained", "/blog/website-automation-small-businesses"],
+    ["AI agents versus workflow automation", "/blog/ai-agent-vs-workflow-automation-small-business"]
+  ],
+  "process-optimisation-and-automation": [
+    ["AI agents versus workflow automation", "/blog/ai-agent-vs-workflow-automation-small-business"],
+    ["Website automation services explained", "/blog/website-automation-small-businesses"]
+  ],
+  "profitability-improvement": [
+    ["Why most businesses are not profitable", "/blog/why-most-businesses-are-not-profitable"],
+    ["Business intelligence and KPI dashboards", "/blog/business-intelligence-small-business-kpi-dashboard"]
+  ],
+  "customer-retention-systems": [
+    ["Customer retention strategy for small businesses", "/blog/customer-retention-strategy-small-business"],
+    ["Why most businesses are not profitable", "/blog/why-most-businesses-are-not-profitable"]
+  ],
+  "digital-transformation": [
+    ["Website automation services explained", "/blog/website-automation-small-businesses"],
+    ["AI agents versus workflow automation", "/blog/ai-agent-vs-workflow-automation-small-business"]
+  ]
+};
+
 const SectionHeading = ({ eyebrow, title, text }) => (
   <div className="service-section-heading">
     <span>{eyebrow}</span>
@@ -13,6 +44,7 @@ const SectionHeading = ({ eyebrow, title, text }) => (
 
 export default function ServicePage({ service }) {
   const related = getRelatedServices(service);
+  const relatedGuides = guideLinksByService[service.slug] || [];
   const variation = (servicePagesIndex(service) % 3) + 1;
 
   return (
@@ -166,6 +198,23 @@ export default function ServicePage({ service }) {
           <ServiceFaq items={service.faqs} serviceTitle={service.title} />
         </div>
       </section>
+
+      {relatedGuides.length > 0 && (
+        <aside className="service-section service-guides" aria-labelledby="service-guides-title">
+          <div className="service-shell service-guides__inner">
+            <div>
+              <span className="service-section-index">Supporting guides</span>
+              <h2 id="service-guides-title">Read the decision context</h2>
+              <p>Use these guides to compare options and prepare a more focused discovery conversation.</p>
+            </div>
+            <div className="service-guides__links">
+              {relatedGuides.map(([label, href]) => (
+                <a href={href} key={href}>{label}<ArrowRight size={17} /></a>
+              ))}
+            </div>
+          </div>
+        </aside>
+      )}
 
       <aside className="service-section service-related" aria-labelledby="related-services-title">
         <div className="service-shell">

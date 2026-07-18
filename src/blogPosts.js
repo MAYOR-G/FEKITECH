@@ -12,7 +12,7 @@ const existingBlogPosts = [
       "Many businesses work hard but still struggle with profit because the systems behind sales, operations, customers, and reporting are unclear.",
     readTime: "7 min read",
     datePublished: "2026-06-18",
-    lastModified: "2026-07-06",
+    lastModified: "2026-07-18",
     keywords: ["business profitability", "business systems", "customer retention", "business transformation"],
     featuredImage: "/outcome-higher-profitability.webp",
     imageAlt: "Business leadership team reviewing profitability and performance information",
@@ -49,6 +49,10 @@ const existingBlogPosts = [
           "Manual admin that takes time away from higher-value work",
           "Poor visibility over costs, margins, and workload",
           "Disconnected tools that make reporting harder"
+        ],
+        links: [
+          { href: "/services", label: "business transformation services", context: "Review the connected" },
+          { href: "/blog/business-intelligence-small-business-kpi-dashboard", label: "small-business KPI and business intelligence guide", context: "Make profit drivers visible with a" }
         ]
       },
       {
@@ -66,7 +70,11 @@ const existingBlogPosts = [
             ["No dashboard", "Performance data is scattered", "Decisions rely on guesswork"],
             ["Owner does everything", "The business depends on one person", "Growth becomes stressful"]
           ]
-        }
+        },
+        links: [
+          { href: "/blog/customer-retention-strategy-small-business", label: "customer retention strategy", context: "Strengthen the follow-up behind a" },
+          { href: "/services/workflow-automations", label: "workflow automation", context: "Reduce repeated admin through proportionate" }
+        ]
       },
       {
         heading: "How structure improves profitability",
@@ -80,6 +88,10 @@ const existingBlogPosts = [
           "Dashboards make performance easier to understand",
           "Automation reduces repetitive admin",
           "Customer follow-up becomes more consistent"
+        ],
+        links: [
+          { href: "/blog/kpi-dashboard-software-small-business", label: "spreadsheet, software and custom KPI dashboard options", context: "Compare" },
+          { href: "/pricing", label: "published software and transformation packages", context: "When the scope is understood, review Fekitech's" }
         ]
       },
       {
@@ -87,6 +99,10 @@ const existingBlogPosts = [
         body: [
           "Digital transformation is not about buying random tools. For a growing business, it means redesigning outdated processes and using practical systems that support how the business actually works.",
           "That may include better forms, customer follow-up, dashboards, workflow automation, quote and invoice systems, AI agents, or custom software. The right setup depends on the business problem, not the trend."
+        ],
+        links: [
+          { href: "/blog/ai-agent-vs-workflow-automation-small-business", label: "whether an AI agent or conventional automation fits the task", context: "Decide" },
+          { href: "/services/process-optimisation-and-automation", label: "process optimisation and automation", context: "Simplify the workflow first through" }
         ]
       },
       {
@@ -135,7 +151,7 @@ const existingBlogPosts = [
       "A practical guide for local businesses comparing simple websites, growth-focused websites, SEO, automation, and conversion features.",
     readTime: "8 min read",
     datePublished: "2026-07-06",
-    lastModified: "2026-07-06",
+    lastModified: "2026-07-18",
     keywords: ["business website cost UK", "website development", "local business website", "website automation"],
     featuredImage: "/outcome-business-success.webp",
     imageAlt: "Business team reviewing a modern website and growth plan in a meeting",
@@ -269,20 +285,20 @@ const existingBlogPosts = [
       "Learn how forms, booking flows, email responses, AI chatbots, analytics, and workflow handoffs can make a website work harder for your business.",
     readTime: "8 min read",
     datePublished: "2026-07-06",
-    lastModified: "2026-07-06",
+    lastModified: "2026-07-18",
     keywords: ["website automation", "small business automation", "lead capture", "AI chatbots"],
     featuredImage: "/outcome-reduce-stress.webp",
     imageAlt: "Small business team planning website automation and connected workflows",
     imageWidth: 1376,
     imageHeight: 768,
     relatedService: { title: "Workflow Automations", href: "/services/workflow-automations" },
-    relatedSlugs: ["/blog/ai-agents-for-small-business", "/blog/how-much-does-a-business-website-cost-uk"],
+    relatedSlugs: ["/blog/ai-agent-vs-workflow-automation-small-business", "/blog/ai-agents-for-small-business"],
     h1: "Website Automation for Small Businesses: How to Turn Your Website Into a System That Saves Time and Captures Leads",
     lead:
       "Website automation means using your website to capture information, guide enquiries, trigger follow-up, and connect work to the right system without relying on manual admin every time.",
     intro: [
       "Many small business websites sit online like digital brochures. They explain the business, but they do not reduce workload or improve the way enquiries are handled.",
-      "A better website can collect the right details, qualify leads, answer common questions, route enquiries, trigger email replies, connect to internal workflows, and help the owner see what is working.",
+      "Website automation services normally cover the workflow around the site as well as the page itself: collecting the right details, qualifying and routing leads, handling booking or quotation requests, creating CRM records, sending confirmations and reporting whether follow-up happened.",
       "This guide explains practical website automation for local businesses and how to avoid turning a simple website into a complicated mess."
     ],
     toc: [
@@ -298,7 +314,12 @@ const existingBlogPosts = [
         heading: "What is website automation?",
         body: [
           "Website automation is the use of forms, workflows, integrations, AI tools, notifications, analytics, and follow-up systems to reduce manual work after someone visits your website.",
-          "It does not mean removing people from the business. It means removing repeated admin so people can respond faster, make better decisions, and focus on valuable work."
+          "It does not mean removing people from the business. It means removing repeated admin so people can respond faster, make better decisions, and focus on valuable work.",
+          "A complete service should also define ownership and exceptions. The business needs to know who receives an enquiry, what happens when an integration fails, which requests require human judgement and how the team can see whether the process completed."
+        ],
+        links: [
+          { href: "/services/workflow-automations", label: "workflow automation services", context: "Connect the website to dependable" },
+          { href: "/services/digital-transformation", label: "digital transformation", context: "Plan the wider systems and adoption through" }
         ]
       },
       {
@@ -328,10 +349,15 @@ const existingBlogPosts = [
             ["Booking flows", "Lets customers request or reserve time", "Saves admin and speeds up action"],
             ["Email responses", "Confirms the enquiry and sets expectations", "Improves customer experience"],
             ["CRM handoff", "Sends lead details into a tracking system", "Keeps follow-up organised"],
+            ["Quotation requests", "Collects scope and prepares a structured handoff", "Makes estimates easier to review consistently"],
             ["AI chatbot", "Answers common questions and captures intent", "Supports visitors outside business hours"],
-            ["Analytics", "Shows pages, sources, and conversions", "Helps owners improve decisions"]
+            ["Reporting", "Shows source, status, response and outcome", "Reveals where leads or handoffs are being lost"]
           ]
-        }
+        },
+        links: [
+          { href: "/services/software-development-apps", label: "custom software and app development", context: "Use tailored interfaces only where the workflow justifies" },
+          { href: "/blog/ai-agent-vs-workflow-automation-small-business", label: "AI agents with conventional workflow automation", context: "Compare" }
+        ]
       },
       {
         heading: "When a small business needs website automation",
@@ -346,6 +372,26 @@ const existingBlogPosts = [
           "You cannot tell which services generate leads",
           "You want a chatbot or AI agent to answer common questions",
           "You need better reporting on website performance"
+        ]
+      },
+      {
+        id: "selection-checklist",
+        heading: "A website automation service selection checklist",
+        body: [
+          "Ask a supplier to map one real enquiry from the visitor's first action to the final business record. The explanation should cover required fields, consent or privacy information, system access, confirmations, ownership, exceptions and reporting. A list of integrations is not the same as a working process.",
+          "Test failure as carefully as success. What happens when the CRM is unavailable, an email bounces, a visitor enters incomplete information or a booking changes? The business needs a visible queue or alert and a person who can recover the item without losing the customer context.",
+          "Measure quality as well as volume. Useful evidence includes complete enquiries, response time, qualified progression, failed handoffs and outcomes by source. Avoid collecting personal information simply because a form or tool makes it possible."
+        ],
+        bullets: [
+          "A named owner for the end-to-end customer and internal workflow",
+          "Clear data fields, validation and a proportionate privacy purpose",
+          "Documented integrations, permissions and credential ownership",
+          "Confirmation, error handling and a manual fallback route",
+          "Human review for quotations, unusual requests and sensitive decisions",
+          "Reporting on source, status, response, failure and outcome"
+        ],
+        links: [
+          { href: "/services/process-optimisation-and-automation", label: "process optimisation before implementation", context: "Remove unnecessary steps through" }
         ]
       },
       {

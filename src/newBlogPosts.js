@@ -1,5 +1,421 @@
 export const newBlogPosts = [
   {
+    slug: "/blog/kpi-dashboard-software-small-business",
+    category: "Business Intelligence",
+    title: "KPI Dashboard Software for Small Businesses: Buy, Build or Use Spreadsheets?",
+    seoTitle: "KPI Dashboard Software for Small Business | Fekitech",
+    metaDescription:
+      "Compare spreadsheets, off-the-shelf KPI software and custom dashboards to choose a reporting approach that fits your small business.",
+    excerpt:
+      "A practical decision guide for choosing between spreadsheets, ready-made dashboard software and a custom KPI reporting system.",
+    readTime: "12 min read",
+    datePublished: "2026-07-18",
+    lastModified: "2026-07-18",
+    primaryKeyword: "KPI dashboard software for small business",
+    keywords: [
+      "KPI dashboard software for small business",
+      "best KPI software for small business",
+      "small business dashboard software",
+      "KPI dashboard development UK",
+      "build vs buy KPI dashboard"
+    ],
+    featuredImage: "/kpi-dashboard-software-small-business.webp",
+    imageAlt: "Small business leadership team comparing a spreadsheet, dashboard software and custom KPI reporting architecture",
+    imageWidth: 1376,
+    imageHeight: 768,
+    h1: "KPI Dashboard Software for Small Businesses: Buy, Build or Use Spreadsheets?",
+    lead:
+      "The best KPI dashboard software for a small business is the simplest option that produces trusted numbers, supports the decisions people actually make and can be maintained without heroic manual work.",
+    intro: [
+      "Use a well-controlled spreadsheet when the data is limited, the reporting cycle is manageable and one accountable person can keep definitions consistent. Choose off-the-shelf dashboard software when standard connectors and reporting patterns cover most requirements. Consider a custom dashboard when the business must combine several systems, apply company-specific calculations, control access carefully or embed reporting into a wider operating process.",
+      "The product is only one part of the decision. A polished chart cannot correct duplicate records, unclear definitions or a workflow in which nobody owns the response. Start with the management questions and data responsibilities, then choose the technology.",
+      "This guide provides a buy-versus-build framework for UK small and growing businesses. It does not rank vendors or assume that custom development is automatically better."
+    ],
+    sections: [
+      {
+        id: "what-dashboard-software-does",
+        heading: "What KPI dashboard software actually does",
+        body: [
+          "KPI dashboard software collects or receives business data, applies agreed calculation rules and presents measures in a format that supports review and action. The useful output is not the chart itself. It is a dependable connection between an operational event, a shared definition and a management decision.",
+          "For example, a service business may need to see qualified enquiries, quote conversion, delivery backlog, gross margin and overdue invoices together. Each measure needs a source, a calculation, an owner and an expected response. The dashboard may update automatically, but people still need to resolve exceptions and decide what to do next.",
+          "Small business dashboard software can range from a spreadsheet with protected formulas to a hosted reporting product or a tailored data model and interface. Those options solve different levels of complexity, so comparing feature lists before defining the reporting job usually creates noise."
+        ],
+        links: [
+          { href: "/blog/business-intelligence-small-business-kpi-dashboard", label: "how a small business KPI dashboard supports decisions", context: "Begin with the wider guide to" },
+          { href: "/services/business-intelligence-architecture", label: "business intelligence architecture", context: "For connected reporting and governance, review Fekitech's" }
+        ]
+      },
+      {
+        id: "spreadsheets",
+        heading: "When spreadsheets are still sufficient",
+        body: [
+          "A spreadsheet remains a sensible reporting tool when the reporting scope is small and stable. It is familiar, flexible and inexpensive to change. A business with one accounting system, a modest number of records and a monthly leadership review may not need another platform.",
+          "The spreadsheet should still be treated as an operating asset. Protect calculation cells, separate raw data from presentation, record definitions, assign an owner and keep a controlled source file. If people email several altered copies or overwrite formulas without review, the problem is governance rather than spreadsheet technology.",
+          "Stay with spreadsheets while the update effort is proportionate and decision-makers trust the result. Move on when reconciliation consumes the review meeting, access becomes difficult to control, or the same data must be prepared repeatedly for several teams."
+        ],
+        bullets: [
+          "A small number of stable data sources and measures",
+          "One clear owner for preparation and quality checks",
+          "A manageable weekly or monthly update cycle",
+          "Limited need for role-based access or live operational alerts",
+          "Documented formulas and a controlled master version"
+        ]
+      },
+      {
+        id: "off-the-shelf",
+        heading: "When off-the-shelf dashboard software is appropriate",
+        body: [
+          "Ready-made software is a good fit when the business uses common platforms and the required measures follow standard sales, marketing, finance or service patterns. Existing connectors can reduce setup effort, and managed hosting may remove much of the infrastructure responsibility.",
+          "The important question is whether the standard model matches how the business defines its work. Two products may both offer a revenue chart while treating refunds, tax, deferred income or project completion differently. Test calculations against known records before relying on a template.",
+          "Also review what happens outside the dashboard. Can a manager investigate the underlying record? Can access be restricted by team or client? Can people record the action agreed in a meeting? If the product produces attractive reports but creates a separate manual follow-up process, it has solved only part of the problem."
+        ],
+        bullets: [
+          "Standard connectors cover the main source systems",
+          "The product's calculations can be aligned with agreed definitions",
+          "User permissions match the business's teams and responsibilities",
+          "Export, backup and exit arrangements are acceptable",
+          "The full subscription and implementation cost is sustainable"
+        ]
+      },
+      {
+        id: "custom-dashboard",
+        heading: "When a small business needs a custom KPI dashboard",
+        body: [
+          "A custom dashboard becomes reasonable when the reporting logic is specific to the business or when data must be combined across systems that do not fit a standard template. Examples include joining enquiries to quotes and completed work, calculating service-level measures from several workflow stages, or applying contract-specific permissions for clients and teams.",
+          "Custom does not have to mean building every technical component from scratch. A practical UK KPI dashboard development project may combine an established database, integration tools and reporting platform with a tailored data model, interface and operating workflow. The value is in the fit, controls and maintainability, not novelty.",
+          "The business should be ready to own the result. Someone must approve definitions, source access, quality rules and change requests. Without that ownership, custom development can preserve confusion in a more expensive form."
+        ],
+        links: [
+          { href: "/services/digital-transformation", label: "a wider digital transformation plan", context: "Connect reporting to systems and adoption through" },
+          { href: "/contact", label: "book a free business audit", context: "If the reporting problem is unclear, you can" }
+        ]
+      },
+      {
+        id: "comparison",
+        heading: "Spreadsheets vs dashboard software vs custom development",
+        body: [
+          "Use the comparison as a starting point, then test it against the decisions, data and people in your business. The cheapest licence is not always the lowest-cost option if staff spend days correcting exports. Equally, a custom build is hard to justify when a controlled spreadsheet already answers the important questions."
+        ],
+        table: {
+          headers: ["Factor", "Controlled spreadsheet", "Off-the-shelf software", "Custom dashboard"],
+          rows: [
+            ["Best fit", "Small, stable reporting scope", "Common systems and standard measures", "Specific logic, integrations or workflows"],
+            ["Setup effort", "Low to moderate", "Moderate configuration", "Higher discovery and delivery effort"],
+            ["Flexibility", "High but manually governed", "Limited by product model", "Designed around agreed requirements"],
+            ["Automation", "Usually partial", "Strong for supported connectors", "Can cover tailored data movement and actions"],
+            ["Permissions", "Basic to moderate", "Product-dependent", "Can be designed for detailed roles"],
+            ["Maintenance", "Owner checks formulas and imports", "Supplier plus internal administrator", "Named product, data and technical owners"],
+            ["Main risk", "Version and formula drift", "Poor fit or supplier dependence", "Overbuilding unclear requirements"]
+          ]
+        }
+      },
+      {
+        id: "selection-criteria",
+        heading: "Essential KPI software selection criteria",
+        body: [
+          "Evaluate the whole reporting system, not just visual design. Ask a supplier or developer to demonstrate how one important measure travels from source record to calculation, display, investigation and follow-up. That path reveals more than a gallery of sample dashboards.",
+          "Document the selection decisions. Record which integrations are native, which require custom work, how refresh failures are detected, where definitions live, who can change them and how data can be exported. If personal information appears in reporting, define a clear purpose, minimise what is displayed and restrict access appropriately.",
+          "Total cost includes internal preparation, data cleaning, implementation, training, administration and future changes as well as the licence or build fee. A useful comparison uses a realistic ownership period and states the assumptions behind each option."
+        ],
+        bullets: [
+          "Data integrations and what each connector actually transfers",
+          "Data quality checks, duplicate handling and failure alerts",
+          "Shared KPI definitions, calculation rules and accountable owners",
+          "Role-based permissions and separation between teams or clients",
+          "Update frequency matched to the decisions being made",
+          "Useful mobile access rather than a compressed desktop screen",
+          "A reporting workflow for investigation, action and review",
+          "Data ownership, export, backup and supplier-exit arrangements",
+          "Total cost across setup, licences, support and internal time"
+        ],
+        sources: [
+          { href: "https://learn.microsoft.com/en-us/power-bi/connect-data/service-datasets-understand", label: "Microsoft guidance on semantic models and reporting data" },
+          { href: "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/data-protection-principles/a-guide-to-the-data-protection-principles/", label: "ICO guide to UK data-protection principles" }
+        ]
+      },
+      {
+        id: "mistakes",
+        heading: "Common dashboard purchasing mistakes",
+        body: [
+          "The most common mistake is buying presentation before agreeing meaning. Teams then debate whether the chart is correct because sales, finance and operations use different definitions. Resolve the decision and definition before selecting the display.",
+          "Another mistake is treating every available field as a KPI. A crowded screen increases maintenance and hides the measures that should prompt action. Keep supporting detail available for investigation, but make the main view deliberately selective.",
+          "Finally, avoid assuming that an automatic refresh guarantees current or complete data. Connections fail, source fields change and staff enter records inconsistently. The system needs quality checks, visible refresh status and an owner who responds when something breaks."
+        ],
+        bullets: [
+          "Choosing from screenshots without testing real business data",
+          "Copying vendor templates without agreeing internal definitions",
+          "Ignoring data-cleaning and identifier problems",
+          "Giving broad access because permissions are difficult to configure",
+          "Building too many measures before leaders adopt a review rhythm",
+          "Failing to budget for ownership, training and future changes"
+        ]
+      },
+      {
+        id: "developer-questions",
+        heading: "Questions to ask a KPI dashboard developer",
+        body: [
+          "A capable dashboard developer should ask about decisions and operating responsibilities before discussing chart types. They should be able to explain the proposed data flow in plain language, identify assumptions and separate confirmed requirements from future possibilities.",
+          "Ask who will own credentials, infrastructure, source code, definitions and documentation. Confirm how access is removed when staff leave, how changes are tested and how failed refreshes are noticed. Request a staged plan that proves the most important data path before expanding the scope.",
+          "For KPI dashboard development in the UK, also clarify where suppliers process and store information, which subcontractors are involved and how personal or commercially sensitive data is protected. The appropriate answer depends on the data and risk; a generic promise of being secure is not enough."
+        ],
+        bullets: [
+          "Which management decisions will the first release support?",
+          "How will you validate calculations against known source records?",
+          "Which integrations are standard and which require custom work?",
+          "What permissions, logging, backup and recovery controls are included?",
+          "What documentation and training will the business receive?",
+          "How are changes scoped, tested, approved and deployed?",
+          "What can the business export if it changes supplier?",
+          "Who maintains the dashboard after launch and at what cost?"
+        ]
+      },
+      {
+        id: "next-steps",
+        heading: "A practical next step for your reporting system",
+        body: [
+          "Choose one recurring decision that is currently slow or uncertain. Write down the question, the people involved, the information they use, the action that follows and the cost of getting it wrong. Then identify the smallest set of measures needed to improve that decision.",
+          "Test the data manually before automating it. A short controlled reporting cycle often exposes definition gaps and source problems quickly. Once the result is trusted, compare the effort of continuing with a spreadsheet against configuring software or commissioning a focused custom release.",
+          "This approach keeps the technology proportional. The best KPI dashboard software for a small business is the option the team can trust, operate and use to make better decisions—not the one with the longest feature list."
+        ],
+        links: [
+          { href: "/services", label: "Fekitech's business transformation services", context: "See how reporting connects with" },
+          { href: "/pricing", label: "Fekitech's published packages", context: "For visible software and transformation pricing, review" }
+        ]
+      }
+    ],
+    faqs: [
+      { question: "What is the best KPI software for a small business?", answer: "The best option is the one that fits the business's data sources, definitions, decisions, permissions and maintenance capacity. A controlled spreadsheet may be sufficient; standard software fits common reporting patterns; a custom dashboard is justified when integrations or calculations are genuinely specific." },
+      { question: "When should a small business stop using spreadsheets for KPIs?", answer: "Consider moving when version control, reconciliation, repeated imports, access management or reporting delays consume too much time or reduce trust. Do not move simply because a dashboard looks more modern; confirm that the new approach will solve the operating problem." },
+      { question: "Is a custom KPI dashboard expensive?", answer: "Cost depends on source systems, data quality, calculations, permissions, interface scope, testing and support. Compare total ownership cost rather than an isolated build fee, and prove one high-value reporting path before commissioning a broad programme." },
+      { question: "How many KPIs should a small-business dashboard contain?", answer: "There is no universal number. Use the smallest group that covers the decisions the view is designed to support, with supporting detail available for investigation. Every headline measure needs a definition, source, owner and expected response." },
+      { question: "Can dashboard software combine accounting, CRM and operational data?", answer: "Yes, where the systems provide suitable access and common identifiers can connect the records. The work still requires clear definitions, quality checks, permissions and failure handling; a connector alone does not guarantee dependable reporting." }
+    ],
+    relatedService: { title: "Business Intelligence Architecture", href: "/services/business-intelligence-architecture" },
+    relatedSlugs: ["/blog/business-intelligence-small-business-kpi-dashboard", "/blog/why-most-businesses-are-not-profitable"],
+    ctaHeading: "Assess the reporting need before choosing the software",
+    cta: "Fekitech can review the decisions, data sources, definitions and reporting workflow with you, then identify whether a controlled spreadsheet, configured platform or custom dashboard is proportionate."
+  },
+  {
+    slug: "/blog/ai-agent-vs-workflow-automation-small-business",
+    category: "Automation",
+    title: "AI Agent vs Workflow Automation: Which Does Your Small Business Need?",
+    seoTitle: "AI Agent vs Workflow Automation for Small Business",
+    metaDescription:
+      "Compare AI agents and workflow automation by predictability, risk, cost and human control to choose the right small-business approach.",
+    excerpt:
+      "A practical comparison of deterministic workflows, AI agents and combined systems, with examples, controls and a first-pilot decision framework.",
+    readTime: "12 min read",
+    datePublished: "2026-07-18",
+    lastModified: "2026-07-18",
+    primaryKeyword: "AI agent vs workflow automation",
+    keywords: [
+      "AI agent vs workflow automation",
+      "AI automation for small business",
+      "workflow automation for small business",
+      "AI agent for small business",
+      "business process automation"
+    ],
+    featuredImage: "/ai-agent-vs-workflow-automation-small-business.webp",
+    imageAlt: "Small business operators comparing a fixed workflow with a supervised AI-assisted decision process",
+    imageWidth: 1376,
+    imageHeight: 768,
+    h1: "AI Agent vs Workflow Automation: Which Does Your Small Business Need?",
+    lead:
+      "Use conventional workflow automation when the rules and expected result are clear. Use an AI agent when the work requires limited interpretation across variable inputs—and only when permissions, evidence, review and fallback are designed around the risk.",
+    intro: [
+      "AI is not automatically better than deterministic automation. A fixed workflow is usually safer and cheaper for repeated steps such as moving approved form data, creating a task or sending a standard confirmation. An AI agent may help when the input varies, several information sources must be consulted or a draft needs context-sensitive preparation.",
+      "Many useful small-business systems combine both. AI can classify or draft inside a narrow boundary; conventional automation can validate required fields, route the result, request approval, write to the correct system and keep an audit trail.",
+      "This guide compares predictability, data, flexibility, risk, human review, maintenance and cost, then gives a decision matrix for selecting a first pilot."
+    ],
+    sections: [
+      {
+        id: "workflow-automation",
+        heading: "What conventional workflow automation is",
+        body: [
+          "Workflow automation applies explicit rules to a defined sequence. A trigger occurs, conditions are checked and approved actions follow. The same valid input should produce the same result, which makes the system easier to test and explain.",
+          "A website form might validate required fields, create a CRM record, assign an owner and send a confirmation email. An invoice workflow might wait for approval, create the document from structured data and notify finance. These are valuable systems even though they do not interpret open-ended requests.",
+          "The main design work is process clarity. The business needs to define triggers, responsibilities, exceptions and recovery steps. Automating an unclear process usually makes the confusion move faster."
+        ],
+        links: [
+          { href: "/services/workflow-automations", label: "workflow automation services", context: "For implementation scope, review Fekitech's" },
+          { href: "/services/process-optimisation-and-automation", label: "process optimisation before automation", context: "See why Fekitech starts with" }
+        ]
+      },
+      {
+        id: "ai-agent",
+        heading: "What an AI agent is",
+        body: [
+          "An AI agent is a software system that works towards a defined outcome by interpreting an input, retrieving approved information, selecting an allowed next step and sometimes using connected tools. Its behaviour is less fixed than a conventional workflow because the model can respond differently to varied language and context.",
+          "For a small business, a narrow agent might categorise enquiries, retrieve relevant policy material, prepare a response draft or summarise a case for review. It should have a specific job description, limited access and a clear point at which a person or deterministic rule takes control.",
+          "An agent is not an autonomous employee and should not be given broad access simply because a demonstration looks capable. Models can misunderstand requests, use incomplete context or produce plausible but incorrect output. The surrounding system must constrain and monitor the work."
+        ],
+        links: [
+          { href: "/blog/ai-agents-for-small-business", label: "practical AI agents for small-business operations", context: "For implementation stages and use cases, read the guide to" },
+          { href: "/services/company-customised-ai-agents", label: "company-customised AI agents", context: "See how Fekitech scopes" }
+        ]
+      },
+      {
+        id: "differences",
+        heading: "AI agent vs workflow automation: the key differences",
+        body: [
+          "The choice is not a contest between old and new technology. It is a decision about how much variation the task contains and how much uncertainty the business can safely manage. A predictable task benefits from predictable automation. A variable task may justify AI when its output can be checked or limited.",
+          "Data requirements also differ. A conventional workflow usually needs structured fields and explicit conditions. An AI agent may work with documents or natural language, but it still needs reliable source material, controlled retrieval and rules about what it may use. More flexibility creates more testing and monitoring work, not less."
+        ],
+        table: {
+          headers: ["Factor", "Workflow automation", "AI agent"],
+          rows: [
+            ["Predictability", "High when rules are complete", "Variable; requires evaluation and controls"],
+            ["Input", "Structured events and fields", "May interpret language, documents or mixed context"],
+            ["Flexibility", "Changes require new rules", "Can handle bounded variation within its job"],
+            ["Risk", "Mostly rule, integration and exception failures", "Adds model error, prompt, retrieval and misuse risks"],
+            ["Human review", "Needed for designed approval points", "Usually essential for sensitive or uncertain output"],
+            ["Maintenance", "Monitor integrations and process changes", "Also evaluate model, instructions, sources and output quality"],
+            ["Cost", "Often lower for stable repeated tasks", "May add model usage, evaluation and oversight cost"]
+          ]
+        }
+      },
+      {
+        id: "ordinary-automation-examples",
+        heading: "Examples where ordinary automation is better",
+        body: [
+          "Choose deterministic automation when the business can state the rule completely and an incorrect interpretation would add no value. A system does not need AI to copy validated contact data, calculate an approved formula, send a known template or escalate an overdue task.",
+          "Fixed workflows are also preferable for irreversible or regulated actions unless a person approves the result. Moving money, changing access, committing contractual terms or deleting records should not depend on an open-ended model decision simply to appear innovative.",
+          "A useful test is to ask whether a competent person would need judgement for each case. If the answer is no and the data is structured, conventional automation is probably the right foundation."
+        ],
+        bullets: [
+          "Sending a confirmation after a valid booking request",
+          "Creating a CRM task when a qualified lead reaches an agreed stage",
+          "Routing an invoice for approval according to a value threshold",
+          "Checking required fields before a record is accepted",
+          "Producing a scheduled report from agreed calculations",
+          "Escalating an overdue item to a named owner"
+        ]
+      },
+      {
+        id: "ai-agent-examples",
+        heading: "Examples where an AI agent may be better",
+        body: [
+          "An agent may be useful when inputs vary enough that writing every rule would be impractical, but the job can still be bounded. It can help prepare work rather than automatically completing it. The person reviewing the result should be able to see the source information and correct the output efficiently.",
+          "For example, an agent might classify a free-text enquiry into a small approved set, draft a response using a controlled knowledge base or summarise several project notes for a manager. The system should show uncertainty, route unusual cases and prevent the model from accessing tools outside the job.",
+          "Do not use AI merely because the source is text. If a simple keyword rule or form redesign produces a dependable result, it may remain the better choice."
+        ],
+        bullets: [
+          "Drafting a response from approved policy and service information",
+          "Summarising a long case before human review",
+          "Classifying varied enquiries with an escalation category",
+          "Preparing a comparison from defined internal sources",
+          "Extracting candidate fields from documents for validation",
+          "Suggesting next actions while leaving approval with the owner"
+        ]
+      },
+      {
+        id: "combined-systems",
+        heading: "Where AI agents and workflow automation work together",
+        body: [
+          "The strongest pattern is often a controlled handoff. A deterministic workflow collects complete information and checks permission. The agent performs one narrow interpretation or drafting task. Another workflow validates the output format, presents evidence, requests approval and records the final action.",
+          "Consider a website quotation enquiry. A form can collect the service, timescale and contact details. An agent can summarise the free-text requirement and flag missing context. A person can approve the qualification, after which a fixed workflow creates the opportunity, assigns follow-up and sends the approved response.",
+          "This separation keeps AI away from tasks that do not need it and makes responsibility visible. It also provides a fallback: if the model or source service is unavailable, the deterministic process can route the item to a person rather than silently losing it."
+        ],
+        links: [
+          { href: "/blog/website-automation-small-businesses", label: "website automation services and handoffs", context: "See practical examples of" },
+          { href: "/services/software-development-apps", label: "custom software and app development", context: "For a tailored controlled interface, review" }
+        ]
+      },
+      {
+        id: "decision-matrix",
+        heading: "A small-business decision matrix",
+        body: [
+          "Score the task before selecting a tool. Begin with consequence: what happens if the output is wrong, delayed or exposed to the wrong person? Then consider variability, source quality, transaction volume and how easily a reviewer can verify the result.",
+          "If the task is stable and structured, use workflow automation. If it is variable but low-risk and easy to check, test an agent in draft-only mode. If it combines structured steps with one interpretive stage, use a hybrid design. If the impact is high and verification is difficult, redesign the process or keep expert human control."
+        ],
+        table: {
+          headers: ["Task pattern", "Recommended starting point", "Control"],
+          rows: [
+            ["Stable rules, structured data", "Workflow automation", "Tests, exception route and monitoring"],
+            ["Variable input, low-impact draft", "Narrow AI agent", "Approved sources and human review"],
+            ["Variable interpretation inside fixed process", "Hybrid system", "Validate, approve and log handoffs"],
+            ["Sensitive action with clear rules", "Workflow plus explicit approval", "Least privilege and audit trail"],
+            ["High-impact judgement with weak evidence", "Human-led process", "Improve information before automating"]
+          ]
+        }
+      },
+      {
+        id: "security-privacy-approval",
+        heading: "Security, privacy and approval considerations",
+        body: [
+          "Map the information and actions before connecting any automation. Record what the system receives, where it comes from, which supplier processes it, how long it is retained and who can see the result. Give each component only the access required for its job.",
+          "For AI, keep confidential credentials out of prompts and separate public knowledge from internal or personal information. Test attempts to retrieve restricted material, manipulate instructions or trigger unauthorised tools. Preserve useful logs without recording more personal data than the business needs.",
+          "Human review must be meaningful. The reviewer needs enough source evidence, time and authority to challenge the output. An approval button is not a safeguard if staff are expected to accept every result without checking it."
+        ],
+        sources: [
+          { href: "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/", label: "ICO guidance on AI and data protection" },
+          { href: "https://www.ncsc.gov.uk/collection/guidelines-secure-ai-system-development", label: "NCSC guidelines for secure AI system development" },
+          { href: "https://www.gov.uk/government/consultations/ai-management-essentials-tool/ai-management-essentials-tool-accessible", label: "UK government AI Management Essentials self-assessment" }
+        ]
+      },
+      {
+        id: "first-pilot",
+        heading: "How to select a first automation or AI pilot",
+        body: [
+          "Choose a task that occurs often enough to measure but is contained enough to recover when something fails. The current process should be understood, and an owner should be willing to review results. Avoid beginning with the most sensitive customer, financial or employment decision.",
+          "Write a success definition before building. Include quality, time, correction, exception and user measures. Establish a baseline from the current process so the team can tell whether the pilot actually improves work rather than merely changing the interface.",
+          "Release in stages. Observe the process, run the automation with test data, produce drafts without action, add approval and only then allow narrowly defined automatic steps that have demonstrated consistent performance."
+        ],
+        bullets: [
+          "Clear owner and documented current workflow",
+          "Frequent enough work to produce useful evaluation evidence",
+          "Low or reversible impact during early testing",
+          "Reliable source information and a visible exception route",
+          "A reviewer who can identify and categorise errors",
+          "A fallback process when the tool is unavailable"
+        ],
+        links: [
+          { href: "/services/digital-transformation", label: "digital transformation for the wider operating system", context: "Connect the pilot to" },
+          { href: "/contact", label: "book a free business audit", context: "To assess a first use case with Fekitech," }
+        ]
+      },
+      {
+        id: "measurement",
+        heading: "How to measure whether the implementation works",
+        body: [
+          "Measure the business outcome and the control performance. Faster completion is useful only if accuracy, customer experience and staff workload remain acceptable. Review failures and near misses, not just successful transactions.",
+          "For a workflow, track completion, exception, failure and recovery time. For an agent, also record acceptance, correction, escalation and unsupported-output categories. Sample results regularly instead of assuming yesterday's quality will continue after source, instruction or model changes.",
+          "Compare the full operating cost, including licences, model usage, review time, maintenance and incident handling. If human correction consumes the time the system was meant to save, narrow the task or return it to a deterministic workflow."
+        ],
+        table: {
+          headers: ["Measure", "Question", "Possible evidence"],
+          rows: [
+            ["Quality", "Is the result correct and complete?", "Acceptance and correction categories"],
+            ["Efficiency", "Does the process require less elapsed and staff time?", "Baseline vs pilot cycle time"],
+            ["Control", "Are exceptions detected and handled?", "Escalations, incidents and recovery"],
+            ["Adoption", "Can staff use and challenge the system?", "Usage, feedback and training gaps"],
+            ["Value", "Does the outcome justify full cost?", "Time, quality, risk and ownership cost"]
+          ]
+        }
+      },
+      {
+        id: "next-steps",
+        heading: "Choose the least complex dependable approach",
+        body: [
+          "Map one process and separate the steps that follow fixed rules from the step, if any, that requires interpretation. Automate the deterministic work first. This often resolves much of the delay and creates cleaner information for any later AI component.",
+          "If variable input still creates a genuine bottleneck, test a narrow agent with approved sources and human review. Keep its permissions smaller than its apparent capabilities. Expand only when evidence shows that the current job is dependable and the business can operate the controls.",
+          "The practical answer to AI agent vs workflow automation is therefore task-specific: use rules where rules work, AI where bounded interpretation adds value, and people wherever context, consequence or accountability demands judgement."
+        ]
+      }
+    ],
+    faqs: [
+      { question: "Is an AI agent the same as automation?", answer: "No. Automation is the broader category. Conventional workflow automation follows defined triggers and rules, while an AI agent can interpret variable input and select among allowed steps. A well-designed system may combine both, with deterministic controls around the AI task." },
+      { question: "When is workflow automation better than an AI agent?", answer: "Use workflow automation when the input is structured, the rules can be stated completely and the expected action should be consistent. It is usually easier to test, explain and maintain for confirmations, routing, validation, calculations and scheduled reporting." },
+      { question: "Can a small business use an AI agent safely?", answer: "It can reduce risk by narrowing the job, limiting access, using approved sources, testing realistic failures, logging actions and keeping human approval for sensitive or uncertain outputs. Safety depends on the full system and operating process, not the model alone." },
+      { question: "Should an AI agent take actions without approval?", answer: "Only after a narrowly defined action has been tested and shown to be dependable, reversible and low-impact. Keep explicit approval for financial, contractual, access, employment, deletion or unusual customer actions, and always provide an exception route." },
+      { question: "What should a small business automate first?", answer: "Choose a frequent, well-understood and low-impact process with a clear owner and measurable baseline. Start with deterministic administrative steps. Add AI only if variable input remains a meaningful problem and a reviewer can verify the result efficiently." }
+    ],
+    relatedService: { title: "Process Optimisation and Automation", href: "/services/process-optimisation-and-automation" },
+    relatedSlugs: ["/blog/ai-agents-for-small-business", "/blog/website-automation-small-businesses"],
+    ctaHeading: "Choose the right first automation for the process",
+    cta: "Fekitech can help map the workflow, separate fixed rules from genuine judgement, and design a proportionate pilot with clear permissions, review and measurement."
+  },
+  {
     slug: "/blog/ai-agents-for-small-business",
     category: "Artificial Intelligence",
     title: "AI Agents for Small Business: Practical Use Cases, Risks and an Implementation Guide",
@@ -10,7 +426,7 @@ export const newBlogPosts = [
       "A practical guide to choosing useful AI-agent workflows, adding human controls, protecting business information, and moving from pilot to dependable operation.",
     readTime: "12 min read",
     datePublished: "2026-07-13",
-    lastModified: "2026-07-13",
+    lastModified: "2026-07-18",
     primaryKeyword: "AI agents for small business",
     secondaryKeywords: ["business AI agents", "custom AI agents", "AI automation", "AI agent use cases", "AI implementation"],
     longTailKeywords: [
@@ -26,7 +442,7 @@ export const newBlogPosts = [
     imageHeight: 768,
     h1: "AI Agents for Small Business: Practical Use Cases, Risks and an Implementation Guide",
     lead:
-      "AI agents can help a small business research, organise information, prepare responses and move routine work forward—but only when the job, boundaries and human approvals are designed clearly.",
+      "An AI agent for a small business is a software system that works towards a defined operational outcome using approved information and tools. It can research, organise information, prepare responses and move routine work forward—but only when the job, permissions and human approvals are designed clearly.",
     intro: [
       "The useful question is not whether artificial intelligence is impressive. It is whether a specific AI agent can improve a repeatable part of your operation without creating more risk, confusion or rework than it removes.",
       "Unlike a basic chatbot that answers one prompt at a time, an agent can follow a defined objective, use approved information, call connected tools and complete several steps. That makes it potentially valuable for customer support, internal knowledge, research, reporting and workflow coordination. It also means the business must decide what the agent may access, what it may change and when a person must approve the next action.",
@@ -50,7 +466,8 @@ export const newBlogPosts = [
         ],
         links: [
           { href: "/services/company-customised-ai-agents", label: "company-customised AI agents", context: "See how Fekitech designs" },
-          { href: "/blog/website-automation-small-businesses", label: "website automation for small businesses", context: "Compare agent workflows with" }
+          { href: "/blog/ai-agent-vs-workflow-automation-small-business", label: "AI agents with conventional workflow automation", context: "Compare" },
+          { href: "/blog/website-automation-small-businesses", label: "website automation for small businesses", context: "See how both approaches fit within" }
         ]
       },
       {
@@ -166,7 +583,7 @@ export const newBlogPosts = [
       { question: "How do I measure whether an AI agent works?", answer: "Measure the complete workflow: safe completion, accuracy, corrections, review time, escalations, failure handling and user feedback. Output volume alone does not show whether the agent improved the business." }
     ],
     relatedService: { title: "Company Customised AI Agents", href: "/services/company-customised-ai-agents" },
-    relatedSlugs: ["/blog/website-automation-small-businesses", "/blog/why-most-businesses-are-not-profitable"],
+    relatedSlugs: ["/blog/ai-agent-vs-workflow-automation-small-business", "/blog/website-automation-small-businesses"],
     ctaHeading: "Design an AI agent around the way your business works",
     cta: "Fekitech can help you select a suitable workflow, define human controls, prepare business knowledge and implement an agent that connects responsibly with your operation."
   },
@@ -181,7 +598,7 @@ export const newBlogPosts = [
       "A step-by-step guide to choosing useful KPIs, connecting reliable data, and building a dashboard that helps managers decide what to do next.",
     readTime: "12 min read",
     datePublished: "2026-07-11",
-    lastModified: "2026-07-13",
+    lastModified: "2026-07-18",
     primaryKeyword: "business intelligence for small business",
     secondaryKeywords: ["small business KPI dashboard", "business dashboard", "BI dashboard", "KPIs for small business", "executive dashboard"],
     longTailKeywords: ["how to build a small business dashboard", "which KPIs should a small business track", "business intelligence dashboard examples"],
@@ -219,6 +636,16 @@ export const newBlogPosts = [
         "How current must the information be?",
         "What threshold or change requires action?"
       ], links: [{ href: "/services/business-structure-design", label: "business structure design", context: "Clarify reporting ownership through" }] },
+      { id: "software-vs-architecture", heading: "Dashboard software versus business intelligence architecture", body: [
+        "Dashboard software provides the interface, visual components and often the connectors used to present information. Business intelligence architecture defines the wider system: authoritative sources, identifiers, calculation rules, permissions, quality checks, refresh processes, ownership and the way people investigate and act on a result.",
+        "A small business can buy capable software and still produce conflicting reports if those foundations remain unclear. Equally, the first architecture does not need an expensive custom platform. It may use a controlled spreadsheet or configured reporting product while the team proves definitions and adoption.",
+        "KPI dashboard development in the UK becomes a custom delivery question when standard connectors, permissions or calculations do not fit the operation. The build should remain proportionate: prove one useful reporting path, document ownership and expand only after leaders trust the result."
+      ], table: { headers: ["Need", "Dashboard software provides", "BI architecture must define"], rows: [
+        ["Data", "Connectors and import tools", "Authoritative sources, matching and quality rules"],
+        ["Measures", "Charts and calculation features", "Definitions, owners and decision thresholds"],
+        ["Access", "User and role settings", "Who may see which records and why"],
+        ["Operation", "Refresh and sharing features", "Failure handling, review rhythm and change ownership"]
+      ] }, links: [{ href: "/blog/kpi-dashboard-software-small-business", label: "whether to use spreadsheets, buy software or build a custom KPI dashboard", context: "Use the decision guide to assess" }] },
       { id: "choose-kpis", heading: "How to choose KPIs for a small business dashboard", body: [
         "A KPI is a measure tied to an important objective, not every number the software can produce. Choose a balanced set across demand, delivery, customer experience, financial health and team capacity. The exact selection depends on the business model and stage.",
         "Include both results and leading signals. Revenue is a result, while qualified pipeline and proposal conversion may indicate what is likely to happen next. Customer loss is a result, while unresolved support cases and falling engagement may provide an earlier warning. A dashboard containing only historical financial totals may explain what happened without helping the team intervene.",
@@ -282,7 +709,7 @@ export const newBlogPosts = [
       { question: "How often should a business dashboard update?", answer: "Match frequency to the decision. A live operational queue may need frequent updates, while a leadership or profitability review may be weekly or monthly. Faster refresh is not automatically more useful if the underlying process changes slowly." }
     ],
     relatedService: { title: "Business Intelligence Architecture", href: "/services/business-intelligence-architecture" },
-    relatedSlugs: ["/blog/why-most-businesses-are-not-profitable", "/blog/customer-retention-strategy-small-business"],
+    relatedSlugs: ["/blog/kpi-dashboard-software-small-business", "/blog/why-most-businesses-are-not-profitable"],
     ctaHeading: "Build a management view your team can trust",
     cta: "Fekitech can help you define useful KPIs, connect business data and design a reporting architecture that supports clear, repeatable decisions."
   },

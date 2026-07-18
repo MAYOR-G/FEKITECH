@@ -54,8 +54,10 @@ async function main() {
   const routes = serverEntry.prerenderRoutes || serverEntry.sitemapRoutes;
   await Promise.all(routes.map((route) => writeRoute(route, template, serverEntry.render, serverEntry.getHeadTags)));
   const sitemap = serverEntry.getSitemapXml();
-  await fs.writeFile(path.join(distDir, "robots.txt"), serverEntry.getRobotsTxt());
+  const robots = serverEntry.getRobotsTxt();
   await Promise.all([
+    fs.writeFile(path.join(distDir, "robots.txt"), robots),
+    fs.writeFile(path.join(root, "public", "robots.txt"), robots),
     fs.writeFile(path.join(distDir, "sitemap.xml"), sitemap),
     fs.writeFile(path.join(root, "public", "sitemap.xml"), sitemap)
   ]);

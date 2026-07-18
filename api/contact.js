@@ -59,7 +59,7 @@ export default async function handler(req, res) {
     const body = await readJson(req);
     const name = cleanString(body.name || body.fullName, 120);
     const email = cleanString(body.email, 160).toLowerCase();
-    const subject = cleanString(body.subject || body.challenge || "FekiTech enquiry", 160);
+    const subject = cleanString(body.subject || body.challenge || "Fekitech enquiry", 160);
     const message = cleanString(body.message, 5000);
     const turnstileToken = cleanString(body.turnstileToken, 4096);
     const meta = {
@@ -93,7 +93,7 @@ export default async function handler(req, res) {
       ...notification
     });
 
-    return sendJson(res, 200, { ok: true, message: "Your message has been received. The FekiTech team will follow up shortly." });
+    return sendJson(res, 200, { ok: true, message: "Your message has been received. The Fekitech team will follow up shortly." });
   } catch (error) {
     console.error(error);
     return sendJson(res, error.statusCode || 500, { error: "Something went wrong. Please try again or email info@contact.fekitech.co.uk." });

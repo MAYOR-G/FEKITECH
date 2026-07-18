@@ -3,7 +3,7 @@ FEKITECH COMPANY KNOWLEDGE BASE
 1. FEKITECH BRAND OVERVIEW
 
 Brand name:
-Fekitech, also styled in some website copy as FekiTech.
+Fekitech is the approved brand styling used on the website.
 
 Website/domain:
 https://fekitech.co.uk
@@ -355,7 +355,7 @@ Service businesses:
 The pricing page includes a Pro Plan for growing service businesses. Fekitech helps service businesses with quotes, invoices, expense tracking, payment integration, workflow automation, and operational efficiency.
 
 Agencies and high-volume businesses:
-The pricing page includes a Business Plan for agencies and high-volume businesses, plus an Agency / White Label plan for agencies reselling FekiTech.
+The pricing page includes a Business Plan for agencies and high-volume businesses, plus an Agency / White Label plan for agencies reselling Fekitech.
 
 Teams with manual processes:
 Fekitech helps teams reduce repeated admin work, automate workflows, and improve productivity.
@@ -450,8 +450,8 @@ Homepage:
 - Header brand text: "Fekitech" and "Business systems for profitable growth."
 - Hero label: "Built For Local Businesses."
 - Hero headline: "Run Your Business, Not Paperwork."
-- Hero description: "At FekiTech, we combine custom software, intelligent automation, and expert technology consultancy to help you run a more profitable business with less stress."
-- Hero CTAs: "Book a Free Call" and "Explore Our Approach."
+- Hero description: "Fekitech combines custom software, intelligent automation and practical business-systems consultancy to help businesses improve the way work is organised and managed."
+- Hero CTAs: "Book a Free Business Audit" and "Explore Our Approach."
 - Transformation section: "How We Transform Your Business."
 - Transformation steps: Business Audit, Diagnose the Gaps, Design Your Transformation Roadmap, Implement Smart Business Systems, Drive Performance & Scale, Partner for Long-Term Success.
 - Outcomes section headline: "Business Results After Our Solution."
@@ -483,7 +483,7 @@ Pricing page:
   - Starter Plan: GBP 19/month. For small businesses starting out. Features: instant quote generator, basic invoice creation, 1 business profile, email delivery of quotes/invoices, standard templates.
   - Pro Plan: GBP 49/month. For growing service businesses. Marked "BEST SELLER." Features: everything in Starter, AI-powered 3-tier quotes, auto invoice generation after quote acceptance, expense tracking, custom branding, Stripe payment integration, website widget embed.
   - Business Plan: GBP 99/month. For agencies and high-volume businesses. Features: everything in Pro, unlimited quotes and invoices, advanced AI pricing rules, full expense tracking system, real-time profit dashboard, multi-user access, priority support, advanced widget customization.
-  - Agency / White Label: GBP 199/month. For agencies reselling FekiTech. Features: everything in Business, white-label branding, multiple client accounts, API access, custom integrations, dedicated onboarding support.
+  - Agency / White Label: GBP 199/month. For agencies reselling Fekitech. Features: everything in Business, white-label branding, multiple client accounts, API access, custom integrations, dedicated onboarding support.
 - Pricing note: "OTHER SERVICES PRICING ARE ALL BESPOKE AND TAILOR-MADE."
 - Business Transformation Package:
   - Starter Package: From GBP 500 to GBP 1,500. Business audit + structure review.
@@ -546,6 +546,9 @@ Phone:
 
 Address:
 71-75, Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ
+
+Birmingham address:
+10 Brindley Place, Birmingham, B1 2JB
 
 Social media:
 Facebook: https://www.facebook.com/profile.php?id=61590753470491
@@ -613,7 +616,7 @@ Question: How can Fekitech help a business scale?
 Answer: Fekitech helps businesses scale by improving structure, workflows, automation, dashboards, business intelligence, customer retention, revenue systems, operating models, and decision visibility.
 
 Question: What happens after I contact Fekitech?
-Answer: The website contact form says visitors submit an audit request. The form success message says the FekiTech team will follow up shortly.
+Answer: The website contact form says visitors submit an audit request. The form success message says the Fekitech team will follow up shortly.
 
 
 12. IMPORTANT PHRASES AND BRAND LANGUAGE
@@ -677,7 +680,7 @@ Contact and conversion phrases:
 13. SEARCH AND RETRIEVAL KEYWORDS
 
 Fekitech brand:
-Fekitech, FekiTech, Fekitech UK, Fekitech business transformation, Fekitech contact, Fekitech services, Fekitech pricing, Fekitech Operating System, FOS
+Fekitech, Fekitech UK, Fekitech business transformation, Fekitech contact, Fekitech services, Fekitech pricing, Fekitech Operating System, FOS
 
 Business transformation:
 business transformation, business transformation company, business transformation services, business operations transformation, operational transformation, business improvement, performance improvement
@@ -713,7 +716,6 @@ Book a Free Call, Book a Free Business Audit, Book an Audit, Submit Audit Reques
 DETAILS TO REVIEW OR ADD LATER
 
 - Confirm whether the exact approved FOS description should be added: "The Fekitech Operating System (FOS) is a unified business operating framework that connects people, processes, data, and technology into one structured system for predictable performance, scalability, and profitability." This exact sentence was not found in the scanned website files.
-- Confirm whether to use "Fekitech" or "FekiTech" consistently across all assistant answers.
 - Confirm whether info@fekitech.co.uk or info@contact.fekitech.co.uk should be treated as the primary public email address.
 - Add confirmed business hours if available.
 - Add a confirmed booking link if one exists outside the current website codebase.
@@ -723,7 +725,7 @@ DETAILS TO REVIEW OR ADD LATER
 - Add full service package details for bespoke services.
 - Add more details about FOS implementation phases, deliverables, and client requirements.
 - Add case studies if real approved case studies become available.
-- Add verified testimonials or client names if available. The website displays review-style testimonials, but the knowledge file should only use verified testimonials if Fekitech confirms they are real and approved.
+- Add verified testimonials or client names only if Fekitech confirms they are real and approved for publication.
 - Add industries served if Fekitech wants to specify them.
 - Add geographic service area details beyond the United Kingdom, London address, and local businesses.
 - Add guarantees, refund policies, contract terms, or support terms only if officially approved.

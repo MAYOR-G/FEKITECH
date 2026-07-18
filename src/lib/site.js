@@ -17,10 +17,14 @@ export const siteConfig = {
   ogImage: "/og-image.png",
   ogImageAlt: "Fekitech business transformation company helping owners improve systems and profitability",
   logo: "/fekitech-logo-transparent-cropped.png",
-  email: "info@fekitech.co.uk",
+  email: "info@contact.fekitech.co.uk",
   contactEmail: "info@contact.fekitech.co.uk",
   phone: "+447352364942",
   address: "71-75, Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ",
+  addresses: [
+    "71-75, Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ",
+    "10 Brindley Place, Birmingham, B1 2JB"
+  ],
   sameAs: [
     "https://www.facebook.com/profile.php?id=61590753470491",
     "https://www.instagram.com/fekitech/",
@@ -55,7 +59,7 @@ export const pageSeo = {
       "Fekitech helps business owners build organised, profitable businesses with better systems, clearer operations, improved performance, and ongoing expert support.",
     canonicalPath: "/",
     priority: 1,
-    lastModified: "2026-06-29",
+    lastModified: "2026-07-18",
     keywords: ["business transformation company", "local business growth", "business systems", "profitability improvement"]
   },
   "/about": {
@@ -64,7 +68,7 @@ export const pageSeo = {
       "Learn how Fekitech helps businesses become organised, data-driven, profitable, and scalable through clearer systems and expert advisory.",
     canonicalPath: "/about",
     priority: 0.8,
-    lastModified: "2026-06-29",
+    lastModified: "2026-07-18",
     keywords: ["about Fekitech", "business transformation company", "business advisory", "organised businesses"]
   },
   "/services": {
@@ -73,7 +77,7 @@ export const pageSeo = {
       "Explore Fekitech’s business transformation services for improving operations, systems, profitability, performance, and long-term business growth.",
     canonicalPath: "/services",
     priority: 0.9,
-    lastModified: "2026-06-29",
+    lastModified: "2026-07-18",
     keywords: ["business transformation services", "operational improvement", "process improvement", "business consulting"]
   },
   "/pricing": {
@@ -82,26 +86,17 @@ export const pageSeo = {
       "View Fekitech’s business transformation packages designed to help businesses improve systems, operations, profitability, and scalable performance.",
     canonicalPath: "/pricing",
     priority: 0.8,
-    lastModified: "2026-06-29",
+    lastModified: "2026-07-18",
     keywords: ["business transformation packages", "business consulting pricing", "business systems pricing", "Fekitech pricing"]
   },
   "/blog": {
-    title: "Business Transformation Insights | Fekitech Blog",
+    title: "Fekitech Business Insights | Systems & Automation",
     description:
-      "Read practical insights on business transformation, operations, profitability, systems, customer growth, and performance improvement.",
+      "Practical guides on business systems, workflow automation, AI agents, business intelligence, customer retention and profitable growth for UK businesses.",
     canonicalPath: "/blog",
     priority: 0.7,
-    lastModified: "2026-07-13",
+    lastModified: "2026-07-18",
     keywords: ["business transformation blog", "business operations insights", "profitability insights", "process improvement"]
-  },
-  "/blog/all": {
-    title: "All Business Insights | Fekitech Blog",
-    description:
-      "Browse all Fekitech guides on business systems, artificial intelligence, automation, customer retention, data and sustainable business growth.",
-    canonicalPath: "/blog/all",
-    priority: 0.6,
-    lastModified: "2026-07-13",
-    keywords: ["business insights", "business systems guides", "digital transformation articles", "Fekitech blog"]
   },
   ...Object.fromEntries(blogPosts.map((post) => [post.slug, {
     title: post.seoTitle,
@@ -118,12 +113,12 @@ export const pageSeo = {
     imageType: "image/webp"
   }])),
   "/contact": {
-    title: "Contact Fekitech | Business Transformation Support",
+    title: "Contact Fekitech | Business Systems & Automation UK",
     description:
-      "Contact Fekitech for business transformation support, operational improvement, better systems, and expert advisory for your business.",
+      "Book a free business audit with Fekitech to discuss operational problems, business systems, workflow automation, reporting or practical software needs.",
     canonicalPath: "/contact",
     priority: 0.8,
-    lastModified: "2026-06-29",
+    lastModified: "2026-07-18",
     keywords: ["contact Fekitech", "business transformation support", "business advisory", "operational improvement"]
   },
   "/audit": {
@@ -149,7 +144,7 @@ export const pageSeo = {
   }]))
 };
 
-export const sitemapRoutes = ["/", "/about", "/services", ...serviceRoutes, "/pricing", "/blog", "/blog/all", "/contact", ...blogPosts.map((post) => post.slug)];
+export const sitemapRoutes = ["/", "/about", "/services", ...serviceRoutes, "/pricing", "/blog", "/contact", ...blogPosts.map((post) => post.slug)];
 export const prerenderRoutes = [...sitemapRoutes, "/admin"];
 
 export function getSeo(pathname = "/") {

@@ -56,7 +56,8 @@ function getInstantAnswer(query = "") {
 
 - **Phone:** +447352364942
 - **Email:** [info@contact.fekitech.co.uk](mailto:info@contact.fekitech.co.uk)
-- **Address:** 71-75, Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ
+- **London address:** 71-75, Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ
+- **Birmingham address:** 10 Brindley Place, Birmingham, B1 2JB
 
 You can also use the contact page to submit an audit request or book a free call.`;
   }

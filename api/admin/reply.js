@@ -46,7 +46,7 @@ export default async function handler(req, res) {
 
     await storeMessage({
       senderEmail: email,
-      senderName: "FekiTech",
+      senderName: "Fekitech",
       subject: replyEmail.subject,
       message,
       direction: "admin",

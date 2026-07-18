@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { blogPosts } from "../src/blogPosts.js";
 import { pageSeo, sitemapRoutes } from "../src/lib/site.js";
 
 const root = process.cwd();
@@ -107,27 +108,40 @@ for (const route of publicRoutes) {
   assert(!html.includes("vercel.app"), `${route} contains a Vercel preview URL`);
   assert(!html.includes("https://www.fekitech.co.uk"), `${route} contains a www canonical URL`);
   assert(!html.includes("og-image.svg"), `${route} references an SVG social image`);
+  assert(!html.includes('name="keywords"'), `${route} still emits an obsolete meta keywords tag`);
+  assert.equal((html.match(/<h1\b/g) || []).length, 1, `${route} must have exactly one H1`);
   const jsonLd = extractJsonLd(html);
   assert(jsonLd.length > 0, `${route} has no valid JSON-LD`);
   const graph = jsonLd.flatMap((entry) => entry["@graph"] || []);
   const schemaTypes = new Set(graph.flatMap((entry) => Array.isArray(entry["@type"]) ? entry["@type"] : [entry["@type"]]));
-  for (const requiredType of ["Organization", "ProfessionalService", "LocalBusiness", "ContactPoint", "WebSite", "WebPage"]) {
+  for (const requiredType of ["Organization", "ContactPoint", "WebSite"]) {
     assert(schemaTypes.has(requiredType), `${route} is missing ${requiredType} schema`);
   }
+  const expectedPageType = route === "/about"
+    ? "AboutPage"
+    : route === "/contact"
+      ? "ContactPage"
+      : route === "/blog"
+        ? "CollectionPage"
+        : "WebPage";
+  assert(schemaTypes.has(expectedPageType), `${route} is missing ${expectedPageType} schema`);
+  assert(!schemaTypes.has("FAQPage"), `${route} must not claim FAQ rich-result eligibility`);
+  assert(!schemaTypes.has("VideoObject"), `${route} contains unsupported VideoObject schema`);
+  assert(!schemaTypes.has("LocalBusiness"), `${route} contains unsupported LocalBusiness schema`);
+  assert(!schemaTypes.has("ProfessionalService"), `${route} contains unsupported ProfessionalService schema`);
   if (route !== "/") assert(schemaTypes.has("BreadcrumbList"), `${route} is missing BreadcrumbList schema`);
   if (route === "/services") assert(schemaTypes.has("Service"), "Services page is missing Service schema");
   if (route.startsWith("/services/")) {
     assert(schemaTypes.has("Service"), `${route} is missing Service schema`);
-    assert(schemaTypes.has("FAQPage"), `${route} is missing visible-content-matched FAQ schema`);
   }
   if (route === "/pricing") assert(schemaTypes.has("OfferCatalog"), "Pricing page is missing OfferCatalog schema");
-  if (route.startsWith("/blog/") && route !== "/blog/all") {
+  if (route.startsWith("/blog/")) {
     assert(schemaTypes.has("BlogPosting"), `${route} is missing BlogPosting schema`);
-    assert(schemaTypes.has("FAQPage"), `${route} is missing visible-content-matched FAQ schema`);
     const article = graph.find((entry) => entry["@type"] === "BlogPosting");
     assert.equal(article.datePublished, pageSeo[route].datePublished, `${route} BlogPosting datePublished mismatch`);
     assert.equal(article.dateModified, pageSeo[route].lastModified, `${route} BlogPosting dateModified mismatch`);
     assert.equal(article.image, ogImage, `${route} BlogPosting image mismatch`);
+    assert.equal(article.mainEntityOfPage?.["@id"], `${siteUrl}${route}#webpage`, `${route} BlogPosting mainEntityOfPage mismatch`);
   }
 
   for (const image of html.matchAll(/<img\b[^>]*>/g)) {
@@ -149,6 +163,28 @@ for (const route of publicRoutes) {
 assert.equal(titles.size, publicRoutes.length, "Public page titles must be unique");
 assert.equal(descriptions.size, publicRoutes.length, "Public page descriptions must be unique");
 
+const homeHtml = routeHtml.get("/");
+for (const value of ["42", "3.2", "94"]) {
+  assert(homeHtml.includes(`data-value="${value}"`), `Homepage is missing restored metric ${value}`);
+}
+assert.match(homeHtml, /What Founders Say About/, "Homepage is missing the restored reviews section");
+assert(homeHtml.includes("images.pexels.com"), "Homepage is missing restored testimonial imagery");
+const aboutHtml = routeHtml.get("/about");
+assert.match(aboutHtml, /FekiTech is a technology company specialising in software development, IT consultancy, and business systems design/, "About page baseline copy is not restored");
+const contactHtml = routeHtml.get("/contact");
+assert(!contactHtml.includes("The audit is for small and growing businesses"), "Contact page still contains the removed audit explanation");
+assert(!contactHtml.includes("After you submit the form"), "Contact page still contains the removed follow-up explanation");
+for (const address of ["71-75, Shelton Street", "10 Brindley Place, Birmingham, B1 2JB"]) {
+  assert(contactHtml.includes(address), `Contact page is missing address: ${address}`);
+}
+assert.match(homeHtml, /<a href="\/services" class="nav-dropdown-trigger"/, "Desktop Services navigation is not a direct link");
+const blogIndexHtml = routeHtml.get("/blog");
+assert.match(blogIndexHtml, /<h1[^>]*>Systems, automation and profitability guides<\/h1>/, "Blog index H1 is not stable");
+for (const article of blogPosts) {
+  const articlePath = article.slug.startsWith("/blog/") ? article.slug : `/blog/${article.slug}`;
+  assert(blogIndexHtml.includes(articlePath), `Blog index is missing ${articlePath}`);
+}
+
 const adminHtml = await fs.readFile(outputPathForRoute("/admin"), "utf8");
 assert.match(adminHtml, /<meta name="robots" content="noindex, nofollow, noarchive" \/>/, "/admin is missing noindex/noarchive");
 
@@ -163,6 +199,9 @@ const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) =>
 assert.deepEqual(sitemapUrls, publicRoutes.map((route) => `${siteUrl}${route}`), "Sitemap routes mismatch");
 assert(!sitemap.includes("/admin"), "Sitemap contains /admin");
 assert(!sitemap.includes("/api/"), "Sitemap contains an API route");
+assert(!sitemap.includes("/blog/all"), "Sitemap contains the redirected duplicate blog route");
+assert(!sitemap.includes("<priority>"), "Sitemap contains subjective priority values");
+assert.equal([...sitemap.matchAll(/<lastmod>/g)].length, publicRoutes.length, "Every sitemap URL needs a lastmod");
 for (const lastmod of sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)) {
   assert(/^\d{4}-\d{2}-\d{2}$/.test(lastmod[1]), `Invalid sitemap lastmod: ${lastmod[1]}`);
 }
@@ -188,6 +227,10 @@ assert.equal(wwwRedirect.destination, `${siteUrl}/:path*`, "www redirect destina
 assert.equal(wwwRedirect.statusCode, 301, "www redirect must use HTTP 301");
 assert.equal(wwwRedirect.permanent, undefined, "www redirect must use statusCode instead of Vercel's 308 permanent option");
 assert.equal(vercelConfig.trailingSlash, false, "Trailing slash normalization is missing");
+const allBlogsRedirect = vercelConfig.redirects?.find((redirect) => redirect.source === "/blog/all");
+assert(allBlogsRedirect, "/blog/all redirect is missing");
+assert.equal(allBlogsRedirect.destination, "/blog", "/blog/all must redirect to /blog");
+assert.equal(allBlogsRedirect.statusCode, 301, "/blog/all redirect must use HTTP 301");
 const sitemapHeaders = vercelConfig.headers?.find((entry) => entry.source === "/sitemap.xml");
 assert(
   sitemapHeaders?.headers?.some((header) => header.key === "Content-Type" && header.value.startsWith("application/xml")),
@@ -198,6 +241,10 @@ assert(
   adminHeaders.length >= 2 && adminHeaders.every((entry) => entry.headers.some((header) => header.key === "X-Robots-Tag")),
   "Admin X-Robots-Tag coverage is incomplete"
 );
+const globalHeaders = vercelConfig.headers?.find((entry) => entry.source === "/(.*)")?.headers || [];
+for (const requiredHeader of ["Strict-Transport-Security", "X-Content-Type-Options", "X-Frame-Options", "Referrer-Policy", "Permissions-Policy", "Content-Security-Policy-Report-Only"]) {
+  assert(globalHeaders.some((header) => header.key === requiredHeader), `Global ${requiredHeader} header is missing`);
+}
 
 const knownInternalRoutes = new Set([...publicRoutes, "/admin", "/audit"]);
 for (const [route, html] of routeHtml) {

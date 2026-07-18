@@ -1,10 +1,3 @@
-export const kpis = [
-  { label: "Revenue Growth", value: "+42%", detail: "90-day lift" },
-  { label: "Operational Efficiency", value: "89%", detail: "workflow health" },
-  { label: "Customer Retention", value: "94%", detail: "active accounts" },
-  { label: "Team Productivity", value: "+41%", detail: "output velocity" }
-];
-
 export const symptoms = [
   ["Falling revenue", "Fragmented systems"],
   ["Customer churn", "Weak visibility"],
@@ -181,9 +174,9 @@ export const pricing = [
 ];
 
 export const faqs = [
-  ["What does FekiTech actually build?", "Business operating systems: dashboards, workflows, automation, metrics, and leadership visibility layers."],
+  ["What does Fekitech actually build?", "Business operating systems: dashboards, workflows, automation, metrics, and leadership visibility layers."],
   ["How fast can we see results?", "Most teams see clarity in the first audit cycle, with measurable operational gains during the first implementation phase."],
-  ["Is this only for large companies?", "No. FekiTech works for growing teams that need better structure before complexity becomes expensive."],
+  ["Is this only for large companies?", "No. Fekitech works for growing teams that need better structure before complexity becomes expensive."],
   ["Do you replace our current tools?", "Only when needed. The goal is to connect, redesign, and improve the operating system around your business."],
   ["Can you support implementation?", "Yes. The Professional and Transformation Partner plans include hands-on system buildout and optimisation."]
 ];

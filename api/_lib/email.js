@@ -2,7 +2,7 @@ import { escapeHtml } from "./http.js";
 
 const resendEndpoint = "https://api.resend.com/emails";
 const fallbackWebsiteUrl = "https://fekitech.co.uk";
-const fallbackCompanyName = "FekiTech";
+const fallbackCompanyName = "Fekitech";
 
 function getSenderEmail() {
   return process.env.RESEND_FROM_EMAIL || "info@contact.fekitech.co.uk";
@@ -103,16 +103,16 @@ export function contactNotificationEmail({ name, email, subject, message, meta }
   const textRows = rows.map(([label, value]) => `${label}: ${value}`).join("\n");
 
   return {
-    subject: `New FekiTech enquiry: ${subject}`,
+    subject: `New Fekitech enquiry: ${subject}`,
     html: `
       <div style="font-family:Arial,sans-serif;line-height:1.6;color:#0f172a;">
-        <h2 style="margin:0 0 16px;">New FekiTech contact message</h2>
+        <h2 style="margin:0 0 16px;">New Fekitech contact message</h2>
         <table style="border-collapse:collapse;margin-bottom:18px;">${htmlRows}</table>
         <h3 style="margin:20px 0 8px;">Message</h3>
         <p style="white-space:pre-wrap;margin:0;padding:16px;border-radius:12px;background:#f8fafc;">${escapeHtml(message)}</p>
       </div>
     `,
-    text: `New FekiTech contact message\n\n${textRows}\n\nMessage:\n${message}`
+    text: `New Fekitech contact message\n\n${textRows}\n\nMessage:\n${message}`
   };
 }
 

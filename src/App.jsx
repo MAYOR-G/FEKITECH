@@ -25,6 +25,7 @@ import ServicePage from "./components/ServicePage.jsx";
 import { getServicePage, servicePages } from "./serviceData.js";
 import { applySeo } from "./lib/seo.js";
 import { siteConfig } from "./lib/site.js";
+import { softwarePlans, transformationPackages } from "./pricingData.js";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -33,7 +34,7 @@ const heroVideo = "https://pub-9f4f9c9b1b3e477aba4991ccfd92f1ae.r2.dev/fekitech%
 const analyticsImage = "/outcome-higher-profitability.webp";
 const systemsImage = "/outcome-reduce-stress.webp";
 const aboutTransformationImage = "/fekitech-about-transformation.webp";
-const transformationStrategyImage = "/fekitech-transformation-systems-ai.png";
+const transformationStrategyImage = "/fekitech-transformation-systems-ai.webp";
 const retentionImage = "/outcome-customer-growth.webp";
 const scaleImage = "/outcome-business-success.webp";
 const billingImage = "/outcome-get-paid-faster.webp";
@@ -48,7 +49,6 @@ const testimonialAvatars = {
   Joelle: "https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=240",
   Courtney: "https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=240"
 };
-
 const turnstileScriptSrc = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
 let turnstileScriptPromise;
 
@@ -197,16 +197,17 @@ function Header() {
             if (label === "Services") {
               return (
                 <div className={`nav-item-dropdown ${servicesOpen ? "is-open" : ""}`} key={label}>
-                  <button
+                  <a
                     ref={servicesTriggerRef}
-                    type="button"
+                    href={href}
                     className="nav-dropdown-trigger"
                     aria-expanded={servicesOpen}
                     aria-controls="desktop-services-menu"
-                    onClick={() => setServicesOpen((current) => !current)}
+                    onFocus={() => setServicesOpen(true)}
+                    onClick={closeNavigation}
                   >
                     {label} <ChevronDown size={14} className="dropdown-icon" aria-hidden="true" />
-                  </button>
+                  </a>
                   <div id="desktop-services-menu" className="nav-dropdown-content" aria-hidden={!servicesOpen}>
                     <div className="nav-dropdown-list">
                       {servicePages.map((service) => (
@@ -227,7 +228,7 @@ function Header() {
           })}
         </nav>
         <a className="header-cta" href="/contact">
-          Book a Free Call
+          Book a Free Business Audit
         </a>
         <button
           className="menu-button"
@@ -242,15 +243,18 @@ function Header() {
         <div id="mobile-navigation" className={`mobile-panel ${open ? "open" : ""}`} aria-hidden={!open}>
           {navItems.map(([label, href]) => label === "Services" ? (
             <div className={`mobile-services ${servicesOpen ? "is-open" : ""}`} key={label}>
-              <button
-                type="button"
-                className="mobile-services-trigger"
-                aria-expanded={servicesOpen}
-                aria-controls="mobile-services-list"
-                onClick={() => setServicesOpen((current) => !current)}
-              >
-                <span>{label}</span><ChevronDown size={17} aria-hidden="true" />
-              </button>
+              <div className="mobile-services-trigger">
+                <a href={href} onClick={closeNavigation}>{label}</a>
+                <button
+                  type="button"
+                  aria-label="Toggle service links"
+                  aria-expanded={servicesOpen}
+                  aria-controls="mobile-services-list"
+                  onClick={() => setServicesOpen((current) => !current)}
+                >
+                  <ChevronDown size={17} aria-hidden="true" />
+                </button>
+              </div>
               <div id="mobile-services-list" className="mobile-services-list">
                 <div>
                   <a href={href} onClick={closeNavigation}><span>View all services</span><ChevronRight size={15} aria-hidden="true" /></a>
@@ -268,7 +272,7 @@ function Header() {
             </a>
           ))}
           <a className="mobile-cta" href="/contact" onClick={closeNavigation}>
-            Book a Free Call
+            Book a Free Business Audit
           </a>
         </div>
       </div>
@@ -308,15 +312,15 @@ function Hero() {
       <div className="hero-inner">
         <span className="hero-label">Built For Local Businesses</span>
         <h1>
-          <span className="hero-title-line">Run Your <span className="logo-blend-text">Business</span>,</span>
+          <span className="hero-title-line">Run Your <span className="logo-blend-text">Business</span>,{" "}</span>
           <span className="hero-title-line">Not Paperwork.</span>
         </h1>
         <p>
-          At FekiTech, we combine custom software, intelligent automation, and expert technology consultancy to help you
+          At Fekitech, we combine custom software, intelligent automation, and practical business-systems consultancy to help you
           run a more profitable business with less stress
         </p>
         <div className="hero-actions">
-          <Button>Book a Free Call</Button>
+          <Button>Book a Free Business Audit</Button>
           <Button href="/services" variant="secondary">Explore Our Approach</Button>
         </div>
       </div>
@@ -352,7 +356,7 @@ function TransformProcess() {
           </div>
         </div>
         <figure className="transform-visual">
-          <img src={transformationStrategyImage} alt="Business team planning strategy, operations, and transformation systems around a meeting table" width="1536" height="1536" loading="lazy" decoding="async" />
+          <img src={transformationStrategyImage} alt="Business team planning strategy, operations, and transformation systems around a meeting table" width="768" height="768" loading="lazy" decoding="async" />
         </figure>
       </div>
     </section>
@@ -403,7 +407,7 @@ function WhyChooseFekitech() {
       <div className="why-layout">
         <div className="why-editorial">
           <h2>Why Choose Fekitech</h2>
-          <Button href="/contact">Book a Free Call</Button>
+          <Button href="/contact">Book a Free Business Audit</Button>
         </div>
         <div className="why-reasons">
           {reasons.map(([title, text]) => (
@@ -495,9 +499,9 @@ function CTA() {
           <span className="section-kicker">Start with clarity</span>
           <h2>Ready to make your business easier to run?</h2>
           <p>
-            Book a free call and we will help you identify the systems, workflows, and performance gaps worth fixing first.
+            Book a free business audit and we will help you identify the systems, workflows, and performance gaps worth examining first.
           </p>
-          <Button>Book a Free Call</Button>
+          <Button>Book a Free Business Audit</Button>
         </div>
         <figure className="cta-signal-panel" aria-hidden="true">
           <span className="cta-visual-accent accent-one" />
@@ -709,6 +713,7 @@ function ServicesPage() {
     <main className="page-main">
       <section className="section services-page-heading">
         <h1>Services</h1>
+        <p>Fekitech works with small and growing UK businesses that need clearer operations, less repeated administration and more dependable information for decisions. Services can address one defined workflow or connect several changes through a wider business-transformation programme.</p>
       </section>
       <section className="section service-list-section services-card-section">
         <h2 className="sr-only">Primary Services</h2>
@@ -734,40 +739,44 @@ function ServicesPage() {
           ))}
         </div>
       </section>
+      <section className="section services-guide-section" aria-labelledby="services-guide-heading">
+        <div className="section-intro">
+          <span className="eyebrow">Supporting guides</span>
+          <h2 id="services-guide-heading">Understand the decision before choosing the system</h2>
+          <p>These practical guides explain when different reporting, automation and AI approaches are appropriate.</p>
+        </div>
+        <div className="services-guide-links">
+          <a href="/blog/business-intelligence-small-business-kpi-dashboard">Business intelligence and small-business KPI dashboards <ArrowRight size={16} /></a>
+          <a href="/blog/kpi-dashboard-software-small-business">Choose KPI dashboard software, spreadsheets or a custom build <ArrowRight size={16} /></a>
+          <a href="/blog/ai-agents-for-small-business">Practical AI agents for small-business operations <ArrowRight size={16} /></a>
+          <a href="/blog/ai-agent-vs-workflow-automation-small-business">Compare AI agents with workflow automation <ArrowRight size={16} /></a>
+          <a href="/blog/website-automation-small-businesses">What website automation services include <ArrowRight size={16} /></a>
+          <a href="/blog/why-most-businesses-are-not-profitable">How systems affect profitability and growth <ArrowRight size={16} /></a>
+          <a href="/blog/customer-retention-strategy-small-business">Build customer retention into daily operations <ArrowRight size={16} /></a>
+        </div>
+      </section>
     </main>
   );
 }
 
 function PricingPage() {
-  const smallBusinessPlans = [
-    ["Starter Plan", "£19/month", "For small businesses starting out", ["Instant quote generator", "Basic invoice creation", "1 business profile", "Email delivery of quotes/invoices", "Standard templates"]],
-    ["Pro Plan", "£49/month", "For growing service businesses", ["Everything in Starter", "AI-powered 3-tier quotes (Basic / Standard / Premium)", "Auto invoice generation after quote acceptance", "Expense tracking (basic)", "Custom branding (logo + colours)", "Stripe payment integration", "Website widget embed"], true],
-    ["Business Plan", "£99/month", "For agencies & high-volume businesses", ["Everything in Pro", "Unlimited quotes & invoices", "Advanced AI pricing rules (profit control + margins)", "Full expense tracking system", "Real-time profit dashboard", "Multi-user access (team accounts)", "Priority support", "Advanced widget customization"]],
-    ["Agency / White Label", "£199/month", "For agencies reselling FekiTech", ["Everything in Business", "White-label branding (remove FekiTech branding)", "Manage multiple client accounts", "API access", "Custom integrations", "Dedicated onboarding support"]]
-  ];
-  const transformationPackages = [
-    ["Starter Package", "From £500 – £1,500", "Business audit + structure review"],
-    ["Growth Package", "From £2,000 – £5,000", "Systems + digital transformation setup"],
-    ["FOS Implementation (Main Offer)", "From £5,000 – £25,000+", "Full business operating system build", true],
-    ["Enterprise (Custom)", "Custom pricing", "Full transformation + ongoing support"]
-  ];
-
   return (
     <main className="page-main">
       <section className="section pricing-page-section pricing-only-page" id="pricing">
         <div className="pricing-section-heading">
           <h1>Pricing</h1>
+          <p>The subscription plans below cover Fekitech's small-business operating software. Business-transformation packages cover advisory and implementation work. Other services are scoped separately after the workflow, integrations, responsibilities and support needs are understood.</p>
         </div>
         <div className="pricing-subsection-heading">
           <h2>Small Business Operating System Package</h2>
         </div>
         <div className="pricing-grid page-pricing small-business-pricing">
-          {smallBusinessPlans.map(([name, price, summary, features, featured]) => (
+          {softwarePlans.map(({ name, priceLabel, summary, features, featured }) => (
             <article className={`pricing-card ${featured ? "featured" : ""}`} key={name}>
               {featured && <span className="popular">BEST SELLER</span>}
               <span className="pricing-kicker">{summary}</span>
               <h3>{name}</h3>
-              <div className="price"><strong>{price}</strong></div>
+              <div className="price"><strong>{priceLabel}</strong></div>
               <ul>
                 {features.map((feature) => <li key={feature}><Check size={15} />{feature}</li>)}
               </ul>
@@ -775,19 +784,19 @@ function PricingPage() {
             </article>
           ))}
         </div>
-        <p className="pricing-note bespoke-pricing-note">OTHER SERVICES PRICING ARE ALL BESPOKE AND TAILOR-MADE</p>
+        <p className="pricing-note bespoke-pricing-note">Other services are bespoke and priced against an agreed scope.</p>
       </section>
       <section className="section transformation-packages-section">
         <div className="transformation-packages-heading">
           <h2>Business Transformation Package</h2>
         </div>
         <div className="transformation-package-grid">
-          {transformationPackages.map(([name, price, summary, featured]) => (
+          {transformationPackages.map(({ name, priceLabel, description, featured }) => (
             <article className={`transformation-package-card ${featured ? "featured" : ""}`} key={name}>
               {featured && <span className="package-badge">Main Offer</span>}
               <h3>{name}</h3>
-              <strong>{price}</strong>
-              <p>{summary}</p>
+              <strong>{priceLabel}</strong>
+              <p>{description}</p>
               <a href="/contact">Book an Audit</a>
             </article>
           ))}
@@ -798,31 +807,32 @@ function PricingPage() {
 }
 
 function BlogPage() {
-  const visibleArticles = blogPosts.slice(0, 6);
-  const [featuredArticle, ...otherArticles] = visibleArticles;
+  const [featuredArticle, ...otherArticles] = blogPosts;
 
   return (
-    <main className="page-main">
+    <main className="page-main blog-index-page">
+      <header className="blog-index-hero blog-index-hero--compact">
+        <div className="blog-shell">
+          <span className="blog-kicker">Fekitech business insights</span>
+          <h1>Systems, automation and profitability guides</h1>
+          <p>Practical guidance on business systems, workflow automation, AI agents, business intelligence, customer retention and profitable growth for UK businesses.</p>
+        </div>
+      </header>
       <section className="section blog-editorial-section" aria-label="Fekitech business insights">
         <BlogTextCard article={featuredArticle} featured />
         <div className="blog-list-grid" aria-label="More Fekitech articles">
           {otherArticles.map((article) => <BlogTextCard article={article} key={article.slug} />)}
         </div>
-        {blogPosts.length > 6 && (
-          <div className="blog-index-more"><Button href="/blog/all">View All Articles</Button></div>
-        )}
       </section>
     </main>
   );
 }
 
 function BlogTextCard({ article, featured = false }) {
-  const Heading = featured ? "h1" : "h2";
-
   return (
     <article className={`blog-text-card${featured ? " blog-text-card-featured" : " blog-list-card"}`}>
       <span className="blog-category">{article.category}</span>
-      <Heading>{article.title}</Heading>
+      <h2>{article.title}</h2>
       <p>{article.excerpt}</p>
       <div className="blog-card-footer">
         <span><time dateTime={article.datePublished}>{formatArticleDate(article.datePublished)}</time> · {article.readTime}</span>
@@ -1076,7 +1086,7 @@ function ContactPage() {
         throw new Error(result.error || "Unable to submit your message right now.");
       }
 
-      setFormStatus({ type: "success", message: result.message || "Your message has been received. The FekiTech team will follow up shortly." });
+      setFormStatus({ type: "success", message: result.message || "Your message has been received. The Fekitech team will follow up shortly." });
       form.reset();
       setTurnstileToken("");
       if (turnstileWidgetId.current !== null && window.turnstile?.reset) {
@@ -1096,10 +1106,13 @@ function ContactPage() {
   return (
     <main className="audit-page">
       <section className="audit-hero">
-        <h1>Start Business Transformation Support</h1>
+        <span className="eyebrow">Start with the current operation</span>
+        <h1>Book a Free Business Audit</h1>
       </section>
       <section className="audit-layout">
-        <form className="audit-form" onSubmit={handleSubmit}>
+        <form className="audit-form" onSubmit={handleSubmit} aria-describedby="audit-form-guidance">
+          <h2>Tell us about the business and the problem</h2>
+          <p id="audit-form-guidance">Provide enough context to understand the workflow, but do not include passwords, private credentials or unnecessary sensitive personal information.</p>
           <label htmlFor="fullName">Full name<input id="fullName" required name="fullName" /></label>
           <label htmlFor="email">Email address<input id="email" required type="email" name="email" /></label>
           <label htmlFor="company">Company name<input id="company" required name="company" /></label>
@@ -1126,14 +1139,15 @@ function ContactPage() {
               {!turnstileLoading && !turnstileSiteKey && <small>Security check is unavailable. Please refresh or email info@contact.fekitech.co.uk.</small>}
             </div>
           </div>
-          <button type="submit" disabled={submitting}>{submitting ? "Submitting..." : "Submit Audit Request"}</button>
-          {formStatus.message && <p className={formStatus.type === "error" ? "error-message" : "success-message"}>{formStatus.message}</p>}
+          <button type="submit" disabled={submitting}>{submitting ? "Submitting..." : "Book My Free Business Audit"}</button>
+          {formStatus.message && <p aria-live="polite" className={formStatus.type === "error" ? "error-message" : "success-message"}>{formStatus.message}</p>}
         </form>
         <aside className="audit-side-card">
           <img src={logoMark} alt="" width="616" height="646" loading="lazy" decoding="async" />
           <h2>Contact Details</h2>
           <p>Phone: <a href="tel:+447352364942">+447352364942</a></p>
           <p>71-75, Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ</p>
+          <p>10 Brindley Place, Birmingham, B1 2JB</p>
           <p>Email: <a href="mailto:info@contact.fekitech.co.uk">info@contact.fekitech.co.uk</a></p>
           <div className="socials">
             {socialLinks.map(({ label, href, Icon, ariaLabel }) => (
@@ -1340,7 +1354,7 @@ function AdminPage() {
                   {loadingThread ? <p>Loading conversation...</p> : messages.map((message) => (
                     <article className={`thread-message ${message.direction === "admin" ? "admin-reply" : ""}`} key={message.id}>
                       <div>
-                        <strong>{message.direction === "admin" ? "FekiTech" : message.name}</strong>
+                        <strong>{message.direction === "admin" ? "Fekitech" : message.name}</strong>
                         <span>{formatAdminDate(message.createdAt)}</span>
                       </div>
                       <h3>{message.subject}</h3>
@@ -1391,10 +1405,11 @@ function Footer() {
         <a href="tel:+447352364942">+447352364942</a>
         <a href="mailto:info@contact.fekitech.co.uk">info@contact.fekitech.co.uk</a>
         <span>71-75, Shelton Street, Covent Garden, London, United Kingdom, WC2H 9JQ</span>
+        <span>10 Brindley Place, Birmingham, B1 2JB</span>
       </div>
       <div className="footer-column">
         <h3>Start</h3>
-        <a href="/contact">Book a Free Call</a>
+        <a href="/contact">Book a Free Business Audit</a>
         {socialLinks.map(({ label, href, ariaLabel }) => (
           <a href={href} key={label} aria-label={ariaLabel} target="_blank" rel="noopener noreferrer">
             {label}

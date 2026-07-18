@@ -1,35 +1,10 @@
 import { absoluteUrl, getCanonicalUrl, getSeo, pageSeo, prerenderRoutes, siteConfig, sitemapRoutes } from "./site.js";
 import { getBlogPost } from "../blogPosts.js";
-import { getServicePage } from "../serviceData.js";
+import { getServicePage, servicePages } from "../serviceData.js";
+import { pricingOffers } from "../pricingData.js";
 
 export { sitemapRoutes } from "./site.js";
 export { prerenderRoutes } from "./site.js";
-
-const serviceItems = [
-  ["Business Structure Design", "We define roles, responsibilities, workflows, ownership, and decision rhythms so the business can operate with clarity."],
-  ["Digital Transformation", "We implement practical digital systems that reduce manual work, improve execution speed, and support better management."],
-  ["Business Intelligence Architecture", "We design reporting systems, dashboards, and performance signals around the numbers leaders actually need."],
-  ["Process Optimisation and Automation", "We map, simplify, and automate repeated workflows so teams spend less time on friction and more time on value."],
-  ["Customer Retention Systems", "We improve follow-up, communication, customer experience, and feedback loops so customers stay longer."],
-  ["Profitability Improvement", "We identify operational gaps, revenue leakage, cost waste, and margin pressure across the business."],
-  ["Company Customised AI Agents", "We build AI agents tailored to your business that automate tasks, handle enquiries, and improve decision-making across your operations."],
-  ["Workflow Automations (Operation Acceleration)", "We design and implement automation systems that remove manual work, speed up processes, and improve overall business efficiency."],
-  ["Training (Staff, Personal & Career Development)", "We provide training programs to improve staff performance, develop individual skills, and support long-term career growth."],
-  ["Software Development / Apps", "We create custom software and mobile/web applications designed to solve specific business problems and improve productivity."],
-  ["Startup Mentorship", "We guide startups with strategy, product development, and business growth support to help them launch and scale successfully."],
-  ["Career Development and Job Success", "We help you go from CV to job offer with a complete career system. We improve your CV, write strong personal statements, and create tailored cover letters to get more interviews. We build a focused job search strategy, provide interview coaching to improve your performance, and support you in negotiating better job offers."]
-];
-
-const pricingOffers = [
-  { name: "Starter Plan", description: "For small businesses starting out", price: "19", unitText: "MONTH" },
-  { name: "Pro Plan", description: "For growing service businesses", price: "49", unitText: "MONTH" },
-  { name: "Business Plan", description: "For agencies & high-volume businesses", price: "99", unitText: "MONTH" },
-  { name: "Agency / White Label", description: "For agencies reselling FekiTech", price: "199", unitText: "MONTH" },
-  { name: "Starter Package", description: "Business audit + structure review", minPrice: "500", maxPrice: "1500" },
-  { name: "Growth Package", description: "Systems + digital transformation setup", minPrice: "2000", maxPrice: "5000" },
-  { name: "FOS Implementation (Main Offer)", description: "Full business operating system build", minPrice: "5000" },
-  { name: "Enterprise (Custom)", description: "Full transformation + ongoing support" }
-];
 
 function escapeHtml(value) {
   return String(value)
@@ -62,10 +37,6 @@ function setLink(selector, attributes) {
   Object.entries(attributes).forEach(([key, value]) => element.setAttribute(key, value));
 }
 
-function compact(values) {
-  return [...new Set(values.filter(Boolean))];
-}
-
 function getBreadcrumbItems(pathname) {
   if (pathname === "/") {
     return [];
@@ -76,7 +47,6 @@ function getBreadcrumbItems(pathname) {
     "/services": "Services",
     "/pricing": "Pricing",
     "/blog": "Blog",
-    "/blog/all": "All articles",
     "/contact": "Contact"
   };
 
@@ -113,11 +83,17 @@ function getBreadcrumbItems(pathname) {
 export function getStructuredData(pathname = "/") {
   const canonical = getCanonicalUrl(pathname);
   const organizationId = `${siteConfig.siteUrl}/#organization`;
-  const professionalServiceId = `${siteConfig.siteUrl}/#professional-service`;
   const contactPointId = `${siteConfig.siteUrl}/#contact-point`;
   const websiteId = `${siteConfig.siteUrl}/#website`;
   const seo = getSeo(pathname);
   const realSocialProfiles = siteConfig.sameAs.filter(Boolean);
+  const pageType = pathname === "/about"
+    ? "AboutPage"
+    : pathname === "/contact"
+      ? "ContactPage"
+      : pathname === "/blog"
+        ? "CollectionPage"
+        : "WebPage";
   const graph = [
     {
       "@type": "Organization",
@@ -128,47 +104,39 @@ export function getStructuredData(pathname = "/") {
       image: absoluteUrl(siteConfig.ogImage),
       description: siteConfig.defaultDescription,
       email: siteConfig.contactEmail,
-      contactPoint: { "@id": contactPointId },
-      sameAs: realSocialProfiles
-    },
-    {
-      "@type": ["ProfessionalService", "LocalBusiness"],
-      "@id": professionalServiceId,
-      name: siteConfig.siteName,
-      url: siteConfig.siteUrl,
-      description: siteConfig.defaultDescription,
-      image: absoluteUrl(siteConfig.ogImage),
-      logo: absoluteUrl(siteConfig.logo),
-      email: siteConfig.contactEmail,
       telephone: siteConfig.phone,
-      priceRange: "Custom",
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: "71-75, Shelton Street, Covent Garden",
-        addressLocality: "London",
-        postalCode: "WC2H 9JQ",
-        addressCountry: "GB"
-      },
-      areaServed: [
-        { "@type": "Country", name: "United Kingdom" },
-        { "@type": "Place", name: "Local businesses" }
+      address: [
+        {
+          "@type": "PostalAddress",
+          streetAddress: "71-75, Shelton Street, Covent Garden",
+          addressLocality: "London",
+          postalCode: "WC2H 9JQ",
+          addressCountry: "GB"
+        },
+        {
+          "@type": "PostalAddress",
+          streetAddress: "10 Brindley Place",
+          addressLocality: "Birmingham",
+          postalCode: "B1 2JB",
+          addressCountry: "GB"
+        }
       ],
-      serviceType: [
+      areaServed: { "@type": "Country", name: "United Kingdom" },
+      knowsAbout: [
         "Business transformation",
-        "Business consulting",
-        "Operational improvement",
-        "Business systems advisory",
-        "Profitability improvement",
-        "Process improvement"
+        "Business systems",
+        "Workflow automation",
+        "Business intelligence",
+        "Process optimisation",
+        "Practical software"
       ],
-      parentOrganization: { "@id": organizationId },
       contactPoint: { "@id": contactPointId },
       sameAs: realSocialProfiles
     },
     {
       "@type": "ContactPoint",
       "@id": contactPointId,
-      contactType: "business transformation support",
+      contactType: "business enquiries",
       email: siteConfig.contactEmail,
       telephone: siteConfig.phone,
       availableLanguage: ["English"],
@@ -184,14 +152,14 @@ export function getStructuredData(pathname = "/") {
       publisher: { "@id": organizationId }
     },
     {
-      "@type": "WebPage",
+      "@type": pageType,
       "@id": `${canonical}#webpage`,
       url: canonical,
       name: seo.title,
       description: seo.description,
       isPartOf: { "@id": websiteId },
       inLanguage: "en-GB",
-      about: { "@id": professionalServiceId }
+      about: { "@id": organizationId }
     }
   ];
 
@@ -211,15 +179,15 @@ export function getStructuredData(pathname = "/") {
 
   if (pathname === "/services") {
     graph.push(
-      ...serviceItems.map(([name, description]) => ({
+      ...servicePages.map((serviceItem) => ({
         "@type": "Service",
-        "@id": `${canonical}#${name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`,
-        name,
-        description,
-        provider: { "@id": professionalServiceId },
-        serviceType: name,
+        "@id": `${absoluteUrl(`/services/${serviceItem.slug}`)}#service`,
+        name: serviceItem.title,
+        description: serviceItem.shortDescription,
+        provider: { "@id": organizationId },
+        serviceType: serviceItem.title,
         areaServed: { "@type": "Country", name: "United Kingdom" },
-        url: canonical
+        url: absoluteUrl(`/services/${serviceItem.slug}`)
       }))
     );
   }
@@ -232,19 +200,10 @@ export function getStructuredData(pathname = "/") {
       name: service.title,
       description: service.heroSummary,
       serviceType: service.title,
-      provider: { "@id": professionalServiceId },
+      provider: { "@id": organizationId },
       areaServed: { "@type": "Country", name: "United Kingdom" },
       url: canonical,
       mainEntityOfPage: { "@id": `${canonical}#webpage` }
-    });
-    graph.push({
-      "@type": "FAQPage",
-      "@id": `${canonical}#faq`,
-      mainEntity: service.faqs.map((faq) => ({
-        "@type": "Question",
-        name: faq.question,
-        acceptedAnswer: { "@type": "Answer", text: faq.answer }
-      }))
     });
   }
 
@@ -271,7 +230,7 @@ export function getStructuredData(pathname = "/") {
               }
             }
           : {}),
-        seller: { "@id": professionalServiceId }
+        seller: { "@id": organizationId }
       }))
     });
   }
@@ -286,7 +245,7 @@ export function getStructuredData(pathname = "/") {
       url: canonical,
       mainEntityOfPage: {
         "@type": "WebPage",
-        "@id": canonical
+        "@id": `${canonical}#webpage`
       },
       isPartOf: { "@id": websiteId },
       inLanguage: "en-GB",
@@ -298,32 +257,6 @@ export function getStructuredData(pathname = "/") {
       publisher: { "@id": organizationId }
     });
 
-    if (blogPost.faqs && blogPost.faqs.length > 0) {
-      graph.push({
-        "@type": "FAQPage",
-        "@id": `${canonical}#faq`,
-        mainEntity: blogPost.faqs.map((faq) => ({
-          "@type": "Question",
-          name: faq.question,
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: faq.answer
-          }
-        }))
-      });
-    }
-  }
-
-  if (pathname === "/") {
-    graph.push({
-      "@type": "VideoObject",
-      "@id": `${canonical}#hero-video`,
-      name: "Fekitech Business Transformation",
-      description: siteConfig.defaultDescription,
-      thumbnailUrl: absoluteUrl("/outcome-business-success.webp"),
-      uploadDate: "2024-01-01T08:00:00+08:00",
-      contentUrl: "https://pub-9f4f9c9b1b3e477aba4991ccfd92f1ae.r2.dev/fekitech%20new%20vid.mp4"
-    });
   }
 
   return {
@@ -342,17 +275,16 @@ export function getHeadTags(pathname = "/") {
   const imageHeight = String(seo.imageHeight || 630);
   const structuredData = getStructuredData(pathname);
   const robots = pathname === "/admin" ? "noindex, nofollow, noarchive" : "index, follow";
-  const keywords = compact([...(siteConfig.keywords || []), ...(seo.keywords || [])]).join(", ");
+  const blogPost = getBlogPost(pathname);
 
   return [
     `<title>${escapeHtml(seo.title)}</title>`,
     `<meta name="robots" content="${robots}" />`,
     `<meta name="description" content="${escapeHtml(seo.description)}" />`,
-    `<meta name="keywords" content="${escapeHtml(keywords)}" />`,
     `<link rel="canonical" href="${escapeHtml(canonical)}" />`,
     `<link rel="alternate" href="${escapeHtml(canonical)}" hreflang="en-GB" />`,
     `<link rel="alternate" href="${escapeHtml(canonical)}" hreflang="x-default" />`,
-    `<meta property="og:type" content="${pathname.startsWith("/blog/") ? "article" : "website"}" />`,
+    `<meta property="og:type" content="${blogPost ? "article" : "website"}" />`,
     `<meta property="og:locale" content="en_GB" />`,
     `<meta property="og:site_name" content="${escapeHtml(siteConfig.siteName)}" />`,
     `<meta property="og:title" content="${escapeHtml(seo.title)}" />`,
@@ -368,6 +300,13 @@ export function getHeadTags(pathname = "/") {
     `<meta name="twitter:description" content="${escapeHtml(seo.description)}" />`,
     `<meta name="twitter:image" content="${escapeHtml(image)}" />`,
     `<meta name="twitter:image:alt" content="${escapeHtml(imageAlt)}" />`,
+    ...(blogPost
+      ? [
+          `<meta property="article:published_time" content="${escapeHtml(seo.datePublished)}" />`,
+          `<meta property="article:modified_time" content="${escapeHtml(seo.lastModified)}" />`,
+          `<meta property="article:section" content="${escapeHtml(blogPost.category || "Business transformation")}" />`
+        ]
+      : []),
     ...(pathname === "/"
       ? [
           '<link rel="preload" as="image" href="/outcome-business-success.webp" fetchpriority="high" />',
@@ -388,16 +327,15 @@ export function applySeo(pathname = "/") {
   const imageWidth = String(seo.imageWidth || 1200);
   const imageHeight = String(seo.imageHeight || 630);
   const robots = pathname === "/admin" ? "noindex, nofollow, noarchive" : "index, follow";
-  const keywords = compact([...(siteConfig.keywords || []), ...(seo.keywords || [])]).join(", ");
+  const blogPost = getBlogPost(pathname);
 
   document.title = seo.title;
   setMetaContent('meta[name="robots"]', { name: "robots", content: robots });
   setMetaContent('meta[name="description"]', { name: "description", content: seo.description });
-  setMetaContent('meta[name="keywords"]', { name: "keywords", content: keywords });
   setLink('link[rel="canonical"]', { rel: "canonical", href: canonical });
   setLink('link[rel="alternate"][hreflang="en-GB"]', { rel: "alternate", href: canonical, hreflang: "en-GB" });
   setLink('link[rel="alternate"][hreflang="x-default"]', { rel: "alternate", href: canonical, hreflang: "x-default" });
-  setMetaContent('meta[property="og:type"]', { property: "og:type", content: pathname.startsWith("/blog/") ? "article" : "website" });
+  setMetaContent('meta[property="og:type"]', { property: "og:type", content: blogPost ? "article" : "website" });
   setMetaContent('meta[property="og:locale"]', { property: "og:locale", content: "en_GB" });
   setMetaContent('meta[property="og:site_name"]', { property: "og:site_name", content: siteConfig.siteName });
   setMetaContent('meta[property="og:title"]', { property: "og:title", content: seo.title });
@@ -413,6 +351,11 @@ export function applySeo(pathname = "/") {
   setMetaContent('meta[name="twitter:description"]', { name: "twitter:description", content: seo.description });
   setMetaContent('meta[name="twitter:image"]', { name: "twitter:image", content: image });
   setMetaContent('meta[name="twitter:image:alt"]', { name: "twitter:image:alt", content: imageAlt });
+  if (blogPost) {
+    setMetaContent('meta[property="article:published_time"]', { property: "article:published_time", content: seo.datePublished });
+    setMetaContent('meta[property="article:modified_time"]', { property: "article:modified_time", content: seo.lastModified });
+    setMetaContent('meta[property="article:section"]', { property: "article:section", content: blogPost.category || "Business transformation" });
+  }
 
   let jsonLd = document.head.querySelector('script[type="application/ld+json"][data-seo-jsonld]');
   if (!jsonLd) {
@@ -427,11 +370,10 @@ export function applySeo(pathname = "/") {
 export function getSitemapXml() {
   const entries = sitemapRoutes
     .map((route) => {
-    const seo = pageSeo[route] || getSeo(route);
+      const seo = pageSeo[route] || getSeo(route);
       return `  <url>
     <loc>${escapeHtml(absoluteUrl(route))}</loc>
-    <lastmod>${seo.lastModified || "2026-07-13"}</lastmod>
-    <priority>${seo?.priority ?? 0.7}</priority>
+    <lastmod>${seo.lastModified}</lastmod>
   </url>`;
     })
     .join("\n");
