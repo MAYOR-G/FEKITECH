@@ -6,18 +6,23 @@ import ServiceVisual from "./ServiceVisual.jsx";
 const guideLinksByService = {
   "business-intelligence-architecture": [
     ["Business intelligence and KPI dashboards", "/blog/business-intelligence-small-business-kpi-dashboard"],
-    ["KPI dashboard software for small businesses", "/blog/kpi-dashboard-software-small-business"]
+    ["KPI dashboard software for small businesses", "/blog/kpi-dashboard-software-small-business"],
+    ["Power BI dashboard cost for UK SMEs", "/blog/power-bi-dashboard-cost-uk-smes"]
   ],
   "company-customised-ai-agents": [
     ["AI agents for small businesses", "/blog/ai-agents-for-small-business"],
-    ["AI agents versus workflow automation", "/blog/ai-agent-vs-workflow-automation-small-business"]
+    ["AI agents versus workflow automation", "/blog/ai-agent-vs-workflow-automation-small-business"],
+    ["AI readiness audit checklist", "/blog/ai-readiness-audit-small-business-checklist"],
+    ["AI receptionist for UK small businesses", "/blog/ai-receptionist-uk-small-business"]
   ],
   "workflow-automations": [
     ["Website automation services explained", "/blog/website-automation-small-businesses"],
-    ["AI agents versus workflow automation", "/blog/ai-agent-vs-workflow-automation-small-business"]
+    ["Automate quotes, invoices and follow-up", "/blog/automate-quotes-invoices-customer-follow-up"],
+    ["n8n vs Make vs Zapier", "/blog/n8n-vs-make-vs-zapier-uk-small-business"]
   ],
   "process-optimisation-and-automation": [
     ["AI agents versus workflow automation", "/blog/ai-agent-vs-workflow-automation-small-business"],
+    ["Business process automation for UK SMEs", "/blog/business-process-automation-uk-smes-workflows"],
     ["Website automation services explained", "/blog/website-automation-small-businesses"]
   ],
   "profitability-improvement": [
@@ -30,7 +35,8 @@ const guideLinksByService = {
   ],
   "digital-transformation": [
     ["Website automation services explained", "/blog/website-automation-small-businesses"],
-    ["AI agents versus workflow automation", "/blog/ai-agent-vs-workflow-automation-small-business"]
+    ["How to build a small-business operating system", "/blog/small-business-operating-system"],
+    ["AI automation cost for UK small businesses", "/blog/ai-automation-cost-small-business-uk"]
   ]
 };
 

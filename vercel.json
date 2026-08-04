@@ -132,12 +132,16 @@
       "destination": "/blog/index.html"
     },
     {
-      "source": "/contact",
-      "destination": "/contact/index.html"
+      "source": "/blog/page/:page",
+      "destination": "/blog/page/:page/index.html"
     },
     {
-      "source": "/blog/why-most-businesses-are-not-profitable",
-      "destination": "/blog/why-most-businesses-are-not-profitable/index.html"
+      "source": "/blog/:slug",
+      "destination": "/blog/:slug/index.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact/index.html"
     },
     {
       "source": "/admin",

@@ -2,6 +2,11 @@ import { blogPosts } from "../blogPosts.js";
 import { servicePages, serviceRoutes } from "../serviceData.js";
 
 const fallbackSiteUrl = "https://fekitech.co.uk";
+export const BLOG_POSTS_PER_PAGE = 12;
+export const blogPageRoutes = Array.from(
+  { length: Math.max(0, Math.ceil(blogPosts.length / BLOG_POSTS_PER_PAGE) - 1) },
+  (_, index) => `/blog/page/${index + 2}`
+);
 
 export function absoluteUrl(path = "/") {
   const normalisedPath = path.startsWith("/") ? path : `/${path}`;
@@ -95,9 +100,21 @@ export const pageSeo = {
       "Practical guides on business systems, workflow automation, AI agents, business intelligence, customer retention and profitable growth for UK businesses.",
     canonicalPath: "/blog",
     priority: 0.7,
-    lastModified: "2026-07-18",
+    lastModified: blogPosts[0]?.lastModified || "2026-07-18",
     keywords: ["business transformation blog", "business operations insights", "profitability insights", "process improvement"]
   },
+  ...Object.fromEntries(blogPageRoutes.map((route) => {
+    const page = Number(route.split("/").pop());
+    const firstPost = blogPosts[(page - 1) * BLOG_POSTS_PER_PAGE];
+    return [route, {
+      title: `Business Automation & Technology Blog - Page ${page} | Fekitech`,
+      description: `Browse page ${page} of Fekitech guides on AI automation, business intelligence, websites, software, operations and practical growth systems.`,
+      canonicalPath: route,
+      priority: 0.6,
+      lastModified: firstPost?.lastModified || blogPosts[0]?.lastModified || "2026-07-18",
+      keywords: ["business automation blog", "technology blog UK", "Fekitech insights"]
+    }];
+  })),
   ...Object.fromEntries(blogPosts.map((post) => [post.slug, {
     title: post.seoTitle,
     description: post.metaDescription,
@@ -139,12 +156,12 @@ export const pageSeo = {
     description: service.metaDescription,
     canonicalPath: servicePath(service.slug),
     priority: 0.8,
-    lastModified: "2026-07-13",
+    lastModified: service.lastModified || "2026-07-13",
     keywords: [service.title.toLowerCase(), service.category.toLowerCase(), "Fekitech services"]
   }]))
 };
 
-export const sitemapRoutes = ["/", "/about", "/services", ...serviceRoutes, "/pricing", "/blog", "/contact", ...blogPosts.map((post) => post.slug)];
+export const sitemapRoutes = ["/", "/about", "/services", ...serviceRoutes, "/pricing", "/blog", ...blogPageRoutes, "/contact", ...blogPosts.map((post) => post.slug)];
 export const prerenderRoutes = [...sitemapRoutes, "/admin"];
 
 export function getSeo(pathname = "/") {

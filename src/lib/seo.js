@@ -50,6 +50,15 @@ function getBreadcrumbItems(pathname) {
     "/contact": "Contact"
   };
 
+  if (pathname.startsWith("/blog/page/")) {
+    const pageNumber = pathname.split("/").pop();
+    return [
+      { name: "Home", item: absoluteUrl("/") },
+      { name: "Blog", item: absoluteUrl("/blog") },
+      { name: `Page ${pageNumber}`, item: getCanonicalUrl(pathname) }
+    ];
+  }
+
   const service = getServicePage(pathname);
   if (service) {
     return [
@@ -91,7 +100,7 @@ export function getStructuredData(pathname = "/") {
     ? "AboutPage"
     : pathname === "/contact"
       ? "ContactPage"
-      : pathname === "/blog"
+      : pathname === "/blog" || pathname.startsWith("/blog/page/")
         ? "CollectionPage"
         : "WebPage";
   const graph = [
@@ -190,6 +199,18 @@ export function getStructuredData(pathname = "/") {
         url: absoluteUrl(`/services/${serviceItem.slug}`)
       }))
     );
+  }
+
+  if (pathname === "/blog" || pathname.startsWith("/blog/page/")) {
+    graph.push({
+      "@type": "Blog",
+      "@id": `${canonical}#blog`,
+      name: seo.title,
+      description: seo.description,
+      url: canonical,
+      publisher: { "@id": organizationId },
+      inLanguage: "en-GB"
+    });
   }
 
   const service = getServicePage(pathname);

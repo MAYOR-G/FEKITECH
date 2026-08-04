@@ -496,13 +496,13 @@ export const servicePages = [
     category: "Capability development",
     eyebrow: "Build confidence through practice",
     heroTitle: "Give people the skills to use technology, lead well, and progress with purpose",
-    heroSummary: "We design practical staff, personal, and career-development programmes around real capability gaps, workplace scenarios, and useful application after the session.",
-    valueProposition: "Training creates value when people can apply it to their work, receive feedback, and continue developing after the workshop ends.",
+    heroSummary: "We design practical staff digital-skills, AI adoption, workflow training, leadership and professional-development programmes for employers and teams.",
+    valueProposition: "Workforce training creates value when staff can apply new skills to their actual roles, receive feedback, and keep improving after the workshop ends.",
     overview: {
       title: "Turn learning needs into practical capability",
       paragraphs: [
         "Generic training often covers too much, connects poorly to the learner’s context, and ends without a plan for application. Employees may understand the presentation but still feel uncertain when they return to the system, conversation, or decision they need to handle.",
-        "Fekitech defines the audience, expected behaviours, current capability, real scenarios, and evidence of learning before creating the programme. Delivery can combine workshops, demonstrations, guided practice, coaching, resources, and follow-up support."
+        "Fekitech defines the employer audience, expected behaviours, current capability, real workplace scenarios, and evidence of learning before creating the programme. Delivery can combine workshops, demonstrations, guided practice, coaching, resources, and follow-up support."
       ],
       highlight: "The content is tailored to the job to be done. People learn by working through relevant situations and leave with practical next steps rather than a folder of unused slides."
     },
@@ -510,7 +510,7 @@ export const servicePages = [
       { title: "Uneven digital confidence", text: "Teams use the same tools in different ways, avoid valuable features, or depend on a few confident colleagues for routine support." },
       { title: "Low adoption after change", text: "New systems or processes are launched without enough role-based practice, leaving people uncertain and old habits intact." },
       { title: "Leadership and communication gaps", text: "Managers need practical support with expectations, feedback, delegation, difficult conversations, and clear team communication." },
-      { title: "Unclear development routes", text: "Individuals want to progress but lack a realistic view of capability gaps, evidence, practice opportunities, and next actions." }
+      { title: "Unclear workforce development routes", text: "Teams need to improve capability, but managers lack a practical plan for skill gaps, practice opportunities, reinforcement, and next actions." }
     ],
     deliverables: [
       { title: "Learning-needs assessment", text: "A focused view of audiences, current capability, target behaviours, practical barriers, priority topics, and suitable delivery formats." },
@@ -525,11 +525,11 @@ export const servicePages = [
       { step: "04", title: "Workplace application", text: "Support learners as they apply the capability through tasks, action plans, manager conversations, or coaching." },
       { step: "05", title: "Review and reinforce", text: "Gather evidence and feedback, address remaining gaps, and recommend reinforcement or a next stage of development." }
     ],
-    capabilities: ["Digital skills training", "AI and technology workshops", "Leadership and communication", "Personal development", "Career preparation", "Tailored team programmes"],
+    capabilities: ["Staff digital skills training", "AI and technology workshops", "Workflow adoption training", "Leadership and communication", "Workforce capability planning", "Tailored team programmes"],
     useCases: [
       { title: "Technology adoption", text: "Teams need role-based confidence with new digital systems, automation, AI tools, data practices, or updated workflows." },
       { title: "Manager development", text: "New and existing managers need practical tools for delegation, feedback, communication, accountability, and team performance." },
-      { title: "Personal and career growth", text: "Individuals need structured development around confidence, direction, communication, digital capability, or career readiness." }
+      { title: "Workforce capability building", text: "Employers need structured development around digital capability, technology adoption, communication, leadership, and team productivity." }
     ],
     outcomes: ["Greater confidence applying relevant skills in realistic situations", "More consistent use of agreed tools and working practices", "Clearer individual development priorities and next actions", "Learning resources and reinforcement that extend beyond the session"],
     why: [
@@ -545,11 +545,12 @@ export const servicePages = [
       { question: "How do you evaluate whether training worked?", answer: "The approach may include practical tasks, observed scenarios, learner reflection, action plans, manager feedback, usage evidence, or follow-up checks. We select evidence that is proportionate and connected to the learning objective." },
       { question: "Can you create an ongoing learning programme?", answer: "Yes. We can design a sequence of modules, practice, coaching, resources, peer learning, and reviews rather than a single event, with priorities adjusted as capability develops." }
     ],
-    related: ["digital-transformation", "company-customised-ai-agents", "career-development"],
+    related: ["digital-transformation", "company-customised-ai-agents", "business-structure-design"],
     visual: "training",
     visualAlt: "Professional learning workshop visual with facilitator, practical exercises, and learner development path",
-    metaTitle: "Staff and Career Development Training | Fekitech",
-    metaDescription: "Build digital, AI, leadership, personal and career capability with tailored practical Fekitech training programmes. Discuss your learning needs."
+    lastModified: "2026-08-04",
+    metaTitle: "Staff Digital Skills and Workforce Training UK | Fekitech",
+    metaDescription: "Build staff digital skills, AI adoption, workflow confidence and workforce capability with practical Fekitech training for UK employers."
   },
   {
     title: "Software Development / Apps",
@@ -732,8 +733,9 @@ export const servicePages = [
     related: ["training-and-career-development", "startup-mentorship", "company-customised-ai-agents"],
     visual: "career",
     visualAlt: "Career coaching visual showing CV evidence, LinkedIn positioning, interview preparation, and offer decision path",
-    metaTitle: "Career Development and Job Success | Fekitech",
-    metaDescription: "Improve your CV, LinkedIn, job search, interviews, portfolio and offer preparation with practical Fekitech career support. Book a call."
+    lastModified: "2026-08-04",
+    metaTitle: "Career Coaching and Job Application Support UK | Fekitech",
+    metaDescription: "Get UK career coaching for CV improvement, LinkedIn optimisation, job applications, interview preparation and portfolio presentation."
   }
 ];
 

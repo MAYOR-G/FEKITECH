@@ -1,9 +1,9 @@
-export const newBlogPosts = [
+const coreNewBlogPosts = [
   {
     slug: "/blog/kpi-dashboard-software-small-business",
     category: "Business Intelligence",
-    title: "KPI Dashboard Software for Small Businesses: Buy, Build or Use Spreadsheets?",
-    seoTitle: "KPI Dashboard Software for Small Business | Fekitech",
+    title: "KPI Dashboard Software for Small Businesses: Buy vs Build",
+    seoTitle: "KPI Dashboard Software for Small Businesses: Buy vs Build",
     metaDescription:
       "Compare spreadsheets, off-the-shelf KPI software and custom dashboards to choose a reporting approach that fits your small business.",
     excerpt:
@@ -23,13 +23,13 @@ export const newBlogPosts = [
     imageAlt: "Small business leadership team comparing a spreadsheet, dashboard software and custom KPI reporting architecture",
     imageWidth: 1376,
     imageHeight: 768,
-    h1: "KPI Dashboard Software for Small Businesses: Buy, Build or Use Spreadsheets?",
+    h1: "KPI Dashboard Software for Small Businesses: Buy vs Build",
     lead:
       "The best KPI dashboard software for a small business is the simplest option that produces trusted numbers, supports the decisions people actually make and can be maintained without heroic manual work.",
     intro: [
       "Use a well-controlled spreadsheet when the data is limited, the reporting cycle is manageable and one accountable person can keep definitions consistent. Choose off-the-shelf dashboard software when standard connectors and reporting patterns cover most requirements. Consider a custom dashboard when the business must combine several systems, apply company-specific calculations, control access carefully or embed reporting into a wider operating process.",
       "The product is only one part of the decision. A polished chart cannot correct duplicate records, unclear definitions or a workflow in which nobody owns the response. Start with the management questions and data responsibilities, then choose the technology.",
-      "This guide provides a buy-versus-build framework for UK small and growing businesses. It does not rank vendors or assume that custom development is automatically better."
+      "This guide provides a buy-versus-build framework for UK small and growing businesses. If you need the wider KPI strategy, data governance and decision architecture, read the separate business intelligence guide linked below."
     ],
     sections: [
       {
@@ -197,7 +197,7 @@ export const newBlogPosts = [
   },
   {
     slug: "/blog/ai-agent-vs-workflow-automation-small-business",
-    category: "Automation",
+    category: "AI and Automation",
     title: "AI Agent vs Workflow Automation: Which Does Your Small Business Need?",
     seoTitle: "AI Agent vs Workflow Automation for Small Business",
     metaDescription:
@@ -417,7 +417,7 @@ export const newBlogPosts = [
   },
   {
     slug: "/blog/ai-agents-for-small-business",
-    category: "Artificial Intelligence",
+    category: "AI and Automation",
     title: "AI Agents for Small Business: Practical Use Cases, Risks and an Implementation Guide",
     seoTitle: "AI Agents for Small Business: A Practical Guide",
     metaDescription:
@@ -590,10 +590,10 @@ export const newBlogPosts = [
   {
     slug: "/blog/business-intelligence-small-business-kpi-dashboard",
     category: "Business Intelligence",
-    title: "Business Intelligence for Small Businesses: How to Build a KPI Dashboard That Supports Better Decisions",
-    seoTitle: "Business Intelligence for Small Business: KPI Guide",
+    title: "Business Intelligence for Small Businesses: A Practical KPI Strategy",
+    seoTitle: "Business Intelligence for Small Businesses: Practical KPI Strategy",
     metaDescription:
-      "Learn how business intelligence for small business turns scattered data into a focused KPI dashboard, with practical steps, examples and mistakes to avoid.",
+      "Build a practical business intelligence strategy for small businesses, covering KPI selection, data sources, governance and better decisions.",
     excerpt:
       "A step-by-step guide to choosing useful KPIs, connecting reliable data, and building a dashboard that helps managers decide what to do next.",
     readTime: "12 min read",
@@ -608,13 +608,13 @@ export const newBlogPosts = [
     imageAlt: "Manager and colleague reviewing a small business KPI dashboard on a tablet",
     imageWidth: 1376,
     imageHeight: 768,
-    h1: "Business Intelligence for Small Businesses: How to Build a KPI Dashboard That Supports Better Decisions",
+    h1: "Business Intelligence for Small Businesses: A Practical KPI Strategy",
     lead:
       "Business intelligence for small business is the practical work of turning data from sales, finance, customers and operations into a trusted view that helps leaders decide what needs attention.",
     intro: [
       "Growing businesses often have plenty of data but very little visibility. Sales sit in one tool, invoices in another, customer activity in a CRM and delivery updates in spreadsheets. A manager spends hours assembling a report that is already out of date when it is shared.",
       "A useful small business KPI dashboard does not display every available number. It connects a small set of reliable measures to the decisions the team must make: where enquiries are being lost, which work is delayed, whether margins are under pressure and which customers need attention.",
-      "This guide explains how to choose KPIs, organise data sources and build business intelligence that people will actually use."
+      "This guide focuses on the strategy behind business intelligence: selecting KPIs, combining data sources, governing definitions and improving decisions. If you are comparing spreadsheet, software and custom-dashboard options, use the separate KPI dashboard software guide."
     ],
     sections: [
       { id: "what-bi-means", heading: "What business intelligence means for a small business", body: [
@@ -715,7 +715,7 @@ export const newBlogPosts = [
   },
   {
     slug: "/blog/customer-retention-strategy-small-business",
-    category: "Customer Retention",
+    category: "Business Operations",
     title: "Customer Retention Strategy for Small Businesses: How to Build a System That Keeps Customers",
     seoTitle: "Customer Retention Strategy for Small Business",
     metaDescription:
@@ -847,3 +847,467 @@ export const newBlogPosts = [
     cta: "Fekitech can help you map the customer lifecycle, clarify ownership and implement CRM, feedback and re-engagement workflows that your team can maintain."
   }
 ];
+
+const strategicBlogPosts = [
+  {
+    slug: "/blog/ai-automation-cost-small-business-uk",
+    category: "AI and Automation",
+    title: "How Much Does AI Automation Cost for a Small Business in the UK? 2026 Pricing Guide",
+    seoTitle: "AI Automation Cost for Small Business UK: 2026 Guide | Fekitech",
+    metaDescription: "Plan AI automation costs for a UK small business, including tools, setup, integrations, support, data protection and buy-versus-build decisions.",
+    excerpt: "A practical UK cost guide for small businesses planning AI automation, from simple workflows to managed systems with human oversight.",
+    readTime: "10 min read",
+    datePublished: "2026-08-04",
+    lastModified: "2026-08-04",
+    primaryKeyword: "AI automation cost for small business UK",
+    keywords: ["AI automation cost UK", "small business AI automation pricing", "AI workflow automation UK"],
+    featuredImage: "/ai-agent-vs-workflow-automation-small-business.webp",
+    imageAlt: "UK small business owner reviewing AI automation scope, software cost and workflow risk",
+    imageWidth: 1376,
+    imageHeight: 768,
+    h1: "How Much Does AI Automation Cost for a Small Business in the UK? 2026 Pricing Guide",
+    lead: "AI automation cost depends less on the AI model and more on the workflow, data quality, integrations, risk controls and support needed to keep the system useful.",
+    intro: [
+      "A small business can start with inexpensive automation software, but a dependable AI-enabled workflow usually needs discovery, process design, secure data access, testing, monitoring and human fallback.",
+      "The useful budget question is not “what does AI cost?” It is “which repeated decision or workflow is valuable enough to automate, and what controls does it need?”",
+      "This guide explains the cost drivers without inventing fixed prices or promising a return."
+    ],
+    sections: [
+      { id: "cost-drivers", heading: "What drives AI automation cost?", body: [
+        "The main cost drivers are workflow complexity, number of systems, data quality, call or message volume, permissions, approvals, monitoring, and whether a team can maintain the workflow after launch.",
+        "Simple automations may only need a form, routing rule and notification. AI workflows cost more when the system must interpret free text, search a knowledge base, produce a draft, update a CRM or trigger a follow-up under approval."
+      ], bullets: ["Discovery and workflow mapping", "Automation platform subscription or hosting", "AI model usage and prompt evaluation", "CRM, email, calendar, finance or database integrations", "Testing, monitoring and support"] },
+      { id: "pricing-models", heading: "Common pricing models to compare", body: [
+        "Small businesses often compare no-code tools, managed automation retainers and custom builds. Each has a different cost shape.",
+        "Zapier counts successful action steps as tasks, Make uses credits for module actions, and n8n Cloud is commonly discussed around workflow executions. Self-hosting n8n can reduce platform fees but moves hosting, updates and security responsibility to the business or its technical partner."
+      ], table: { headers: ["Option", "Best fit", "Cost risk"], rows: [
+        ["No-code automation", "Simple app-to-app handoffs", "Usage can grow as workflows run more often"],
+        ["Managed automation", "Teams that want setup and support handled", "Scope creep without clear workflow ownership"],
+        ["Custom system", "Specific logic, permissions or interfaces", "Overbuilding before process clarity"],
+        ["Self-hosted automation", "Technical teams needing control", "Maintenance, security and monitoring responsibility"]
+      ] }, sources: [
+        { href: "https://zapier.com/pricing/rates", label: "Zapier task usage rates" },
+        { href: "https://www.make.com/en/pricing", label: "Make pricing and credits" },
+        { href: "https://blog.n8n.io/n8n-execution-advantage/", label: "n8n execution-based pricing overview" }
+      ] },
+      { id: "uk-considerations", heading: "UK-specific budgeting considerations", body: [
+        "If the automation handles customers, staff, candidates or callers, budget for data-protection work. UK businesses should know what personal data is processed, why it is needed, where it is stored, who can access it and how human review works.",
+        "The ICO’s AI guidance emphasises fair, lawful and transparent processing. That means privacy, purpose limitation and data minimisation should be planned before launch, not added after the workflow is live."
+      ], links: [{ href: "/services/company-customised-ai-agents", label: "company-customised AI agents", context: "For controlled AI design, review" }], sources: [
+        { href: "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/", label: "ICO artificial intelligence guidance" },
+        { href: "https://www.business.gov.uk/support/digital-data-protection-and-cyber-security/data-protection-in-your-business/", label: "Business.gov.uk data protection in your business" }
+      ] },
+      { id: "first-project", heading: "How to scope the first AI automation project", body: [
+        "Start with one repeated workflow where the input, owner, next action and exception route can be described clearly. Estimate monthly volume and the time currently spent on the work. Then decide what must remain human.",
+        "A sensible first release proves the highest-value path, records failures and gives the team a way to override or correct the automation."
+      ], links: [
+        { href: "/blog/ai-readiness-audit-small-business-checklist", label: "AI readiness audit checklist", context: "Before implementation, use the" },
+        { href: "/services/workflow-automations", label: "workflow automation service", context: "For repeatable system handoffs, see Fekitech's" }
+      ] }
+    ],
+    faqs: [
+      { question: "What is a realistic AI automation budget?", answer: "It depends on scope, data, integrations and support. Budget for discovery, setup, platform usage, testing, documentation and monitoring rather than only a monthly AI tool fee." },
+      { question: "Is AI automation cheaper than hiring staff?", answer: "Sometimes it reduces repeated admin, but it should not be framed as a direct replacement for judgement, customer care or accountability. Human review is still needed for sensitive or uncertain work." },
+      { question: "Should a small business start with Zapier, Make or n8n?", answer: "Start with the workflow requirement. Zapier is often easiest for simple handoffs, Make suits visual multi-step scenarios, and n8n is useful where control, self-hosting or complex logic matters." }
+    ],
+    relatedService: { title: "Workflow Automations", href: "/services/workflow-automations" },
+    relatedSlugs: ["/blog/ai-agent-vs-workflow-automation-small-business", "/blog/ai-readiness-audit-small-business-checklist"],
+    ctaHeading: "Price the workflow before buying the tool",
+    cta: "Fekitech can help you map the workflow, compare automation options and identify the first AI-assisted process worth testing."
+  },
+  {
+    slug: "/blog/ai-receptionist-uk-small-business",
+    category: "AI and Automation",
+    title: "AI Receptionist for UK Small Businesses: Costs, Uses and Limitations",
+    seoTitle: "AI Receptionist for UK Small Business: Costs & Limits | Fekitech",
+    metaDescription: "Understand AI receptionist costs, use cases, risks, handoffs and UK data considerations before adding AI call answering to your business.",
+    excerpt: "A practical guide to when AI receptionists help UK small businesses and where human escalation, privacy and careful call design still matter.",
+    readTime: "9 min read",
+    datePublished: "2026-08-04",
+    lastModified: "2026-08-04",
+    primaryKeyword: "AI receptionist UK small business",
+    keywords: ["AI receptionist UK", "AI phone answering small business", "AI call answering costs"],
+    featuredImage: "/outcome-customer-growth.webp",
+    imageAlt: "Small business team reviewing customer call handling and AI receptionist workflow",
+    imageWidth: 1376,
+    imageHeight: 768,
+    h1: "AI Receptionist for UK Small Businesses: Costs, Uses and Limitations",
+    lead: "An AI receptionist can help capture calls and route enquiries, but it needs clear scripts, escalation rules and privacy controls to avoid creating a poor customer experience.",
+    intro: [
+      "The strongest use cases are routine: answering common questions, taking messages, qualifying enquiries, booking appointments and sending summaries to the team.",
+      "The risks appear when a caller needs empathy, negotiation, emergency judgement, identity checks or a decision the business has not authorised the system to make.",
+      "This guide helps UK small businesses decide whether AI call answering is appropriate before committing to a provider or custom build."
+    ],
+    sections: [
+      { id: "uses", heading: "What an AI receptionist can do", body: [
+        "A well-scoped AI receptionist can greet callers, ask structured questions, capture names and contact details, answer approved FAQs, check appointment availability, create a summary and notify the right person.",
+        "It works best where the business can define the call types and the allowed next steps in plain language."
+      ], bullets: ["Missed-call capture", "Appointment requests", "Lead qualification", "FAQ answering from approved content", "Call summaries and CRM notes"] },
+      { id: "costs", heading: "What affects AI receptionist cost?", body: [
+        "Published UK pricing varies widely because providers bundle minutes, phone numbers, voices, setup, human backup and integrations differently. Compare the real call volume and overage model, not only the headline monthly price.",
+        "Custom or managed systems cost more when they require CRM updates, bespoke call flows, multilingual support, out-of-hours routing or compliance documentation."
+      ], table: { headers: ["Cost factor", "Why it matters"], rows: [
+        ["Included minutes", "Busy phone lines can exceed entry plans quickly"],
+        ["Setup depth", "A generic greeting is simpler than a role-specific call flow"],
+        ["Integrations", "Calendar, CRM and notification handoffs add implementation work"],
+        ["Human fallback", "Escalation improves service but adds cost and process design"],
+        ["Monitoring", "Call quality needs review, correction and updates"]
+      ] }, sources: [
+        { href: "https://team-connect.co.uk/ai-receptionist/pricing", label: "Team-Connect AI receptionist pricing" },
+        { href: "https://www.staffley.ai/pricing", label: "Staffley AI receptionist pricing" }
+      ] },
+      { id: "limitations", heading: "Limitations to plan for", body: [
+        "AI receptionists can misunderstand accents, intent, noisy calls or unusual requests. They may sound fluent while missing a detail that matters operationally. That is why the system needs confirmation, transcripts, escalation and a clear route to a person.",
+        "Do not use an AI receptionist to make sensitive decisions without review. The safest first version captures and routes information rather than promising the caller a result the business has not checked."
+      ], links: [{ href: "/blog/ai-agent-vs-workflow-automation-small-business", label: "AI agent versus workflow automation comparison", context: "Use this" }] },
+      { id: "implementation", heading: "How to implement it responsibly", body: [
+        "List the most common call reasons and decide what the AI may answer, what it should collect and when it must transfer or create an urgent alert. Test real examples before going live.",
+        "If calls include personal data, review privacy notices, data storage, recordings, retention periods and staff access. Keep the data collected proportionate to the purpose."
+      ], sources: [{ href: "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/", label: "ICO guidance on AI and data protection" }], links: [{ href: "/services/company-customised-ai-agents", label: "custom AI agent support", context: "For governed AI workflows, see" }] }
+    ],
+    faqs: [
+      { question: "Can an AI receptionist replace a human receptionist?", answer: "It can handle some routine call capture and routing, but it should not replace human judgement, empathy or responsibility for unusual and sensitive calls." },
+      { question: "What should an AI receptionist hand off to a person?", answer: "Complaints, emergencies, uncertain identity checks, payment disputes, safeguarding issues, complex quotations and anything outside the approved script should be escalated." },
+      { question: "Does an AI receptionist need GDPR planning?", answer: "Yes, where calls involve personal data. Plan purpose, minimisation, retention, access, recordings and privacy information before launch." }
+    ],
+    relatedService: { title: "Company Customised AI Agents", href: "/services/company-customised-ai-agents" },
+    relatedSlugs: ["/blog/ai-automation-cost-small-business-uk", "/blog/ai-agents-for-small-business"],
+    ctaHeading: "Design the call workflow before turning on the AI",
+    cta: "Fekitech can help you define call types, approved answers, escalation rules and integrations for a responsible AI receptionist workflow."
+  },
+  {
+    slug: "/blog/automate-quotes-invoices-customer-follow-up",
+    category: "Business Operations",
+    title: "How to Automate Quotes, Invoices and Customer Follow-Up",
+    seoTitle: "Automate Quotes, Invoices and Follow-Up | Fekitech",
+    metaDescription: "Learn how to automate quotes, invoices and customer follow-up without losing control over approvals, pricing, exceptions or customer care.",
+    excerpt: "A practical workflow map for turning quote, invoice and follow-up admin into a controlled business system.",
+    readTime: "9 min read",
+    datePublished: "2026-08-04",
+    lastModified: "2026-08-04",
+    primaryKeyword: "automate quotes invoices customer follow up",
+    keywords: ["quote automation", "invoice automation", "customer follow up automation"],
+    featuredImage: "/outcome-get-paid-faster.webp",
+    imageAlt: "Invoice and customer follow-up workflow being reviewed on a business desk",
+    imageWidth: 1376,
+    imageHeight: 768,
+    h1: "How to Automate Quotes, Invoices and Customer Follow-Up",
+    lead: "Quote and invoice automation works best when pricing rules, approvals, customer stages and exception handling are clear before software is connected.",
+    intro: [
+      "Many small businesses lose time between enquiry, quote, approval, invoice and follow-up. The work is not difficult once, but repeated manual handling creates delays and missed opportunities.",
+      "Automation should create a dependable handoff, not remove necessary commercial judgement. A high-value quote may still need review while routine confirmations can happen automatically.",
+      "This guide maps the workflow from enquiry to follow-up."
+    ],
+    sections: [
+      { id: "map-flow", heading: "Map the quote-to-cash flow first", body: [
+        "Write down how an enquiry becomes a scoped quote, how pricing is checked, how approval is given, how the invoice is issued and how payment or follow-up is tracked.",
+        "The automation should support that path with visible ownership and status."
+      ], bullets: ["Enquiry capture", "Scope questions", "Quote preparation", "Approval and revision", "Invoice creation", "Payment and follow-up"] },
+      { id: "automation-points", heading: "Where automation usually helps", body: [
+        "The strongest candidates are data movement, reminders, document preparation, status updates and customer confirmations. Sensitive pricing or unusual work can pause for human approval.",
+        "Avoid automating vague estimates or uncontrolled discounting. The workflow should make the rules clearer."
+      ], table: { headers: ["Step", "Automation", "Control"], rows: [
+        ["New enquiry", "Create CRM record and task", "Validate required fields"],
+        ["Quote draft", "Populate known customer and service details", "Review scope and price before sending"],
+        ["Acceptance", "Create invoice or project task", "Check terms and exceptions"],
+        ["Payment follow-up", "Send reminders", "Pause for disputes or complaints"]
+      ] } },
+      { id: "tools", heading: "Tools and integrations to consider", body: [
+        "Common components include website forms, CRM, accounting software, e-signature tools, email templates, calendar booking and reporting dashboards.",
+        "The exact tool matters less than having a clear source of truth for customer, quote, invoice and status information."
+      ], links: [
+        { href: "/services/workflow-automations", label: "workflow automation", context: "Connect handoffs with" },
+        { href: "/services/business-intelligence-architecture", label: "business intelligence architecture", context: "Track quote and payment status through" }
+      ] },
+      { id: "start-small", heading: "Start with one quote type", body: [
+        "Choose a common service with stable pricing and a clear approval route. Build that first, test exceptions, then expand to more complex work.",
+        "This keeps the system useful and reduces the risk of automating commercial decisions before they are ready."
+      ] }
+    ],
+    faqs: [
+      { question: "Can quotes be fully automated?", answer: "Routine quotes with stable rules can be largely automated. Complex, high-value or unusual quotes should usually include human review." },
+      { question: "Can invoice automation connect to accounting software?", answer: "Often yes, depending on API access, permissions and data quality. The integration should be tested with real records before release." },
+      { question: "What follow-up should be automated?", answer: "Confirmations, reminders and task creation are suitable. Complaints, disputes and sensitive customer situations should be routed to a person." }
+    ],
+    relatedService: { title: "Workflow Automations", href: "/services/workflow-automations" },
+    relatedSlugs: ["/blog/business-process-automation-uk-smes-workflows", "/blog/website-automation-small-businesses"],
+    ctaHeading: "Turn quote and invoice admin into a visible workflow",
+    cta: "Fekitech can help you map the current process and build automation that preserves approvals, accuracy and customer care."
+  },
+  {
+    slug: "/blog/business-process-automation-uk-smes-workflows",
+    category: "Business Operations",
+    title: "Business Process Automation for UK SMEs: 15 Workflows to Automate First",
+    seoTitle: "Business Process Automation for UK SMEs: 15 Workflows | Fekitech",
+    metaDescription: "See 15 practical business process automation ideas for UK SMEs, with prioritisation criteria, risks, data checks and first-project guidance.",
+    excerpt: "Fifteen practical workflows UK SMEs can automate once ownership, data and exception handling are clear.",
+    readTime: "11 min read",
+    datePublished: "2026-08-04",
+    lastModified: "2026-08-04",
+    primaryKeyword: "business process automation UK SMEs",
+    keywords: ["business process automation UK", "SME workflow automation", "workflows to automate"],
+    featuredImage: "/outcome-save-time.webp",
+    imageAlt: "Small business workflow automation plan showing tasks, handoffs and time savings",
+    imageWidth: 1376,
+    imageHeight: 768,
+    h1: "Business Process Automation for UK SMEs: 15 Workflows to Automate First",
+    lead: "The best first automations are frequent, rule-based, measurable and low enough risk that exceptions can be handled by a named person.",
+    intro: [
+      "Business process automation should start with real friction: repeated copying, missed updates, slow approvals, duplicate records and unclear handoffs.",
+      "A workflow is ready when the trigger, data, owner, action and failure route can be described. If that cannot be done, optimise the process before automating it.",
+      "Use this list as a prioritisation tool rather than a promise that every workflow should be automated immediately."
+    ],
+    sections: [
+      { id: "first-workflows", heading: "15 workflows to consider first", body: ["These workflows commonly create avoidable admin in SMEs and can often be improved with simple integrations or structured software."], bullets: [
+        "Website enquiry to CRM record", "New lead assignment and reminders", "Quote request intake", "Quote approval routing", "Invoice preparation handoff", "Payment reminder tasks", "Customer onboarding checklist", "Appointment booking confirmation", "Support ticket triage", "Document collection and naming", "Staff onboarding tasks", "Purchase approval requests", "Weekly KPI report preparation", "Customer feedback routing", "Renewal or re-engagement reminders"
+      ] },
+      { id: "prioritise", heading: "How to prioritise automation candidates", body: [
+        "Score each workflow by frequency, time spent, error risk, customer impact, data quality and stability. A frequent low-risk workflow is often a better first candidate than a dramatic but poorly understood process.",
+        "Also check who owns the workflow. Automation without ownership fails quietly because nobody maintains the rules or reviews exceptions."
+      ], table: { headers: ["Question", "Why it matters"], rows: [
+        ["How often does it happen?", "Volume determines whether automation effort is justified"],
+        ["Is the rule stable?", "Changing rules create maintenance burden"],
+        ["What happens on failure?", "A safe fallback protects customers and staff"],
+        ["Who owns it?", "A named owner keeps the workflow useful"]
+      ] } },
+      { id: "risk", heading: "What not to automate first", body: [
+        "Avoid starting with workflows where legal, HR, financial or customer-impact decisions are unclear. These may still be improved, but they need stronger governance and human approval.",
+        "Do not automate data you do not need. UK data protection law expects personal data use to be lawful, fair, transparent and proportionate."
+      ], sources: [{ href: "https://www.business.gov.uk/support/digital-data-protection-and-cyber-security/data-protection-in-your-business/", label: "Business.gov.uk data protection overview" }] },
+      { id: "implementation-plan", heading: "A simple implementation plan", body: [
+        "Document the current process, remove unnecessary steps, define the target workflow and run a pilot with real records. Measure completion, failures, manual overrides and customer impact.",
+        "Once the first workflow is stable, reuse the design pattern for related workflows."
+      ], links: [{ href: "/services/process-optimisation-and-automation", label: "process optimisation and automation", context: "For process redesign before build, review" }] }
+    ],
+    faqs: [
+      { question: "What is business process automation?", answer: "It is the use of software, rules and integrations to move work through a defined process with less manual effort, clearer ownership and better visibility." },
+      { question: "Which SME workflow should be automated first?", answer: "Start with a frequent, stable, low-risk workflow that wastes time or delays customers and has a clear owner." },
+      { question: "Can automation harm customer experience?", answer: "Yes, if it removes necessary human judgement or sends irrelevant messages. Use escalation and review for exceptions." }
+    ],
+    relatedService: { title: "Process Optimisation and Automation", href: "/services/process-optimisation-and-automation" },
+    relatedSlugs: ["/blog/automate-quotes-invoices-customer-follow-up", "/blog/n8n-vs-make-vs-zapier-uk-small-business"],
+    ctaHeading: "Choose the first workflow with evidence",
+    cta: "Fekitech can help you identify, simplify and automate the processes that create the most avoidable friction."
+  },
+  {
+    slug: "/blog/small-business-operating-system",
+    category: "Business Operations",
+    title: "How to Build a Small-Business Operating System",
+    seoTitle: "How to Build a Small-Business Operating System | Fekitech",
+    metaDescription: "Build a small-business operating system with roles, workflows, KPIs, documentation, meetings, tools and improvement routines.",
+    excerpt: "A practical framework for connecting roles, workflows, tools, KPIs and routines so a small business becomes easier to run.",
+    readTime: "10 min read",
+    datePublished: "2026-08-04",
+    lastModified: "2026-08-04",
+    primaryKeyword: "small business operating system",
+    keywords: ["business operating system", "small business systems", "operational structure"],
+    featuredImage: "/fekitech-transformation-systems-ai.webp",
+    imageAlt: "Small business operating system plan connecting roles, workflows, tools and performance dashboards",
+    imageWidth: 1376,
+    imageHeight: 768,
+    h1: "How to Build a Small-Business Operating System",
+    lead: "A small-business operating system is the connected way your business handles roles, workflows, information, decisions, meetings, tools and improvement.",
+    intro: [
+      "A business operating system does not need to be complicated. It should make the recurring work clear enough for people to execute without constant improvisation.",
+      "The aim is to connect what the business promises customers with how work is assigned, delivered, measured and improved.",
+      "This guide shows the core building blocks."
+    ],
+    sections: [
+      { id: "components", heading: "The seven core components", body: ["A useful operating system connects structure with daily work. The components should be simple enough for the team to maintain."], bullets: [
+        "Clear roles and decision rights", "Mapped core workflows", "Shared customer and operational data", "KPI definitions and dashboards", "Meeting and review rhythms", "SOPs and reusable templates", "A backlog for improvements and automation"
+      ] },
+      { id: "sequence", heading: "The right build sequence", body: [
+        "Start with the customer journey and the work that keeps the business alive: enquiries, delivery, invoicing, service quality and follow-up. Then define who owns each stage.",
+        "Only after that should software, dashboards and automation be selected."
+      ], links: [
+        { href: "/services/business-structure-design", label: "business structure design", context: "Clarify ownership with" },
+        { href: "/services/business-intelligence-architecture", label: "business intelligence architecture", context: "Make performance visible with" }
+      ] },
+      { id: "tools", heading: "Where technology fits", body: [
+        "Technology supports the operating system when it reduces friction or improves visibility. It creates problems when tools are added before the underlying responsibility and workflow are clear.",
+        "A small business may use a CRM, project tool, accounting system, automation platform and dashboard. The important question is whether the tools share enough information to support decisions."
+      ] },
+      { id: "review", heading: "Keep the system alive", body: [
+        "An operating system is maintained through review. Set a rhythm for checking whether roles, workflows, data and meetings still match the business.",
+        "Use customer feedback, delivery issues, financial signals and staff friction to decide what to improve next."
+      ], links: [{ href: "/blog/why-most-businesses-are-not-profitable", label: "why systems affect profitability", context: "Read more about" }] }
+    ],
+    faqs: [
+      { question: "Is a business operating system software?", answer: "Not by itself. Software can support it, but the operating system also includes roles, workflows, routines, measures and decision rules." },
+      { question: "Where should a small business start?", answer: "Start by mapping the work that affects customers, cash and delivery, then clarify ownership before adding more tools." },
+      { question: "How often should the system be reviewed?", answer: "Review core measures and blockers weekly or monthly, and review the wider operating model when the business changes stage, team or offer." }
+    ],
+    relatedService: { title: "Business Structure Design", href: "/services/business-structure-design" },
+    relatedSlugs: ["/blog/business-process-automation-uk-smes-workflows", "/blog/business-intelligence-small-business-kpi-dashboard"],
+    ctaHeading: "Build the operating system around real work",
+    cta: "Fekitech can help you clarify roles, workflows, measures and tools so the business becomes easier to manage and improve."
+  },
+  {
+    slug: "/blog/n8n-vs-make-vs-zapier-uk-small-business",
+    category: "AI and Automation",
+    title: "n8n vs Make vs Zapier for UK Small Businesses",
+    seoTitle: "n8n vs Make vs Zapier for UK Small Businesses | Fekitech",
+    metaDescription: "Compare n8n, Make and Zapier for UK small-business automation across ease, pricing model, governance, AI workflows and maintenance.",
+    excerpt: "A practical comparison of Zapier, Make and n8n for UK small businesses choosing an automation platform.",
+    readTime: "10 min read",
+    datePublished: "2026-08-04",
+    lastModified: "2026-08-04",
+    primaryKeyword: "n8n vs Make vs Zapier UK small business",
+    keywords: ["n8n vs Make vs Zapier", "automation platform UK small business", "Zapier Make n8n comparison"],
+    featuredImage: "/ai-agent-vs-workflow-automation-small-business.webp",
+    imageAlt: "Automation platform comparison for n8n, Make and Zapier on a small business workflow board",
+    imageWidth: 1376,
+    imageHeight: 768,
+    h1: "n8n vs Make vs Zapier for UK Small Businesses",
+    lead: "Choose Zapier for fast simple handoffs, Make for visual multi-step scenarios, and n8n when control, complex logic or self-hosting matters enough to justify technical ownership.",
+    intro: [
+      "The right automation platform depends on who will build and maintain the workflow, what systems need to connect, how often it runs and how sensitive the data is.",
+      "Do not choose from screenshots alone. Test one real workflow with expected monthly volume and the failure cases the business actually sees.",
+      "This comparison focuses on practical small-business fit rather than declaring one universal winner."
+    ],
+    sections: [
+      { id: "comparison", heading: "At-a-glance comparison", body: ["The tools overlap, but their cost models and operating responsibilities differ."], table: { headers: ["Platform", "Best fit", "Watch out for"], rows: [
+        ["Zapier", "Simple SaaS handoffs owned by non-technical users", "Task usage can rise with volume and multi-step workflows"],
+        ["Make", "Visual workflows with branches and transformations", "Scenarios still need governance and testing"],
+        ["n8n", "Technical teams needing control, complex logic or self-hosting", "Self-hosting adds security, updates and monitoring responsibility"]
+      ] }, sources: [
+        { href: "https://zapier.com/pricing/rates", label: "Zapier task usage rates" },
+        { href: "https://www.make.com/en/pricing", label: "Make pricing" },
+        { href: "https://n8n.io/legal/security/", label: "n8n security information" }
+      ] },
+      { id: "pricing", heading: "Compare pricing by workflow volume", body: [
+        "Pricing pages can be misleading if you do not know the billing unit. A five-step workflow running hundreds of times may be cheap in one tool and costly in another.",
+        "Estimate runs per month, actions per run, AI steps, retries and support time. Then include the cost of the person maintaining it."
+      ] },
+      { id: "governance", heading: "Governance matters more than tool preference", body: [
+        "For UK businesses, tool selection should include access control, audit logs, credential ownership, privacy, backups and how staff will change workflows safely.",
+        "Self-hosted tools offer control but require technical discipline. Managed tools reduce infrastructure responsibility but still need process ownership."
+      ], sources: [{ href: "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/", label: "ICO AI and data protection guidance" }] },
+      { id: "decision", heading: "A practical decision route", body: [
+        "Pick one real automation candidate and build a small proof of workflow. Test normal cases, missing data, duplicates, permission errors and manual fallback.",
+        "The winning platform is the one your team can operate reliably, not the one with the longest integration list."
+      ], links: [{ href: "/services/workflow-automations", label: "workflow automation support", context: "For tool selection and implementation, review" }] }
+    ],
+    faqs: [
+      { question: "Is n8n better than Zapier?", answer: "It can be better for complex or self-hosted workflows, but Zapier is often easier for simple non-technical automations." },
+      { question: "Is Make cheaper than Zapier?", answer: "It depends on the workflow and current plans. Compare actions, credits or tasks using your expected monthly volume." },
+      { question: "Should a small business self-host automation?", answer: "Only if it has technical support for security, updates, backups, monitoring and recovery." }
+    ],
+    relatedService: { title: "Workflow Automations", href: "/services/workflow-automations" },
+    relatedSlugs: ["/blog/business-process-automation-uk-smes-workflows", "/blog/ai-automation-cost-small-business-uk"],
+    ctaHeading: "Choose the platform around the process",
+    cta: "Fekitech can help you compare Zapier, Make, n8n or custom options against your real workflow, data and support needs."
+  },
+  {
+    slug: "/blog/ai-readiness-audit-small-business-checklist",
+    category: "AI and Automation",
+    title: "AI Readiness Audit for Small Businesses: A 25-Point Checklist",
+    seoTitle: "AI Readiness Audit Checklist for Small Businesses | Fekitech",
+    metaDescription: "Use this 25-point AI readiness checklist to assess workflows, data, risk, privacy, ownership and support before adopting AI.",
+    excerpt: "A practical readiness checklist for small businesses considering AI agents, automation or AI-assisted workflows.",
+    readTime: "10 min read",
+    datePublished: "2026-08-04",
+    lastModified: "2026-08-04",
+    primaryKeyword: "AI readiness audit small business",
+    keywords: ["AI readiness checklist", "small business AI audit", "AI adoption readiness"],
+    featuredImage: "/fekitech-cta-systems-clarity.png",
+    imageAlt: "AI readiness checklist for a small business covering data, workflows, people and risk",
+    imageWidth: 1536,
+    imageHeight: 1536,
+    h1: "AI Readiness Audit for Small Businesses: A 25-Point Checklist",
+    lead: "A small business is ready for AI when the workflow is clear, data is usable, risks are understood and people know how to review the output.",
+    intro: [
+      "AI readiness is not a technology shopping exercise. It is a check on whether the business has the process, data, ownership and safeguards needed for AI to help rather than confuse.",
+      "Use this checklist before buying tools, building agents or automating customer-facing tasks.",
+      "You do not need every item perfect, but weak areas should shape the first project scope."
+    ],
+    sections: [
+      { id: "checklist", heading: "The 25-point AI readiness checklist", body: ["Use these points to identify whether a workflow is ready for AI-assisted improvement."], bullets: [
+        "A valuable workflow is selected", "The trigger is clear", "The desired output is defined", "The human owner is named", "Exceptions are known", "The fallback route is documented", "Source data is accessible", "Source data is accurate enough", "Sensitive data is identified", "Data minimisation is planned", "Permissions are clear", "Privacy information is reviewed", "A lawful purpose is understood", "Approved knowledge sources exist", "Output quality criteria are defined", "Human review is placed at risk points", "Users know when AI is involved", "Prompt and workflow changes are controlled", "Testing scenarios include edge cases", "Logs can be reviewed", "Failures trigger alerts", "Staff know how to override", "Support ownership is assigned", "Costs can be estimated from volume", "The first release is small enough to learn from"
+      ] },
+      { id: "score", heading: "How to score readiness", body: [
+        "Score each item as ready, partial or not ready. A high-risk workflow with many partial answers should not be the first AI project.",
+        "Look for a contained use case where the system can assist preparation, classification, routing or drafting while a person remains accountable."
+      ] },
+      { id: "risk", heading: "Privacy and governance questions", body: [
+        "If the workflow uses personal data, assess fairness, transparency, minimisation, access and retention. AI does not remove normal UK data-protection obligations.",
+        "For higher-risk processing, consider whether a DPIA is needed and whether meaningful human intervention is part of the process."
+      ], sources: [
+        { href: "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/", label: "ICO artificial intelligence guidance" },
+        { href: "https://www.gov.uk/government/publications/ethics-transparency-and-accountability-framework-for-automated-decision-making/ethics-transparency-and-accountability-framework-for-automated-decision-making", label: "GOV.UK automated decision-making framework" }
+      ] },
+      { id: "next-step", heading: "What to do after the audit", body: [
+        "Pick one workflow with strong readiness and a measurable benefit. Define the test set, success criteria, escalation route and review rhythm.",
+        "Treat the first release as a controlled pilot. Expand only after the team trusts the output and understands the limits."
+      ], links: [{ href: "/services/company-customised-ai-agents", label: "company-customised AI agents", context: "For a governed build, review" }] }
+    ],
+    faqs: [
+      { question: "What is an AI readiness audit?", answer: "It is a structured review of workflows, data, people, risk, privacy and support before using AI in a business process." },
+      { question: "Does every AI project need perfect data?", answer: "No, but the data must be good enough for the use case and the system must handle uncertainty safely." },
+      { question: "What is a good first AI project?", answer: "A bounded, frequent workflow where AI assists preparation or routing and a human can review important outputs." }
+    ],
+    relatedService: { title: "Company Customised AI Agents", href: "/services/company-customised-ai-agents" },
+    relatedSlugs: ["/blog/ai-automation-cost-small-business-uk", "/blog/ai-agent-vs-workflow-automation-small-business"],
+    ctaHeading: "Audit readiness before implementation",
+    cta: "Fekitech can help you assess AI readiness, choose the first suitable workflow and design the controls around it."
+  },
+  {
+    slug: "/blog/power-bi-dashboard-cost-uk-smes",
+    category: "Business Intelligence",
+    title: "Power BI Dashboard Cost in the UK: What SMEs Should Budget",
+    seoTitle: "Power BI Dashboard Cost UK for SMEs | Fekitech",
+    metaDescription: "Plan Power BI dashboard cost in the UK, including licences, data preparation, modelling, build scope, training and ongoing support.",
+    excerpt: "A practical UK SME guide to budgeting for Power BI licences, dashboard design, data work and support.",
+    readTime: "10 min read",
+    datePublished: "2026-08-04",
+    lastModified: "2026-08-04",
+    primaryKeyword: "Power BI dashboard cost UK",
+    keywords: ["Power BI dashboard cost UK", "Power BI consultant cost UK", "SME dashboard budget"],
+    featuredImage: "/kpi-dashboard-software-small-business.webp",
+    imageAlt: "SME leadership team planning Power BI dashboard costs, licensing and data preparation",
+    imageWidth: 1376,
+    imageHeight: 768,
+    h1: "Power BI Dashboard Cost in the UK: What SMEs Should Budget",
+    lead: "Power BI dashboard cost includes more than licences: SMEs should budget for data preparation, modelling, report design, permissions, training and support.",
+    intro: [
+      "Power BI can be a strong reporting option for SMEs, especially where Microsoft 365, Excel, SharePoint, SQL or common business systems are already part of the operation.",
+      "The licence is only one part of the budget. Most project effort sits in understanding KPIs, cleaning data, building a model, creating measures, testing calculations and helping people use the report.",
+      "This guide explains the cost structure without pretending every dashboard has the same price."
+    ],
+    sections: [
+      { id: "licensing", heading: "Power BI licence costs to understand", body: [
+        "Microsoft publishes UK Power BI pricing for Free, Pro and Premium Per User plans. Sharing and collaboration usually require paid licences for the people who publish or consume shared reports.",
+        "Check current Microsoft pricing before purchase because product names, licence rules and bundled Microsoft 365 entitlements can change."
+      ], sources: [{ href: "https://www.microsoft.com/en-gb/power-platform/products/power-bi/pricing", label: "Microsoft Power BI pricing" }] },
+      { id: "project-cost", heading: "What drives dashboard project cost?", body: [
+        "A dashboard fed by one clean spreadsheet is very different from a dashboard that combines CRM, finance, operations and service data. Complexity usually sits in the data model and definitions, not chart design.",
+        "Budget for discovery, data access, cleansing, semantic model design, calculations, report pages, permissions, testing, documentation and training."
+      ], table: { headers: ["Cost driver", "Why it matters"], rows: [
+        ["Number of data sources", "More sources mean more mapping, cleaning and testing"],
+        ["KPI definitions", "Ambiguous measures cause rework and mistrust"],
+        ["Refresh needs", "Automated refresh and alerts require stronger setup"],
+        ["Permissions", "Different users may need different views"],
+        ["Training", "Reports create value only when people use them in decisions"]
+      ] } },
+      { id: "buy-vs-custom", heading: "Template dashboard vs custom model", body: [
+        "Templates can work for standard sales, finance or marketing reporting. A custom model is more appropriate when the business has specific calculations, joins multiple systems or needs reports to match management routines.",
+        "Do not start with a broad executive dashboard. Prove one decision area first, such as enquiries to quotes, margin by service or overdue work."
+      ], links: [{ href: "/blog/kpi-dashboard-software-small-business", label: "KPI dashboard software buy-versus-build guide", context: "Compare wider options in the" }] },
+      { id: "ownership", heading: "Ongoing ownership and support", body: [
+        "Every Power BI dashboard needs owners for definitions, data sources, access, refresh failures and change requests. Without ownership, reports become stale or disputed.",
+        "Include support time in the budget for new measures, changed source fields, staff questions and periodic review."
+      ], links: [{ href: "/services/business-intelligence-architecture", label: "business intelligence architecture", context: "For governed reporting, see Fekitech's" }] }
+    ],
+    faqs: [
+      { question: "Is Power BI free for small businesses?", answer: "Power BI has a free account option, but sharing and collaboration usually require paid licences. Check Microsoft’s current UK pricing before deciding." },
+      { question: "Why does a dashboard project cost more than the licence?", answer: "The main work is data preparation, modelling, KPI definitions, report design, testing, permissions, training and support." },
+      { question: "Should an SME use Power BI or a custom dashboard?", answer: "Power BI is often a good fit when Microsoft tools and standard reporting needs are present. A custom dashboard may be better for tailored workflows or embedded operational interfaces." }
+    ],
+    relatedService: { title: "Business Intelligence Architecture", href: "/services/business-intelligence-architecture" },
+    relatedSlugs: ["/blog/kpi-dashboard-software-small-business", "/blog/business-intelligence-small-business-kpi-dashboard"],
+    ctaHeading: "Budget for trusted reporting, not only licences",
+    cta: "Fekitech can help you define KPI requirements, data ownership and the right reporting architecture before building a dashboard."
+  }
+];
+
+export const newBlogPosts = [...strategicBlogPosts, ...coreNewBlogPosts];

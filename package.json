@@ -8,6 +8,7 @@
     "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-ssr && node scripts/postbuild.mjs",
     "preview": "vite preview --host 0.0.0.0",
     "seo:check": "node scripts/seo-qa.mjs",
+    "seo:protected": "node scripts/protected-regression.mjs",
     "index:chatbot": "node lib/chatbot/index-content.js"
   },
   "dependencies": {

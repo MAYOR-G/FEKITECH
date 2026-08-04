@@ -806,8 +806,19 @@ function PricingPage() {
   );
 }
 
-function BlogPage() {
-  const [featuredArticle, ...otherArticles] = blogPosts;
+const BLOG_POSTS_PER_PAGE = 12;
+
+function getBlogPageNumber(pathname = "/blog") {
+  const match = pathname.match(/^\/blog\/page\/(\d+)$/);
+  return match ? Number(match[1]) : 1;
+}
+
+function BlogPage({ page = 1 }) {
+  const totalPages = Math.max(1, Math.ceil(blogPosts.length / BLOG_POSTS_PER_PAGE));
+  const currentPage = Math.min(Math.max(page, 1), totalPages);
+  const startIndex = (currentPage - 1) * BLOG_POSTS_PER_PAGE;
+  const pagedArticles = blogPosts.slice(startIndex, startIndex + BLOG_POSTS_PER_PAGE);
+  const showPagination = totalPages > 1;
 
   return (
     <main className="page-main blog-index-page">
@@ -819,10 +830,10 @@ function BlogPage() {
         </div>
       </header>
       <section className="section blog-editorial-section" aria-label="Fekitech business insights">
-        <BlogTextCard article={featuredArticle} featured />
-        <div className="blog-list-grid" aria-label="More Fekitech articles">
-          {otherArticles.map((article) => <BlogTextCard article={article} key={article.slug} />)}
+        <div className="blog-card-grid blog-archive-grid" aria-label="Fekitech articles">
+          {pagedArticles.map((article) => <BlogTextCard article={article} key={article.slug} />)}
         </div>
+        {showPagination && <BlogPagination currentPage={currentPage} totalPages={totalPages} />}
       </section>
     </main>
   );
@@ -830,15 +841,55 @@ function BlogPage() {
 
 function BlogTextCard({ article, featured = false }) {
   return (
-    <article className={`blog-text-card${featured ? " blog-text-card-featured" : " blog-list-card"}`}>
-      <span className="blog-category">{article.category}</span>
-      <h2>{article.title}</h2>
-      <p>{article.excerpt}</p>
-      <div className="blog-card-footer">
-        <span><time dateTime={article.datePublished}>{formatArticleDate(article.datePublished)}</time> · {article.readTime}</span>
-        <a className="blog-read-link" href={article.slug}>Read Article <ArrowRight size={17} aria-hidden="true" /></a>
+    <article className={`blog-card${featured ? " blog-card--featured" : ""}`}>
+      <a className="blog-card__image" href={article.slug} aria-label={`Read ${article.title}`}>
+        <img src={article.featuredImage} alt={article.imageAlt} width={article.imageWidth} height={article.imageHeight} loading="lazy" decoding="async" />
+      </a>
+      <div className="blog-card__content">
+        <div className="blog-card__meta">
+          <span>{article.category}</span>
+          <time dateTime={article.datePublished}>{formatArticleDate(article.datePublished)}</time>
+        </div>
+        <h2><a href={article.slug}>{article.title}</a></h2>
+        <p>{article.excerpt}</p>
+        <div className="blog-card__footer">
+          <span>By Fekitech · {article.readTime}</span>
+          <a href={article.slug}>Read Article <ArrowRight size={17} aria-hidden="true" /></a>
+        </div>
       </div>
     </article>
+  );
+}
+
+function BlogPagination({ currentPage, totalPages }) {
+  const pageHref = (page) => page === 1 ? "/blog" : `/blog/page/${page}`;
+  const previousPage = currentPage - 1;
+  const nextPage = currentPage + 1;
+
+  return (
+    <nav className="blog-pagination" aria-label="Blog archive pagination">
+      {previousPage >= 1 ? (
+        <a href={pageHref(previousPage)} aria-label={`Go to blog page ${previousPage}`}>Previous</a>
+      ) : (
+        <span aria-disabled="true">Previous</span>
+      )}
+      <ol>
+        {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+          <li key={page}>
+            {page === currentPage ? (
+              <span aria-current="page">{page}</span>
+            ) : (
+              <a href={pageHref(page)} aria-label={`Go to blog page ${page}`}>{page}</a>
+            )}
+          </li>
+        ))}
+      </ol>
+      {nextPage <= totalPages ? (
+        <a href={pageHref(nextPage)} aria-label={`Go to blog page ${nextPage}`}>Next</a>
+      ) : (
+        <span aria-disabled="true">Next</span>
+      )}
+    </nav>
   );
 }
 
@@ -1448,6 +1499,9 @@ function AppPage({ pathname }) {
     case "/admin":
       return <AdminPage />;
     default:
+      if (pathname.startsWith("/blog/page/")) {
+        return <BlogPage page={getBlogPageNumber(pathname)} />;
+      }
       return <HomePage />;
   }
 }

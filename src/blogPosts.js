@@ -3,7 +3,7 @@ import { newBlogPosts } from "./newBlogPosts.js";
 const existingBlogPosts = [
   {
     slug: "/blog/why-most-businesses-are-not-profitable",
-    category: "Business Systems",
+    category: "Business Operations",
     title: "Why Most Businesses Are Not Profitable And How to Fix It with Structured Systems",
     seoTitle: "Why Most Businesses Are Not Profitable | Fekitech",
     metaDescription:
@@ -142,7 +142,7 @@ const existingBlogPosts = [
   },
   {
     slug: "/blog/how-much-does-a-business-website-cost-uk",
-    category: "Websites",
+    category: "Websites and Software",
     title: "How Much Does a Business Website Cost in the UK? A Practical Guide for Local Businesses",
     seoTitle: "Business Website Cost UK Guide | Fekitech",
     metaDescription:
@@ -276,7 +276,7 @@ const existingBlogPosts = [
   },
   {
     slug: "/blog/website-automation-small-businesses",
-    category: "Automation",
+    category: "AI and Automation",
     title: "Website Automation for Small Businesses: How to Turn Your Website Into a System That Saves Time and Captures Leads",
     seoTitle: "Website Automation for Small Businesses | Fekitech",
     metaDescription:

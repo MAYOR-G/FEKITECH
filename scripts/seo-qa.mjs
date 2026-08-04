@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { blogPosts } from "../src/blogPosts.js";
-import { pageSeo, sitemapRoutes } from "../src/lib/site.js";
+import { BLOG_POSTS_PER_PAGE, blogPageRoutes, pageSeo, sitemapRoutes } from "../src/lib/site.js";
 
 const root = process.cwd();
 const distDir = path.join(root, "dist");
@@ -121,7 +121,7 @@ for (const route of publicRoutes) {
     ? "AboutPage"
     : route === "/contact"
       ? "ContactPage"
-      : route === "/blog"
+      : route === "/blog" || route.startsWith("/blog/page/")
         ? "CollectionPage"
         : "WebPage";
   assert(schemaTypes.has(expectedPageType), `${route} is missing ${expectedPageType} schema`);
@@ -135,7 +135,7 @@ for (const route of publicRoutes) {
     assert(schemaTypes.has("Service"), `${route} is missing Service schema`);
   }
   if (route === "/pricing") assert(schemaTypes.has("OfferCatalog"), "Pricing page is missing OfferCatalog schema");
-  if (route.startsWith("/blog/")) {
+  if (route.startsWith("/blog/") && blogPosts.some((post) => post.slug === route)) {
     assert(schemaTypes.has("BlogPosting"), `${route} is missing BlogPosting schema`);
     const article = graph.find((entry) => entry["@type"] === "BlogPosting");
     assert.equal(article.datePublished, pageSeo[route].datePublished, `${route} BlogPosting datePublished mismatch`);
@@ -180,9 +180,23 @@ for (const address of ["71-75, Shelton Street", "10 Brindley Place, Birmingham, 
 assert.match(homeHtml, /<a href="\/services" class="nav-dropdown-trigger"/, "Desktop Services navigation is not a direct link");
 const blogIndexHtml = routeHtml.get("/blog");
 assert.match(blogIndexHtml, /<h1[^>]*>Systems, automation and profitability guides<\/h1>/, "Blog index H1 is not stable");
+const blogArchiveHtml = [blogIndexHtml, ...blogPageRoutes.map((route) => routeHtml.get(route))].filter(Boolean);
+const archiveLinks = new Set();
+for (const html of blogArchiveHtml) {
+  const cards = [...html.matchAll(/<article class="blog-card/g)];
+  assert(cards.length <= BLOG_POSTS_PER_PAGE, "A blog archive page displays more than 12 cards");
+  for (const match of html.matchAll(/href="(\/blog\/[^"#?]+)"/g)) {
+    archiveLinks.add(decodeHtml(match[1]));
+  }
+}
 for (const article of blogPosts) {
-  const articlePath = article.slug.startsWith("/blog/") ? article.slug : `/blog/${article.slug}`;
-  assert(blogIndexHtml.includes(articlePath), `Blog index is missing ${articlePath}`);
+  assert(archiveLinks.has(article.slug), `Blog archive pagination is missing ${article.slug}`);
+}
+for (const route of blogPageRoutes) {
+  const html = routeHtml.get(route);
+  assert(html, `${route} was not prerendered`);
+  assert(html.includes(`rel="canonical" href="${siteUrl}${route}"`), `${route} must have a self-referencing canonical`);
+  assert.match(html, new RegExp(`<title>Business Automation &amp; Technology Blog - Page ${route.split("/").pop()} \\| Fekitech<\\/title>`), `${route} title is not unique`);
 }
 
 const adminHtml = await fs.readFile(outputPathForRoute("/admin"), "utf8");
@@ -231,6 +245,14 @@ const allBlogsRedirect = vercelConfig.redirects?.find((redirect) => redirect.sou
 assert(allBlogsRedirect, "/blog/all redirect is missing");
 assert.equal(allBlogsRedirect.destination, "/blog", "/blog/all must redirect to /blog");
 assert.equal(allBlogsRedirect.statusCode, 301, "/blog/all redirect must use HTTP 301");
+assert(
+  vercelConfig.rewrites?.some((rewrite) => rewrite.source === "/blog/page/:page" && rewrite.destination === "/blog/page/:page/index.html"),
+  "Blog pagination rewrite is missing"
+);
+assert(
+  vercelConfig.rewrites?.some((rewrite) => rewrite.source === "/blog/:slug" && rewrite.destination === "/blog/:slug/index.html"),
+  "Generic blog post rewrite is missing"
+);
 const sitemapHeaders = vercelConfig.headers?.find((entry) => entry.source === "/sitemap.xml");
 assert(
   sitemapHeaders?.headers?.some((header) => header.key === "Content-Type" && header.value.startsWith("application/xml")),
