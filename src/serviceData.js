@@ -129,13 +129,13 @@ export const servicePages = [
     category: "Commercial performance",
     eyebrow: "Make profit drivers visible",
     heroTitle: "Find where value is leaking and build a practical plan to improve profit",
-    heroSummary: "We connect financial and operational evidence to examine pricing, margins, cost behaviour, resource use, revenue leakage, and the processes behind commercial performance.",
+    heroSummary: "We connect financial and operational evidence to examine pricing, margins, cost behaviour, resource use, revenue leakage, KPI visibility, and the processes behind commercial performance.",
     valueProposition: "Profitability becomes manageable when leaders can see which activities create value, which consume it, and which operational changes deserve priority.",
     overview: {
       title: "Understand the operational causes behind the financial result",
       paragraphs: [
         "A business can be busy, growing, and still struggle to convert revenue into sustainable profit. Pricing may not reflect delivery effort, discounts may be uncontrolled, costly rework may be hidden, capacity may be allocated poorly, or revenue may be lost between quote, delivery, invoice, and collection.",
-        "Fekitech combines commercial analysis with process evidence. We clarify revenue and cost drivers, examine how work is sold and delivered, identify leakage and waste, and build an improvement plan with owners, measures, and realistic sequencing."
+        "Fekitech combines commercial analysis with process evidence. We clarify revenue and cost drivers, examine how work is sold and delivered, identify leakage and waste, and build an improvement plan with owners, measures, KPI dashboards where useful, and realistic sequencing."
       ],
       highlight: "We do not promise a fabricated percentage or a quick financial cure. We create clearer margin visibility and support disciplined changes that the business can test and sustain."
     },
@@ -181,8 +181,9 @@ export const servicePages = [
     related: ["business-intelligence-architecture", "process-optimisation-and-automation", "business-structure-design"],
     visual: "profitability",
     visualAlt: "Profitability planning visual connecting revenue, pricing, delivery cost, margin, and resource decisions",
-    metaTitle: "Profitability Improvement Services | Fekitech",
-    metaDescription: "Find revenue leakage, cost inefficiency and margin gaps with Fekitech profitability improvement planning. Request a free business audit."
+    metaTitle: "Profitability Improvement Services UK | Fekitech",
+    metaDescription: "Improve profit with revenue leakage review, margin visibility, KPI reporting and practical operational changes. Request a Fekitech audit.",
+    lastModified: "2026-08-10"
   },
   {
     title: "Company Customised AI Agents",
@@ -251,14 +252,14 @@ export const servicePages = [
     slug: "workflow-automations",
     category: "Connected operations",
     eyebrow: "Connect work across systems",
-    heroTitle: "Move information and action between teams and tools without manual chasing",
-    heroSummary: "We build trigger-based workflows for data movement, notifications, approvals, email, CRM activity, document handling, and cross-system execution.",
+    heroTitle: "Workflow automation services for UK businesses that need work to move without manual chasing",
+    heroSummary: "We design business workflow software, integrations and trigger-based workflows for data movement, notifications, approvals, email, CRM activity, document handling, and cross-system execution.",
     valueProposition: "Well-designed workflow automation removes administrative delay while keeping ownership, approvals, logs, and exception handling visible.",
     overview: {
       title: "Create dependable execution between the systems you already use",
       paragraphs: [
-        "A business may have capable tools and still operate slowly because people must bridge every gap. They copy lead details into a CRM, chase approvals in chat, rename and route documents, send routine updates, or reconcile status across several platforms.",
-        "Fekitech designs event-driven workflows that connect those steps. We define triggers, data mapping, business rules, actions, approvals, notifications, logs, and recovery. The automation is documented and owned so it can remain useful as tools and processes change."
+        "A UK business may have capable tools and still operate slowly because people must bridge every gap. They copy lead details into a CRM, chase approvals in chat, rename and route documents, send routine updates, or reconcile status across several platforms.",
+        "Fekitech designs workflow automation services and business workflow software around those repeated handoffs. We define triggers, data mapping, business rules, actions, approvals, notifications, logs, and recovery so the automation is documented, owned, and maintainable as tools and processes change."
       ],
       highlight: "Acceleration does not mean removing control. The workflow can move routine work instantly while pausing at the exact points where a person needs to review, decide, or communicate."
     },
@@ -281,7 +282,7 @@ export const servicePages = [
       { step: "04", title: "Test end to end", text: "Validate data, permissions, timing, duplicates, failures, unusual cases, approvals, notifications, and recovery." },
       { step: "05", title: "Release and monitor", text: "Launch in stages, document support, monitor runs and errors, and refine the workflow as real usage develops." }
     ],
-    capabilities: ["System and API integrations", "Automated data movement", "Approval and notification flows", "Email and CRM automation", "Document processing", "Trigger-based operational actions"],
+    capabilities: ["Business workflow software design", "System and API integrations", "Automated data movement", "Approval and notification flows", "Email and CRM automation", "Document processing", "Trigger-based operational actions"],
     useCases: [
       { title: "Lead-to-delivery flow", text: "New enquiries need qualification, CRM creation, assignment, reminders, proposal activity, project setup, and customer communication." },
       { title: "Approval and request flow", text: "Purchasing, expenses, contracts, content, access, or operational requests need controlled routing and visible status." },
@@ -304,8 +305,9 @@ export const servicePages = [
     related: ["process-optimisation-and-automation", "company-customised-ai-agents", "digital-transformation"],
     visual: "workflow",
     visualAlt: "Workflow automation visual showing connected apps, triggers, approvals, notifications, and data movement",
-    metaTitle: "Workflow Automation Services | Fekitech",
-    metaDescription: "Connect apps, automate data movement, approvals, email, CRM and documents with Fekitech workflow automation. Book a free business audit."
+    metaTitle: "Workflow Automation Services UK | Business Workflow Software",
+    metaDescription: "Workflow automation services and business workflow software for UK SMEs. Connect apps, approvals, CRM, email, documents and data handoffs.",
+    lastModified: "2026-08-10"
   },
   {
     title: "Digital Transformation",
@@ -373,14 +375,14 @@ export const servicePages = [
     slug: "business-intelligence-architecture",
     category: "Data and decisions",
     eyebrow: "Make performance visible",
-    heroTitle: "Create a reporting system leaders can trust and act on",
+    heroTitle: "Business intelligence and KPI dashboard development leaders can trust",
     heroSummary: "We connect data sources, define useful KPIs, design reporting pipelines, and build focused dashboards that support operational and executive decisions.",
     valueProposition: "Good business intelligence reduces debate about whose figures are correct and increases attention on what the figures mean and what should happen next.",
     overview: {
       title: "Turn scattered data into a dependable decision-support system",
       paragraphs: [
         "Reporting often grows through individual spreadsheets and one-off requests. Definitions vary, numbers arrive late, and teams spend more time preparing reports than understanding performance. A business intelligence architecture creates a governed route from source data to useful decisions.",
-        "Fekitech maps the questions leaders and operators need to answer, then works backwards through metrics, definitions, source systems, data quality, transformations, dashboards, ownership, and review cadence. The design is proportionate to the size and maturity of the organisation."
+        "Fekitech maps the questions leaders and operators need to answer, then works backwards through metrics, definitions, source systems, data quality, transformations, KPI dashboard development, ownership, and review cadence. The design is proportionate to the size and maturity of the organisation."
       ],
       highlight: "A dashboard is only the visible layer. The real value comes from consistent definitions, reliable data movement, clear ownership, and a management rhythm that turns insight into action."
     },
@@ -403,7 +405,7 @@ export const servicePages = [
       { step: "04", title: "Build and validate", text: "Develop pipelines and dashboards, reconcile outputs with trusted records, and test usability with real reporting scenarios." },
       { step: "05", title: "Embed and improve", text: "Document ownership, train users, establish the review cadence, and refine reports as decision needs mature." }
     ],
-    capabilities: ["Data-source mapping", "KPI definition", "Dashboard design", "Data pipeline planning", "Reporting governance", "Executive performance views"],
+    capabilities: ["Data-source mapping", "KPI definition", "KPI dashboard development", "Dashboard design", "Data pipeline planning", "Reporting governance", "Executive performance views"],
     useCases: [
       { title: "Leadership reporting", text: "Executives need a concise, trusted view of financial, customer, operational, and workforce performance." },
       { title: "Operational control", text: "Managers need timely signals about backlog, capacity, service quality, conversion, or exceptions requiring intervention." },
@@ -426,8 +428,9 @@ export const servicePages = [
     related: ["digital-transformation", "profitability-improvement", "software-development-apps"],
     visual: "intelligence",
     visualAlt: "Business intelligence dashboard visual with connected data sources, performance charts, and KPI signals",
-    metaTitle: "Business Intelligence Architecture | Fekitech",
-    metaDescription: "Design trusted KPIs, data pipelines, reporting and executive dashboards with Fekitech business intelligence architecture. Book a free audit."
+    metaTitle: "BI & KPI Dashboard Development UK | Fekitech",
+    metaDescription: "Business intelligence architecture and KPI dashboard development for UK SMEs. Define KPIs, connect data, build dashboards and reporting governance.",
+    lastModified: "2026-08-10"
   },
   {
     title: "Process Optimisation and Automation",

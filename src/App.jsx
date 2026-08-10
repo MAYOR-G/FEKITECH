@@ -1445,11 +1445,11 @@ function Footer() {
       </div>
       <div className="footer-column">
         <h3>Services</h3>
-        <a href="/services">Business Structure Design</a>
-        <a href="/services">Digital Transformation</a>
-        <a href="/services">Business Intelligence</a>
-        <a href="/services">Process Optimisation</a>
-        <a href="/services">FOS Implementation</a>
+        <a href="/services/business-structure-design">Business Structure Design</a>
+        <a href="/services/digital-transformation">Digital Transformation</a>
+        <a href="/services/business-intelligence-architecture">Business Intelligence</a>
+        <a href="/services/process-optimisation-and-automation">Process Optimisation</a>
+        <a href="/services/business-structure-design">FOS Implementation</a>
       </div>
       <div className="footer-column">
         <h3>Contact</h3>

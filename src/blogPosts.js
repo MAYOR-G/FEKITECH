@@ -280,19 +280,19 @@ const existingBlogPosts = [
     title: "Website Automation for Small Businesses: How to Turn Your Website Into a System That Saves Time and Captures Leads",
     seoTitle: "Website Automation for Small Businesses | Fekitech",
     metaDescription:
-      "Learn how website automation helps small businesses capture leads, reduce admin, improve follow-up, and turn websites into useful business systems.",
+      "Learn how website automation helps small businesses capture leads, reduce admin, improve follow-up, and connect enquiries to workflow software.",
     excerpt:
       "Learn how forms, booking flows, email responses, AI chatbots, analytics, and workflow handoffs can make a website work harder for your business.",
     readTime: "8 min read",
     datePublished: "2026-07-06",
-    lastModified: "2026-07-18",
-    keywords: ["website automation", "small business automation", "lead capture", "AI chatbots"],
+    lastModified: "2026-08-10",
+    keywords: ["website automation", "small business automation", "lead capture", "workflow automation", "AI chatbots"],
     featuredImage: "/outcome-reduce-stress.webp",
     imageAlt: "Small business team planning website automation and connected workflows",
     imageWidth: 1376,
     imageHeight: 768,
     relatedService: { title: "Workflow Automations", href: "/services/workflow-automations" },
-    relatedSlugs: ["/blog/ai-agent-vs-workflow-automation-small-business", "/blog/ai-agents-for-small-business"],
+    relatedSlugs: ["/blog/business-workflow-software-uk-custom-automation", "/blog/ai-agent-vs-workflow-automation-small-business"],
     h1: "Website Automation for Small Businesses: How to Turn Your Website Into a System That Saves Time and Captures Leads",
     lead:
       "Website automation means using your website to capture information, guide enquiries, trigger follow-up, and connect work to the right system without relying on manual admin every time.",
@@ -319,6 +319,7 @@ const existingBlogPosts = [
         ],
         links: [
           { href: "/services/workflow-automations", label: "workflow automation services", context: "Connect the website to dependable" },
+          { href: "/blog/business-workflow-software-uk-custom-automation", label: "business workflow software selection", context: "Choose the right connected tool with" },
           { href: "/services/digital-transformation", label: "digital transformation", context: "Plan the wider systems and adoption through" }
         ]
       },

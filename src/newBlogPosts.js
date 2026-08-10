@@ -5,12 +5,12 @@ const coreNewBlogPosts = [
     title: "KPI Dashboard Software for Small Businesses: Buy vs Build",
     seoTitle: "KPI Dashboard Software for Small Businesses: Buy vs Build",
     metaDescription:
-      "Compare spreadsheets, off-the-shelf KPI software and custom dashboards to choose a reporting approach that fits your small business.",
+      "Compare spreadsheets, off-the-shelf KPI software and custom KPI dashboard development options for a UK small business reporting system.",
     excerpt:
       "A practical decision guide for choosing between spreadsheets, ready-made dashboard software and a custom KPI reporting system.",
     readTime: "12 min read",
     datePublished: "2026-07-18",
-    lastModified: "2026-07-18",
+    lastModified: "2026-08-10",
     primaryKeyword: "KPI dashboard software for small business",
     keywords: [
       "KPI dashboard software for small business",
@@ -82,10 +82,11 @@ const coreNewBlogPosts = [
         heading: "When a small business needs a custom KPI dashboard",
         body: [
           "A custom dashboard becomes reasonable when the reporting logic is specific to the business or when data must be combined across systems that do not fit a standard template. Examples include joining enquiries to quotes and completed work, calculating service-level measures from several workflow stages, or applying contract-specific permissions for clients and teams.",
-          "Custom does not have to mean building every technical component from scratch. A practical UK KPI dashboard development project may combine an established database, integration tools and reporting platform with a tailored data model, interface and operating workflow. The value is in the fit, controls and maintainability, not novelty.",
+          "Custom does not have to mean building every technical component from scratch. A practical KPI dashboard development project may combine an established database, integration tools and reporting platform with a tailored data model, interface and operating workflow. The value is in the fit, controls and maintainability, not novelty.",
           "The business should be ready to own the result. Someone must approve definitions, source access, quality rules and change requests. Without that ownership, custom development can preserve confusion in a more expensive form."
         ],
         links: [
+          { href: "/blog/kpi-dashboard-development-uk-cost-process", label: "KPI dashboard development cost and process in the UK", context: "For commissioning expectations, read" },
           { href: "/services/digital-transformation", label: "a wider digital transformation plan", context: "Connect reporting to systems and adoption through" },
           { href: "/contact", label: "book a free business audit", context: "If the reporting problem is unclear, you can" }
         ]
@@ -178,7 +179,7 @@ const coreNewBlogPosts = [
           "This approach keeps the technology proportional. The best KPI dashboard software for a small business is the option the team can trust, operate and use to make better decisions—not the one with the longest feature list."
         ],
         links: [
-          { href: "/services", label: "Fekitech's business transformation services", context: "See how reporting connects with" },
+          { href: "/services/business-intelligence-architecture", label: "Fekitech's Business Intelligence Architecture service", context: "See how reporting connects with" },
           { href: "/pricing", label: "Fekitech's published packages", context: "For visible software and transformation pricing, review" }
         ]
       }
@@ -593,12 +594,12 @@ const coreNewBlogPosts = [
     title: "Business Intelligence for Small Businesses: A Practical KPI Strategy",
     seoTitle: "Business Intelligence for Small Businesses: Practical KPI Strategy",
     metaDescription:
-      "Build a practical business intelligence strategy for small businesses, covering KPI selection, data sources, governance and better decisions.",
+      "Build a practical BI architecture for small businesses, covering KPI selection, dashboard governance, data sources and better decisions.",
     excerpt:
       "A step-by-step guide to choosing useful KPIs, connecting reliable data, and building a dashboard that helps managers decide what to do next.",
     readTime: "12 min read",
     datePublished: "2026-07-11",
-    lastModified: "2026-07-18",
+    lastModified: "2026-08-10",
     primaryKeyword: "business intelligence for small business",
     secondaryKeywords: ["small business KPI dashboard", "business dashboard", "BI dashboard", "KPIs for small business", "executive dashboard"],
     longTailKeywords: ["how to build a small business dashboard", "which KPIs should a small business track", "business intelligence dashboard examples"],
@@ -639,13 +640,16 @@ const coreNewBlogPosts = [
       { id: "software-vs-architecture", heading: "Dashboard software versus business intelligence architecture", body: [
         "Dashboard software provides the interface, visual components and often the connectors used to present information. Business intelligence architecture defines the wider system: authoritative sources, identifiers, calculation rules, permissions, quality checks, refresh processes, ownership and the way people investigate and act on a result.",
         "A small business can buy capable software and still produce conflicting reports if those foundations remain unclear. Equally, the first architecture does not need an expensive custom platform. It may use a controlled spreadsheet or configured reporting product while the team proves definitions and adoption.",
-        "KPI dashboard development in the UK becomes a custom delivery question when standard connectors, permissions or calculations do not fit the operation. The build should remain proportionate: prove one useful reporting path, document ownership and expand only after leaders trust the result."
+        "KPI dashboard development becomes a custom delivery question when standard connectors, permissions or calculations do not fit the operation. The build should remain proportionate: prove one useful reporting path, document ownership and expand only after leaders trust the result."
       ], table: { headers: ["Need", "Dashboard software provides", "BI architecture must define"], rows: [
         ["Data", "Connectors and import tools", "Authoritative sources, matching and quality rules"],
         ["Measures", "Charts and calculation features", "Definitions, owners and decision thresholds"],
         ["Access", "User and role settings", "Who may see which records and why"],
         ["Operation", "Refresh and sharing features", "Failure handling, review rhythm and change ownership"]
-      ] }, links: [{ href: "/blog/kpi-dashboard-software-small-business", label: "whether to use spreadsheets, buy software or build a custom KPI dashboard", context: "Use the decision guide to assess" }] },
+      ] }, links: [
+        { href: "/blog/kpi-dashboard-software-small-business", label: "whether to use spreadsheets, buy software or build a custom KPI dashboard", context: "Use the decision guide to assess" },
+        { href: "/blog/kpi-dashboard-development-uk-cost-process", label: "KPI dashboard development cost, process and SME expectations", context: "For a UK commissioning view, read" }
+      ] },
       { id: "choose-kpis", heading: "How to choose KPIs for a small business dashboard", body: [
         "A KPI is a measure tied to an important objective, not every number the software can produce. Choose a balanced set across demand, delivery, customer experience, financial health and team capacity. The exact selection depends on the business model and stage.",
         "Include both results and leading signals. Revenue is a result, while qualified pipeline and proposal conversion may indicate what is likely to happen next. Customer loss is a result, while unresolved support cases and falling engagement may provide an earlier warning. A dashboard containing only historical financial totals may explain what happened without helping the team intervene.",
@@ -850,6 +854,179 @@ const coreNewBlogPosts = [
 
 const strategicBlogPosts = [
   {
+    slug: "/blog/kpi-dashboard-development-uk-cost-process",
+    category: "Business Intelligence",
+    title: "KPI Dashboard Development UK: Cost, Process & What SMEs Should Expect",
+    seoTitle: "KPI Dashboard Development UK: Cost, Process & Expectations",
+    metaDescription: "Plan KPI dashboard development in the UK: cost drivers, process, data preparation, BI architecture, timelines, ownership and SME project expectations.",
+    excerpt: "A practical UK SME guide to KPI dashboard development costs, delivery stages, data preparation and what a useful BI project should include.",
+    readTime: "11 min read",
+    datePublished: "2026-08-10",
+    lastModified: "2026-08-10",
+    primaryKeyword: "kpi dashboard development uk",
+    keywords: ["KPI dashboard development UK", "KPI dashboard developer UK", "BI dashboard development", "SME KPI dashboard"],
+    featuredImage: "/kpi-dashboard-software-small-business.webp",
+    imageAlt: "UK SME team planning KPI dashboard development, data sources, BI architecture and reporting ownership",
+    imageWidth: 1376,
+    imageHeight: 768,
+    h1: "KPI Dashboard Development UK: Cost, Process & What SMEs Should Expect",
+    lead: "KPI dashboard development in the UK should produce trusted measures, clear ownership and decision-ready reporting, not just a collection of attractive charts.",
+    intro: [
+      "For SMEs, the cost of a KPI dashboard depends on the decisions it must support, the number and quality of data sources, the calculations required, permissions, refresh needs and the level of support after launch.",
+      "A useful dashboard project usually includes discovery, KPI definition, data mapping, model design, dashboard build, validation, training and a clear operating rhythm. The visible report is only the final layer of the work.",
+      "This guide explains what UK SMEs should expect before commissioning a dashboard developer or business intelligence partner."
+    ],
+    sections: [
+      { id: "what-is-included", heading: "What KPI dashboard development should include", body: [
+        "A dashboard development project should begin with the management questions the business needs to answer. Revenue, margin, enquiries, backlog, capacity, customer health and cash collection may all matter, but each measure must connect to a real decision.",
+        "The developer or BI partner then maps source systems, agrees definitions, designs the data flow and builds the dashboard around priority, investigation and action. If these foundations are skipped, the business may receive a polished interface that people do not trust.",
+        "For UK SMEs, the scope should also cover data protection where personal data appears in reports, access control for different roles, documentation and support arrangements."
+      ], bullets: [
+        "Decision and audience discovery",
+        "KPI definitions, owners and thresholds",
+        "Data-source mapping and quality checks",
+        "Dashboard wireframe or prototype",
+        "Build, validation, training and handover",
+        "Support for changes, refresh failures and new measures"
+      ], links: [
+        { href: "/services/business-intelligence-architecture", label: "Business Intelligence Architecture", context: "Fekitech covers this wider reporting system through" },
+        { href: "/blog/business-intelligence-small-business-kpi-dashboard", label: "business intelligence strategy for small businesses", context: "For KPI selection and governance, read the" }
+      ] },
+      { id: "cost-drivers", heading: "What affects KPI dashboard development cost?", body: [
+        "Cost is usually driven by complexity rather than the number of charts. One clean spreadsheet feeding a monthly management view is simpler than combining CRM, finance, operations and customer service systems with different definitions and permissions.",
+        "Data preparation can be the largest hidden cost. Duplicate customer names, inconsistent stage use, missing dates and manual spreadsheets all require decisions before reporting can be reliable. A responsible quote should state assumptions about data quality, integrations, validation and ongoing ownership.",
+        "Licences and hosting are separate from implementation effort. Power BI, Looker Studio, spreadsheet-based reporting, custom dashboards and embedded reporting each create different cost and maintenance responsibilities."
+      ], table: { headers: ["Cost driver", "Why it changes scope"], rows: [
+        ["Number of data sources", "Each system adds access, mapping, testing and failure handling"],
+        ["KPI definitions", "Ambiguous calculations create rework and poor trust"],
+        ["Refresh frequency", "Live or daily reporting needs stronger automation than monthly reporting"],
+        ["Permissions", "Role-based access may require modelling and security design"],
+        ["Data quality", "Cleaning and matching records can take longer than visual build"],
+        ["Support model", "Dashboards need maintenance when systems, teams or measures change"]
+      ] } },
+      { id: "delivery-process", heading: "A sensible KPI dashboard development process", body: [
+        "Start with one audience and one decision area. A first release might focus on sales pipeline, overdue work, margin by service or quote-to-cash visibility. This keeps discovery practical and gives the business something it can validate.",
+        "The build should move through discovery, data assessment, prototype, development, reconciliation, training and adoption. During reconciliation, figures should be checked against trusted source records and known edge cases such as refunds, cancellations, missing fields or duplicate leads.",
+        "After launch, the dashboard should be used in a real review meeting. If no one owns the response to a measure, the dashboard is not finished as an operating tool."
+      ], bullets: [
+        "Define the decision, audience and expected action",
+        "Map sources, fields, owners and data quality risks",
+        "Prototype the report hierarchy before broad build",
+        "Validate calculations against known records",
+        "Train users around decisions, filters and limitations",
+        "Assign ownership for refresh, access and change requests"
+      ] },
+      { id: "what-to-prepare", heading: "What SMEs should prepare before asking for a quote", body: [
+        "A supplier can estimate more accurately when the business prepares a simple inventory. List current reports, source systems, important measures, users, update frequency and pain points. Include examples of reports the team already relies on, even if they are manual.",
+        "Be honest about data quality and access. If a system cannot export the needed fields or no one knows how a calculation is currently produced, that is part of the project scope rather than a minor detail."
+      ], bullets: [
+        "Current spreadsheets, exports and reports",
+        "Source systems such as CRM, finance, ecommerce or project tools",
+        "The decisions leadership wants to improve",
+        "Known problems with missing, duplicated or inconsistent data",
+        "Who needs access and what they should be able to see",
+        "How often the dashboard needs to update"
+      ], links: [{ href: "/blog/kpi-dashboard-software-small-business", label: "KPI dashboard software buy-versus-build guide", context: "If you are still comparing software options, use the" }] },
+      { id: "avoid-mistakes", heading: "Mistakes to avoid when commissioning a dashboard", body: [
+        "Do not commission a broad executive dashboard before agreeing definitions. The project will become a dispute about whose number is correct. Resolve the meaning of each KPI before making the chart prominent.",
+        "Avoid measuring everything because the data is available. A useful dashboard is selective, with supporting detail available for investigation. Too many tiles create a maintenance burden and make urgent signals harder to notice.",
+        "Finally, do not treat handover as a download link. SMEs need documentation, training, access management and a route for fixes when source systems change."
+      ], links: [{ href: "/services/business-intelligence-architecture", label: "BI and KPI dashboard development support", context: "For a governed build, review Fekitech's" }] }
+    ],
+    faqs: [
+      { question: "How much does KPI dashboard development cost in the UK?", answer: "Cost depends on data sources, definitions, refresh needs, permissions, validation, dashboard scope and support. Ask for a quote that separates discovery, build, licences or hosting, training and ongoing maintenance." },
+      { question: "How long does a KPI dashboard project take?", answer: "A focused first dashboard can often be scoped and delivered faster than a broad reporting programme, but timing depends on access to data, definition decisions, stakeholder availability and testing complexity." },
+      { question: "Should an SME use Power BI or a custom dashboard?", answer: "Power BI can be a strong option where Microsoft tools and standard reporting fit. A custom dashboard may be justified where the business needs tailored interfaces, complex permissions or embedded operational workflows." },
+      { question: "What makes a KPI dashboard useful?", answer: "It has trusted data, clear definitions, a focused audience, visible trends or exceptions, an owner for each measure and a management routine that turns insight into action." }
+    ],
+    relatedService: { title: "Business Intelligence Architecture", href: "/services/business-intelligence-architecture" },
+    relatedSlugs: ["/blog/business-intelligence-small-business-kpi-dashboard", "/blog/kpi-dashboard-software-small-business"],
+    ctaHeading: "Build the dashboard on a trusted BI architecture",
+    cta: "Fekitech can help UK SMEs define KPIs, map data sources, design BI architecture and build dashboards that support real management decisions."
+  },
+  {
+    slug: "/blog/business-workflow-software-uk-custom-automation",
+    category: "AI and Automation",
+    title: "Business Workflow Software UK: How SMEs Should Choose Between Tools and Custom Automation",
+    seoTitle: "Business Workflow Software UK: Tools vs Custom Automation",
+    metaDescription: "Choose business workflow software in the UK by comparing off-the-shelf tools, automation platforms and custom workflow automation for SMEs.",
+    excerpt: "A practical guide for UK SMEs choosing between workflow software, automation platforms and custom business workflow development.",
+    readTime: "10 min read",
+    datePublished: "2026-08-10",
+    lastModified: "2026-08-10",
+    primaryKeyword: "business workflow software UK",
+    keywords: ["business workflow software UK", "workflow automation software UK", "custom workflow automation", "workflow automation services UK"],
+    featuredImage: "/ai-agent-vs-workflow-automation-small-business.webp",
+    imageAlt: "UK SME comparing business workflow software, automation tools and custom workflow automation options",
+    imageWidth: 1376,
+    imageHeight: 768,
+    h1: "Business Workflow Software UK: How SMEs Should Choose Between Tools and Custom Automation",
+    lead: "The right business workflow software is the option your team can operate reliably: sometimes an off-the-shelf tool, sometimes an automation platform, and sometimes a custom workflow built around your process.",
+    intro: [
+      "UK SMEs often look for business workflow software when admin has become too dependent on inboxes, spreadsheets and staff memory. The temptation is to buy a tool quickly, but the better starting point is the workflow itself.",
+      "A tool is suitable when its stages, permissions and integrations match the way work should move. Custom automation becomes more reasonable when the business has specific rules, cross-system handoffs, role-based controls or customer-facing steps that generic software cannot handle cleanly.",
+      "This guide is distinct from a list of workflows to automate first. It focuses on how to choose the software or build approach once a workflow problem has been identified."
+    ],
+    sections: [
+      { id: "workflow-software", heading: "What business workflow software should do", body: [
+        "Business workflow software organises a sequence of work: who owns the next step, what information is required, which conditions apply, when a notification or approval is needed and how exceptions are handled.",
+        "A useful system does more than move a task card. It gives managers visibility, reduces repeated data entry, keeps records consistent and makes the next action obvious. The workflow should also preserve judgement where risk, customer care or commercial decisions require a person.",
+        "Before comparing products, describe the trigger, stages, required data, owners, approvals, outputs and failure route. That description becomes the selection criteria."
+      ], bullets: [
+        "Clear triggers and stages",
+        "Task ownership and handover rules",
+        "Required data and validation",
+        "Approvals, reminders and escalations",
+        "Integration with CRM, finance, forms, email or project tools",
+        "Reporting on status, volume, delays and exceptions"
+      ], links: [{ href: "/services/workflow-automations", label: "Workflow Automations", context: "Fekitech designs and builds these connected systems through" }] },
+      { id: "off-the-shelf", heading: "When off-the-shelf workflow tools are enough", body: [
+        "Off-the-shelf workflow tools can be a good fit when the business needs standard task routing, simple approvals, document checklists, CRM stages or project handoffs. They are often faster to launch and easier for non-technical teams to maintain.",
+        "The trade-off is fit. If staff need to work around the tool every day, export data for separate reporting or duplicate records in another system, the headline simplicity may disappear.",
+        "Test the product with one real workflow before committing. Include missing information, duplicate submissions, approval delays and a user leaving the team."
+      ], table: { headers: ["Good fit", "Warning sign"], rows: [
+        ["Standard approval or task flow", "Rules require many exceptions or manual workarounds"],
+        ["Native integrations cover key tools", "Staff must copy data into several systems anyway"],
+        ["Simple role permissions are enough", "Clients, departments or managers need different views"],
+        ["Internal team workflow", "Customer-facing steps need a tailored experience"]
+      ] } },
+      { id: "automation-platforms", heading: "When automation platforms help", body: [
+        "Platforms such as Zapier, Make or n8n can connect apps and automate repeatable handoffs without building a full application. They are useful when the main problem is data movement, notifications, task creation or scheduled reporting.",
+        "They still need governance. Someone must own credentials, monitor failed runs, test changes, control personal data and document what each workflow does. A low-code automation can become business-critical even if it began as a quick fix."
+      ], links: [
+        { href: "/blog/n8n-vs-make-vs-zapier-uk-small-business", label: "n8n vs Make vs Zapier comparison", context: "Compare platform fit in the" },
+        { href: "/blog/business-process-automation-uk-smes-workflows", label: "15 workflows to automate first", context: "For candidate ideas, use the" }
+      ] },
+      { id: "custom-automation", heading: "When custom workflow automation is justified", body: [
+        "Custom workflow automation is justified when the workflow is specific enough that generic tools create friction, risk or duplicated work. Examples include tailored quote approval, client portals, service operations, document processing, internal dashboards or multi-system workflows with detailed permissions.",
+        "Custom does not mean everything must be built from scratch. A sensible project can combine existing platforms, APIs, databases, automation tools and a tailored interface. The value is in matching the business process, controls and reporting needs.",
+        "The business should still avoid overbuilding. Prove the highest-value workflow first, then expand once the team trusts the system."
+      ], links: [
+        { href: "/services/workflow-automations", label: "workflow automation services", context: "For custom and connected handoffs, review Fekitech's" },
+        { href: "/services/software-development-apps", label: "custom software development", context: "Where a tailored interface is needed, see" }
+      ] },
+      { id: "decision-route", heading: "A practical decision route for UK SMEs", body: [
+        "Start by mapping the workflow and removing unnecessary steps. Then choose the smallest maintainable approach that handles the real process safely. If a standard tool fits, use it. If the tool fits most of the process but not the handoffs, add automation. If the workflow is a core differentiator or needs tailored controls, consider a custom build.",
+        "For UK businesses, include privacy, access control, supplier exit and support in the decision. The chosen software should make work easier to manage over time, not simply create another place where information gets trapped."
+      ], table: { headers: ["Choose this", "When"], rows: [
+        ["Standard workflow software", "The process is common and the tool matches stages and permissions"],
+        ["Automation platform", "Existing tools are staying but need connected handoffs"],
+        ["Custom workflow automation", "Rules, interfaces, permissions or reporting are specific to the business"],
+        ["Process optimisation first", "The workflow is unclear or disputed"]
+      ] } }
+    ],
+    faqs: [
+      { question: "What is business workflow software?", answer: "It is software that manages stages, tasks, data, approvals, notifications and visibility for a defined business process." },
+      { question: "Should an SME buy workflow software or build custom automation?", answer: "Buy when a standard tool fits the process and integrations. Build or customise when specific rules, permissions, interfaces or cross-system handoffs make generic tools inefficient." },
+      { question: "What workflow should be automated first?", answer: "Choose a frequent, stable, measurable workflow with clear ownership and a safe exception route. Avoid starting with sensitive decisions that are not yet well defined." },
+      { question: "Can workflow software connect to CRM and finance tools?", answer: "Often yes, depending on API access, permissions, data quality and whether the connected systems support the required fields and actions." }
+    ],
+    relatedService: { title: "Workflow Automations", href: "/services/workflow-automations" },
+    relatedSlugs: ["/blog/business-process-automation-uk-smes-workflows", "/blog/n8n-vs-make-vs-zapier-uk-small-business"],
+    ctaHeading: "Choose workflow software around the real process",
+    cta: "Fekitech can help you map the workflow, compare tools and build maintainable automation where standard software does not fit."
+  },
+  {
     slug: "/blog/ai-automation-cost-small-business-uk",
     category: "AI and Automation",
     title: "How Much Does AI Automation Cost for a Small Business in the UK? 2026 Pricing Guide",
@@ -1039,11 +1216,11 @@ const strategicBlogPosts = [
     category: "Business Operations",
     title: "Business Process Automation for UK SMEs: 15 Workflows to Automate First",
     seoTitle: "Business Process Automation for UK SMEs: 15 Workflows | Fekitech",
-    metaDescription: "See 15 practical business process automation ideas for UK SMEs, with prioritisation criteria, risks, data checks and first-project guidance.",
+    metaDescription: "See 15 practical business process automation and workflow automation ideas for UK SMEs, with prioritisation, risks and first-project guidance.",
     excerpt: "Fifteen practical workflows UK SMEs can automate once ownership, data and exception handling are clear.",
     readTime: "11 min read",
     datePublished: "2026-08-04",
-    lastModified: "2026-08-04",
+    lastModified: "2026-08-10",
     primaryKeyword: "business process automation UK SMEs",
     keywords: ["business process automation UK", "SME workflow automation", "workflows to automate"],
     featuredImage: "/outcome-save-time.webp",
@@ -1077,7 +1254,11 @@ const strategicBlogPosts = [
       { id: "implementation-plan", heading: "A simple implementation plan", body: [
         "Document the current process, remove unnecessary steps, define the target workflow and run a pilot with real records. Measure completion, failures, manual overrides and customer impact.",
         "Once the first workflow is stable, reuse the design pattern for related workflows."
-      ], links: [{ href: "/services/process-optimisation-and-automation", label: "process optimisation and automation", context: "For process redesign before build, review" }] }
+      ], links: [
+        { href: "/services/process-optimisation-and-automation", label: "process optimisation and automation", context: "For process redesign before build, review" },
+        { href: "/services/workflow-automations", label: "workflow automation services", context: "For connected software handoffs, review Fekitech's" },
+        { href: "/blog/business-workflow-software-uk-custom-automation", label: "how to choose business workflow software in the UK", context: "If you are comparing tools, read" }
+      ] }
     ],
     faqs: [
       { question: "What is business process automation?", answer: "It is the use of software, rules and integrations to move work through a defined process with less manual effort, clearer ownership and better visibility." },
